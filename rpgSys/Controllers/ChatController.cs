@@ -16,13 +16,13 @@ namespace rpgSys.Controllers
         private static List<Message> db = xmlBase.Chat.Data;
         private static int lastId = db.Max(tdi => tdi.Id);
 
-        public IEnumerable<Message> GetMessages()
+        public IEnumerable<Message> Get_AllMessages()
         {
             lock (db)
                 return db.ToArray();
         }
 
-        public Message GetMessage(int id)
+        public Message Get_OneMessage(int id)
         {
             lock (db)
             {
@@ -36,7 +36,7 @@ namespace rpgSys.Controllers
             }
         }
 
-        public HttpResponseMessage AddMessage(Message item)
+        public HttpResponseMessage Post_AddMessage(Message item)
         {
             lock (db)
             {
@@ -45,7 +45,7 @@ namespace rpgSys.Controllers
                 db.Add(item);
 
                 // Notify the connected clients
-                Hub.Clients.All.addItem(item);
+                Hub.Clients.addItem(item);
 
                 // Return the new item, inside a 201 response
                 var response = Request.CreateResponse(HttpStatusCode.Created, item);

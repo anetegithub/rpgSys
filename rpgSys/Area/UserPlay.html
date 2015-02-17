@@ -121,13 +121,13 @@
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <div class="form-control breadcrumb" style=" height: 400px;overflow-x:auto"></div>
+                            <div class="form-control breadcrumb" id="chat" style=" height: 400px;overflow-x:auto"></div>
                             <div class="row">
                                 <div class="col-lg-10">
                                     <textarea class="form-control" rows="5"></textarea>
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="button" class="form-control btn btn-default" value="Отправить" style="height:114px;">
+                                    <input type="button" class="form-control btn btn-default" id="send_btn" value="Отправить" style="height:114px;">
                                 </div>
                             </div>
                         </div>
@@ -192,9 +192,13 @@
 
     <!-- jQuery -->
     <script src="../Bootstrap/js/jquery.js"></script>
+    <!-- SignalR-->
+    <script src="../Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="../signalr/hubs" type="text/javascript"></script>
+
     <script src="../Bootstrap/js/cookie.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="../Bootstrap/js/bootstrap.min.js"></script>
+    <script src="../Bootstrap/js/bootstrap.min.js"></script>    
 
 </body>
 

@@ -1,69 +1,55 @@
-﻿/// <reference path="jquery-1.7.2.js" />
-/// <reference path="knockout-2.1.0.js" />
+﻿
+//$(function () {
+//    function outingDataViewModel() {
+//        var self = this;
+//        self.hub = $.connection.msg;
+//    }
+//    var vm = new outingDataViewModel();
 
-function ToDoViewModel() {
-    var self = this;
+//    $.connection.hub.start();
 
-    function MessageItem(root, id,text,master,system) {
-        var self = this,
-            updating = false;
+//    $.get("/api/chat", function (items) {
+//        $.each(items, function (idx, item) {
+//            $('#chat').html($('#chat').html() + item.text);
+//        });
+//    }, "json");
+//});
 
-        self.id = id;
-        self.text = ko.observable(text);
-        self.master = ko.observable(master);
-        self.system = ko.observable(system);
+//function newmessage() {
+    //$.ajax({
+    //    url: "/api/chat",
+    //    data: { 'Text': 'New text', 'Master': false, 'System': false },
+    //    type: "POST",
+    //    done: update()
+    //});
+//}
 
-        self.remove = function () {
-            root.sendDelete(self);
-        };
-
-        self.update = function (title, finished) {
-            updating = true;
-            self.title(title);
-            self.finished(finished);
-            updating = false;
-        };
-
-        self.finished.subscribe(function () {
-            if (!updating) {
-                root.sendUpdate(self);
-            }
-        });
-    };
-
-    self.addItemTitle = ko.observable("");
-    self.items = ko.observableArray();
-
-    self.add = function (id, title, finished) {
-        self.items.push(new MessageItem(self, id, title, finished));
-    };
-
-    self.sendCreate = function () {
-        $.ajax({
-            url: "/api/chat",
-            data: { 'Title': self.addItemTitle(), 'Finished': false },
-            type: "POST"
-        });
-
-        self.addItemTitle("");
-    };
-};
+//function update() {
+//    $('#chat').html('');
+//    $.get("/api/chat", function (items) {
+//        $.each(items, function (idx, item) {
+//            $('#chat').html($('#chat').html() + item.text);
+//        });
+//    }, "json");
+//}
 
 $(function () {
-    var viewModel = new ToDoViewModel(),
-        hub = $.connection.msg;
+    // Declare a proxy to reference the hub. 
+    var chat = $.connection.msg;
 
-    ko.applyBindings(viewModel);
-
-    hub.addItem = function (item) {
-        viewModel.add(item.ID, item.Title, item.Finished);
+    // Create a function that the hub can call to broadcast messages.
+    chat.client.additem = function (name, message) {
+        $.ajax({
+            url: "/api/chat",
+            data: { 'Text': 'New text', 'Master': false, 'System': false },
+            type: "POST"
+        });
     };
 
-    $.connection.hub.start();
-
-    $.get("/api/chat", function (items) {
-        $.each(items, function (idx, item) {
-            viewModel.add(item.ID, item.Title, item.Finished);
+    // Start the connection.
+    $.connection.hub.start().done(function () {
+        $('#send_btn').click(function () {            
+            chat.server.message('n','m');
         });
-    }, "json");
+    });
 });
