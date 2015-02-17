@@ -1,8 +1,8 @@
-﻿//using Microsoft.AspNet.SignalR;
-//using Microsoft.AspNet.SignalR.Hubs;
+﻿using SignalR;
+using SignalR.Hubs;
 
-//namespace rpgSys
-//{
-//    [HubName("msg")]
-//    public class MessageHub : Hub { }
-//}
+namespace rpgSys
+{
+    [HubName("msg")]
+    public class MessageHub : Hub { }
+}
