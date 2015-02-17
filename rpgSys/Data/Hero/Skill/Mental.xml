@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MentalSkills>
+  <MentalSkill Id="1">
+    <Name>Слух</Name>
+    <DIX>WIS</DIX>
+  </MentalSkill>
+  <MentalSkill Id="2">
+    <Name>Ложь</Name>
+    <DIX>WIS</DIX>
+  </MentalSkill>
+  <MentalSkill Id="3">
+    <Name>Дипломатия</Name>
+    <DIX>CHA</DIX>
+  </MentalSkill>
+  <MentalSkill Id="4">
+    <Name>Блеф</Name>
+    <DIX>CHA</DIX>
+  </MentalSkill>
+  <MentalSkill Id="5">
+    <Name>Идентификация</Name>
+    <DIX>INT</DIX>
+  </MentalSkill>
+  <MentalSkill Id="6">
+    <Name>Концентрация</Name>
+    <DIX>CON</DIX>
+  </MentalSkill>
+  <MentalSkill Id="7">
+    <Name>Создание вещей</Name>
+    <DIX>INT</DIX>
+  </MentalSkill>
+  <MentalSkill Id="8">
+    <Name>Чтение свитков</Name>
+    <DIX>INT</DIX>
+  </MentalSkill>
+  <MentalSkill Id="9">
+    <Name>Приручение животных</Name>
+    <DIX>CHA</DIX>
+  </MentalSkill>
+  <MentalSkill Id="10">
+    <Name>Создание заклинаний</Name>
+    <DIX>WIS</DIX>
+  </MentalSkill>
+  <MentalSkill Id="11">
+    <Name>Сотворение заклинаний</Name>
+    <DIX>INT</DIX>
+  </MentalSkill>
+  <MentalSkill Id="12">
+    <Name>Использование маг. предметов</Name>
+    <DIX>INT</DIX>
+  </MentalSkill>
+</MentalSkills>

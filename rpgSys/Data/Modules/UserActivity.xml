@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UserActivity Id="1" UserId="1">
+  <Activity>
+    <Icon>fa-child</Icon>
+    <Info>Новый уровень</Info>
+    <Stamp>09.02.2015 10:10:15</Stamp>
+  </Activity>
+  <Activity>
+    <Icon>fa-trophy</Icon>
+    <Info>Получено достижение "Зарегистрироваться и обломаться!"</Info>
+    <Stamp>08.02.2015 10:35:15</Stamp>
+  </Activity>
+  <Activity>
+    <Icon>fa-graduation-cap</Icon>
+    <Info>Увеличена характеристика "Интеллект"</Info>
+    <Stamp>08.02.2015 10:00:15</Stamp>
+  </Activity>
+  <Activity>
+    <Icon>fa-compass</Icon>
+    <Info>Пройден сценарий "Тролли в огне"</Info>
+    <Stamp>08.02.2015 8:20:15</Stamp>
+  </Activity>
+  <Activity>
+    <Icon>fa-comment</Icon>
+    <Info>Беседа с пользователем 'Kenguriy'</Info>
+    <Stamp>02.02.2015 05:20:15</Stamp>
+  </Activity>
+  <Activity>
+    <Icon>fa-child</Icon>
+    <Info>Создан новый персонаж: Валоран</Info>
+    <Stamp>11.11.2014 05:20:15</Stamp>
+  </Activity>
+  <Activity>
+    <Icon>fa-trophy</Icon>
+    <Info>Получено достижение "Зарегистрироваться!"</Info>
+    <Stamp>12.05.2008 05:20:15</Stamp>
+  </Activity>
+</UserActivity>

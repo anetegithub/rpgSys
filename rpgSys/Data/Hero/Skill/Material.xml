@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MaterialSkills>
+  <MaterialSkill Id="1">
+    <Name>Создание брони и оружия</Name>
+    <DIX>FIT</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="2">
+    <Name>Разоружиение ловушек</Name>
+    <DIX>FTE</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="3">
+    <Name>Внимание</Name>
+    <DIX>INT</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="4">
+    <Name>Скрытность</Name>
+    <DIX>FIT</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="5">
+    <Name>Устрашение</Name>
+    <DIX>CHA</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="6">
+    <Name>Прыжки</Name>
+    <DIX>FIT</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="7">
+    <Name>Открывание замков</Name>
+    <DIX>FTE</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="8">
+    <Name>Езда верхом</Name>
+    <DIX>FIT</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="9">
+    <Name>Выслеживание</Name>
+    <DIX>INT</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="10">
+    <Name>Выживание</Name>
+    <DIX>FTE</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="11">
+    <Name>Плавание</Name>
+    <DIX>FIT</DIX>
+  </MaterialSkill>
+  <MaterialSkill Id="12">
+    <Name>Акробатика</Name>
+    <DIX>FIT</DIX>
+  </MaterialSkill>
+</MaterialSkills>

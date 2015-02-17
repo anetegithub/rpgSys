@@ -1,0 +1,74 @@
+﻿.tile-container{
+    background: #808080;
+    font-size:18px;
+    line-height:2em;
+    color:#fff;
+    margin:0.5%;
+    cursor:pointer;    
+}
+
+.tile-container-icon{
+    padding:35px;
+    font-size: 22px;
+}
+
+.tile{
+
+}
+
+.green{
+    background: #00A600;
+    
+}
+.green:hover{
+    background: #008A00;
+}
+
+.cyan{
+    background:#00A0B1;
+}
+.cyan:hover{
+    background:#008299;
+}
+
+.blue{
+    background:#2E8DEF;
+}
+.blue:hover{
+    background:#2672EC;
+}
+
+.purple{
+    background:#A700AE;
+}
+.purple:hover{
+    background:#8C0095;
+}
+
+.darkpurple{
+    background:#643EBF;
+}
+.darkPurple:hover{
+    background:#5133AB;
+}
+
+.red{
+    background:#BF1E4B;
+}
+.red:hover{
+    background:#AC193D;
+}
+
+.orange{
+    background:#DC572E;
+}
+.orange:hover{
+    background:#D24726;
+}
+
+.skyblue{
+    background:#0A5BC4;
+}
+.skyblue:hover{
+    background:#094AB2;
+}

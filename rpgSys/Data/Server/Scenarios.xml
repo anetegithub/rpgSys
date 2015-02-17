@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Scenarios>
+  <Scenario Id="1">
+    <Title></Title>
+    <Recomendation></Recomendation>
+    <Fable></Fable>
+    <Locations>
+      <Location Id="1">
+        <Name></Name>
+        <Description></Description>
+        <Specification></Specification>
+        <Map></Map>
+      </Location>
+    </Locations>
+    <Npcs>
+      <Npc Id="1">
+        <Name></Name>
+        <View></View>
+        <Specification></Specification>
+        <Stats>
+          <Stat>
+            <Name></Name>
+            <Info></Info>
+            <Value></Value>
+            <Bonus></Bonus>
+          </Stat>
+        </Stats>
+      </Npc>
+    </Npcs>
+    <Events>
+      <Event Id="1">
+        <Title></Title>
+        <Description></Description>
+      </Event>
+    </Events>
+    <Rewards>
+      <Reward Id="1">
+        <Name></Name>
+        <Who></Who>
+        <Rare></Rare>
+        <Additional></Additional>
+        <Characteristics>
+          <Characteristic>
+            <Name></Name>
+            <Info></Info>
+            <Value></Value>
+            <Bonus></Bonus>
+          </Characteristic>
+        </Characteristics>
+      </Reward>
+    </Rewards>
+  </Scenario>
+  <Scenario Id="2">
+    <Title>Название</Title>
+    <Recomendation>Рекомендации</Recomendation>
+    <Fable>Краткое содержание</Fable>
+    <Locations>
+      <Location Id="0">
+        <Name>Название локации</Name>
+        <Description>Описание локации</Description>
+        <Specification>Пояснения</Specification>
+        <Map>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAACWCAYAAAAouC1GAAAACXBIWXMAAAsTAAALEwEAmpwYAAABNmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarY6xSsNQFEDPi6LiUCsEcXB4kygotupgxqQtRRCs1SHJ1qShSmkSXl7VfoSjWwcXd7/AyVFwUPwC/0Bx6uAQIYODCJ7p3MPlcsGo2HWnYZRhEGvVbjrS9Xw5+8QMUwDQCbPUbrUOAOIkjvjB5ysC4HnTrjsN/sZ8mCoNTIDtbpSFICpA/0KnGsQYMIN+qkHcAaY6addAPAClXu4vQCnI/Q0oKdfzQXwAZs/1fDDmADPIfQUwdXSpAWpJOlJnvVMtq5ZlSbubBJE8HmU6GmRyPw4TlSaqo6MukP8HwGK+2G46cq1qWXvr/DOu58vc3o8QgFh6LFpBOFTn3yqMnd/n4sZ4GQ5vYXpStN0ruNmAheuirVahvAX34y/Axk/96FpPYgAAACBjSFJNAAB6JQAAgIMAAPn/AACA6AAAUggAARVYAAA6lwAAF2/XWh+QAAAC50lEQVR42uzd0Y3aQBCA4SG6Bq6BPNDCtWBKoAWUDqAE6CC6Fq4E3AIt3EMaoATnhUjceBMbYhDG3y/54ayzzM6vnWEXPMyapgk8Dt+EgBAQQggIIQSEEAJCCMED8XLJP3//0Tq1j4jqAcZRR8QinXuUPaFNROzOT/z6aYZIWSBkejXkVDPO+Uj5cRkRq4nHNNeytxS3w6muDCIkF/DdqaCe33zq1AUhvd/4SFlqCIasIZllIU3l/Lh94vh9RsR7OrfuSPM3FbLqWgRNQMhuyAWplKWGgJAJC9mecuj5MUtHPeJ4bdJYdoXxmiFmCAixMByOrg3JITgWzi1uMJa8Ufg6RiFdG5K3or6RkJt+QiplqSEghBAQQggIIQSEEAJCQAghIIQQEEIICCEEhIAQQkAIISCEEBBCCAgBIYSAkHFz6QM7uW3GKiLmwvhP6vj68NBxSCH5UbSKkF5Cej/CJ2WpISDkiYXkNhK7+NpqYiOkrVYiOW57M0TKAiETXRhmtmmhU+rBnjmMOF4fPV5/rhHzewp561iVPhufp+MSIVKWGgJCCAEhhGD065BDtD9wqa64ZizMe6wr6iuuGUzIJr2AdY/34YsRr1WW0d3Lfpb+XscF/e+lLDUEhDxxUc/5cR//uXfzhDSFOjszQ6QsEKKGtH7wypfkuskL5WO0f0jsaiFb8b1KSJVW8u9SlhoCQggBIYSAEEJACAghBIQQAkIIASGEgBAQQggIIQSEEAJCCAEhIIQQEEIICHlOXu5wj1KriWrgexyj3XqvusN4XqPdVe/hheQejPsbBKv+y32GZpPuUw19HylLDQEhExbyp43E+ZH7xVcjjtc2jWUd5V7vZogZAkIsDLt5j3br7fWE4jcvjHdTWKBW9xLyEe2ei9uJCcnjLRX23kKkLDUEQ6asro1C7ZrK6ek8bochhdxjo3Ds7AtFftH3YilLDQEhI2LWNI0omCEghBAQQggIIQSEEIJH4fcA4Tl26u/HwNsAAAAASUVORK5CYII=</Map>
+      </Location>
+      <Location Id="1">
+        <Name>Название локации</Name>
+        <Description>Описание локации</Description>
+        <Specification>Пояснения</Specification>
+        <Map>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAACWCAYAAAAouC1GAAAACXBIWXMAAAsTAAALEwEAmpwYAAABNmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarY6xSsNQFEDPi6LiUCsEcXB4kygotupgxqQtRRCs1SHJ1qShSmkSXl7VfoSjWwcXd7/AyVFwUPwC/0Bx6uAQIYODCJ7p3MPlcsGo2HWnYZRhEGvVbjrS9Xw5+8QMUwDQCbPUbrUOAOIkjvjB5ysC4HnTrjsN/sZ8mCoNTIDtbpSFICpA/0KnGsQYMIN+qkHcAaY6addAPAClXu4vQCnI/Q0oKdfzQXwAZs/1fDDmADPIfQUwdXSpAWpJOlJnvVMtq5ZlSbubBJE8HmU6GmRyPw4TlSaqo6MukP8HwGK+2G46cq1qWXvr/DOu58vc3o8QgFh6LFpBOFTn3yqMnd/n4sZ4GQ5vYXpStN0ruNmAheuirVahvAX34y/Axk/96FpPYgAAACBjSFJNAAB6JQAAgIMAAPn/AACA6AAAUggAARVYAAA6lwAAF2/XWh+QAAAC50lEQVR42uzd0Y3aQBCA4SG6Bq6BPNDCtWBKoAWUDqAE6CC6Fq4E3AIt3EMaoATnhUjceBMbYhDG3y/54ayzzM6vnWEXPMyapgk8Dt+EgBAQQggIIQSEEAJCCMED8XLJP3//0Tq1j4jqAcZRR8QinXuUPaFNROzOT/z6aYZIWSBkejXkVDPO+Uj5cRkRq4nHNNeytxS3w6muDCIkF/DdqaCe33zq1AUhvd/4SFlqCIasIZllIU3l/Lh94vh9RsR7OrfuSPM3FbLqWgRNQMhuyAWplKWGgJAJC9mecuj5MUtHPeJ4bdJYdoXxmiFmCAixMByOrg3JITgWzi1uMJa8Ufg6RiFdG5K3or6RkJt+QiplqSEghBAQQggIIQSEEAJCQAghIIQQEEIICCEEhIAQQkAIISCEEBBCCAgBIYSAkHFz6QM7uW3GKiLmwvhP6vj68NBxSCH5UbSKkF5Cej/CJ2WpISDkiYXkNhK7+NpqYiOkrVYiOW57M0TKAiETXRhmtmmhU+rBnjmMOF4fPV5/rhHzewp561iVPhufp+MSIVKWGgJCCAEhhGD065BDtD9wqa64ZizMe6wr6iuuGUzIJr2AdY/34YsRr1WW0d3Lfpb+XscF/e+lLDUEhDxxUc/5cR//uXfzhDSFOjszQ6QsEKKGtH7wypfkuskL5WO0f0jsaiFb8b1KSJVW8u9SlhoCQggBIYSAEEJACAghBIQQAkIIASGEgBAQQggIIQSEEAJCCAEhIIQQEEIICHlOXu5wj1KriWrgexyj3XqvusN4XqPdVe/hheQejPsbBKv+y32GZpPuUw19HylLDQEhExbyp43E+ZH7xVcjjtc2jWUd5V7vZogZAkIsDLt5j3br7fWE4jcvjHdTWKBW9xLyEe2ei9uJCcnjLRX23kKkLDUEQ6asro1C7ZrK6ek8bochhdxjo3Ds7AtFftH3YilLDQEhI2LWNI0omCEghBAQQggIIQSEEIJH4fcA4Tl26u/HwNsAAAAASUVORK5CYII=</Map>
+      </Location>
+      <Location Id="2">
+        <Name>Название локации</Name>
+        <Description>Описание локации</Description>
+        <Specification>Пояснения</Specification>
+        <Map>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAACWCAYAAAAouC1GAAAACXBIWXMAAAsTAAALEwEAmpwYAAABNmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarY6xSsNQFEDPi6LiUCsEcXB4kygotupgxqQtRRCs1SHJ1qShSmkSXl7VfoSjWwcXd7/AyVFwUPwC/0Bx6uAQIYODCJ7p3MPlcsGo2HWnYZRhEGvVbjrS9Xw5+8QMUwDQCbPUbrUOAOIkjvjB5ysC4HnTrjsN/sZ8mCoNTIDtbpSFICpA/0KnGsQYMIN+qkHcAaY6addAPAClXu4vQCnI/Q0oKdfzQXwAZs/1fDDmADPIfQUwdXSpAWpJOlJnvVMtq5ZlSbubBJE8HmU6GmRyPw4TlSaqo6MukP8HwGK+2G46cq1qWXvr/DOu58vc3o8QgFh6LFpBOFTn3yqMnd/n4sZ4GQ5vYXpStN0ruNmAheuirVahvAX34y/Axk/96FpPYgAAACBjSFJNAAB6JQAAgIMAAPn/AACA6AAAUggAARVYAAA6lwAAF2/XWh+QAAAC50lEQVR42uzd0Y3aQBCA4SG6Bq6BPNDCtWBKoAWUDqAE6CC6Fq4E3AIt3EMaoATnhUjceBMbYhDG3y/54ayzzM6vnWEXPMyapgk8Dt+EgBAQQggIIQSEEAJCCMED8XLJP3//0Tq1j4jqAcZRR8QinXuUPaFNROzOT/z6aYZIWSBkejXkVDPO+Uj5cRkRq4nHNNeytxS3w6muDCIkF/DdqaCe33zq1AUhvd/4SFlqCIasIZllIU3l/Lh94vh9RsR7OrfuSPM3FbLqWgRNQMhuyAWplKWGgJAJC9mecuj5MUtHPeJ4bdJYdoXxmiFmCAixMByOrg3JITgWzi1uMJa8Ufg6RiFdG5K3or6RkJt+QiplqSEghBAQQggIIQSEEAJCQAghIIQQEEIICCEEhIAQQkAIISCEEBBCCAgBIYSAkHFz6QM7uW3GKiLmwvhP6vj68NBxSCH5UbSKkF5Cej/CJ2WpISDkiYXkNhK7+NpqYiOkrVYiOW57M0TKAiETXRhmtmmhU+rBnjmMOF4fPV5/rhHzewp561iVPhufp+MSIVKWGgJCCAEhhGD065BDtD9wqa64ZizMe6wr6iuuGUzIJr2AdY/34YsRr1WW0d3Lfpb+XscF/e+lLDUEhDxxUc/5cR//uXfzhDSFOjszQ6QsEKKGtH7wypfkuskL5WO0f0jsaiFb8b1KSJVW8u9SlhoCQggBIYSAEEJACAghBIQQAkIIASGEgBAQQggIIQSEEAJCCAEhIIQQEEIICHlOXu5wj1KriWrgexyj3XqvusN4XqPdVe/hheQejPsbBKv+y32GZpPuUw19HylLDQEhExbyp43E+ZH7xVcjjtc2jWUd5V7vZogZAkIsDLt5j3br7fWE4jcvjHdTWKBW9xLyEe2ei9uJCcnjLRX23kKkLDUEQ6asro1C7ZrK6ek8bochhdxjo3Ds7AtFftH3YilLDQEhI2LWNI0omCEghBAQQggIIQSEEIJH4fcA4Tl26u/HwNsAAAAASUVORK5CYII=</Map>
+      </Location>
+      <Location Id="3">
+        <Name>Название локации</Name>
+        <Description>Описание локации</Description>
+        <Specification>Пояснения</Specification>
+        <Map>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAACWCAYAAAAouC1GAAAACXBIWXMAAAsTAAALEwEAmpwYAAABNmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarY6xSsNQFEDPi6LiUCsEcXB4kygotupgxqQtRRCs1SHJ1qShSmkSXl7VfoSjWwcXd7/AyVFwUPwC/0Bx6uAQIYODCJ7p3MPlcsGo2HWnYZRhEGvVbjrS9Xw5+8QMUwDQCbPUbrUOAOIkjvjB5ysC4HnTrjsN/sZ8mCoNTIDtbpSFICpA/0KnGsQYMIN+qkHcAaY6addAPAClXu4vQCnI/Q0oKdfzQXwAZs/1fDDmADPIfQUwdXSpAWpJOlJnvVMtq5ZlSbubBJE8HmU6GmRyPw4TlSaqo6MukP8HwGK+2G46cq1qWXvr/DOu58vc3o8QgFh6LFpBOFTn3yqMnd/n4sZ4GQ5vYXpStN0ruNmAheuirVahvAX34y/Axk/96FpPYgAAACBjSFJNAAB6JQAAgIMAAPn/AACA6AAAUggAARVYAAA6lwAAF2/XWh+QAAAC50lEQVR42uzd0Y3aQBCA4SG6Bq6BPNDCtWBKoAWUDqAE6CC6Fq4E3AIt3EMaoATnhUjceBMbYhDG3y/54ayzzM6vnWEXPMyapgk8Dt+EgBAQQggIIQSEEAJCCMED8XLJP3//0Tq1j4jqAcZRR8QinXuUPaFNROzOT/z6aYZIWSBkejXkVDPO+Uj5cRkRq4nHNNeytxS3w6muDCIkF/DdqaCe33zq1AUhvd/4SFlqCIasIZllIU3l/Lh94vh9RsR7OrfuSPM3FbLqWgRNQMhuyAWplKWGgJAJC9mecuj5MUtHPeJ4bdJYdoXxmiFmCAixMByOrg3JITgWzi1uMJa8Ufg6RiFdG5K3or6RkJt+QiplqSEghBAQQggIIQSEEAJCQAghIIQQEEIICCEEhIAQQkAIISCEEBBCCAgBIYSAkHFz6QM7uW3GKiLmwvhP6vj68NBxSCH5UbSKkF5Cej/CJ2WpISDkiYXkNhK7+NpqYiOkrVYiOW57M0TKAiETXRhmtmmhU+rBnjmMOF4fPV5/rhHzewp561iVPhufp+MSIVKWGgJCCAEhhGD065BDtD9wqa64ZizMe6wr6iuuGUzIJr2AdY/34YsRr1WW0d3Lfpb+XscF/e+lLDUEhDxxUc/5cR//uXfzhDSFOjszQ6QsEKKGtH7wypfkuskL5WO0f0jsaiFb8b1KSJVW8u9SlhoCQggBIYSAEEJACAghBIQQAkIIASGEgBAQQggIIQSEEAJCCAEhIIQQEEIICHlOXu5wj1KriWrgexyj3XqvusN4XqPdVe/hheQejPsbBKv+y32GZpPuUw19HylLDQEhExbyp43E+ZH7xVcjjtc2jWUd5V7vZogZAkIsDLt5j3br7fWE4jcvjHdTWKBW9xLyEe2ei9uJCcnjLRX23kKkLDUEQ6asro1C7ZrK6ek8bochhdxjo3Ds7AtFftH3YilLDQEhI2LWNI0omCEghBAQQggIIQSEEIJH4fcA4Tl26u/HwNsAAAAASUVORK5CYII=</Map>
+      </Location>
+      <Location Id="4">
+        <Name>Название локации</Name>
+        <Description>Описание локации</Description>
+        <Specification>Пояснения</Specification>
+        <Map>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAACWCAYAAAAouC1GAAAACXBIWXMAAAsTAAALEwEAmpwYAAABNmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarY6xSsNQFEDPi6LiUCsEcXB4kygotupgxqQtRRCs1SHJ1qShSmkSXl7VfoSjWwcXd7/AyVFwUPwC/0Bx6uAQIYODCJ7p3MPlcsGo2HWnYZRhEGvVbjrS9Xw5+8QMUwDQCbPUbrUOAOIkjvjB5ysC4HnTrjsN/sZ8mCoNTIDtbpSFICpA/0KnGsQYMIN+qkHcAaY6addAPAClXu4vQCnI/Q0oKdfzQXwAZs/1fDDmADPIfQUwdXSpAWpJOlJnvVMtq5ZlSbubBJE8HmU6GmRyPw4TlSaqo6MukP8HwGK+2G46cq1qWXvr/DOu58vc3o8QgFh6LFpBOFTn3yqMnd/n4sZ4GQ5vYXpStN0ruNmAheuirVahvAX34y/Axk/96FpPYgAAACBjSFJNAAB6JQAAgIMAAPn/AACA6AAAUggAARVYAAA6lwAAF2/XWh+QAAAC50lEQVR42uzd0Y3aQBCA4SG6Bq6BPNDCtWBKoAWUDqAE6CC6Fq4E3AIt3EMaoATnhUjceBMbYhDG3y/54ayzzM6vnWEXPMyapgk8Dt+EgBAQQggIIQSEEAJCCMED8XLJP3//0Tq1j4jqAcZRR8QinXuUPaFNROzOT/z6aYZIWSBkejXkVDPO+Uj5cRkRq4nHNNeytxS3w6muDCIkF/DdqaCe33zq1AUhvd/4SFlqCIasIZllIU3l/Lh94vh9RsR7OrfuSPM3FbLqWgRNQMhuyAWplKWGgJAJC9mecuj5MUtHPeJ4bdJYdoXxmiFmCAixMByOrg3JITgWzi1uMJa8Ufg6RiFdG5K3or6RkJt+QiplqSEghBAQQggIIQSEEAJCQAghIIQQEEIICCEEhIAQQkAIISCEEBBCCAgBIYSAkHFz6QM7uW3GKiLmwvhP6vj68NBxSCH5UbSKkF5Cej/CJ2WpISDkiYXkNhK7+NpqYiOkrVYiOW57M0TKAiETXRhmtmmhU+rBnjmMOF4fPV5/rhHzewp561iVPhufp+MSIVKWGgJCCAEhhGD065BDtD9wqa64ZizMe6wr6iuuGUzIJr2AdY/34YsRr1WW0d3Lfpb+XscF/e+lLDUEhDxxUc/5cR//uXfzhDSFOjszQ6QsEKKGtH7wypfkuskL5WO0f0jsaiFb8b1KSJVW8u9SlhoCQggBIYSAEEJACAghBIQQAkIIASGEgBAQQggIIQSEEAJCCAEhIIQQEEIICHlOXu5wj1KriWrgexyj3XqvusN4XqPdVe/hheQejPsbBKv+y32GZpPuUw19HylLDQEhExbyp43E+ZH7xVcjjtc2jWUd5V7vZogZAkIsDLt5j3br7fWE4jcvjHdTWKBW9xLyEe2ei9uJCcnjLRX23kKkLDUEQ6asro1C7ZrK6ek8bochhdxjo3Ds7AtFftH3YilLDQEhI2LWNI0omCEghBAQQggIIQSEEIJH4fcA4Tl26u/HwNsAAAAASUVORK5CYII=</Map>
+      </Location>
+    </Locations>
+    <Npcs>
+      <Npc Id="0">
+        <Name>Имя:</Name>
+        <View>Дополнения:</View>
+        <Specification>Описание:</Specification>
+        <Stats>
+          <Stat>
+            <Name>Уровень:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Телосложение:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Тренированность:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Интеллект:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Мудрость:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Харизма:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Судьба:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Стойкость:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Реакция:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Воля:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Здоровье:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Регенерация:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Класс защиты:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Природная защита:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Физическая защита:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Магическая защита:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Инициатива:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Скорость:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Шанс крит.:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Бонус крит.:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Атака:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Урон:</Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+          <Stat>
+            <Name>Урон: </Name>
+            <Info />
+            <Value>0</Value>
+            <Bonus />
+          </Stat>
+        </Stats>
+      </Npc>
+    </Npcs>
+    <Events>
+      <Event Id="0">
+        <Title>Название события</Title>
+        <Description>Описание события</Description>
+      </Event>
+      <Event Id="1">
+        <Title>Название события</Title>
+        <Description>Описание события</Description>
+      </Event>
+      <Event Id="2">
+        <Title>Название события</Title>
+        <Description>Описание события</Description>
+      </Event>
+    </Events>
+    <Rewards>
+      <Npc Id="0">
+        <Name>Награда</Name>
+        <Who>Награда</Who>
+        <Additional>Дополнительные особенности:</Additional>
+        <Rare>Волшебный</Rare>
+        <Characteristics>
+          <Characteristic>
+            <Name>Золото</Name>
+            <Info />
+            <Value>1</Value>
+            <Bonus />
+          </Characteristic>
+        </Characteristics>
+      </Npc>
+      <Npc Id="1">
+        <Name>Награда</Name>
+        <Who>Награда</Who>
+        <Additional>Дополнительные особенности:</Additional>
+        <Rare>Волшебный</Rare>
+        <Characteristics>
+          <Characteristic>
+            <Name>Золото</Name>
+            <Info />
+            <Value>1</Value>
+            <Bonus />
+          </Characteristic>
+        </Characteristics>
+      </Npc>
+    </Rewards>
+  </Scenario>
+</Scenarios>

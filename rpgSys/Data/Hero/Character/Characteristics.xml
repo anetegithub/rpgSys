@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Characteristics>
+  <Characteristic Id="1" HeroId="1">
+    <Телосложение DIX="CON">0</Телосложение>
+    <Тренированность DIX="FIT">0</Тренированность>
+    <Интеллект DIX="INT">0</Интеллект>
+    <Мудрость DIX="WIS">0</Мудрость>
+    <Харизма DIX="CHA">0</Харизма>
+    <Судьба DIX="FTE">0</Судьба>
+  </Characteristic>
+</Characteristics>

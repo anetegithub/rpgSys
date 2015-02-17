@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Characteristics>
+  <Characteristic Name="Телосложение">Описание телосложения.</Characteristic>
+  <Characteristic Name="Тренированность">Описание тренированности.</Characteristic>
+  <Characteristic Name="Интеллект">Описание интеллекта.</Characteristic>
+  <Characteristic Name="Мудрость">Описание мудрости.</Characteristic>
+  <Characteristic Name="Харизма">Описание харизмы.</Characteristic>
+  <Characteristic Name="Судьба">Описание судьбы.</Characteristic>
+</Characteristics>
