@@ -462,6 +462,20 @@ namespace rpgSys
 
         public static class Chat
         {
+            public static string add
+            {
+                set
+                {
+                    Data.Add(new Message()
+                        {
+                            Id = Data.Count + 1,
+                            Master = false,
+                            System = false,
+                            Text = value
+                        });
+                }
+            }
+
             public static List<Message> Data = new List<Message>()
             {
                 new Message(){ Id=1, Master=false, System=false, Text="Magnum: Hello there pidarasy"},

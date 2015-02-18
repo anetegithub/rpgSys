@@ -6,8 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 
 using System.Threading;
-using SignalR;
-using SignalR.Hubs;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace rpgSys.Controllers
 {
@@ -45,13 +45,13 @@ namespace rpgSys.Controllers
                 db.Add(item);
 
                 // Notify the connected clients
-                Hub.Clients.addItem(item);
+                Hub.Clients.All.addItem(item);
 
                 // Return the new item, inside a 201 response
                 var response = Request.CreateResponse(HttpStatusCode.Created, item);
-                string link = Url.Link("apiRoute", new { controller = "chat", id = item.Id });
-                response.Headers.Location = new Uri(link);
-                return response;
+                //string link = Url.Link("apiRoute", new { controller = "chat", id = item.Id });
+                //response.Headers.Location = new Uri(link);
+                return response;                
             }
         }
     }
