@@ -1,11 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using System.Diagnostics;
+
 namespace rpgSys.Tests
 {
     [TestClass]
     public class MainTest
     {
+        [Conditional( "TEST" )]
         [TestMethod]
         public void select_messages_query_Test()
         {
@@ -19,7 +22,7 @@ namespace rpgSys.Tests
             var d = xmlBase.Chat.Get(GameId, Count, Desc, null);
 
             // assert
-            Assert.AreEqual(d[0], "Hello FCKING world!");
+            Assert.AreEqual(d[0], "Мастер: yep yep!");
         }
 
         [TestMethod]
