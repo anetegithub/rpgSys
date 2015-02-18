@@ -10,10 +10,10 @@ namespace rpgSys
         public string Title { get; set; }
         public string Recomendation { get; set; }
         public string Fable { get; set; }
-        public Location[] Locations { get; set; }
-        public Npc[] Npcs { get; set; }
-        public Event[] Events { get; set; }
-        public Item[] Rewards { get; set; }
+        public List<Location> Locations { get; set; }
+        public List<Npc> Npcs { get; set; }
+        public List<Event> Events { get; set; }
+        public List<Item> Rewards { get; set; }
     }
     
     public class Location
@@ -31,7 +31,7 @@ namespace rpgSys
         public string Name { get; set; }
         public string View { get; set; }
         public string Specification { get; set; }
-        public Stat[] Stats { get; set; }
+        public List<Stat> Stats { get; set; }
     }
 
     public class Event
@@ -43,12 +43,12 @@ namespace rpgSys
 
     public static class Additional
     {
-        public static object[] Add(this object[] arr, object Item)
-        {
-            Array.Resize<object>(ref arr, arr.Length + 1);
-            arr[arr.Length - 1] = Item;
-            return arr;
-        }
+        //public static object[] Add(this object[] arr, object Item)
+        //{
+        //    Array.Resize<object>(ref arr, arr.Length + 1);
+        //    arr[arr.Length - 1] = Item;
+        //    return arr;
+        //}
 
         public static int[] Add(this int[] arr, int Item)
         {

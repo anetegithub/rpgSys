@@ -177,7 +177,7 @@ namespace rpgSys
                         }
                         foreach (XElement n in el.Elements("Npcs"))
                         {
-                            Stat[] Stts = new Stat[0];
+                            List<Stat> Stts = new List<Stat>();
                             foreach (XElement s in n.Elements("Stats"))
                             {
                                 Stts.Add(new Stat()
@@ -208,7 +208,7 @@ namespace rpgSys
                         }
                         foreach (XElement n in el.Elements("Rewards"))
                         {
-                            Stat[] Stts = new Stat[0];
+                            List<Stat> Stts = new List<Stat>();
                             foreach (XElement s in n.Elements("Characteristics"))
                             {
                                 Stts.Add(new Stat()
@@ -388,100 +388,150 @@ namespace rpgSys
                 return null;
             }
 
-            public static void AddMessage(string GameId, string HeroId, string Master, string System)
-            {
-                XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Games.xml"));
-                foreach (XElement gme in doc.Root.Elements())
-                {
-                    if (gme.Attribute("Id").Value == GameId)
-                    {
-                        XElement newmessage = new XElement("Message",
-                            new XAttribute("HeroId", HeroId),
-                            new XAttribute("Master", Master),
-                            new XAttribute("System", System));
-                        gme.Element("Games").Add(newmessage);
-                    }
-                }
-                doc.Save(path);
-            }
+            //public static void AddMessage(string GameId, string HeroId, string Master, string System)
+            //{
+            //    XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Games.xml"));
+            //    foreach (XElement gme in doc.Root.Elements())
+            //    {
+            //        if (gme.Attribute("Id").Value == GameId)
+            //        {
+            //            XElement newmessage = new XElement("Message",
+            //                new XAttribute("HeroId", HeroId),
+            //                new XAttribute("Master", Master),
+            //                new XAttribute("System", System));
+            //            gme.Element("Games").Add(newmessage);
+            //        }
+            //    }
+            //    doc.Save(path);
+            //}
 
-            public static string[] GetMessage(string GameId, int Count, bool Desc)
-            {
-                string[] s = new string[0];
+            //public static string[] GetMessage(string GameId, int Count, bool Desc)
+            //{
+            //    string[] s = new string[0];
 
-                int chat_id = 0;
+            //    int chat_id = 0;
+            //    XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Games.xml"));
+            //    foreach (XElement el in doc.Root.Elements())
+            //    {
+            //        if (el.Attribute("Id").Value == GameId)
+            //        {
+            //            chat_id = Convert.ToInt32(el.Element("Chat").Value);
+
+            //        }
+            //    }
+
+
+            //    //        foreach (XElement x in el.Element("Chat"))
+            //    //        {
+            //    //            string prefix = "";
+            //    //            if (el.Attribute("HeroId").Value != "0")
+            //    //                prefix = Characters.GetInfo(el.Attribute("HeroId").Value, "")[0].Value;
+            //    //            if (el.Attribute("Master").Value == "True")
+            //    //                prefix = "Мастер";
+
+            //    //            g.Chat.Add(prefix + ": " + el.Element("Message").Value);
+
+            //    //for (int i = 0; i < g.Chat.Length; i++)
+            //    //{
+
+            //    //}
+            //    return s;
+            //}
+
+            public static void ChangeLocation(string GameId, string MasterId, string LocationId)
+            { Change(GameId, MasterId, "LocationId", LocationId); }
+
+            public static void ChangeEvent(string GameId, string MasterId, string EventId)
+            { Change(GameId, MasterId, "EventId", EventId); }
+
+            public static void ChangeNpc(string GameId, string MasterId, string NpcId)
+            { Change(GameId, MasterId, "NpcId", NpcId); }
+
+            public static void Change(string GameId, string MasterId, string ArgumentName, string Id)
+            {
+
                 XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Games.xml"));
                 foreach (XElement el in doc.Root.Elements())
                 {
                     if (el.Attribute("Id").Value == GameId)
                     {
-                        chat_id = Convert.ToInt32(el.Element("Chat").Value);
-                        
-                    }
-                }
-
-                
-                //        foreach (XElement x in el.Element("Chat"))
-                //        {
-                //            string prefix = "";
-                //            if (el.Attribute("HeroId").Value != "0")
-                //                prefix = Characters.GetInfo(el.Attribute("HeroId").Value, "")[0].Value;
-                //            if (el.Attribute("Master").Value == "True")
-                //                prefix = "Мастер";
-
-                //            g.Chat.Add(prefix + ": " + el.Element("Message").Value);
-
-                //for (int i = 0; i < g.Chat.Length; i++)
-                //{
-
-                //}
-                return s;
-            }
-
-            public static void ChangeLocation(string GameId,string LocationId)
-            { Change(GameId, "LocationId", LocationId); }
-
-            public static void ChangeEvent(string GameId, string EventId)
-            { Change(GameId, "EventId", EventId); }
-
-            public static void ChangeNpc(string GameId, string NpcId)
-            { Change(GameId, "NpcId", NpcId); }
-
-            public static void Change(string GameId,string ArgumentName,string Id)
-            {
-                XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Games.xml"));
-                foreach (XElement el in doc.Root.Elements())
-                {
-                    if(el.Attribute("Id").Value==GameId)
-                    {
-                        el.SetElementValue(ArgumentName, Id);                        
+                        if (el.Element("Master").ToString() == MasterId)
+                            el.SetElementValue(ArgumentName, Id);
                     }
                 }
             }
         }
 
+        public delegate bool Where(Message M);
+
         public static class Chat
         {
-            public static string add
+            public static object obj;
+
+            public static string[] Get(int GameId, int Count, bool Desc, Where[] where)
             {
-                set
+                if (where == null)
                 {
-                    Data.Add(new Message()
-                        {
-                            Id = Data.Count + 1,
-                            Master = false,
-                            System = false,
-                            Text = value
-                        });
+                    where = new Where[0];
                 }
+
+                XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Chats/" + GameId.ToString() + ".xml"));
+                List<string> data = new List<string>();
+                var mydata = (from item in doc.Root.Elements()
+                              orderby Convert.ToInt32(item.Attribute("Id").Value)
+                              select new Message
+                              {
+                                  Id = Convert.ToInt32(item.Attribute("Id").Value),
+                                  HeroId = Convert.ToInt32(item.Attribute("HeroId").Value),
+                                  Master = Convert.ToBoolean(item.Attribute("Master").Value),
+                                  System = Convert.ToBoolean(item.Attribute("System").Value),
+                                  Text = item.Value
+                              }).ToList<Message>();
+                if (Desc)
+                    mydata = mydata.OrderByDescending(a => a.Id).Take(Count).ToList<Message>();
+                else
+                    mydata = mydata.OrderBy(a => a.Id).Take(Count).ToList<Message>();
+
+                foreach (Message m in mydata)
+                {
+                    bool tested = true;
+                    foreach (Where w in where)
+                    {
+                        tested = w(m);
+                    }
+
+                    if (tested)
+                    {
+                        string prefix = "";
+
+                        if (m.HeroId != 0)
+                            prefix = Characters.GetInfo(m.HeroId.ToString(), "")[0].Value + ": ";
+                        if (m.Master)
+                            prefix = "Мастер: ";
+
+                        data.Add(prefix + m.Text);
+                    }
+                }
+                return data.ToArray();
             }
 
-            public static List<Message> Data = new List<Message>()
+            public static bool Set(int GameId, int HeroId, bool IsMaster, bool IsSystem, string Text)
             {
-                new Message(){ Id=1, Master=false, System=false, Text="Magnum: Hello there pidarasy"},
-                new Message(){ Id=2, Master=true, System=false, Text="Master: Dungeon is empty now!"},
-                new Message(){ Id=3, Master=false, System=true, Text="Location changed, you entered into darkness."}
-            };
+                lock (obj)
+                {
+                    XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Chats/" + GameId.ToString() + ".xml"));
+                    int maxId = doc.Root.Elements("Message").Max(t => Int32.Parse(t.Attribute("id").Value));
+                    XElement newmessage = new XElement("Message",
+                        new XAttribute("Id", ++maxId),
+                        new XElement("HeroId", HeroId),
+                        new XElement("System", IsSystem),
+                        new XElement("Text", Text),
+                        new XElement("Master", IsMaster));
+                    doc.Root.Add(newmessage);
+                    doc.Save(path);
+                    return true;
+                }
+            }
         }
 
         public static class Skills

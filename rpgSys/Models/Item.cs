@@ -12,6 +12,6 @@ namespace rpgSys
         public string Rare { get; set; }
         public string Who { get; set; }
         public string Additional { get; set; }
-        public Stat[] Characteristics { get; set; }
+        public List<Stat> Characteristics { get; set; }
     }
 }

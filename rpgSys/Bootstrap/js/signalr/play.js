@@ -1,20 +1,20 @@
 ﻿function update() {
     $('#chat').html('');
-    $.get("/api/chat", function (items) {
+    $.get("/api/play", function (items) {
         $.each(items, function (idx, item) {
-            $('#chat').html($('#chat').html() +"<label>"+item.Text+"</label><br/>");
+            $('#chat').html($('#chat').html() +"<label>"+item+"</label><br/>");
         });
     }, "json");
 }
 
 $(function () {
     // Declare a proxy to reference the hub. 
-    var chat = $.connection.msg;
+    var chat = $.connection.play;
 
     // Create a function that the hub can call to broadcast messages.
     chat.client.additem = function (name, message) {
         $.ajax({
-            url: "/api/chat",
+            url: "/api/play",
             data: { 'Text': 'Volvo: New text', 'Master': false, 'System': false },
             type: "POST"
         });

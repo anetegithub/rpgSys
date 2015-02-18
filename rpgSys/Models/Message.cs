@@ -9,6 +9,7 @@ namespace rpgSys
 {
     public class Message
     {
+        public int HeroId { get; set; }
         public int Id { get; set; }
         public bool Master { get; set; }
         public bool System { get; set; }
