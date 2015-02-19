@@ -20,9 +20,7 @@ namespace rpgSys.Controllers
             {
                 string field = condition.Split(' ')[0];
                 string _if = condition.Split(' ')[1];
-                string value = condition.Split(' ')[2];
-
-                
+                string value = condition.Split(' ')[2];               
 
                 conditions.Add(new xmlBase.Where(
                     (Message m) =>
@@ -48,6 +46,26 @@ namespace rpgSys.Controllers
             cod = conditions.ToArray();
 
             return xmlBase.Chat.Get(gid, cnt, dsc, cod);
+        }
+
+        public string Put_Messages(string GameId,string HeroId,string IsMaster,string IsSystem,string Text)
+        {
+            int gid,hro;
+            bool ism,iss;
+
+            if (!Int32.TryParse(GameId, out gid))
+                return "";
+
+            if (!Int32.TryParse(HeroId, out hro))
+                return "";
+
+            if (!Boolean.TryParse(IsMaster, out ism))
+                return "";
+
+            if (!Boolean.TryParse(IsSystem, out iss))
+                return "";
+
+            return xmlBase.Chat.Set(gid, hro, ism, iss, Text).ToString();
         }
 
         //public Message Get_OneMessage(int id)

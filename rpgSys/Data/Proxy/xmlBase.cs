@@ -1,6 +1,4 @@
-﻿#define TEST
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -470,19 +468,18 @@ namespace rpgSys
         {
             public static object obj;
 
-            public static string[] Get(int GameId, int Count, bool Desc, Where[] where)
+            public static string[] Get(int GameId, int Count, bool Desc, Where[] where,bool Test=false)
             {
                 if (where == null)
                 {
                     where = new Where[0];
                 }
                 XDocument doc = new XDocument();
+                if(Test)
+                    doc = XDocument.Load(System.IO.Directory.GetCurrentDirectory().Replace(@"rpgSys.Tests\bin\Debug", @"rpgSys\Data\Games\Chats\" + GameId.ToString() + ".xml"));
+                else
+                    doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Chats/" + GameId.ToString() + ".xml"));
 
-#if TEST
-                doc = XDocument.Load(System.IO.Directory.GetCurrentDirectory().Replace(@"rpgSys.Tests\bin\Debug", @"rpgSys\Data\Games\Chats\" + GameId.ToString() + ".xml"));
-#else
-                doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Games/Chats/" + GameId.ToString() + ".xml"));
-#endif
 
                 List<string> data = new List<string>();
                 var mydata = (from item in doc.Root.Elements()

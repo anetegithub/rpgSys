@@ -19,7 +19,7 @@ namespace rpgSys.Tests
 
 
             // act
-            var d = xmlBase.Chat.Get(GameId, Count, Desc, null);
+            var d = xmlBase.Chat.Get(GameId, Count, Desc, null,true);
 
             // assert
             Assert.AreEqual(d[0], "Мастер: yep yep!");
