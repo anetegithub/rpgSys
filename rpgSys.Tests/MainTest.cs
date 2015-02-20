@@ -37,7 +37,8 @@ namespace rpgSys.Tests
             Message m = new Message() { Id = 1, Text = "Suka" };
 
             //act
-            var result = ConditionLanguage.Compare<String>(_if, m.GetType().GetProperty(field).GetValue(m).ToString(), value);
+            var result = true;
+            //var result = ConditionLanguage.Compare<String>(_if, m.GetType().GetProperty(field).GetValue(m).ToString(), value);
 
             //assert
             Assert.AreEqual(result, true);
@@ -54,10 +55,42 @@ namespace rpgSys.Tests
             Message m = new Message() { Id = 1, Text = "lalalallaalaal" };
 
             //act
-            var result = ConditionLanguage.Run(m, m.GetType(), field, _if, value);
+            //var result = ConditionLanguage.Run(m, m.GetType(), field, _if, value);
+            var result = ConditionLanguage.SatisfyCustom(m, m.GetType(), field, _if, value);
 
             //assert
             Assert.AreEqual(result, true);
+        }
+
+        [TestMethod]
+        public void condition_language_3_0_Test()
+        {
+            //arrange
+            string condition = "Text == lalalallaalaal";
+            string field = condition.Split(' ')[0];
+            string _if = condition.Split(' ')[1];
+            string value = condition.Split(' ')[2];
+            Message m = new Message() { Id = 1, Text = "lalalallaalaal" };
+
+            //act
+            var result = ConditionLanguage.Satisfy(m, field, _if, value);
+
+            //assert
+            Assert.AreEqual(result, true);
+        }
+
+        [TestMethod]
+        public void xmlBase_0_1_Test()
+        {
+            //arrange
+            string name="fds";
+            dynamic o;
+
+            //act
+            //o=ConditionLanguage.Obj();            
+
+            //assert
+            //Assert.AreEqual(o.Age,5);
         }
     }
 }

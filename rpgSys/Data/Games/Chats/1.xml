@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Messages>
-  <Message Id="1" HeroId="0" Master="False" System="True">Hello FCKING world!</Message>
-  <Message Id="2" HeroId="0" Master="True" System="True">yep yep!</Message>
+  <Message Id="1" HeroId="0" Master="False" System="True">
+    <Text>Hello FCKING world!</Text>
+  </Message>
+  <Message Id="2" HeroId="0" Master="True" System="True">
+    <Text>yep yep!</Text>
+  </Message>
+  <!--<Message Id="1" HeroId="0" Master="False" System="True"></Message>
+  <Message Id="2" HeroId="0" Master="True" System="True">yep yep!</Message>-->
 </Messages>

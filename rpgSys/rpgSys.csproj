@@ -144,7 +144,9 @@
     <Content Include="Bootstrap\js\renders\userServer.js" />
     <Content Include="Bootstrap\js\renders\userScenario.js" />
     <Content Include="Bootstrap\js\signalr\play.js" />
-    <Content Include="Data\Games\Chats\1.xml" />
+    <Content Include="Data\Games\Chats\1.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Data\Games\Games.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -228,6 +230,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Modules\ConditionLanguage.cs" />
     <Compile Include="Modules\UserActivity.cs" />
+    <Compile Include="ORM\baseCL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

@@ -14,4 +14,17 @@
     <Version>1,0</Version>
     <Dllinfo>FastInfoModule_Core : HOWTOUSE// add fastinfo.js, add fastinfo.css, set info window container (span id=fiContainer /span) any place, then add to every item oncontext function ShowInfo('ID_THIS_ITEM','ID_CONTAINER'), and AT LAST: put (span id=Container /span) some place for show message in this container. Server side working automatic with non-custom items which need info.</Dllinfo>
   </Module>
+  <Module Id="3">
+    <Name>Язык условий</Name>
+    <InnerName>CL</InnerName>
+    <Info>
+      Возможность использовать конструкции в запросах что бы делать выборки с большим количеством условий
+    </Info>
+    <Version>0.5</Version>
+    <DllInfo>
+      How to use:
+      Field Operation Value
+      Id == 1      
+    </DllInfo>
+  </Module>
 </Modules>
