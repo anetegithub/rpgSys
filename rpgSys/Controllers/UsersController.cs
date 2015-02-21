@@ -21,8 +21,18 @@ namespace rpgSys
         public IHttpActionResult Get(string name, string psw)
         {
             baseCL b = new baseCL("Data");
+
+            new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().ToList();
+
             b.Test = false;
-            var result = b.Select(new requestCl() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).Filter(new conditionCL("Id.==.1")).ToList();
+            Message m=new Message();
+            m.Id=999;
+            m.HeroId=999;
+            m.Master=false;
+            m.System=false;
+            m.Text="Some text";
+            var result = b.Insert<Message>(new irequestCl<Message>() { Table = new tableCl("/Games/Chats/1"), Object = m });
+            //var result = b.Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).Filter(new conditionCL("Id.==.1")).ToList();
             //var result = b.Request(new requestCl() { Statement = new statementCl(""), Table = new tableCl("/Hero/Character/Characteristics") }).Cast<Characteristics>();
             //var result = b.Select(new requestCl() { Statement = new conditionCL(""), Table = new tableCl("/Hero/Character/MaterialSkills") }).Cast<Skills>().Sort(new sortingCL("HeroId:Desc")).ToList();
             //foreach(Message m in result.ToList())

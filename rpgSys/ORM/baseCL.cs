@@ -7,11 +7,32 @@ using System.Dynamic;
 using System.Xml.Linq;
 using System.Reflection;
 using System.Linq.Expressions;
+using System.Collections;
 
 namespace rpgSys
 {
     public class baseCL
     {
+        private U CreateObject<U>()
+        {
+            return (U)Activator.CreateInstance(typeof(U));
+        }
+        private Type GetListType(Type T)
+        {
+            var Ltype = T;
+            foreach (Type interfaceType in Ltype.GetInterfaces())
+            {
+                if (interfaceType.IsGenericType &&
+                    interfaceType.GetGenericTypeDefinition()
+                    == typeof(IList<>))
+                {
+                    return Ltype.GetGenericArguments()[0];
+                }
+            }
+            return typeof(Nullable);
+        }
+
+        public static object Safe;
         public bool Test = false;
         private string Path;
         public baseCL(string Path)
@@ -27,7 +48,7 @@ namespace rpgSys
                 return System.IO.Directory.GetCurrentDirectory().Replace(@"rpgSys.Tests\bin\Debug", @"rpgSys\" + Path + @"\" + Table.Replace("/", @"\"));
         }
 
-        public resultCL Select(requestCl Request)
+        public resultCL Select(requestCL Request)
         {
             List<Stat> info = new List<Stat>();
             XDocument doc = XDocument.Load(GetPath(Request.Table.Path));
@@ -36,7 +57,57 @@ namespace rpgSys
             {
                 Objects.Add(DynamicElement(el));
             }
-            return resultCL.ConnectResponse(new responseCl() { Response = Objects, Conditions = Request.Conditions != null ? Request.Conditions : null });
+            return resultCL.ConnectResponse(new responseCL() { Response = Objects, Conditions = Request.Conditions != null ? Request.Conditions : null });
+        }
+
+        public returnCL Insert<T>(irequestCl<T> Request)
+        {
+            returnCL result = new returnCL("");
+            try
+            {
+                XDocument doc = XDocument.Load(GetPath(Request.Table.Path));
+                XElement Element = new XElement(typeof(T).Name);
+                foreach (var Property in typeof(T).GetProperties())
+                {
+                    Element.Add(DynamicObject<T>(Request.Object, Property));
+                }
+                lock (Safe)
+                {
+                    doc.Root.Add(Element);
+                    doc.Save(GetPath(Request.Table.Path));
+                }
+            }
+            catch (Exception ex) { result = new returnCL(ex.Message) { Successful = false }; }
+            result.Successful = true;
+
+            return result;
+        }
+
+        private XElement DynamicObject<U>(U Object, PropertyInfo Property)
+        {
+            XElement Element = new XElement(Property.Name);
+            Element.Value = Property.GetValue(Object, null).ToString();
+            if (Property.PropertyType == typeof(List<>))
+            {
+                Type PropertyType = GetListType(Property.PropertyType);
+                Type GenericListType = typeof(List<>).MakeGenericType(PropertyType);
+                var List = (IList)Activator.CreateInstance(GenericListType);
+
+                foreach (var Inner in List)
+                {
+                    foreach (var InnerProperty in Inner.GetType().GetProperties())
+                    {
+                        MethodInfo method = typeof(baseCL).GetMethod("DynamicObject");
+                        var CollectionType = GetListType(Property.PropertyType);
+                        MethodInfo generic = method.MakeGenericMethod(CollectionType);
+                        object classInstance = new baseCL("");
+                        object[] parametersArray = new object[] { Inner, InnerProperty };
+                        var DeCastedProperty = generic.Invoke(classInstance, parametersArray);
+                        Element.Add((XElement)DeCastedProperty);
+                    }
+                }
+            }
+            return Element;
         }
 
         private dynamic DynamicElement(XElement Element)
@@ -66,19 +137,41 @@ namespace rpgSys
         }
     }
 
-    public class requestCl
+    public class returnCL
+    {
+        public bool Successful = false;
+        private string innermessage;
+        public string InnerMessage
+        {
+            get
+            {
+                return innermessage;
+            }
+        }
+        public returnCL(string InnerMessage)
+        {
+            innermessage = InnerMessage;
+        }
+    }
+
+    public class requestCL
     {
         public tableCl Table;
         public conditionCL Conditions;
     }
 
-    public class responseCl
+    public class irequestCl<T>: requestCL
+    {
+        public T Object;
+    }
+
+    public class responseCL
     {
         public List<dynamic> Response;
         public conditionCL Conditions;
     }
 
-    public class castedCl<T>
+    public class castedCL<T>
     {
         private U CreateObject<U>()
         {
@@ -99,16 +192,16 @@ namespace rpgSys
             return typeof(Nullable);
         }
         private List<T> Result = new List<T>();
-        private castedCl()
+        private castedCL()
         { }
-        protected responseCl response;
-        public castedCl(responseCl Response)
+        protected responseCL response;
+        public castedCL(responseCL Response)
         {
             response = Response;
-            MethodInfo method = typeof(castedCl<T>).GetMethod("CastCollection");
+            MethodInfo method = typeof(castedCL<T>).GetMethod("CastCollection");
             MethodInfo generic = method.MakeGenericMethod(typeof(T));
             ParameterInfo[] parameters = generic.GetParameters();
-            object classInstance = new castedCl<T>();
+            object classInstance = new castedCL<T>();
             object[] parametersArray = new object[] { Response.Response };
             Result = (List<T>)generic.Invoke(classInstance, parametersArray);
         }
@@ -127,10 +220,10 @@ namespace rpgSys
                             var pType = Property.PropertyType;
                             if (dWhat.Value.GetType() == typeof(List<dynamic>))
                             {
-                                MethodInfo method = typeof(castedCl<T>).GetMethod("CastCollection");
+                                MethodInfo method = typeof(castedCL<T>).GetMethod("CastCollection");
                                 var CollectionType = GetListType(Property.PropertyType);
                                 MethodInfo generic = method.MakeGenericMethod(CollectionType);
-                                object classInstance = new castedCl<T>();
+                                object classInstance = new castedCL<T>();
                                 object[] parametersArray = new object[] { dWhat.Value };
                                 var CastedCollection = generic.Invoke(classInstance, parametersArray);
                                 o.GetType()
@@ -154,12 +247,6 @@ namespace rpgSys
 
             return o;
         }
-
-        public void GenericMethod<P>()
-        {
-            Console.WriteLine("fd");
-        }
-
         public List<O> CastCollection<O>(List<dynamic> Collection)
         {
             List<O> List = new List<O>();
@@ -179,7 +266,7 @@ namespace rpgSys
             return Result[0];
         }
 
-        public castedCl<T> Sort(sortingCL Sortings)
+        public castedCL<T> Sort(sortingCL Sortings)
         {
             object Temp = new object();
 
@@ -214,17 +301,17 @@ namespace rpgSys
 
             return this;
         }
-        public castedCl<T> Limit(Int32 Count)
+        public castedCL<T> Limit(Int32 Count)
         {
             Result=Result.Take(Count).ToList<T>();
             return this;
         }
-        public castedCl<T> Filter()
+        public castedCL<T> Filter()
         {
             this.Filter(response.Conditions);
             return this;
         }
-        public castedCl<T>Filter(conditionCL Conditions)
+        public castedCL<T>Filter(conditionCL Conditions)
         {
             List<T> Filtered = new List<T>();
             foreach (T Row in Result)
@@ -248,7 +335,7 @@ namespace rpgSys
 
     public class sortingCL
     {
-        public List<tokenCl> Sortings = new List<tokenCl>();
+        public List<tokenCL> Sortings = new List<tokenCL>();
         public sortingCL(string Sortings)
         {
             foreach (string Sorting in Sortings.Split(','))
@@ -256,7 +343,7 @@ namespace rpgSys
                 try
                 {
                     this.Sortings.Add(
-                        new tokenCl()
+                        new tokenCL()
                         {
                             Field = Sorting.Split(':')[0],
                             Operation = Sorting.Split(':')[1]
@@ -269,19 +356,19 @@ namespace rpgSys
 
     public class resultCL
     {
-        private resultCL(responseCl Response)
+        private resultCL(responseCL Response)
         {
             response = Response;
         }
-        private responseCl response;
-        public responseCl Response
+        private responseCL response;
+        public responseCL Response
         { get { return response; } }
-        public castedCl<T> Cast<T>()
+        public castedCL<T> Cast<T>()
         {
-            return new castedCl<T>(response);
+            return new castedCL<T>(response);
         }
 
-        public static resultCL ConnectResponse(responseCl Response)
+        public static resultCL ConnectResponse(responseCL Response)
         {
             resultCL response = new resultCL(Response);
             return response;
@@ -331,7 +418,7 @@ namespace rpgSys
         }
         private string conditions;
         [Obsolete("Please, don't use it! CL rules can changes any version! U can use string[] Conditions with CL.Solve")]
-        public List<tokenCl> Tokens = new List<tokenCl>();
+        public List<tokenCL> Tokens = new List<tokenCL>();
         public conditionCL(string Conditions)
         {
             conditions = Conditions;
@@ -340,7 +427,7 @@ namespace rpgSys
                 try
                 {
                     Tokens.Add(
-                        new tokenCl()
+                        new tokenCL()
                         {
                             Field = s.Split('.')[0],
                             Operation = s.Split('.')[1],
@@ -352,12 +439,12 @@ namespace rpgSys
         }
     }
 
-    public struct tokenCl
+    public struct tokenCL
     {
         public string Field, Operation, Value;
     }
 
-    public static class exampleCl
+    public static class exampleCL
     {
         /// <summary>
         /// test class
@@ -390,7 +477,7 @@ namespace rpgSys
             t.Node = "Hero";
 
             //pack it into request
-            requestCl r = new requestCl();
+            requestCL r = new requestCL();
             r.Conditions = s;
             r.Table = t;
 
@@ -404,10 +491,10 @@ namespace rpgSys
             exCl y = casted.UniqueResult();
 
             //Acctualy, it can looks like this:
-            y = Base.Select(new requestCl() { Table = new tableCl("/Games/Chats/1") }).Cast<exCl>().UniqueResult();
+            y = Base.Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<exCl>().UniqueResult();
 
             //Or like this:
-            y = Base.Select(new requestCl()
+            y = Base.Select(new requestCL()
             {
                 Table = new tableCl("/Games/Chats/1")
             })

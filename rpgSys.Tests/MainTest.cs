@@ -33,7 +33,7 @@ namespace rpgSys.Tests
             b.Test = true;
 
             //act
-            var result = b.Select(new requestCl() {  Conditions = new conditionCL(""), Table = new tableCl("/Games/Chats/1") }).Cast<Message>().ToList();
+            var result = b.Select(new requestCL() {  Conditions = new conditionCL(""), Table = new tableCl("/Games/Chats/1") }).Cast<Message>().ToList();
 
             //assert
             Assert.AreEqual(result[0].Text, "111111111111Hello FCKING world!");
@@ -47,7 +47,7 @@ namespace rpgSys.Tests
             b.Test = true;
 
             //act
-            var result = b.Select(new requestCl() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).ToList();
+            var result = b.Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).ToList();
 
             //assert
             Assert.AreEqual(result[0].Id, 4);
