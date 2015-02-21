@@ -22,44 +22,35 @@ namespace rpgSys.Tests
             var d = xmlBase.Chat.Get(GameId, Count, Desc, null,true);
 
             // assert
-            Assert.AreEqual(d[0], "Мастер: yep yep!");
+            Assert.AreEqual(d[0], "Мастер:");
         }
 
         [TestMethod]
-        public void condition_language_Test()
+        public void select_messages_ORM_Test()
         {
             //arrange
-            //string condition = "Id <= 1";
-            string condition = "Text == Suka";
-            string field = condition.Split(' ')[0];
-            string _if = condition.Split(' ')[1];
-            string value = condition.Split(' ')[2];
-            Message m = new Message() { Id = 1, Text = "Suka" };
+            baseCL b = new baseCL("Data");
+            b.Test = true;
 
             //act
-            var result = true;
-            //var result = ConditionLanguage.Compare<String>(_if, m.GetType().GetProperty(field).GetValue(m).ToString(), value);
+            var result = b.Select(new requestCl() {  Conditions = new conditionCL(""), Table = new tableCl("/Games/Chats/1") }).Cast<Message>().ToList();
 
             //assert
-            Assert.AreEqual(result, true);
+            Assert.AreEqual(result[0].Text, "111111111111Hello FCKING world!");
         }
 
         [TestMethod]
-        public void condition_language_2_0_Test()
+        public void select_messages_ORM_sorting_Test()
         {
             //arrange
-            string condition = "Text == lalalallaalaal";
-            string field = condition.Split(' ')[0];
-            string _if = condition.Split(' ')[1];
-            string value = condition.Split(' ')[2];
-            Message m = new Message() { Id = 1, Text = "lalalallaalaal" };
+            baseCL b = new baseCL("Data");
+            b.Test = true;
 
             //act
-            //var result = ConditionLanguage.Run(m, m.GetType(), field, _if, value);
-            var result = ConditionLanguage.SatisfyCustom(m, m.GetType(), field, _if, value);
+            var result = b.Select(new requestCl() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).ToList();
 
             //assert
-            Assert.AreEqual(result, true);
+            Assert.AreEqual(result[0].Id, 4);
         }
 
         [TestMethod]
@@ -73,7 +64,7 @@ namespace rpgSys.Tests
             Message m = new Message() { Id = 1, Text = "lalalallaalaal" };
 
             //act
-            var result = ConditionLanguage.Satisfy(m, field, _if, value);
+            var result = CL.Satisfy(m, field, _if, value);
 
             //assert
             Assert.AreEqual(result, true);
@@ -83,8 +74,8 @@ namespace rpgSys.Tests
         public void xmlBase_0_1_Test()
         {
             //arrange
-            string name="fds";
-            dynamic o;
+            //string name="fds";
+            //dynamic o;
 
             //act
             //o=ConditionLanguage.Obj();            

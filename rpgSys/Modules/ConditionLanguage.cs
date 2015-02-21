@@ -7,30 +7,40 @@ using System.Dynamic;
 
 namespace rpgSys
 {
-    public static class ConditionLanguage
+    /// <summary>
+    /// 0.6: space replace by dot
+    /// 0.7 Solve method
+    /// 0.8 sorting CL
+    /// 0.8.1 added custom Split for version control
+    /// </summary>
+    public static class CL
     {
-        [Obsolete("Run it is an old and not safe method, better use Satisfy. If you need set different object and type use SatisfyCustom method")]
+        [Obsolete("Run is an old and don't safe method, better use Satisfy. If you need set different object and type use SatisfyCustom method")]
         public static bool Run(object Object, Type Class, string Field, string Operator, string Value)
         {
             Field = Convert.ChangeType(Object, Class).GetType().GetProperty(Field).GetValue(Convert.ChangeType(Object, Class)).ToString();
-            return ConditionLanguage.Compare<String>(Operator, Field, Value);
+            return CL.Compare<String>(Operator, Field, Value);
         }
 
         public static bool Satisfy(object Object, string Field, string Operator, string Value)
         {
             Field = Convert.ChangeType(Object, Object.GetType()).GetType().GetProperty(Field).GetValue(Convert.ChangeType(Object, Object.GetType())).ToString();
-            return ConditionLanguage.Compare<String>(Operator, Field, Value);
+            return CL.Compare<String>(Operator, Field, Value);
         }
 
-        /// <summary>
-        /// Still working about it
-        /// </summary>
-        /// <param name="Object"></param>
-        /// <param name="CustomType"></param>
-        /// <param name="Field"></param>
-        /// <param name="Operator"></param>
-        /// <param name="Value"></param>
-        /// <returns></returns>
+        public static string[] Split(string Conditions)
+        {
+            return Conditions.Split(',');
+        }
+
+        public static bool Solve(object Object, string Condition)
+        {
+            string Operator = Condition.Split('.')[1];
+            string Value = Condition.Split('.')[2];
+            string Field = Convert.ChangeType(Object, Object.GetType()).GetType().GetProperty(Condition.Split('.')[0]).GetValue(Convert.ChangeType(Object, Object.GetType())).ToString();
+            return CL.Compare<String>(Operator, Field, Value);
+        }
+
         public static bool SatisfyCustom(object Object, Type CustomType, string Field, string Operator, string Value)
         {
             try
@@ -42,7 +52,7 @@ namespace rpgSys
                 Console.WriteLine(ex.Message);
                 return true;
             }
-            return ConditionLanguage.Compare<String>(Operator, Field, Value);
+            return CL.Compare<String>(Operator, Field, Value);
         }
 
         private static bool Compare<T>(string op, T x, T y) where T : IComparable
@@ -55,8 +65,8 @@ namespace rpgSys
                 case ">=": return x.CompareTo(y) >= 0;
                 case "<": return x.CompareTo(y) < 0;
                 case "<=": return x.CompareTo(y) <= 0;
-                case "@=": return x.CompareToIn(y) >= 0;
-                case "@!": return x.CompareToIn(y) < 0;
+                case "@": return x.CompareToIn(y) >= 0;
+                case "!@": return x.CompareToIn(y) < 0;
                 case "%": return x.CompareToLike(y) != 0;
                 case "!%": return x.CompareToLike(y) != 0;
                 default: return false;
@@ -91,5 +101,23 @@ namespace rpgSys
 
             return together >= length / 2 ? 1 : 0;
         }
+
+        public static readonly string CLrules =
+@"
+    Syntax:
+        <Field.Operation.Value,Field.Operation.Value>
+    Operations:
+        1. Equal: ==
+        2. NotEqual: !=
+        3. More/Less: >/<
+        4. More/Less or Equal: >=/<=
+        5. Object like string CONTAINS string: @
+        6. Object like string NOT CONTAINS string: !@
+        7. Object like string LIKE another string MORE OR EQUAL 50% of SOURSE string: %
+        8. Object like string NOT LIKE another string MORE OR EQUAL 50% of SOURSE string: !%
+
+    SortingCL syntax:
+        <Id:Desc,Name:Asce>
+";
     }
 }

@@ -25,7 +25,7 @@ namespace rpgSys.Controllers
                 conditions.Add(new xmlBase.Where(
                     (Message m) =>
                     {
-                        return ConditionLanguage.Satisfy(m, field, _if, value);
+                        return CL.Satisfy(m, field, _if, value);
                         //return ConditionLanguage.Compare<String>(_if, m.GetType().GetProperty(field).GetValue(m).ToString(), value);
                     })
                );

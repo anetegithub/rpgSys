@@ -1,53 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<MaterialSkills>
-  <CharacterMaterialSkills HeroId="1">
-    <MaterialSkill Id="1">
+<Skills>
+  <SkillsList HeroId="1">
+    <Skill Id="1">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="2">
+    </Skill>
+    <Skill Id="2">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="3">
+    </Skill>
+    <Skill Id="3">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="4">
+    </Skill>
+    <Skill Id="4">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="5">
+    </Skill>
+    <Skill Id="5">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="6">
+    </Skill>
+    <Skill Id="6">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="7">
+    </Skill>
+    <Skill Id="7">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="8">
+    </Skill>
+    <Skill Id="8">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="9">
+    </Skill>
+    <Skill Id="9">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="10">
+    </Skill>
+    <Skill Id="10">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="11">
+    </Skill>
+    <Skill Id="11">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-    <MaterialSkill Id="12">
+    </Skill>
+    <Skill Id="12">
       <Value>0</Value>
       <Bonus>0</Bonus>
-    </MaterialSkill>
-  </CharacterMaterialSkills>
-</MaterialSkills>
+    </Skill>
+  </SkillsList>
+</Skills>

@@ -27,4 +27,16 @@
       Id == 1      
     </DllInfo>
   </Module>
+  <Module Id="4">
+    <Name>ORM baseCL</Name>
+    <InnerName>baseCL</InnerName>
+    <Info>
+      ORM позволяющая получать данные из XML файла с помощью языка условий (CL)
+    </Info>
+    <Version>0.2</Version>
+    <DllInfo>
+      How to use:
+      See baseCL.exampleCL class
+    </DllInfo>
+  </Module>
 </Modules>

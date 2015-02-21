@@ -22,12 +22,14 @@ namespace rpgSys
         {
             baseCL b = new baseCL("Data");
             b.Test = false;
-            var result = b.Request(new requestCl() { Statement = new statementCl(""), Table = new tableCl("/Games/Chats/1") }).Cast<Message>();
-            foreach(Message m in result.ToList())
-            {
-                if (m.Text != "f")
-                    m.Text = "hello world!";
-            }
+            var result = b.Select(new requestCl() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).Filter(new conditionCL("Id.==.1")).ToList();
+            //var result = b.Request(new requestCl() { Statement = new statementCl(""), Table = new tableCl("/Hero/Character/Characteristics") }).Cast<Characteristics>();
+            //var result = b.Select(new requestCl() { Statement = new conditionCL(""), Table = new tableCl("/Hero/Character/MaterialSkills") }).Cast<Skills>().Sort(new sortingCL("HeroId:Desc")).ToList();
+            //foreach(Message m in result.ToList())
+            //{
+            //    if (m.Text != "f")
+            //        m.Text = "hello world!";
+            //}
             User tryFind = xmlBase.Users.GetByName(name, psw)[0];
             if (tryFind != null)
             {

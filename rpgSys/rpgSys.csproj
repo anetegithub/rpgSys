@@ -221,12 +221,14 @@
     </Compile>
     <Compile Include="Hubs\PlayHub.cs" />
     <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\Characteristics.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Scenario.cs" />
     <Compile Include="Models\ServerSettings.cs" />
+    <Compile Include="Models\Skills.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Modules\ConditionLanguage.cs" />
     <Compile Include="Modules\UserActivity.cs" />

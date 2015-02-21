@@ -27,7 +27,7 @@ namespace rpgSys
                 return System.IO.Directory.GetCurrentDirectory().Replace(@"rpgSys.Tests\bin\Debug", @"rpgSys\" + Path + @"\" + Table.Replace("/", @"\"));
         }
 
-        public resultCL Request(requestCl Request)
+        public resultCL Select(requestCl Request)
         {
             List<Stat> info = new List<Stat>();
             XDocument doc = XDocument.Load(GetPath(Request.Table.Path));
@@ -36,7 +36,7 @@ namespace rpgSys
             {
                 Objects.Add(DynamicElement(el));
             }
-            return resultCL.ConnectResponse(new responseCl() { Response = Objects });
+            return resultCL.ConnectResponse(new responseCl() { Response = Objects, Conditions = Request.Conditions != null ? Request.Conditions : null });
         }
 
         private dynamic DynamicElement(XElement Element)
@@ -69,12 +69,13 @@ namespace rpgSys
     public class requestCl
     {
         public tableCl Table;
-        public statementCl Statement;
+        public conditionCL Conditions;
     }
 
     public class responseCl
     {
         public List<dynamic> Response;
+        public conditionCL Conditions;
     }
 
     public class castedCl<T>
@@ -83,28 +84,90 @@ namespace rpgSys
         {
             return (U)Activator.CreateInstance(typeof(U));
         }
+        private Type GetListType(Type T)
+        {
+            var Ltype = T;
+            foreach (Type interfaceType in Ltype.GetInterfaces())
+            {
+                if (interfaceType.IsGenericType &&
+                    interfaceType.GetGenericTypeDefinition()
+                    == typeof(IList<>))
+                {
+                    return Ltype.GetGenericArguments()[0];
+                }
+            }
+            return typeof(Nullable);
+        }
         private List<T> Result = new List<T>();
+        private castedCl()
+        { }
+        protected responseCl response;
         public castedCl(responseCl Response)
         {
-            foreach (var DField in Response.Response)
+            response = Response;
+            MethodInfo method = typeof(castedCl<T>).GetMethod("CastCollection");
+            MethodInfo generic = method.MakeGenericMethod(typeof(T));
+            ParameterInfo[] parameters = generic.GetParameters();
+            object classInstance = new castedCl<T>();
+            object[] parametersArray = new object[] { Response.Response };
+            Result = (List<T>)generic.Invoke(classInstance, parametersArray);
+        }
+
+        public V Cast<V>(List<dynamic> Object)
+        {
+            var o = CreateObject<V>();
+            foreach (var DField in Object)
             {
-                var o = CreateObject<T>();
-                foreach (var Property in typeof(T).GetProperties())
+                foreach (var Property in typeof(V).GetProperties())
                 {
                     foreach (var dWhat in DField)
                     {
                         if (Property.Name == dWhat.Key)
                         {
-                            o.GetType()
-                                .GetProperty(Property.Name)
-                                .SetValue(
-                                o,
-                                Convert.ChangeType(dWhat.Value, Property.PropertyType));
+                            var pType = Property.PropertyType;
+                            if (dWhat.Value.GetType() == typeof(List<dynamic>))
+                            {
+                                MethodInfo method = typeof(castedCl<T>).GetMethod("CastCollection");
+                                var CollectionType = GetListType(Property.PropertyType);
+                                MethodInfo generic = method.MakeGenericMethod(CollectionType);
+                                object classInstance = new castedCl<T>();
+                                object[] parametersArray = new object[] { dWhat.Value };
+                                var CastedCollection = generic.Invoke(classInstance, parametersArray);
+                                o.GetType()
+                                    .GetProperty(Property.Name)
+                                    .SetValue(
+                                    o,
+                                    CastedCollection);
+                            }
+                            else
+                            {
+                                o.GetType()
+                                    .GetProperty(Property.Name)
+                                    .SetValue(
+                                    o,
+                                    Convert.ChangeType(dWhat.Value, Property.PropertyType));
+                            }
                         }
                     }
                 }
-                Result.Add(o);
             }
+
+            return o;
+        }
+
+        public void GenericMethod<P>()
+        {
+            Console.WriteLine("fd");
+        }
+
+        public List<O> CastCollection<O>(List<dynamic> Collection)
+        {
+            List<O> List = new List<O>();
+            foreach (dynamic CollectionItem in Collection)
+            {
+                List.Add(Cast<O>(new List<dynamic>() { CollectionItem }));
+            }
+            return List;
         }
 
         public List<T> ToList()
@@ -114,6 +177,93 @@ namespace rpgSys
         public T UniqueResult()
         {
             return Result[0];
+        }
+
+        public castedCl<T> Sort(sortingCL Sortings)
+        {
+            object Temp = new object();
+
+            if (Sortings.Sortings.Count != 0)
+            {
+                if (Sortings.Sortings[0].Operation == "Desc")
+                {
+                    Temp = Result.OrderByDescending(x => typeof(T).GetProperty(Sortings.Sortings[0].Field).GetValue(x, null));
+                }
+                else
+                {
+                    Temp = Result.OrderBy(x => typeof(T).GetProperty(Sortings.Sortings[0].Field).GetValue(x, null));
+                }
+            }
+
+            if (Sortings.Sortings.Count > 1)
+            {
+                for (int i = 1; i < Sortings.Sortings.Count; i++)
+                {
+                    var v2 = i;
+                    if (Sortings.Sortings[v2].Operation == "Desc")
+                    {
+                        Temp = (Temp as IOrderedEnumerable<T>).ThenByDescending(x => typeof(T).GetProperty(Sortings.Sortings[v2].Field).GetValue(x, null));
+                    }
+                    else
+                    {
+                        Temp = (Temp as IOrderedEnumerable<T>).ThenBy(x => typeof(T).GetProperty(Sortings.Sortings[v2].Field).GetValue(x, null));
+                    }
+                }
+            }
+            Result = (Temp as IOrderedEnumerable<T>).ToList<T>();
+
+            return this;
+        }
+        public castedCl<T> Limit(Int32 Count)
+        {
+            Result=Result.Take(Count).ToList<T>();
+            return this;
+        }
+        public castedCl<T> Filter()
+        {
+            this.Filter(response.Conditions);
+            return this;
+        }
+        public castedCl<T>Filter(conditionCL Conditions)
+        {
+            List<T> Filtered = new List<T>();
+            foreach (T Row in Result)
+            {
+                bool Add=false;
+                foreach(string Condition in Conditions.Conditions)
+                {
+                    Add = CL.Solve(Row, Condition);
+                }
+                /*foreach (tokenCl Condition in Conditions.Tokens)
+                {
+                    Add = CL.Satisfy(Row, Condition.Field, Condition.Operation, Condition.Value);
+                }*/
+                if (Add)
+                    Filtered.Add(Row);
+            }
+            Result = Filtered;
+            return this;
+        }
+    }
+
+    public class sortingCL
+    {
+        public List<tokenCl> Sortings = new List<tokenCl>();
+        public sortingCL(string Sortings)
+        {
+            foreach (string Sorting in Sortings.Split(','))
+            {
+                try
+                {
+                    this.Sortings.Add(
+                        new tokenCl()
+                        {
+                            Field = Sorting.Split(':')[0],
+                            Operation = Sorting.Split(':')[1]
+                        });
+                }
+                catch { }
+            }
         }
     }
 
@@ -170,21 +320,31 @@ namespace rpgSys
         }
     }
 
-    public class statementCl
+    public class conditionCL
     {
-        private List<tokenCl> Tokens = new List<tokenCl>();
-        public statementCl(string Conditions)
+        public string[] Conditions
         {
-            foreach (string s in Conditions.Split(';'))
+            get
+            {
+                return CL.Split(conditions);
+            }
+        }
+        private string conditions;
+        [Obsolete("Please, don't use it! CL rules can changes any version! U can use string[] Conditions with CL.Solve")]
+        public List<tokenCl> Tokens = new List<tokenCl>();
+        public conditionCL(string Conditions)
+        {
+            conditions = Conditions;
+            foreach (string s in Conditions.Split(','))
             {
                 try
                 {
                     Tokens.Add(
                         new tokenCl()
                         {
-                            Field = s.Split(' ')[0],
-                            Operation = s.Split(' ')[1],
-                            Value = s.Split(' ')[2],
+                            Field = s.Split('.')[0],
+                            Operation = s.Split('.')[1],
+                            Value = s.Split('.')[2],
                         });
                 }
                 catch { }
@@ -222,7 +382,7 @@ namespace rpgSys
             Base.Test = true;
 
             //write ur conditions
-            statementCl s = new statementCl("Age != 1, Name != Peter");
+            conditionCL s = new conditionCL("Age != 1, Name != Peter");
 
             //set table, don't forget about folders before table
             tableCl t = new tableCl("Characters");
@@ -231,11 +391,11 @@ namespace rpgSys
 
             //pack it into request
             requestCl r = new requestCl();
-            r.Statement = s;
+            r.Conditions = s;
             r.Table = t;
 
             //get value
-            var value = Base.Request(r);
+            var value = Base.Select(r);
 
             //cast
             var casted = value.Cast<exCl>();
@@ -244,16 +404,17 @@ namespace rpgSys
             exCl y = casted.UniqueResult();
 
             //Acctualy, it can looks like this:
-            y = Base.Request(new requestCl() { Statement = new statementCl(""), Table = new tableCl("/Games/Chats/1") }).Cast<exCl>().UniqueResult();
+            y = Base.Select(new requestCl() { Table = new tableCl("/Games/Chats/1") }).Cast<exCl>().UniqueResult();
 
             //Or like this:
-            y = Base.Request(new requestCl()
+            y = Base.Select(new requestCl()
             {
-                Statement = new statementCl(""),
                 Table = new tableCl("/Games/Chats/1")
             })
             .Cast<exCl>()
             .UniqueResult();
+
+            Console.WriteLine(rules);
 
             //see how object was casted
             return y.NameAge() + "\n My Age is: " + y.AgeLikeAGirl();
@@ -268,5 +429,37 @@ namespace rpgSys
         {
             return ex.Name + ": " + ex.Age.ToString();
         }
+
+
+        private static readonly string rules =
+@"
+Two types of using CL:
+1. JustCL:
+    <Field.Operation.Value>
+        
+2. baseCL:
+    main syntax:
+        <baseCL_Operation?Condition,Condition,Condition&Object{Field=Value,Field=Value}&Object{Field=Value,Field=Value}>
+    a) Select objects
+        syntax:
+            <s?Id.!=.0,Name!=Petro Is>
+                LikeSQL:
+                    SELECT * FROM table WHERE Id<>0 AND Name<>'Petro Is'
+    b) Insert object(s)
+        syntax:
+            <i?Message{Id=1,HeroId=1,Master=False,System=False,Text=I like to move it move it, i like to, move it!!!}>
+                LikeSQL:
+                    INSERT INTO table(Id,HeroId,Master,System,Text) VALUES(1,1,false,false,'...')
+    c) Update
+        syntax:
+            <u?Id.==.1,HeroId.==.1&Message{Id=1,HeroId=1,Master=False,System=False,Text=No more moves!}>
+                LikeSQL:
+                    UPDATE table(Id,HeroId,Master,System,Text) SET VALUES(1,1,false,false,'No more moves!')
+    d) Delete
+        syntax:
+            <d?Id.==.1>
+                LikeSQL:
+                    DELETE FROM table WHERE Id=1
+";
     }
 }

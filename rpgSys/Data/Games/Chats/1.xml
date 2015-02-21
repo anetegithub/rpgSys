@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Messages>
-  <Message Id="1" HeroId="0" Master="False" System="True">
-    <Text>Hello FCKING world!</Text>
-  </Message>
-  <Message Id="2" HeroId="0" Master="True" System="True">
-    <Text>yep yep!</Text>
-  </Message>
+  <Text Id="1" HeroId="4" Master="True" System="True">111111111111Hello FCKING world!</Text>
+  <Text Id="1" HeroId="3" Master="True" System="True">Hello34543534534353 FCKING world!</Text>
+  <Text Id="3" HeroId="0" Master="True" System="True">Hello FCKING world!</Text>
+  <Text Id="4" HeroId="0" Master="True" System="True">
+  </Text>
   <!--<Message Id="1" HeroId="0" Master="False" System="True"></Message>
   <Message Id="2" HeroId="0" Master="True" System="True">yep yep!</Message>-->
 </Messages>

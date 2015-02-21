@@ -512,7 +512,7 @@ namespace rpgSys
                         if (m.HeroId != 0)
                             prefix = Characters.GetInfo(m.HeroId.ToString(), "")[0].Value + ": ";
                         if (m.Master)
-                            prefix = "Мастер: ";
+                            prefix = "Мастер:";
 
                         data.Add(prefix + m.Text);
                     }
