@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-using System.Dynamic;
-
-namespace rpgSys
+namespace ConditionsLanguage
 {
-    /// <summary>
-    /// 0.6: space replace by dot
-    /// 0.7 Solve method
-    /// 0.8 sorting CL
-    /// 0.8.1 added custom Split for version control
-    /// </summary>
     public static class CL
     {
         [Obsolete("Run is an old and don't safe method, better use Satisfy. If you need set different object and type use SatisfyCustom method")]
@@ -102,7 +95,7 @@ namespace rpgSys
             return together >= length / 2 ? 1 : 0;
         }
 
-        public static readonly string CLrules =
+        public static readonly string Rules =
 @"
     Syntax:
         <Field.Operation.Value,Field.Operation.Value>

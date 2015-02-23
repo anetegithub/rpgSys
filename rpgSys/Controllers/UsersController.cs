@@ -9,6 +9,8 @@ using System.Web.Script.Serialization;
 
 using System.Dynamic;
 
+using ormCL;
+
 namespace rpgSys
 {
     public class UsersController : ApiController
@@ -22,7 +24,7 @@ namespace rpgSys
         {
             baseCL b = new baseCL("Data");
 
-            new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().ToList();
+            //new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().ToList();
 
             b.Test = false;
             Message m=new Message();
@@ -31,7 +33,22 @@ namespace rpgSys
             m.Master=false;
             m.System=false;
             m.Text="Some text";
-            var result = b.Insert<Message>(new irequestCl<Message>() { Table = new tableCl("/Games/Chats/1"), Object = m });
+
+            Characteristics c=new Characteristics();
+            c.Id=5;
+            c.HeroId=3;
+            c.Characteristic=new List<Characstic>()
+            {
+                new Characstic(){ DIX="dix", Name="1", Value="1"},
+                new Characstic(){ DIX="dix", Name="2", Value="2"},
+                new Characstic(){ DIX="dix", Name="3", Value="3"}
+            };
+
+            //var result = b.Insert<Characteristics>(new irequestCl<Characteristics>() { Table = new tableCl("/Hero/Character/Characteristics"), Object = c });
+
+            var rsult = b.Select(new requestCL() { Table = new tableCl("/Hero/Character/Characteristics") }).Cast<Characteristics>().ToList();
+            //var result = b.Insert<Message>(new irequestCl<Message>() { Table = new tableCl("/Games/Chats/1"), Object = m });
+            /**/
             //var result = b.Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).Filter(new conditionCL("Id.==.1")).ToList();
             //var result = b.Request(new requestCl() { Statement = new statementCl(""), Table = new tableCl("/Hero/Character/Characteristics") }).Cast<Characteristics>();
             //var result = b.Select(new requestCl() { Statement = new conditionCL(""), Table = new tableCl("/Hero/Character/MaterialSkills") }).Cast<Skills>().Sort(new sortingCL("HeroId:Desc")).ToList();

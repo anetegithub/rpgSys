@@ -9,6 +9,8 @@ using System.Threading;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 
+using ConditionsLanguage;
+
 namespace rpgSys.Controllers
 {
     public class PlayController : ApiControllerWithHub<PlayHub>
