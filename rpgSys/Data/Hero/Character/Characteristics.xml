@@ -11,16 +11,13 @@
   <Characteristics Id="5" HeroId="3">
     <Stats>
       <Characstic DIX="dix" Name="1">
-        <Bonus>1</Bonus>
-        <Strepsils>1</Strepsils>
+        <Value>1</Value>
       </Characstic>
       <Characstic DIX="dix" Name="2">
-        <Bonus>2</Bonus>
-        <Strepsils>1</Strepsils>
+        <Value>1</Value>
       </Characstic>
       <Characstic DIX="dix" Name="3">
-        <Bonus>3</Bonus>
-        <Strepsils>1</Strepsils>
+        <Value>1</Value>
       </Characstic>
     </Stats>
   </Characteristics>

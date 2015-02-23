@@ -281,13 +281,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\baseCL\ormCL.csproj">
-      <Project>{a3051d0d-ac77-456c-9b5c-0f999f60093e}</Project>
-      <Name>ormCL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CL\ConditionsLanguage.csproj">
+    <ProjectReference Include="..\ConditionsLanguage\ConditionsLanguage.csproj">
       <Project>{71d4fc0c-b99d-49f4-850f-cb6e2d46fe63}</Project>
       <Name>ConditionsLanguage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ormCL\ormCL.csproj">
+      <Project>{a3051d0d-ac77-456c-9b5c-0f999f60093e}</Project>
+      <Name>ormCL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
