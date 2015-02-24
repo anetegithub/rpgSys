@@ -1,11 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <AttackStates>
-  <AttackState HeroId="1">
+  <AttackState Id="1" HeroId="1">
+    <Attack>1</Attack>
+    <Fit>0</Fit>
+    <MinDmg>1</MinDmg>
+    <MaxDmg>2</MaxDmg>
+    <WeaponMinDmg>1</WeaponMinDmg>
+    <WeaponMaxDmg>2</WeaponMaxDmg>
+    <CritChance>0</CritChance>
+    <CritBonus>5</CritBonus>
+  </AttackState>
+  <!--<AttackState HeroId="1">
     <Атака>5</Атака>
     <Бонус_тренированности>1</Бонус_тренированности>
     <Урон>1d2</Урон>
     <Урон_оружия>2d4</Урон_оружия>
     <Шанс_критического_урона>0</Шанс_критического_урона>
     <Бонус_критического_урона>x1</Бонус_критического_урона>
-  </AttackState>
+  </AttackState>-->
 </AttackStates>

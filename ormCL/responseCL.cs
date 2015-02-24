@@ -18,6 +18,7 @@ namespace ormCL
     {
         public List<dynamic> Response;
         public conditionCL Conditions;
+        public string dbPath;
     }
 
 }

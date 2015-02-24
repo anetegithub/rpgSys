@@ -18,7 +18,6 @@ namespace ormCL
     //wtf
     public class conditionCL
     {
-        private static readonly string wtf = "wtf";
         public string[] Conditions
         {
             get

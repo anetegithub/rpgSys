@@ -18,7 +18,6 @@ namespace ormCL
     //wtf
     public class baseCL
     {
-        private static readonly string wtf = "wtf";
         private U CreateObject<U>()
         {
             return (U)Activator.CreateInstance(typeof(U));
@@ -45,7 +44,6 @@ namespace ormCL
         {
             this.Path = Path;
         }
-
         private string GetPath(string Table)
         {
             if (!Test)
@@ -62,7 +60,7 @@ namespace ormCL
             {
                 Objects.Add(DynamicElement(el));
             }
-            return resultCL.ConnectResponse(new responseCL() { Response = Objects, Conditions = Request.Conditions != null ? Request.Conditions : null });
+            return resultCL.ConnectResponse(new responseCL() { Response = Objects, Conditions = Request.Conditions != null ? Request.Conditions : null, dbPath = Path });
         }
 
         public returnCL Insert<T>(irequestCl<T> Request)

@@ -43,6 +43,7 @@
     <Compile Include="Attributes\absorbedCL.cs" />
     <Compile Include="Attributes\attributeCL.cs" />
     <Compile Include="Attributes\nameCL.cs" />
+    <Compile Include="Attributes\outerCL.cs" />
     <Compile Include="Attributes\referenceCL.cs" />
     <Compile Include="baseCL.cs" />
     <Compile Include="castedCL.cs" />

@@ -8,11 +8,12 @@
     <Value DIX="CHA" Name="Харизма">0</Value>
     <Value DIX="FTE" Name="Судьба">0</Value>
   </Characteristic>-->
-  <Characteristics Id="5" HeroId="3">
+  <Characteristics Id="5" HeroId="1">
     <Stats>
       <Characstic DIX="dix" Name="1">1</Characstic>
       <Characstic DIX="dix" Name="2">2</Characstic>
       <Characstic DIX="dix" Name="3">3</Characstic>
     </Stats>
+    <Attack>3</Attack>
   </Characteristics>
 </CharacteristicsRoot>

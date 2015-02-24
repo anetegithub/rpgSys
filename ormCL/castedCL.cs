@@ -20,7 +20,6 @@ namespace ormCL
     //wtf
     public class castedCL<T>
     {
-        private static readonly string wtf = "wtf";
         private U CreateObject<U>()
         {
             return (U)Activator.CreateInstance(typeof(U));
@@ -43,13 +42,16 @@ namespace ormCL
         private castedCL()
         { }
         protected responseCL response;
+        public string dbPath;
         public castedCL(responseCL Response)
         {
+            dbPath = Response.dbPath;
             response = Response;
             MethodInfo method = typeof(castedCL<T>).GetMethod("CastCollection");
             MethodInfo generic = method.MakeGenericMethod(typeof(T));
             ParameterInfo[] parameters = generic.GetParameters();
             object classInstance = new castedCL<T>();
+            (classInstance as castedCL<T>).dbPath = this.dbPath;
             object[] parametersArray = new object[] { Response.Response };
             Result = (List<T>)generic.Invoke(classInstance, parametersArray);
         }
@@ -63,45 +65,44 @@ namespace ormCL
                 {
                     foreach (var dWhat in DField)
                     {
+                        string outerField = "Id";
+                        string table = "";
+                        bool reference = false;
                         bool absorbed = false;
                         string name = Property.Name;
-                        object[] attributes = Property.GetCustomAttributes(true);
-                        for (int i = 0; i < attributes.Length; i++)
-                        {
-                            if (attributes[i].GetType() == typeof(nameCLAttribute))
-                            {
-                                name = (attributes[i] as nameCLAttribute).Name;
-                            }
-                            if (attributes[i].GetType() == typeof(absorbedCLAttribute))
-                            {
-                                absorbed = true;
-                            }
-                        }
 
-                        if (name == dWhat.Key || (absorbed && dWhat.Key=="AbsorbedValue"))
+                        CheckAttributes(Property, ref name, ref absorbed, ref reference, ref table, ref outerField);
+
+                        if (name == dWhat.Key || (absorbed && dWhat.Key == "AbsorbedValue"))
                         {
                             var pType = Property.PropertyType;
-                            if (dWhat.Value.GetType() == typeof(List<dynamic>))
+                            if (!reference)
                             {
-                                MethodInfo method = typeof(castedCL<T>).GetMethod("CastCollection");
-                                var CollectionType = GetListType(Property.PropertyType);
-                                MethodInfo generic = method.MakeGenericMethod(CollectionType);
-                                object classInstance = new castedCL<T>();
-                                object[] parametersArray = new object[] { dWhat.Value };
-                                var CastedCollection = generic.Invoke(classInstance, parametersArray);
-                                o.GetType()
-                                    .GetProperty(Property.Name)
-                                    .SetValue(
-                                    o,
-                                    CastedCollection);
+                                if (dWhat.Value.GetType() == typeof(List<dynamic>))
+                                {
+                                    var CastedCollection = InvokeCastCollection(Property, dWhat.Value);
+                                    o.GetType()
+                                        .GetProperty(Property.Name)
+                                        .SetValue(
+                                        o,
+                                        CastedCollection);
+                                }
+                                else
+                                {
+                                    o.GetType()
+                                        .GetProperty(Property.Name)
+                                        .SetValue(
+                                        o,
+                                        Convert.ChangeType(dWhat.Value, Property.PropertyType));
+                                }
                             }
                             else
                             {
+                                var ReferenceObject = CastReference(pType, table, outerField, dWhat.Value, Property);
                                 o.GetType()
                                     .GetProperty(Property.Name)
-                                    .SetValue(
-                                    o,
-                                    Convert.ChangeType(dWhat.Value, Property.PropertyType));
+                                    .SetValue
+                                    (o, Property.PropertyType is ICollection ? ReferenceObject : (ReferenceObject as IList)[0]);
                             }
                         }
                     }
@@ -110,6 +111,67 @@ namespace ormCL
 
             return o;
         }
+
+        protected object CastReference(Type pType, string table, string outerField, dynamic dWhatValue, PropertyInfo Property)
+        {
+            MethodInfo method = typeof(castedCL<T>).GetMethod("CastCollection");
+            MethodInfo generic = method.MakeGenericMethod(pType);
+            ParameterInfo[] parameters = generic.GetParameters();
+            object classInstance = new castedCL<T>();
+            baseCL b = new baseCL(dbPath);
+            (classInstance as castedCL<T>).dbPath = this.dbPath;
+            object[] parametersArray = new object[] { b.Select(new requestCL() { Table = new tableCl(table) }).Response.Response };
+            var ReferenceObject = generic.Invoke(classInstance, parametersArray);
+
+            method = typeof(castedCL<T>).GetMethod("FilterIt");
+            generic = method.MakeGenericMethod(pType);
+            parameters = generic.GetParameters();
+            parametersArray = new object[] { ReferenceObject, new conditionCL(outerField + ".==." + dWhatValue) };
+            ReferenceObject = generic.Invoke(classInstance, parametersArray);
+
+            if ((ReferenceObject as ICollection).Count > 0)
+            {
+                return ReferenceObject;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        protected void CheckAttributes(PropertyInfo Property, ref string name, ref bool absorbed, ref bool reference, ref string table, ref string outerField)
+        {
+            object[] attributes = Property.GetCustomAttributes(true);
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                if (attributes[i].GetType() == typeof(nameCLAttribute))
+                {
+                    name = (attributes[i] as nameCLAttribute).Name;
+                }
+                if (attributes[i].GetType() == typeof(absorbedCLAttribute))
+                {
+                    absorbed = true;
+                }
+                if (attributes[i].GetType() == typeof(referenceCLAttribute))
+                {
+                    reference = true;
+                    table = (attributes[i] as referenceCLAttribute).Table;
+                }
+                if (attributes[i].GetType() == typeof(outerCLAttribute))
+                {
+                    outerField = (attributes[i] as outerCLAttribute).Key;
+                }
+            }
+        }
+        protected object InvokeCastCollection(PropertyInfo Property, dynamic dWhatValue)
+        {
+            MethodInfo method = typeof(castedCL<T>).GetMethod("CastCollection");
+            var CollectionType = GetListType(Property.PropertyType);
+            MethodInfo generic = method.MakeGenericMethod(CollectionType);
+            object classInstance = new castedCL<T>();
+            object[] parametersArray = new object[] { dWhatValue };
+            return generic.Invoke(classInstance, parametersArray);
+        }
+
         public List<O> CastCollection<O>(List<dynamic> Collection)
         {
             List<O> List = new List<O>();
@@ -176,23 +238,23 @@ namespace ormCL
         }
         public castedCL<T> Filter(conditionCL Conditions)
         {
-            List<T> Filtered = new List<T>();
-            foreach (T Row in Result)
+            Result = this.FilterIt<T>(Result, Conditions);
+            return this;
+        }
+        public List<Y> FilterIt<Y>(List<Y> Collection, conditionCL Conditions)
+        {
+            List<Y> Filtered = new List<Y>();
+            foreach (Y Row in Collection)
             {
                 bool Add = false;
                 foreach (string Condition in Conditions.Conditions)
-                {                    
+                {
                     Add = CL.Solve(Row, Condition);
                 }
-                /*foreach (tokenCl Condition in Conditions.Tokens)
-                {
-                    Add = CL.Satisfy(Row, Condition.Field, Condition.Operation, Condition.Value);
-                }*/
                 if (Add)
                     Filtered.Add(Row);
             }
-            Result = Filtered;
-            return this;
+            return Filtered;
         }
     }
 }
