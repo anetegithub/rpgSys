@@ -13,6 +13,8 @@ using System.Collections;
 
 using ConditionsLanguage;
 
+using ormCL.Attributes;
+
 namespace ormCL
 {
     //wtf
@@ -61,7 +63,22 @@ namespace ormCL
                 {
                     foreach (var dWhat in DField)
                     {
-                        if (Property.Name == dWhat.Key)
+                        bool absorbed = false;
+                        string name = Property.Name;
+                        object[] attributes = Property.GetCustomAttributes(true);
+                        for (int i = 0; i < attributes.Length; i++)
+                        {
+                            if (attributes[i].GetType() == typeof(nameCLAttribute))
+                            {
+                                name = (attributes[i] as nameCLAttribute).Name;
+                            }
+                            if (attributes[i].GetType() == typeof(absorbedCLAttribute))
+                            {
+                                absorbed = true;
+                            }
+                        }
+
+                        if (name == dWhat.Key || (absorbed && dWhat.Key=="AbsorbedValue"))
                         {
                             var pType = Property.PropertyType;
                             if (dWhat.Value.GetType() == typeof(List<dynamic>))

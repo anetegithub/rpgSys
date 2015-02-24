@@ -10,15 +10,9 @@
   </Characteristic>-->
   <Characteristics Id="5" HeroId="3">
     <Stats>
-      <Characstic DIX="dix" Name="1">
-        <Value>1</Value>
-      </Characstic>
-      <Characstic DIX="dix" Name="2">
-        <Value>1</Value>
-      </Characstic>
-      <Characstic DIX="dix" Name="3">
-        <Value>1</Value>
-      </Characstic>
+      <Characstic DIX="dix" Name="1">1</Characstic>
+      <Characstic DIX="dix" Name="2">2</Characstic>
+      <Characstic DIX="dix" Name="3">3</Characstic>
     </Stats>
   </Characteristics>
 </CharacteristicsRoot>

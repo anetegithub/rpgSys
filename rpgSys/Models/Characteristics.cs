@@ -25,7 +25,7 @@ namespace rpgSys
         public string DIX { get; set; }
         [attributeCLAttribute]
         public string Name { get; set; }
-        //[absorbedCL]
+        [absorbedCL]
         public string Value { get; set; }
     }
 }

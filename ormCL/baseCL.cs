@@ -186,7 +186,7 @@ namespace ormCL
                     else
                         (Object as IDictionary<string, object>).Add(e.Name.LocalName, DynamicElement(e));
                 }
-                (Object as IDictionary<string, object>).Add("Value", Element.Value);
+                (Object as IDictionary<string, object>).Add("AbsorbedValue", Element.Value);
             }
 
             return Object;
