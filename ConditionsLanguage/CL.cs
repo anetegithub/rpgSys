@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Xml.Linq;
+
 namespace ConditionsLanguage
 {
     public static class CL
@@ -32,6 +34,22 @@ namespace ConditionsLanguage
             string Value = Condition.Split('.')[2];
             string Field = Convert.ChangeType(Object, Object.GetType()).GetType().GetProperty(Condition.Split('.')[0]).GetValue(Convert.ChangeType(Object, Object.GetType())).ToString();
             return CL.Compare<String>(Operator, Field, Value);
+        }
+
+        public static bool Solve(XElement Object, string Condition)
+        {
+            bool preResult = true;
+            string Field=Condition.Split('.')[0];
+            string Operator = Condition.Split('.')[1];
+            string Value = Condition.Split('.')[2];
+            foreach(XElement Element in Object.Elements())
+            {
+                if (Element.Name.LocalName==Field)
+                {
+                    preResult = Compare<String>(Operator, Element.Value, Value);
+                }
+            }
+            return preResult;
         }
 
         public static bool SatisfyCustom(object Object, Type CustomType, string Field, string Operator, string Value)

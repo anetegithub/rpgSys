@@ -49,9 +49,10 @@
     <Compile Include="castedCL.cs" />
     <Compile Include="conditionCL.cs" />
     <Compile Include="dynamicobjectType.cs" />
-    <Compile Include="irequestCL.cs" />
+    <Compile Include="Requests\urequestCL.cs" />
+    <Compile Include="Requests\irequestCL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="requestCL.cs" />
+    <Compile Include="Requests\requestCL.cs" />
     <Compile Include="responseCL.cs" />
     <Compile Include="resultCL.cs" />
     <Compile Include="returnCL.cs" />

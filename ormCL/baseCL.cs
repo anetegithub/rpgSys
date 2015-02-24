@@ -12,6 +12,7 @@ using System.Linq.Expressions;
 using System.Collections;
 
 using ormCL.Attributes;
+using ConditionsLanguage;
 
 namespace ormCL
 {
@@ -81,11 +82,7 @@ namespace ormCL
             try
             {
                 XDocument doc = XDocument.Load(GetPath(Request.Table.Path));
-                XElement Element = new XElement(typeof(T).Name);
-                foreach (var Property in typeof(T).GetProperties())
-                {
-                    Element.Add(DynamicObject<T>((T)Request.Object, Property));
-                }
+                XElement Element = ConvertToXElement<T>(Request.Object,true);
                 lock (Safe)
                 {
                     doc.Root.Add(Element);
@@ -96,7 +93,49 @@ namespace ormCL
             return result;
         }
 
-        public XObject DynamicObject<U>(U Object, PropertyInfo Property)
+        public returnCL Update<T>(urequestCl Request)
+        {
+            returnCL result = new returnCL("");
+            int i = 0;
+            result.Successful = true;
+            try
+            {
+                var Collection = new baseCL(Path).Select(new requestCL() { Table = new tableCl(Request.Table.Path.Replace(".xml", "")) }).Cast<T>().Filter(Request.Conditions).ToList();
+                if (Collection.Count > 1)
+                    return new returnCL("Double value") { Successful = false };
+
+                XDocument doc = XDocument.Load(GetPath(Request.Table.Path));
+                foreach (XElement Element in doc.Root.Elements())
+                {
+                    i++;
+                    bool ElementNeedUpdate = false;
+                    foreach (string Condition in Request.Conditions.Conditions)
+                    {
+                        ElementNeedUpdate = CL.Solve(Element, Condition);
+                    }
+                    if (ElementNeedUpdate)
+                    {
+                        Element.ReplaceWith(ConvertToXElement<T>(Request.Object,false));
+                    }
+                }
+                doc.Save(GetPath(Request.Table.Path));
+            }
+            catch (Exception ex) { result = new returnCL(ex.Message) { Successful = false }; }
+            var f=i;
+            return result;
+        }
+        
+        protected XElement ConvertToXElement<X>(object Object,bool New)
+        {
+            XElement Element = new XElement(typeof(X).Name);
+            foreach (var Property in typeof(X).GetProperties())
+            {
+                Element.Add(DynamicObject<X>((X)Object, Property,New));
+            }
+            return Element;
+        }
+
+        public XObject DynamicObject<U>(U Object, PropertyInfo Property, Boolean New)
         {
             string name = Property.Name, table = "", field = "";
             dynamicobjectType t = dynamicobjectType.Element;
@@ -116,7 +155,7 @@ namespace ormCL
                         XElement InnerElement = new XElement(Inner.GetType().Name);
                         foreach (var InnerProperty in Inner.GetType().GetProperties())
                         {
-                            var DeCastedProperty = invoke_DynamicObject(Property, Inner, InnerProperty);
+                            var DeCastedProperty = invoke_DynamicObject(Property, Inner, InnerProperty,New);
 
                             /* absorbed */
                             bool absorbed = false;
@@ -145,8 +184,10 @@ namespace ormCL
                         value = InnerProperty.GetValue(Property.GetValue(Object, null), null).ToString();
                 }
                 (Element as XElement).Value = value;
-               
-               invoke_ReferenceWrite(Property.GetValue(Object,null),Property.PropertyType,table,field);
+                if (New)
+                    invoke_ReferenceWrite(Property.GetValue(Object, null), Property.PropertyType, table);
+                else
+                    invoke_ReferenceUpdate(Property.GetValue(Object, null), Property.PropertyType, table, field, value);
             }
             return Element;
         }
@@ -189,22 +230,36 @@ namespace ormCL
                 }
             }
         }
-        protected object invoke_DynamicObject(PropertyInfo Property, Object Inner, PropertyInfo InnerProperty)
+        protected object invoke_DynamicObject(PropertyInfo Property, Object Inner, PropertyInfo InnerProperty,Boolean New)
         {
             MethodInfo method = typeof(baseCL).GetMethod("DynamicObject");
             var CollectionType = GetListType(Property.PropertyType);
             MethodInfo generic = method.MakeGenericMethod(CollectionType);
             object classInstance = new baseCL("");
-            object[] parametersArray = new object[] { Inner, InnerProperty };
+            object[] parametersArray = new object[] { Inner, InnerProperty,New};
             return generic.Invoke(classInstance, parametersArray);
         }
-        protected void invoke_ReferenceWrite(Object Object, Type pType,String table, String field)
+        protected void invoke_ReferenceWrite(Object Object, Type pType,String table)
         {
             MethodInfo method = typeof(baseCL).GetMethod("Insert");
             MethodInfo generic = method.MakeGenericMethod(pType);
             ParameterInfo[] parameters = generic.GetParameters();
             object classInstance = new baseCL(Path);
             object[] parametersArray = new object[] { new irequestCl() { Table = new tableCl(table), Object = Object } };
+            var ReferenceObject = generic.Invoke(classInstance, parametersArray);
+
+            if (!(ReferenceObject as returnCL).Successful)
+            {
+                Console.WriteLine((ReferenceObject as returnCL).InnerMessage);
+            }
+        }
+        protected void invoke_ReferenceUpdate(Object Object, Type pType, String table, String field,String Value)
+        {
+            MethodInfo method = typeof(baseCL).GetMethod("Update");
+            MethodInfo generic = method.MakeGenericMethod(pType);
+            ParameterInfo[] parameters = generic.GetParameters();
+            object classInstance = new baseCL(Path);
+            object[] parametersArray = new object[] { new urequestCl(new conditionCL(field + ".==." + Value)) { Table = new tableCl(table), Object = Object } };
             var ReferenceObject = generic.Invoke(classInstance, parametersArray);
 
             if (!(ReferenceObject as returnCL).Successful)

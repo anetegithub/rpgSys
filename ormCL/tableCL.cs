@@ -44,6 +44,6 @@ namespace ormCL
                 }
                 return r.Substring(0, r.Length - 1) + ".xml";
             }
-        }
+        }        
     }
 }

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AttackStates>
-  <AttackState Id="1" HeroId="1">
-    <Attack>1</Attack>
-    <Fit>0</Fit>
-    <MinDmg>1</MinDmg>
-    <MaxDmg>2</MaxDmg>
-    <WeaponMinDmg>1</WeaponMinDmg>
-    <WeaponMaxDmg>2</WeaponMaxDmg>
-    <CritChance>0</CritChance>
-    <CritBonus>5</CritBonus>
+  <AttackState HeroId="3">
+    <Attack>9999</Attack>
+    <Fit>99</Fit>
+    <MinDmg>9999</MinDmg>
+    <MaxDmg>9999</MaxDmg>
+    <WeaponMinDmg>-2</WeaponMinDmg>
+    <WeaponMaxDmg>-1</WeaponMaxDmg>
+    <CritChance>9999</CritChance>
+    <CritBonus>9999</CritBonus>
   </AttackState>
   <!--<AttackState HeroId="1">
     <Атака>5</Атака>
