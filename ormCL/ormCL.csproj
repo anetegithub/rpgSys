@@ -49,6 +49,8 @@
     <Compile Include="castedCL.cs" />
     <Compile Include="conditionCL.cs" />
     <Compile Include="dynamicobjectType.cs" />
+    <Compile Include="ormCLcommand.cs" />
+    <Compile Include="Requests\drequestCL.cs" />
     <Compile Include="Requests\urequestCL.cs" />
     <Compile Include="Requests\irequestCL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

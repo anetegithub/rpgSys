@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AttackStates>
-  <AttackState HeroId="3">
-    <Attack>9999</Attack>
-    <Fit>99</Fit>
-    <MinDmg>9999</MinDmg>
-    <MaxDmg>9999</MaxDmg>
-    <WeaponMinDmg>-2</WeaponMinDmg>
-    <WeaponMaxDmg>-1</WeaponMaxDmg>
-    <CritChance>9999</CritChance>
-    <CritBonus>9999</CritBonus>
-  </AttackState>
   <!--<AttackState HeroId="1">
     <Атака>5</Атака>
     <Бонус_тренированности>1</Бонус_тренированности>

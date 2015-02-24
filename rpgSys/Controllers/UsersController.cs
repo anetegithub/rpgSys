@@ -65,7 +65,10 @@ namespace rpgSys
            // var sult = b.Insert<Characteristics>(new irequestCl() { Table = new tableCl("/Hero/Character/Characteristics"), Object = c });
 
             //update
-            var slt = b.Update<Characteristics>(new urequestCl(new conditionCL("HeroId.==.1")) { Object = c, Table = new tableCl("/Hero/Character/Characteristics") });
+            //var slt = b.Update<Characteristics>(new urequestCl(new conditionCL("HeroId.==.1")) { Object = c, Table = new tableCl("/Hero/Character/Characteristics") });
+
+            //delete
+            var lt = b.Delete<Characteristics>(new drequestCl(new conditionCL("HeroId.==.3")) { Object = c, Table = new tableCl("/Hero/Character/Characteristics") });
 
             //var result = b.Insert<Message>(new irequestCl<Message>() { Table = new tableCl("/Games/Chats/1"), Object = m });
             /**/
