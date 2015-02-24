@@ -21,65 +21,7 @@ namespace rpgSys
         }
 
         public IHttpActionResult Get(string name, string psw)
-        {
-            baseCL b = new baseCL("Data");
-
-            //new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().ToList();
-
-            b.Test = false;
-            Message m=new Message();
-            m.Id=999;
-            m.HeroId=999;
-            m.Master=false;
-            m.System=false;
-            m.Text="Some text";
-
-            Characteristics c=new Characteristics();
-            c.Id=5;
-            c.HeroId=3;
-            c.Characteristic=new List<Characstic>()
-            {
-                new Characstic(){ DIX="dix", Name="1", Value="1"},
-                new Characstic(){ DIX="dix", Name="2", Value="2"},
-                new Characstic(){ DIX="dix", Name="3", Value="3"}
-            };
-            c.Attack = new AttackState()
-            {
-                HeroId = 3,
-                Attack = 9999,
-                CritBonus = 9999,
-                CritChance = 9999,
-                Fit = 99,
-                MaxDmg = 9999,
-                MinDmg = 9999,
-                WeaponMaxDmg = -1,
-                WeaponMinDmg = -2
-            };
-
-            //var result = b.Insert<Characteristics>(new irequestCl<Characteristics>() { Table = new tableCl("/Hero/Character/Characteristics"), Object = c });
-
-            //select
-            //var rsult = b.Select(new requestCL() { Table = new tableCl("/Hero/Character/Characteristics") }).Cast<Characteristics>().ToList();
-
-           //insert
-           // var sult = b.Insert<Characteristics>(new irequestCl() { Table = new tableCl("/Hero/Character/Characteristics"), Object = c });
-
-            //update
-            //var slt = b.Update<Characteristics>(new urequestCl(new conditionCL("HeroId.==.1")) { Object = c, Table = new tableCl("/Hero/Character/Characteristics") });
-
-            //delete
-            var lt = b.Delete<Characteristics>(new drequestCl(new conditionCL("HeroId.==.3")) { Object = c, Table = new tableCl("/Hero/Character/Characteristics") });
-
-            //var result = b.Insert<Message>(new irequestCl<Message>() { Table = new tableCl("/Games/Chats/1"), Object = m });
-            /**/
-            //var result = b.Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).Filter(new conditionCL("Id.==.1")).ToList();
-            //var result = b.Request(new requestCl() { Statement = new statementCl(""), Table = new tableCl("/Hero/Character/Characteristics") }).Cast<Characteristics>();
-            //var result = b.Select(new requestCl() { Statement = new conditionCL(""), Table = new tableCl("/Hero/Character/MaterialSkills") }).Cast<Skills>().Sort(new sortingCL("HeroId:Desc")).ToList();
-            //foreach(Message m in result.ToList())
-            //{
-            //    if (m.Text != "f")
-            //        m.Text = "hello world!";
-            //}
+        {          
             User tryFind = xmlBase.Users.GetByName(name, psw)[0];
             if (tryFind != null)
             {

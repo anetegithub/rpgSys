@@ -177,12 +177,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\Modules\UserActivity.xml" />
-    <Content Include="Data\Scenario\Scenarios.xml">
+    <Content Include="Data\Server\Scenarios.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\Server\Items.xml" />
     <Content Include="Data\Server\Modules.xml" />
-    <Content Include="Data\Server\Scenarios.xml" />
     <Content Include="Data\Server\Server.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -279,6 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\Scenario\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConditionsLanguage\ConditionsLanguage.csproj">
