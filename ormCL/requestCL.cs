@@ -13,8 +13,6 @@ using System.Collections;
 
 namespace ormCL
 {
-
-
     public class requestCL
     {
         public tableCl Table;

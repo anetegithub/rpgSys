@@ -16,4 +16,12 @@
     </Stats>
     <Attack>3</Attack>
   </Characteristics>
+  <Characteristics Id="5" HeroId="4">
+    <Stats>
+      <Characstic DIX="dix" Name="1">1</Characstic>
+      <Characstic DIX="dix" Name="2">2</Characstic>
+      <Characstic DIX="dix" Name="3">3</Characstic>
+    </Stats>
+    <Attack>4</Attack>
+  </Characteristics>
 </CharacteristicsRoot>

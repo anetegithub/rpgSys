@@ -99,10 +99,13 @@ namespace ormCL
                             else
                             {
                                 var ReferenceObject = CastReference(pType, table, outerField, dWhat.Value, Property);
-                                o.GetType()
-                                    .GetProperty(Property.Name)
-                                    .SetValue
-                                    (o, Property.PropertyType is ICollection ? ReferenceObject : (ReferenceObject as IList)[0]);
+                                if (ReferenceObject != null)
+                                {
+                                    o.GetType()
+                                        .GetProperty(Property.Name)
+                                        .SetValue
+                                        (o, Property.PropertyType is ICollection ? ReferenceObject : (ReferenceObject as IList)[0]);
+                                }
                             }
                         }
                     }

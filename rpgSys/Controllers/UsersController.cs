@@ -36,17 +36,34 @@ namespace rpgSys
 
             Characteristics c=new Characteristics();
             c.Id=5;
-            c.HeroId=3;
+            c.HeroId=4;
             c.Characteristic=new List<Characstic>()
             {
                 new Characstic(){ DIX="dix", Name="1", Value="1"},
                 new Characstic(){ DIX="dix", Name="2", Value="2"},
                 new Characstic(){ DIX="dix", Name="3", Value="3"}
             };
+            c.Attack = new AttackState()
+            {
+                HeroId = 4,
+                Attack = 1,
+                CritBonus = 0,
+                CritChance = 0,
+                Fit = 99,
+                MaxDmg = 1,
+                MinDmg = 2,
+                WeaponMaxDmg = -1,
+                WeaponMinDmg = -2
+            };
 
             //var result = b.Insert<Characteristics>(new irequestCl<Characteristics>() { Table = new tableCl("/Hero/Character/Characteristics"), Object = c });
 
+            //select
             var rsult = b.Select(new requestCL() { Table = new tableCl("/Hero/Character/Characteristics") }).Cast<Characteristics>().ToList();
+
+           //insert
+           // var sult = b.Insert<Characteristics>(new irequestCl() { Table = new tableCl("/Hero/Character/Characteristics"), Object = c });
+
             //var result = b.Insert<Message>(new irequestCl<Message>() { Table = new tableCl("/Games/Chats/1"), Object = m });
             /**/
             //var result = b.Select(new requestCL() { Table = new tableCl("/Games/Chats/1") }).Cast<Message>().Sort(new sortingCL("Id:Desc,HeroId:Desc")).Filter(new conditionCL("Id.==.1")).ToList();

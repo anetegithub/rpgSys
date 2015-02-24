@@ -13,11 +13,9 @@ using System.Collections;
 
 namespace ormCL
 {
-
-
-    public class irequestCl<T> : requestCL
+    public class irequestCl : requestCL
     {
-        public T Object;
+        public object Object;
     }
 
 }
