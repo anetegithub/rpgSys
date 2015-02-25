@@ -790,23 +790,23 @@ namespace rpgSys
                 return "0";
             }
 
-            public static List<Character> Get()
+            public static List<Hero> Get()
             {
-                List<Character> list = new List<Character>();
+                List<Hero> list = new List<Hero>();
                 XDocument doc = XDocument.Load(path);
                 foreach (XElement el in doc.Root.Elements())
                 {
                     if (el.Attribute("Id").Value != "0")
                     {
-                        list.Add(new Character());
+                        list.Add(new Hero());
                     }
                 }
                 return list;
             }
 
-            public static Character Profile(string UserId)
+            public static Hero Profile(string UserId)
             {
-                Character c = new Character();
+                Hero c = new Hero();
                 XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Hero/Character/Characters.xml"));
                 foreach (XElement el in doc.Root.Elements())
                 {
@@ -851,14 +851,14 @@ namespace rpgSys
             try
             {
                 ServerSettings s = new ServerSettings();
-                XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Server/Server.xml"));
-                s.Name = doc.Root.Element("Name").Value;
-                s.ServerMessage = doc.Root.Element("ServerMessage").Value;
-                s.MessageOfTheDay = doc.Root.Element("MessageOfTheDay").Value;
-                s.ServerModule = Modules.Get().Count;
-                s.ServerScenario = Scenarios.Get().Count;
-                s.ServerCharacter = Characters.Get().Count;
-                s.ServerItem = Items.Get().Count;
+                //XDocument doc = XDocument.Load(HttpContext.Current.Server.MapPath("~/Data/Server/Server.xml"));
+                //s.Name = doc.Root.Element("Name").Value;
+                //s.ServerMessage = doc.Root.Element("ServerMessage").Value;
+                //s.MessageOfTheDay = doc.Root.Element("MessageOfTheDay").Value;
+                //s.ServerModule = Modules.Get().Count;
+                //s.ServerScenario = Scenarios.Get().Count;
+                //s.ServerCharacter = Characters.Get().Count;
+                //s.ServerItem = Items.Get().Count;
                 return s;
             }
             catch { return null; }

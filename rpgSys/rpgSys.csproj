@@ -150,6 +150,8 @@
     <Content Include="Data\Games\Games.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Data\Hero\Ability.xml" />
+    <Content Include="Data\Hero\AttackState.xml" />
     <Content Include="Data\Hero\Character\ClassSkills.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -169,6 +171,24 @@
     <Content Include="Data\Hero\Character\Рост.xml" />
     <Content Include="Data\Hero\Character\Раса.xml" />
     <Content Include="Data\Hero\Character\Класс.xml" />
+    <Content Include="Data\Hero\ClassSkill.xml" />
+    <Content Include="Data\Hero\CommonState.xml" />
+    <Content Include="Data\Hero\Characteristic.xml" />
+    <Content Include="Data\Hero\Common\AbilityInfo.xml" />
+    <Content Include="Data\Hero\Common\CharacteristicInfo.xml" />
+    <Content Include="Data\Hero\Common\Charm.xml" />
+    <Content Include="Data\Hero\Common\Class.xml" />
+    <Content Include="Data\Hero\Common\Desease.xml" />
+    <Content Include="Data\Hero\Common\Height.xml" />
+    <Content Include="Data\Hero\Common\Intoxication.xml" />
+    <Content Include="Data\Hero\Common\Race.xml" />
+    <Content Include="Data\Hero\Common\Sex.xml" />
+    <Content Include="Data\Hero\Common\SkillInfo.xml" />
+    <Content Include="Data\Hero\DefenceState.xml" />
+    <Content Include="Data\Hero\HealthState.xml" />
+    <Content Include="Data\Hero\Info.xml" />
+    <Content Include="Data\Hero\MaterialSkill.xml" />
+    <Content Include="Data\Hero\MentalSkill.xml" />
     <Content Include="Data\Hero\Skill\Некромант.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -182,7 +202,7 @@
     </Content>
     <Content Include="Data\Server\Items.xml" />
     <Content Include="Data\Server\Modules.xml" />
-    <Content Include="Data\Server\Server.xml">
+    <Content Include="Data\Server\Settings.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\User\Users.xml" />
@@ -210,24 +230,29 @@
     <Compile Include="Controllers\PlayController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\ScenarioController.cs" />
-    <Compile Include="Controllers\ServersController.cs" />
+    <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\Modules\UserActivityController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\Proxy\xmlBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hubs\PlayHub.cs" />
-    <Compile Include="Models\Character.cs" />
-    <Compile Include="Models\Characteristics.cs" />
+    <Compile Include="Models\Hero\Ability.cs" />
+    <Compile Include="Models\Hero\AttackState.cs" />
+    <Compile Include="Models\Hero\CommonState.cs" />
+    <Compile Include="Models\Hero\DefenceState.cs" />
+    <Compile Include="Models\Hero\HealthState.cs" />
+    <Compile Include="Models\Hero\Hero.cs" />
+    <Compile Include="Models\Hero\Characteristic.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Scenario.cs" />
     <Compile Include="Models\ServerSettings.cs" />
-    <Compile Include="Models\Skills.cs" />
+    <Compile Include="Models\Hero\Skill.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Modules\UserActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

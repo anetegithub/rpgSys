@@ -59,6 +59,7 @@
     <Compile Include="resultCL.cs" />
     <Compile Include="returnCL.cs" />
     <Compile Include="sortingCL.cs" />
+    <Compile Include="SpecialTypes\stringCL.cs" />
     <Compile Include="tableCL.cs" />
     <Compile Include="tokenCL.cs" />
   </ItemGroup>

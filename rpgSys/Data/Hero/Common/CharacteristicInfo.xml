@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CharacteristicInfoes>
+  <CharacteristicInfo Id="1">
+    <Name>Телосложение</Name>
+    <DIX>CON</DIX>
+  </CharacteristicInfo>
+  <CharacteristicInfo Id="2">
+    <Name>Тренированность</Name>
+    <DIX>FIT</DIX>
+  </CharacteristicInfo>
+  <CharacteristicInfo Id="3">
+    <Name>Интеллект</Name>
+    <DIX>INT</DIX>
+  </CharacteristicInfo>
+  <CharacteristicInfo Id="4">
+    <Name>Мудрость</Name>
+    <DIX>WIS</DIX>
+  </CharacteristicInfo>
+  <CharacteristicInfo Id="5">
+    <Name>Харизма</Name>
+    <DIX>CHA</DIX>
+  </CharacteristicInfo>
+  <CharacteristicInfo Id="6">
+    <Name>Судьба</Name>
+    <DIX>FTE</DIX>
+  </CharacteristicInfo>
+</CharacteristicInfoes>

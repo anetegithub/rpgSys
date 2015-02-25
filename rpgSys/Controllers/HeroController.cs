@@ -9,6 +9,8 @@ using System.Text;
 using System.Runtime.Serialization.Json;
 using System.Web.Script.Serialization;
 
+using ormCL;
+
 namespace rpgSys.Controllers
 {
     public class HeroController : ApiController
@@ -25,8 +27,20 @@ namespace rpgSys.Controllers
             return "1";
         }
 
-        public IHttpActionResult GetInfo(string Auth, string OperationId,string UserId)
+        public IHttpActionResult GetInfo(string Auth, string OperationId, string UserId)
         {
+            baseCL b = new baseCL("Data");
+            string HeroId = b.Select(new requestCL() { Table = new tableCl("/User/Users") }).Cast<User>().Filter(new conditionCL("Id.==." + UserId)).ToList()[0].HeroId.ToString();
+            List<Hero> Heroes = b.Select(new requestCL() { Table = new tableCl("/Hero/Info") }).Cast<Hero>().Filter(new conditionCL("Id.==." + HeroId)).ToList();
+            if(Heroes.Count>0)
+            {
+                return Ok(Heroes[0]);
+            }
+            else
+            {
+                return NotFound();
+            }
+
             if (xmlBase.Users.Authed(UserId, Auth))
             {
                 switch (OperationId.Split('~')[0])

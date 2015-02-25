@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AbilityInfoes>
+  <AbilityInfo Id="1">Стойкость</AbilityInfo>
+  <AbilityInfo Id="2">Реакция</AbilityInfo>
+  <AbilityInfo Id="3">Воля</AbilityInfo>
+</AbilityInfoes>

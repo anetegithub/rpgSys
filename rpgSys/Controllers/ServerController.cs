@@ -5,13 +5,15 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using ormCL;
+
 namespace rpgSys.Controllers
 {
-    public class ServersController : ApiController
+    public class ServerController : ApiController
     {
         public IHttpActionResult Get()
         {
-            var Server = xmlBase.Get();
+            ServerSettings Server = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Server/Settings") }).Cast<ServerSettings>().ToList()[0];
             if(Server!=null)
             {
                 return Ok(Server);

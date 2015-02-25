@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ServerSettings>
-  <Name>Тестовый сервер</Name>
-  <UpTime>5</UpTime>
-  <ServerMessage>Тестовый сервер успешно запущен</ServerMessage>
-  <MessageOfTheDay>success~Успешное прохождение альфа-тестов!</MessageOfTheDay>
-</ServerSettings>

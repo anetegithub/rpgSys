@@ -16,4 +16,15 @@ namespace rpgSys
         public Int32[] Heroes { get; set; }
         public int Chat { get; set; }
     }
+
+
+    public class Stat
+    {
+        public string Name { get; set; }
+        public string Info { get; set; }
+        public string Value { get; set; }
+        public string Bonus { get; set; }
+    }
+
+
 }

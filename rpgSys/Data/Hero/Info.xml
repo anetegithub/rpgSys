@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Infos>
+  <Info Id="1" HeroId="1" UserId="1">
+    <Name>Валора ан Сием</Name>
+    <Level>1</Level>
+    <Expirience>0</Expirience>
+    <Class>1</Class>
+    <Race>1</Race>
+    <God>Няша я тащу</God>
+    <Height>1</Height>
+    <Age>120</Age>
+    <Sex>1</Sex>
+    <Weight>50</Weight>
+    <Eyes>Голубые</Eyes>
+    <Hair>Черные</Hair>
+    <Skin>Цвета морской волыны</Skin>
+    <Characteristics>1</Characteristics>
+    <Abilities>1</Abilities>
+    <HealthState>1</HealthState>
+    <DefenceState>1</DefenceState>
+    <AttackState>1</AttackState>
+    <CommonState>1</CommonState>
+    <MaterialSkill>1</MaterialSkill>
+    <MentalSkill>1</MentalSkill>
+    <ClassSkill>1</ClassSkill>
+  </Info>
+</Infos>

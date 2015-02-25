@@ -15,6 +15,8 @@ using ConditionsLanguage;
 
 using ormCL.Attributes;
 
+using ormCL.SpecialTypes;
+
 namespace ormCL
 {
     //wtf
@@ -22,6 +24,7 @@ namespace ormCL
     {
         private U CreateObject<U>()
         {
+            if (typeof(U) == typeof(string)) return ((U)("" as object));
             return (U)Activator.CreateInstance(typeof(U));
         }
         private Type GetListType(Type T)
@@ -101,10 +104,20 @@ namespace ormCL
                                 var ReferenceObject = CastReference(pType, table, outerField, dWhat.Value, Property);
                                 if (ReferenceObject != null)
                                 {
-                                    o.GetType()
-                                        .GetProperty(Property.Name)
-                                        .SetValue
-                                        (o, Property.PropertyType is ICollection ? ReferenceObject : (ReferenceObject as IList)[0]);
+                                    try
+                                    {
+                                        o.GetType()
+                                            .GetProperty(Property.Name)
+                                            .SetValue
+                                            (o, Property.PropertyType is ICollection ? ReferenceObject : (ReferenceObject as IList)[0]);
+                                    }
+                                    catch (ArgumentException)
+                                    {
+                                        o.GetType()
+                                            .GetProperty(Property.Name)
+                                            .SetValue
+                                            (o, ReferenceObject);
+                                    }
                                 }
                             }
                         }
@@ -117,23 +130,48 @@ namespace ormCL
 
         protected object CastReference(Type pType, string table, string outerField, dynamic dWhatValue, PropertyInfo Property)
         {
+            Type IsList = GetListType(pType);
+            if(IsList!=typeof(Nullable))
+            {
+                pType = IsList;
+            }           
+
             MethodInfo method = typeof(castedCL<T>).GetMethod("CastCollection");
             MethodInfo generic = method.MakeGenericMethod(pType);
-            ParameterInfo[] parameters = generic.GetParameters();
             object classInstance = new castedCL<T>();
             baseCL b = new baseCL(dbPath);
             (classInstance as castedCL<T>).dbPath = this.dbPath;
             object[] parametersArray = new object[] { b.Select(new requestCL() { Table = new tableCl(table) }).Response.Response };
+                       
+            if(pType==typeof(string))
+            {
+                generic = method.MakeGenericMethod(typeof(stringCL));               
+            }
+
             var ReferenceObject = generic.Invoke(classInstance, parametersArray);
 
             method = typeof(castedCL<T>).GetMethod("FilterIt");
             generic = method.MakeGenericMethod(pType);
-            parameters = generic.GetParameters();
+
+            if (pType == typeof(string))
+            {
+                generic = method.MakeGenericMethod(typeof(stringCL));
+            }
+
             parametersArray = new object[] { ReferenceObject, new conditionCL(outerField + ".==." + dWhatValue) };
             ReferenceObject = generic.Invoke(classInstance, parametersArray);
 
             if ((ReferenceObject as ICollection).Count > 0)
             {
+                if (pType == typeof(string))
+                {
+                    List<string> S = new List<string>();
+                    foreach(stringCL ReferenceObjecItem in (List<stringCL>)ReferenceObject)
+                    {
+                        S.Add(ReferenceObjecItem.AbsorbedValue);
+                    }
+                    return S;
+                }
                 return ReferenceObject;
             }
             else
@@ -179,7 +217,7 @@ namespace ormCL
         {
             List<O> List = new List<O>();
             foreach (dynamic CollectionItem in Collection)
-            {
+            {                
                 List.Add(Cast<O>(new List<dynamic>() { CollectionItem }));
             }
             return List;

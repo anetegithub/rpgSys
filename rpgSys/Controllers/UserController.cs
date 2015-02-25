@@ -21,15 +21,19 @@ namespace rpgSys
         }
 
         public IHttpActionResult Get(string name, string psw)
-        {          
-            User tryFind = xmlBase.Users.GetByName(name, psw)[0];
-            if (tryFind != null)
+        {
+            var users = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/User/Users") }).Cast<User>().Filter(new conditionCL("Login.==." + name + ",Password.==." + psw)).ToList();
+            if(users.Count==0)
             {
-                return Ok(tryFind);
+                return NotFound();
+            }
+            else if (users.Count==1)
+            {
+                return Ok(users[0]);
             }
             else
             {
-                return NotFound();
+                return Conflict();
             }
         }
 

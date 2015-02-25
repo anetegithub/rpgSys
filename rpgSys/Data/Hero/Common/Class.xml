@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Classes>
+  <Class Id="1">Воин</Class>
+  <Class Id="2">Послушник</Class>
+  <Class Id="3">Некромант</Class>
+  <Class Id="4">Разбойник</Class>
+  <Class Id="5">Волшебник</Class>
+  <Class Id="6">Друид</Class>
+  <Class Id="7">Рыцарь тьмы</Class>
+  <Class Id="8">Бард</Class>
+  <Class Id="9">Инженер</Class>
+</Classes>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MaterialSkill>
+  <Skill Id="1" HeroId="1">
+    <Info>1</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="2" HeroId="1">
+    <Info>2</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="3" HeroId="1">
+    <Info>3</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="4" HeroId="1">
+    <Info>4</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="5" HeroId="1">
+    <Info>5</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="6" HeroId="1">
+    <Info>6</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="7" HeroId="1">
+    <Info>7</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="8" HeroId="1">
+    <Info>8</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="9" HeroId="1">
+    <Info>9</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="10" HeroId="1">
+    <Info>10</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="11" HeroId="1">
+    <Info>11</Info>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="12" HeroId="1">
+    <Info>12</Info>
+    <Value>0</Value>
+  </Skill>
+</MaterialSkill>
