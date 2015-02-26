@@ -188,14 +188,14 @@ namespace rpgSys
                                     Value = s.Element("Value").Value
                                 });
                             }
-                            sc.Npcs.Add(new Npc()
-                            {
-                                Id = Convert.ToInt32(n.Attribute("Id").Value),
-                                Name = n.Element("Name").Value,
-                                Specification = n.Element("Specification").Value,
-                                View = n.Element("View").Value,
-                                Stats = Stts
-                            });
+                            //sc.Npcs.Add(new Npc()
+                            //{
+                            //    Id = Convert.ToInt32(n.Attribute("Id").Value),
+                            //    Name = n.Element("Name").Value,
+                            //    Specification = n.Element("Specification").Value,
+                            //    View = n.Element("View").Value,
+                            //    Stats = Stts
+                            //});
                         }
                         foreach (XElement l in el.Elements("Events"))
                         {
@@ -219,15 +219,15 @@ namespace rpgSys
                                     Value = s.Element("Value").Value
                                 });
                             }
-                            sc.Rewards.Add(new Item()
-                            {
-                                Id = Convert.ToInt32(n.Attribute("Id").Value),
-                                Name = n.Element("Name").Value,
-                                Additional = n.Element("Additional").Value,
-                                Rare = n.Element("Rare").Value,
-                                Who = n.Element("Who").Value,
-                                Characteristics = Stts
-                            });
+                            //sc.Rewards.Add(new Item()
+                            //{
+                            //    Id = Convert.ToInt32(n.Attribute("Id").Value),
+                            //    Name = n.Element("Name").Value,
+                            //    Additional = n.Element("Additional").Value,
+                            //    Rare = n.Element("Rare").Value,
+                            //    Who = n.Element("Who").Value,
+                            //    Characteristics = Stts
+                            //});
                         }
                     }
                 }
@@ -273,15 +273,15 @@ namespace rpgSys
                         Npc.Add(new XElement("View", n.View));
                         Npc.Add(new XElement("Specification", n.Specification));
                         XElement Stats = new XElement("Stats");
-                        foreach (Stat s in n.Stats)
-                        {
-                            XElement Stat = new XElement("Stat");
-                            Stat.Add(new XElement("Name", s.Name));
-                            Stat.Add(new XElement("Info", s.Info));
-                            Stat.Add(new XElement("Value", s.Value));
-                            Stat.Add(new XElement("Bonus", s.Bonus));
-                            Stats.Add(new XElement(Stat));
-                        }
+                        //foreach (Stat s in n.Stats)
+                        //{
+                        //    XElement Stat = new XElement("Stat");
+                        //    Stat.Add(new XElement("Name", s.Name));
+                        //    Stat.Add(new XElement("Info", s.Info));
+                        //    Stat.Add(new XElement("Value", s.Value));
+                        //    Stat.Add(new XElement("Bonus", s.Bonus));
+                        //    Stats.Add(new XElement(Stat));
+                        //}
                         Npc.Add(new XElement(Stats));
                         newS.Element("Npcs").Add(new XElement(Npc));
                         i++;
@@ -310,15 +310,15 @@ namespace rpgSys
                         Reward.Add(new XElement("Additional", r.Additional));
                         Reward.Add(new XElement("Rare", r.Rare));
                         XElement Stats = new XElement("Characteristics");
-                        foreach (Stat s in r.Characteristics)
-                        {
-                            XElement Stat = new XElement("Characteristic");
-                            Stat.Add(new XElement("Name", s.Name));
-                            Stat.Add(new XElement("Info", s.Info));
-                            Stat.Add(new XElement("Value", s.Value));
-                            Stat.Add(new XElement("Bonus", s.Bonus));
-                            Stats.Add(new XElement(Stat));
-                        }
+                        //foreach (Stat s in r.Characteristics)
+                        //{
+                        //    XElement Stat = new XElement("Characteristic");
+                        //    Stat.Add(new XElement("Name", s.Name));
+                        //    Stat.Add(new XElement("Info", s.Info));
+                        //    Stat.Add(new XElement("Value", s.Value));
+                        //    Stat.Add(new XElement("Bonus", s.Bonus));
+                        //    Stats.Add(new XElement(Stat));
+                        //}
                         Reward.Add(new XElement(Stats));
                         newS.Element("Rewards").Add(new XElement(Reward));
                         i++;
@@ -379,8 +379,8 @@ namespace rpgSys
                         g.Master = Convert.ToInt32(el.Element("Master").Value);
 
                         g.Heroes = new int[0];
-                        foreach (XElement x in el.Elements("Heroes"))
-                            g.Heroes.Add(Convert.ToInt32(x.Element("Hero").Value));
+                        //foreach (XElement x in el.Elements("Heroes"))
+                        //    g.Heroes.Add(Convert.ToInt32(x.Element("Hero").Value));
 
                         g.Chat = Convert.ToInt32(el.Element("Chat").Value);
                     }

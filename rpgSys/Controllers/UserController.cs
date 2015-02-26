@@ -22,6 +22,48 @@ namespace rpgSys
 
         public IHttpActionResult Get(string name, string psw)
         {
+            Scenario s = new Scenario();
+            s.Id = 1;
+            s.Title = "ttle";
+            s.Recomendation = "Recomend";
+            s.Fable = "good game";
+            s.Locations = new List<Location>()
+            {
+                new Location(){ Id=1, Description="desc", Map="mp", Name="nm", Specification="spec"},
+                new Location(){ Id=2, Description="desc", Map="mp", Name="nm", Specification="spec"},
+                new Location(){ Id=3, Description="desc", Map="mp", Name="nm", Specification="spec"}
+            };
+            s.Npcs=new List<Npc>()
+            {
+                new Npc(){ Id=1, Name="nme", Specification="spec", View="view"},
+                new Npc(){ Id=2, Name="nme", Specification="spec", View="view"},
+                new Npc(){ Id=3, Name="nme", Specification="spec", View="view"},
+            };
+            s.Events=new List<Event>()
+            {
+                new Event(){ Id=1, Description="dsc", Title="ttle"},
+                new Event(){ Id=2, Description="dsc", Title="ttle"},
+                new Event(){ Id=3, Description="dsc", Title="ttle"},
+            };
+            s.Rewards=new List<Item>()
+            {
+                new Item(){ Id=1, Additional="add", Name="nme", Rare="rare", Who="wh"},
+                new Item(){ Id=2, Additional="add", Name="nme", Rare="rare", Who="wh"},
+                new Item(){ Id=3, Additional="add", Name="nme", Rare="rare", Who="wh"},
+            };
+
+            new baseCL("Data").Insert<Scenario>(new irequestCl() { Table = new tableCl("/Scenario/Scenario"), Object = s });
+
+
+
+
+
+
+
+
+
+
+
             var users = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/User/Users") }).Cast<User>().Filter(new conditionCL("Login.==." + name + ",Password.==." + psw)).ToList();
             if(users.Count==0)
             {

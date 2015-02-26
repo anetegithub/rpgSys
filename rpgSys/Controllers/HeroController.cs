@@ -41,30 +41,30 @@ namespace rpgSys.Controllers
                 return NotFound();
             }
 
-            if (xmlBase.Users.Authed(UserId, Auth))
-            {
-                switch (OperationId.Split('~')[0])
-                {
-                    case "0": return info(UserId);
-                    case "1": return characteristics(UserId);
-                    case "2": return proficiency(UserId);
-                    case "3": return healthstate(UserId);
-                    case "4": return defencestate(UserId);
-                    case "5": return attackstate(UserId);
-                    case "6": return initiativestate(UserId);
-                    case "7": return materialskill(UserId);
-                    case "8": return mentalskill(UserId);
-                    case "9": return classskill(UserId);
-                    case "10": return getskills("Material");
-                    case "11": return getskills("Mental");
-                    case "12": return getskills(OperationId.Split('~')[1]);
-                    default: return NotFound();
-                }
-            }
-            else
-            {
-                return BadRequest("Ключ авторизации истёк!");
-            }
+            //if (xmlBase.Users.Authed(UserId, Auth))
+            //{
+            //    switch (OperationId.Split('~')[0])
+            //    {
+            //        case "0": return info(UserId);
+            //        case "1": return characteristics(UserId);
+            //        case "2": return proficiency(UserId);
+            //        case "3": return healthstate(UserId);
+            //        case "4": return defencestate(UserId);
+            //        case "5": return attackstate(UserId);
+            //        case "6": return initiativestate(UserId);
+            //        case "7": return materialskill(UserId);
+            //        case "8": return mentalskill(UserId);
+            //        case "9": return classskill(UserId);
+            //        case "10": return getskills("Material");
+            //        case "11": return getskills("Mental");
+            //        case "12": return getskills(OperationId.Split('~')[1]);
+            //        default: return NotFound();
+            //    }
+            //}
+            //else
+            //{
+            //    return BadRequest("Ключ авторизации истёк!");
+            //}
         }
 
         private IHttpActionResult materialskill(string UserId)

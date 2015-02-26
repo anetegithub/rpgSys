@@ -81,8 +81,21 @@ namespace ormCL
             result.Successful = true;
             try
             {
+                XElement Element = new XElement("");
                 XDocument doc = XDocument.Load(GetPath(Request.Table.Path));
-                XElement Element = ConvertToXElement<T>(Request.Object,ormCLcommand.Insert);
+                Type Collection=GetListType(Request.Object.GetType());
+                if (Collection != typeof(Nullable))
+                {
+                    //Element=new XElement()
+                    //foreach (var CollectionElement in (Request.Object as IList))
+                    //{
+                    //    Element
+                    //}
+                }
+                else
+                {
+                    Element = ConvertToXElement<T>(Request.Object, ormCLcommand.Insert);
+                }
                 lock (Safe)
                 {
                     doc.Root.Add(Element);
