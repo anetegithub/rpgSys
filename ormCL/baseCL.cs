@@ -83,14 +83,20 @@ namespace ormCL
             {
                 XElement Element = new XElement("");
                 XDocument doc = XDocument.Load(GetPath(Request.Table.Path));
-                Type Collection=GetListType(Request.Object.GetType());
+                Type Collection = GetListType(Request.Object.GetType());
                 if (Collection != typeof(Nullable))
                 {
-                    //Element=new XElement()
-                    //foreach (var CollectionElement in (Request.Object as IList))
-                    //{
-                    //    Element
-                    //}
+                    Element = new XElement(Collection.Name);
+                    foreach (var CollectionElement in (Request.Object as IList))
+                    {
+                        MethodInfo method = typeof(baseCL).GetMethod("ConvertToXElement");
+                        MethodInfo generic = method.MakeGenericMethod(Collection);
+                        ParameterInfo[] parameters = generic.GetParameters();
+                        object classInstance = new baseCL(Path);
+                        object[] parametersArray = new object[] { CollectionElement, ormCLcommand.Insert };
+                        var ReferenceObject = generic.Invoke(classInstance, parametersArray);
+                        Element.Add(ReferenceObject);
+                    }
                 }
                 else
                 {
