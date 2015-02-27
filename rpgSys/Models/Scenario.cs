@@ -30,7 +30,7 @@ namespace rpgSys
         [outerCL("Id")]
         public List<Event> Events { get; set; }
 
-        [referenceCL("/Scenarion/Reward")]
+        [referenceCL("/Scenario/Reward")]
         [outerCL("Id")]
         public List<Item> Rewards { get; set; }
     }

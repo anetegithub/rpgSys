@@ -337,13 +337,13 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4018</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4018/</IISUrl>
+          <IISUrl>http://localhost:300/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-          <servers defaultServer="SelfHostServer">
+          <servers defaultServer="">
             <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:4018/" workingDir="" />
           </servers>
         </WebProjectProperties>

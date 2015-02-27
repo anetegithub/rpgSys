@@ -48,6 +48,11 @@ namespace ormCL
             Type GenericListType = typeof(List<>).MakeGenericType(PropertyType);
             return (List<M>)Activator.CreateInstance(GenericListType);
         }
+        public List<M> CreateListOfM<M>()
+        {
+            Type GenericListType = typeof(List<>).MakeGenericType(typeof(M));
+            return (List<M>)Activator.CreateInstance(GenericListType);
+        }
 
         public static object Safe = new object();
         public bool Test = false;
@@ -81,12 +86,10 @@ namespace ormCL
             result.Successful = true;
             try
             {
-                XElement Element = new XElement("");
                 XDocument doc = XDocument.Load(GetPath(Request.Table.Path));
                 Type Collection = GetListType(Request.Object.GetType());
                 if (Collection != typeof(Nullable))
                 {
-                    Element = new XElement(Collection.Name);
                     foreach (var CollectionElement in (Request.Object as IList))
                     {
                         MethodInfo method = typeof(baseCL).GetMethod("ConvertToXElement");
@@ -95,16 +98,16 @@ namespace ormCL
                         object classInstance = new baseCL(Path);
                         object[] parametersArray = new object[] { CollectionElement, ormCLcommand.Insert };
                         var ReferenceObject = generic.Invoke(classInstance, parametersArray);
-                        Element.Add(ReferenceObject);
+                        doc.Root.Add(ReferenceObject);
                     }
                 }
                 else
                 {
-                    Element = ConvertToXElement<T>(Request.Object, ormCLcommand.Insert);
+                    XElement Element = ConvertToXElement<T>(Request.Object, ormCLcommand.Insert);
+                    doc.Root.Add(Element);
                 }
                 lock (Safe)
                 {
-                    doc.Root.Add(Element);
                     doc.Save(GetPath(Request.Table.Path));
                 }
             }
@@ -178,7 +181,7 @@ namespace ormCL
             return result;
         }
 
-        protected XElement ConvertToXElement<X>(object Object, ormCLcommand Command)
+        public XElement ConvertToXElement<X>(object Object, ormCLcommand Command)
         {
             XElement Element = new XElement(typeof(X).Name);
             foreach (var Property in typeof(X).GetProperties())
@@ -231,12 +234,34 @@ namespace ormCL
             else
             {
                 string value = "";
-                foreach (var InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
+
+
+                Type IsCollection = GetListType(Property.PropertyType);
+                if (IsCollection != typeof(Nullable))
                 {
-                    if (InnerProperty.Name == field)
-                        value = InnerProperty.GetValue(Property.GetValue(Object, null), null).ToString();
+                    foreach (var InnerObject in (Property.GetValue(Object, null) as IList))
+                    {
+                        //var InnerElement = new XElement(IsCollection.Name);
+                        foreach (var InnerProperty in InnerObject.GetType().GetProperties())
+                        {
+                            if (InnerProperty.Name == field)
+                                value = InnerProperty.GetValue(InnerObject, null).ToString();
+                        }
+                        //InnerElement.Value = value;
+                        (Element as XElement).Add(new XElement(IsCollection.Name, value));
+                    }
+
                 }
-                (Element as XElement).Value = value;
+                else
+                {
+                    foreach (var InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
+                    {
+                        if (InnerProperty.Name == field)
+                            value = InnerProperty.GetValue(Property.GetValue(Object, null), null).ToString();
+                    }
+                    (Element as XElement).Value = value;
+                }
+                
                 if (Command == ormCLcommand.Insert)
                     invoke_ReferenceWrite(Property.GetValue(Object, null), Property.PropertyType, table);
                 else if (Command == ormCLcommand.Update)

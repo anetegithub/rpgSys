@@ -1,3 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Scenarios>
+  <Scenario Id="1">
+    <Title>ttle</Title>
+    <Recomendation>Recomend</Recomendation>
+    <Fable>good game</Fable>
+    <Locations>
+      <Location>1</Location>
+      <Location>2</Location>
+      <Location>3</Location>
+    </Locations>
+    <Npcs>
+      <Npc>1</Npc>
+      <Npc>2</Npc>
+      <Npc>3</Npc>
+    </Npcs>
+    <Events>
+      <Event>1</Event>
+      <Event>2</Event>
+      <Event>3</Event>
+    </Events>
+    <Rewards>
+      <Item>1</Item>
+      <Item>2</Item>
+      <Item>3</Item>
+    </Rewards>
+  </Scenario>
 </Scenarios>

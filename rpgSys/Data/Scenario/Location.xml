@@ -1,4 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Locations>
-  
+  <Location Id="1">
+    <Name>nm</Name>
+    <Description>desc</Description>
+    <Specification>spec</Specification>
+    <Map>mp</Map>
+  </Location>
+  <Location Id="2">
+    <Name>nm</Name>
+    <Description>desc</Description>
+    <Specification>spec</Specification>
+    <Map>mp</Map>
+  </Location>
+  <Location Id="3">
+    <Name>nm</Name>
+    <Description>desc</Description>
+    <Specification>spec</Specification>
+    <Map>mp</Map>
+  </Location>
 </Locations>

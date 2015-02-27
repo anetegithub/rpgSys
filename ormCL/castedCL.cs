@@ -104,20 +104,28 @@ namespace ormCL
                                 var ReferenceObject = CastReference(pType, table, outerField, dWhat.Value, Property);
                                 if (ReferenceObject != null)
                                 {
-                                    try
+                                    //ormCL.SpecialTypes : stringCL
+                                    if (GetListType(Property.PropertyType) == typeof(Nullable) && GetListType(ReferenceObject.GetType()) != typeof(Nullable))
                                     {
                                         o.GetType()
                                             .GetProperty(Property.Name)
                                             .SetValue
-                                            (o, Property.PropertyType is ICollection ? ReferenceObject : (ReferenceObject as IList)[0]);
+                                            (o, ReferenceObject[0]);
                                     }
-                                    catch (ArgumentException)
+                                    else
                                     {
+                                        ////Cast or it didn't happen
+                                        //MethodInfo method = typeof(Enumerable).GetMethod("Cast");
+                                        //MethodInfo generic = method.MakeGenericMethod(Property.PropertyType);
+                                        //object[] parametersArray = new object[] { ReferenceObject };
+                                        //object classInstance=new List<object>();
+                                        //ReferenceObject = generic.Invoke(classInstance, parametersArray);
                                         o.GetType()
-                                            .GetProperty(Property.Name)
-                                            .SetValue
-                                            (o, ReferenceObject);
+                                                .GetProperty(Property.Name)
+                                                .SetValue
+                                                (o, ReferenceObject);
                                     }
+
                                 }
                             }
                         }
@@ -158,8 +166,26 @@ namespace ormCL
                 generic = method.MakeGenericMethod(typeof(stringCL));
             }
 
-            parametersArray = new object[] { ReferenceObject, new conditionCL(outerField + ".==." + dWhatValue) };
-            ReferenceObject = generic.Invoke(classInstance, parametersArray);
+            Type IsCollection = GetListType(dWhatValue.GetType());
+            if (IsCollection != typeof(Nullable))
+            {
+                MethodInfo method_inner = typeof(baseCL).GetMethod("CreateListOfM");
+                MethodInfo generic_inner = method_inner.MakeGenericMethod(pType);
+                object classInstance_inner = new baseCL("");
+                object[] parametersArray_inner = new object[] { };
+                var SomeCollection = generic_inner.Invoke(classInstance_inner, parametersArray_inner);
+                foreach (dynamic Item in (dWhatValue as IList))
+                {
+                    parametersArray = new object[] { ReferenceObject, new conditionCL(outerField + ".==." + Item.AbsorbedValue) };
+                    (SomeCollection as IList).Add((generic.Invoke(classInstance, parametersArray) as IList)[0]);  //Potential error. Please care about this.
+                }
+                ReferenceObject = SomeCollection;
+            }
+            else
+            {
+                parametersArray = new object[] { ReferenceObject, new conditionCL(outerField + ".==." + dWhatValue) };
+                ReferenceObject = generic.Invoke(classInstance, parametersArray);
+            }
 
             if ((ReferenceObject as ICollection).Count > 0)
             {

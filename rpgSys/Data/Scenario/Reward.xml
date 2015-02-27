@@ -1,4 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Rewards>
-  
+  <Item Id="1">
+    <Name>nme</Name>
+    <Rare>rare</Rare>
+    <Who>wh</Who>
+    <Additional>add</Additional>
+  </Item>
+  <Item Id="2">
+    <Name>nme</Name>
+    <Rare>rare</Rare>
+    <Who>wh</Who>
+    <Additional>add</Additional>
+  </Item>
+  <Item Id="3">
+    <Name>nme</Name>
+    <Rare>rare</Rare>
+    <Who>wh</Who>
+    <Additional>add</Additional>
+  </Item>
 </Rewards>

@@ -33,31 +33,31 @@ namespace rpgSys
                 new Location(){ Id=2, Description="desc", Map="mp", Name="nm", Specification="spec"},
                 new Location(){ Id=3, Description="desc", Map="mp", Name="nm", Specification="spec"}
             };
-            s.Npcs=new List<Npc>()
+            s.Npcs = new List<Npc>()
             {
                 new Npc(){ Id=1, Name="nme", Specification="spec", View="view"},
                 new Npc(){ Id=2, Name="nme", Specification="spec", View="view"},
                 new Npc(){ Id=3, Name="nme", Specification="spec", View="view"},
             };
-            s.Events=new List<Event>()
+            s.Events = new List<Event>()
             {
                 new Event(){ Id=1, Description="dsc", Title="ttle"},
                 new Event(){ Id=2, Description="dsc", Title="ttle"},
                 new Event(){ Id=3, Description="dsc", Title="ttle"},
             };
-            s.Rewards=new List<Item>()
+            s.Rewards = new List<Item>()
             {
                 new Item(){ Id=1, Additional="add", Name="nme", Rare="rare", Who="wh"},
                 new Item(){ Id=2, Additional="add", Name="nme", Rare="rare", Who="wh"},
                 new Item(){ Id=3, Additional="add", Name="nme", Rare="rare", Who="wh"},
             };
 
-            new baseCL("Data").Insert<Scenario>(new irequestCl() { Table = new tableCl("/Scenario/Scenario"), Object = s });
+            //new baseCL("Data").Insert<Scenario>(new irequestCl() { Table = new tableCl("/Scenario/Scenario"), Object = s });
 
 
 
 
-
+            var scenarios = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Scenario/Scenario") }).Cast<Scenario>().ToList();
 
 
 
