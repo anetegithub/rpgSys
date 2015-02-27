@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Npces>
+  <!--<Npc Id="1">-->
+  <!--<Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+  </Npc>
+  <Npc Id="2">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+  </Npc>
+  <Npc Id="3">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+  </Npc>-->
+  <Npc Id="1">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>1</Stats>
+  </Npc>
+  <Npc Id="2">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats />
+  </Npc>
+  <Npc Id="3">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>2</Stats>
+  </Npc>
+  <Npc Id="1">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>1</Stats>
+  </Npc>
+  <Npc Id="2">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats />
+  </Npc>
+  <Npc Id="3">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>2</Stats>
+  </Npc>
+  <Npc Id="1">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>1</Stats>
+  </Npc>
+  <Npc Id="2">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats />
+  </Npc>
+  <Npc Id="3">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>2</Stats>
+  </Npc>
+  <Npc Id="1">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>1</Stats>
+  </Npc>
+  <Npc Id="2">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats />
+  </Npc>
+  <Npc Id="3">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>2</Stats>
+  </Npc>
+  <Npc Id="1">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>1</Stats>
+  </Npc>
+  <Npc Id="2">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats />
+  </Npc>
+  <Npc Id="3">
+    <Name>nme</Name>
+    <View>view</View>
+    <Specification>spec</Specification>
+    <Stats>2</Stats>
+  </Npc>
+</Npces>

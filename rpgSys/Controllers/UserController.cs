@@ -35,9 +35,9 @@ namespace rpgSys
             };
             s.Npcs = new List<Npc>()
             {
-                new Npc(){ Id=1, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=1, CRC=1}},
+                new Npc(){ Id=1, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=1, CRC=1, CHM="1", DES="1", INX="1"}},
                 new Npc(){ Id=2, Name="nme", Specification="spec", View="view"},
-                new Npc(){ Id=3, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=2, CON=5}}
+                new Npc(){ Id=3, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=2, CON=5, CHM="1", DES="1", INX="1"}}
             };
             s.Events = new List<Event>()
             {
@@ -72,7 +72,7 @@ namespace rpgSys
 
 
 
-            var scenarios = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Scenario/Scenario") }).Cast<Scenario>().ToList();
+            var scenarios = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Scenario/Scenario") });//.Cast<Scenario>();
 
 
 
