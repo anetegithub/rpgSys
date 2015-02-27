@@ -7,13 +7,11 @@ using ormCL.Attributes;
 
 namespace rpgSys
 {
-    public class Item
+    public class Event
     {
         [attributeCL]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Rare { get; set; }
-        public string Who { get; set; }
-        public string Additional { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
     }
 }

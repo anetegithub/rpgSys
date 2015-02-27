@@ -235,31 +235,44 @@ namespace ormCL
             {
                 string value = "";
 
-
                 Type IsCollection = GetListType(Property.PropertyType);
                 if (IsCollection != typeof(Nullable))
                 {
                     foreach (var InnerObject in (Property.GetValue(Object, null) as IList))
                     {
-                        //var InnerElement = new XElement(IsCollection.Name);
                         foreach (var InnerProperty in InnerObject.GetType().GetProperties())
                         {
                             if (InnerProperty.Name == field)
                                 value = InnerProperty.GetValue(InnerObject, null).ToString();
                         }
-                        //InnerElement.Value = value;
                         (Element as XElement).Add(new XElement(IsCollection.Name, value));
                     }
 
                 }
                 else
                 {
-                    foreach (var InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
+                    try
+                    {                        
+                        if (Property.PropertyType != typeof(string))
+                        {
+                            foreach (var InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
+                            {
+                                if (InnerProperty.Name == field)
+                                    value = InnerProperty.GetValue(Property.GetValue(Object, null), null).ToString();
+                            }
+                            (Element as XElement).Value = value;
+                        }
+                        else
+                        {
+                            /* SpecialTypes */
+                            Element = new XElement(Property.Name, Property.GetValue(Object, null).ToString());
+                        }
+                    }                        
+                    catch(NullReferenceException ex)
                     {
-                        if (InnerProperty.Name == field)
-                            value = InnerProperty.GetValue(Property.GetValue(Object, null), null).ToString();
+                        //We have not this property in object, so, we don't need serialize it
+                        Console.WriteLine(ex.Message);
                     }
-                    (Element as XElement).Value = value;
                 }
                 
                 if (Command == ormCLcommand.Insert)

@@ -152,25 +152,6 @@
     </Content>
     <Content Include="Data\Hero\Ability.xml" />
     <Content Include="Data\Hero\AttackState.xml" />
-    <Content Include="Data\Hero\Character\ClassSkills.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Data\Hero\Character\MentalSkills.xml" />
-    <Content Include="Data\Hero\Character\MaterialSkills.xml" />
-    <Content Include="Data\Hero\Character\InitiativeState.xml" />
-    <Content Include="Data\Hero\Character\Characteristics.xml" />
-    <Content Include="Data\Hero\Character\Characters.xml" />
-    <Content Include="Data\Hero\Character\AttackState.xml" />
-    <Content Include="Data\Hero\Character\DefenceState.xml" />
-    <Content Include="Data\Hero\Character\HealthState.xml" />
-    <Content Include="Data\Hero\Character\Proficiency.xml" />
-    <Content Include="Data\Hero\Character\Чары.xml" />
-    <Content Include="Data\Hero\Character\Отравление.xml" />
-    <Content Include="Data\Hero\Character\Болезнь.xml" />
-    <Content Include="Data\Hero\Character\Пол.xml" />
-    <Content Include="Data\Hero\Character\Рост.xml" />
-    <Content Include="Data\Hero\Character\Раса.xml" />
-    <Content Include="Data\Hero\Character\Класс.xml" />
     <Content Include="Data\Hero\ClassSkill.xml" />
     <Content Include="Data\Hero\CommonState.xml" />
     <Content Include="Data\Hero\Characteristic.xml" />
@@ -189,18 +170,16 @@
     <Content Include="Data\Hero\Info.xml" />
     <Content Include="Data\Hero\MaterialSkill.xml" />
     <Content Include="Data\Hero\MentalSkill.xml" />
-    <Content Include="Data\Hero\Skill\Некромант.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Data\Hero\Skill\Mental.xml" />
-    <Content Include="Data\Hero\Skill\Material.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Data\Modules\UserActivity.xml" />
+    <Content Include="Data\Reward\Reward.xml" />
+    <Content Include="Data\Reward\RewardInfo.xml" />
+    <Content Include="Data\Reward\RewardRare.xml" />
+    <Content Include="Data\Reward\RewardStats.xml" />
+    <Content Include="Data\Reward\RewardTarget.xml" />
     <Content Include="Data\Scenario\Event.xml" />
     <Content Include="Data\Scenario\Location.xml" />
-    <Content Include="Data\Scenario\Npc.xml" />
-    <Content Include="Data\Scenario\Reward.xml" />
+    <Content Include="Data\Npc\Npc.xml" />
+    <Content Include="Data\Npc\NpcStat.xml" />
     <Content Include="Data\Scenario\Scenario.xml" />
     <Content Include="Data\Server\Scenarios.xml">
       <SubType>Designer</SubType>
@@ -255,7 +234,12 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Module.cs" />
-    <Compile Include="Models\Scenario.cs" />
+    <Compile Include="Models\Scenario\Event.cs" />
+    <Compile Include="Models\Scenario\Location.cs" />
+    <Compile Include="Models\Scenario\Npc.cs" />
+    <Compile Include="Models\Scenario\NpcStat.cs" />
+    <Compile Include="Models\Scenario\Reward.cs" />
+    <Compile Include="Models\Scenario\Scenario.cs" />
     <Compile Include="Models\ServerSettings.cs" />
     <Compile Include="Models\Hero\Skill.cs" />
     <Compile Include="Models\User.cs" />

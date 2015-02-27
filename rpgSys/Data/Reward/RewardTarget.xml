@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RewardTargets>
+  <RewardTarget Id="1">Всем</RewardTarget>
+  <RewardTarget Id="2">Всем, кто выполнил условия</RewardTarget>
+  <RewardTarget Id="3">Одному, кто выполнил условия</RewardTarget>
+  <Target>2</Target>
+  <Target>2</Target>
+  <Target>2</Target>
+  <Target>2</Target>
+  <Target>2</Target>
+  <Target>2</Target>
+  <Target>2</Target>
+  <Target>2</Target>
+  <Target>2</Target>
+  <Target>2</Target>
+</RewardTargets>

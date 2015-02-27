@@ -301,28 +301,28 @@ namespace rpgSys
                     i = 0;
 
                     newS.Add(new XElement("Rewards"));
-                    foreach (Item r in S.Rewards)
-                    {
-                        XElement Reward = new XElement("Npc");
-                        Reward.Add(new XAttribute("Id", i.ToString()));
-                        Reward.Add(new XElement("Name", r.Name));
-                        Reward.Add(new XElement("Who", r.Who));
-                        Reward.Add(new XElement("Additional", r.Additional));
-                        Reward.Add(new XElement("Rare", r.Rare));
-                        XElement Stats = new XElement("Characteristics");
-                        //foreach (Stat s in r.Characteristics)
-                        //{
-                        //    XElement Stat = new XElement("Characteristic");
-                        //    Stat.Add(new XElement("Name", s.Name));
-                        //    Stat.Add(new XElement("Info", s.Info));
-                        //    Stat.Add(new XElement("Value", s.Value));
-                        //    Stat.Add(new XElement("Bonus", s.Bonus));
-                        //    Stats.Add(new XElement(Stat));
-                        //}
-                        Reward.Add(new XElement(Stats));
-                        newS.Element("Rewards").Add(new XElement(Reward));
-                        i++;
-                    }
+                    //foreach (Item r in S.Rewards)
+                    //{
+                    //    XElement Reward = new XElement("Npc");
+                    //    Reward.Add(new XAttribute("Id", i.ToString()));
+                    //    Reward.Add(new XElement("Name", r.Name));
+                    //    Reward.Add(new XElement("Who", r.Who));
+                    //    Reward.Add(new XElement("Additional", r.Additional));
+                    //    Reward.Add(new XElement("Rare", r.Rare));
+                    //    XElement Stats = new XElement("Characteristics");
+                    //    //foreach (Stat s in r.Characteristics)
+                    //    //{
+                    //    //    XElement Stat = new XElement("Characteristic");
+                    //    //    Stat.Add(new XElement("Name", s.Name));
+                    //    //    Stat.Add(new XElement("Info", s.Info));
+                    //    //    Stat.Add(new XElement("Value", s.Value));
+                    //    //    Stat.Add(new XElement("Bonus", s.Bonus));
+                    //    //    Stats.Add(new XElement(Stat));
+                    //    //}
+                    //    Reward.Add(new XElement(Stats));
+                    //    newS.Element("Rewards").Add(new XElement(Reward));
+                    //    i++;
+                    //}
                     i = 0;
 
                     doc.Root.Add(new XElement(newS));

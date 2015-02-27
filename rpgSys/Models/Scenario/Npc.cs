@@ -7,13 +7,15 @@ using ormCL.Attributes;
 
 namespace rpgSys
 {
-    public class Item
+    public class Npc
     {
         [attributeCL]
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Rare { get; set; }
-        public string Who { get; set; }
-        public string Additional { get; set; }
+        public string View { get; set; }
+        public string Specification { get; set; }
+        [referenceCL("/Npc/NpcStat")]
+        [outerCL("Id")]
+        public NpcStat Stats { get; set; }
     }
 }

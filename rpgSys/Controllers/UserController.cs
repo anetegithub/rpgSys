@@ -35,9 +35,9 @@ namespace rpgSys
             };
             s.Npcs = new List<Npc>()
             {
-                new Npc(){ Id=1, Name="nme", Specification="spec", View="view"},
+                new Npc(){ Id=1, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=1, CRC=1}},
                 new Npc(){ Id=2, Name="nme", Specification="spec", View="view"},
-                new Npc(){ Id=3, Name="nme", Specification="spec", View="view"},
+                new Npc(){ Id=3, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=2, CON=5}}
             };
             s.Events = new List<Event>()
             {
@@ -45,14 +45,29 @@ namespace rpgSys
                 new Event(){ Id=2, Description="dsc", Title="ttle"},
                 new Event(){ Id=3, Description="dsc", Title="ttle"},
             };
-            s.Rewards = new List<Item>()
+            //s.Rewards = new List<Item>()
+            //{
+            //    new Item(){ Id=1, Additional="add", Name="nme", Rare="rare", Who="wh"},
+            //    new Item(){ Id=2, Additional="add", Name="nme", Rare="rare", Who="wh"},
+            //    new Item(){ Id=3, Additional="add", Name="nme", Rare="rare", Who="wh"},
+            //};
+            s.Rewards = new List<Reward>()
             {
-                new Item(){ Id=1, Additional="add", Name="nme", Rare="rare", Who="wh"},
-                new Item(){ Id=2, Additional="add", Name="nme", Rare="rare", Who="wh"},
-                new Item(){ Id=3, Additional="add", Name="nme", Rare="rare", Who="wh"},
+                new Reward(){ Id=1, Name="Меч истины", Rare="1", Target="2", Conditions="To be", Stats=new List<RewardStat>(){ 
+                    new RewardStat(){ 
+                        Id=1, RewardId=1, Value=5, 
+                        Info=new RewardInfo(){ Id=5}
+                    }
+                }},
+                new Reward(){ Id=2, Name="Меч истины", Rare="1", Target="2", Conditions="To be", Stats=new List<RewardStat>(){ 
+                    new RewardStat(){ 
+                        Id=2, RewardId=1, Value=5, 
+                        Info=new RewardInfo(){ Id=10}
+                    }
+                }}
             };
 
-            //new baseCL("Data").Insert<Scenario>(new irequestCl() { Table = new tableCl("/Scenario/Scenario"), Object = s });
+            new baseCL("Data").Insert<Scenario>(new irequestCl() { Table = new tableCl("/Scenario/Scenario"), Object = s });
 
 
 
@@ -65,11 +80,11 @@ namespace rpgSys
 
 
             var users = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/User/Users") }).Cast<User>().Filter(new conditionCL("Login.==." + name + ",Password.==." + psw)).ToList();
-            if(users.Count==0)
+            if (users.Count == 0)
             {
                 return NotFound();
             }
-            else if (users.Count==1)
+            else if (users.Count == 1)
             {
                 return Ok(users[0]);
             }
