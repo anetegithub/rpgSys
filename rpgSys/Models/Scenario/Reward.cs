@@ -37,18 +37,28 @@ namespace rpgSys
         [attributeCL]
         public int RewardId { get; set; }
 
+        //[referenceCL("/Reward/RewardInfo")]
+        //[outerCL("Id")]
+        //public RewardInfo Info { get; set; }
+
+        /* 
+         * 
+         * If you want use property like ENUM pls did it String.
+         * If you did it another object result of this field will be all time insert/
+         * 
+         */
         [referenceCL("/Reward/RewardInfo")]
         [outerCL("Id")]
-        public RewardInfo Info { get; set; }
+        public string Info { get; set; }
 
         public int Value { get; set; }
     }
 
-    public class RewardInfo
-    {
-        [attributeCL]
-        public int Id { get; set; }
-        [absorbedCL]
-        public string Name { get; set; }
-    }
+    //public class RewardInfo
+    //{
+    //    [attributeCL]
+    //    public int Id { get; set; }
+    //    [absorbedCL]
+    //    public string Name { get; set; }
+    //}
 }

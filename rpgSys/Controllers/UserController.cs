@@ -27,24 +27,24 @@ namespace rpgSys
             s.Title = "ttle";
             s.Recomendation = "Recomend";
             s.Fable = "good game";
-            s.Locations = new List<Location>()
-            {
-                new Location(){ Id=1, Description="desc", Map="mp", Name="nm", Specification="spec"},
-                new Location(){ Id=2, Description="desc", Map="mp", Name="nm", Specification="spec"},
-                new Location(){ Id=3, Description="desc", Map="mp", Name="nm", Specification="spec"}
-            };
-            s.Npcs = new List<Npc>()
-            {
-                new Npc(){ Id=1, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=1, CRC=1, CHM="1", DES="1", INX="1"}},
-                new Npc(){ Id=2, Name="nme", Specification="spec", View="view"},
-                new Npc(){ Id=3, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=2, CON=5, CHM="1", DES="1", INX="1"}}
-            };
-            s.Events = new List<Event>()
-            {
-                new Event(){ Id=1, Description="dsc", Title="ttle"},
-                new Event(){ Id=2, Description="dsc", Title="ttle"},
-                new Event(){ Id=3, Description="dsc", Title="ttle"},
-            };
+            //s.Locations = new List<Location>()
+            //{
+            //    new Location(){ Id=1, Description="desc", Map="mp", Name="nm", Specification="spec"},
+            //    new Location(){ Id=2, Description="desc", Map="mp", Name="nm", Specification="spec"},
+            //    new Location(){ Id=3, Description="desc", Map="mp", Name="nm", Specification="spec"}
+            //};
+            //s.Npcs = new List<Npc>()
+            //{
+            //    new Npc(){ Id=1, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=1, CRC=1}},
+            //    new Npc(){ Id=2, Name="nme", Specification="spec", View="view"},
+            //    new Npc(){ Id=3, Name="nme", Specification="spec", View="view", Stats=new NpcStat(){ Id=2, CON=5, CHM="1", DES="1", INX="1"}}
+            //};
+            //s.Events = new List<Event>()
+            //{
+            //    new Event(){ Id=1, Description="dsc", Title="ttle"},
+            //    new Event(){ Id=2, Description="dsc", Title="ttle"},
+            //    new Event(){ Id=3, Description="dsc", Title="ttle"},
+            //};
             //s.Rewards = new List<Item>()
             //{
             //    new Item(){ Id=1, Additional="add", Name="nme", Rare="rare", Who="wh"},
@@ -56,18 +56,18 @@ namespace rpgSys
                 new Reward(){ Id=1, Name="Меч истины", Rare="1", Target="2", Conditions="To be", Stats=new List<RewardStat>(){ 
                     new RewardStat(){ 
                         Id=1, RewardId=1, Value=5, 
-                        Info=new RewardInfo(){ Id=5}
+                        Info="5"
                     }
                 }},
                 new Reward(){ Id=2, Name="Меч истины", Rare="1", Target="2", Conditions="To be", Stats=new List<RewardStat>(){ 
                     new RewardStat(){ 
                         Id=2, RewardId=1, Value=5, 
-                        Info=new RewardInfo(){ Id=10}
+                        Info="10"
                     }
                 }}
             };
 
-            new baseCL("Data").Insert<Scenario>(new irequestCl() { Table = new tableCl("/Scenario/Scenario"), Object = s });
+            //new baseCL("Data").Insert<Scenario>(new irequestCl() { Table = new tableCl("/Scenario/Scenario"), Object = s });
 
 
 

@@ -103,8 +103,9 @@ namespace ormCL
                 }
                 else
                 {
-                    XElement Element = ConvertToXElement<T>(Request.Object, ormCLcommand.Insert);
-                    doc.Root.Add(Element);
+                        XElement Element = ConvertToXElement<T>(Request.Object, ormCLcommand.Insert);
+                        doc.Root.Add(Element);
+                                       
                 }
                 lock (Safe)
                 {
@@ -224,11 +225,21 @@ namespace ormCL
                 }
                 else
                 {
-                    if (t == dynamicobjectType.Attribute)
-                        Element = new XAttribute(Property.Name, Property.GetValue(Object, null).ToString());
+                    try
+                    {
+                        if (t == dynamicobjectType.Attribute)
+                            Element = new XAttribute(Property.Name, Property.GetValue(Object, null).ToString());
 
-                    if (t == dynamicobjectType.Element)
-                        (Element as XElement).Value = Property.GetValue(Object, null).ToString();
+                        if (t == dynamicobjectType.Element)
+                            (Element as XElement).Value = Property.GetValue(Object, null).ToString();
+                    }
+                    catch (NullReferenceException)
+                    {
+                        /*This property is null, but object need to be serialized. 
+                         * Just not serialize this property.
+                         * When object will be casted this property will be null.*/
+                        Console.WriteLine("/* Null Property */");
+                    } 
                 }
             }
             else
@@ -238,14 +249,23 @@ namespace ormCL
                 Type IsCollection = GetListType(Property.PropertyType);
                 if (IsCollection != typeof(Nullable))
                 {
-                    foreach (var InnerObject in (Property.GetValue(Object, null) as IList))
+                    /* Empty property-collection */
+                    try
                     {
-                        foreach (var InnerProperty in InnerObject.GetType().GetProperties())
+                        foreach (var InnerObject in (Property.GetValue(Object, null) as IList))
                         {
-                            if (InnerProperty.Name == field)
-                                value = InnerProperty.GetValue(InnerObject, null).ToString();
+                            foreach (var InnerProperty in InnerObject.GetType().GetProperties())
+                            {
+                                if (InnerProperty.Name == field)
+                                    value = InnerProperty.GetValue(InnerObject, null).ToString();
+                            }
+                            (Element as XElement).Add(new XElement(IsCollection.Name, value));
                         }
-                        (Element as XElement).Add(new XElement(IsCollection.Name, value));
+                    }
+                    catch (NullReferenceException)
+                    {
+                        //We have not this property in object, so, we don't need serialize it
+                        Console.WriteLine("/* Null Property [Collection]*/");
                     }
 
                 }
@@ -268,10 +288,12 @@ namespace ormCL
                             Element = new XElement(Property.Name, Property.GetValue(Object, null).ToString());
                         }
                     }                        
-                    catch(NullReferenceException ex)
+                    catch(NullReferenceException)
                     {
-                        //We have not this property in object, so, we don't need serialize it
-                        Console.WriteLine(ex.Message);
+                        /*This property is null, but object need to be serialized. 
+                        * Just not serialize this property.
+                        * When object will be casted this property will be null.*/
+                        Console.WriteLine("/* Null Property */");
                     }
                 }
                 
