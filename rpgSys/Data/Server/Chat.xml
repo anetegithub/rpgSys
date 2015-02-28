@@ -1,4 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Messages>
-  
-</Messages>
+<GeneralMessages>
+  <GeneralMessage Id="1">
+    <UserId>1</UserId>
+    <UserAvatar>img/unknown.png</UserAvatar>
+    <Stamp>01.01.2000 01:01:01</Stamp>
+    <Text>Hello World!</Text>
+  </GeneralMessage>
+</GeneralMessages>

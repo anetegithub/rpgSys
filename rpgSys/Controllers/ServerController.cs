@@ -5,6 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using System.Runtime.Serialization.Json;
+using System.Web.Script.Serialization;
+
 using ormCL;
 
 namespace rpgSys.Controllers

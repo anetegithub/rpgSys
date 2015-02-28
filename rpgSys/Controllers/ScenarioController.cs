@@ -13,7 +13,7 @@ namespace rpgSys.Controllers
     public class ScenarioController : ApiController
     {
         [ActionName("create")]
-        public string Post([FromBody]string value)
+        public string Put([FromBody]string value)
         {
             Scenario Scenario=new JavaScriptSerializer().Deserialize<Scenario>(value);
             //xmlBase.Scenarios.New = Scenario;

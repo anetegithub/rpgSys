@@ -188,6 +188,7 @@
     <Content Include="site\js\morris\morris.js" />
     <Content Include="site\js\morris\raphael-2.1.0.min.js" />
     <Content Include="site\hero.html" />
+    <Content Include="site\js\pages\profile.js" />
     <Content Include="site\js\renders\userHero.js" />
     <Content Include="site\js\renders\userIndex.js" />
     <Content Include="site\js\renders\userScenario.js" />
@@ -204,6 +205,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApiControllerWithHub.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\PlayController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\ScenarioController.cs" />
@@ -229,9 +231,10 @@
     <Compile Include="Models\Scenario\NpcStat.cs" />
     <Compile Include="Models\Scenario\Reward.cs" />
     <Compile Include="Models\Scenario\Scenario.cs" />
-    <Compile Include="Models\ServerSettings.cs" />
+    <Compile Include="Models\Server\GeneralMessage.cs" />
+    <Compile Include="Models\Server\ServerSettings.cs" />
     <Compile Include="Models\Hero\Skill.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\User\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
