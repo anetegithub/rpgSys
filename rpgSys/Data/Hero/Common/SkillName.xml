@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SkillNames>
+  <Name Id="1">Создание брони и оружия</Name>
+  <!--<DIX>CON</DIX>-->
+  <Name Id="2">Разоружиение ловушек</Name>
+  <!--<DIX>FTE</DIX>-->
+  <Name Id="3">Внимание</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="4">Скрытность</Name>
+  <!--<DIX>FIT</DIX>-->
+  <Name Id="5">Устрашение</Name>
+  <!--<DIX>CHA</DIX>-->
+  <Name Id="6">Прыжки</Name>
+  <!--<DIX>FIT</DIX>-->
+  <Name Id="7">Открывание замков</Name>
+  <!--<DIX>FTE</DIX>-->
+  <Name Id="8">Езда верхом</Name>
+  <!--<DIX>FIT</DIX>-->
+  <Name Id="9">Выслеживание</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="10">Выживание</Name>
+  <!--<DIX>FTE</DIX>-->
+  <Name Id="11">Плавание</Name>
+  <!--<DIX>FIT</DIX>-->
+  <Name Id="12">Акробатика</Name>
+  <!--<DIX>FIT</DIX>-->
+  <Name Id="13">Слух</Name>
+  <!--<DIX>WIS</DIX>-->
+  <Name Id="14">Ложь</Name>
+  <!--<DIX>WIS</DIX>-->
+  <Name Id="15">Дипломатия</Name>
+  <!--<DIX>CHA</DIX>-->
+  <Name Id="16">Блеф</Name>
+  <!--<DIX>CHA</DIX>-->
+  <Name Id="17">Идентификация</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="18">Концентрация</Name>
+  <!--<DIX>CON</DIX>-->
+  <Name Id="19">Создание вещей</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="20">Чтение свитков</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="21">Приручение животных</Name>
+  <!--<DIX>CHA</DIX>-->
+  <Name Id="22">Создание заклинаний</Name>
+  <!--<DIX>WIS</DIX>-->
+  <Name Id="23">Сотворение заклинаний</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="24">Использование маг. предметов</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="25">Темная магия</Name>
+  <!--<DIX>WIS</DIX>-->
+  <Name Id="26">Поднятие мёртвых</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="27">Управление мёртвыми</Name>
+  <!--<DIX>CHA</DIX>-->
+  <Name Id="28">Магия костей</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="29">Создание костей</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="30">Создание оберегов</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="31">Сотворение проклятий</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="32">Поддержание проклятий</Name>
+  <!--<DIX>WIS</DIX>-->
+  <Name Id="33">Разговоры с мёртвыми</Name>
+  <Name Id="34">Управление кошмарами</Name>
+  <!--<DIX>WIS</DIX>-->
+  <Name Id="35">Посещение снов</Name>
+  <!--<DIX>INT</DIX>-->
+  <Name Id="36">Управление тенями</Name>
+  <!--<DIX>CHA</DIX>-->
+</SkillNames>

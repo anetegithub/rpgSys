@@ -11,25 +11,26 @@ namespace rpgSys.Controllers
     {
         public IHttpActionResult Get(string UserId)
         {
-            if (UserId != "undefined")
-            {
-                var Data = xmlBase.Modules.UserActivityes.Get(UserId)[0];
-                if (Data != null)
-                {
-                    foreach (var a in Data.Activityes)
-                    {
-                        a.Stamp = TimeAgo(Convert.ToDateTime(a.Stamp));
-                    }
+            //if (UserId != "undefined")
+            //{
+            //    var Data = xmlBase.Modules.UserActivityes.Get(UserId)[0];
+            //    if (Data != null)
+            //    {
+            //        foreach (var a in Data.Activityes)
+            //        {
+            //            a.Stamp = TimeAgo(Convert.ToDateTime(a.Stamp));
+            //        }
 
-                    return Ok(Data);
-                }
-                else
-                {
-                    return BadRequest("User is not found!");
-                }
-            }
-            else
-            { return NotFound(); }
+            //        return Ok(Data);
+            //    }
+            //    else
+            //    {
+            //        return BadRequest("User is not found!");
+            //    }
+            //}
+            //else
+            //{ return NotFound(); }
+            return NotFound();
         }
 
         //Переписано на реалии ru-RU

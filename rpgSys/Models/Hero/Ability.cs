@@ -17,16 +17,8 @@ namespace rpgSys
 
         [referenceCL("Hero/Common/AbilityInfo")]
         [outerCL("Id")]
-        public AbilityInfo Info { get; set; }
+        public string Info { get; set; }
 
         public int Value { get; set; }
-    }
-
-    public class AbilityInfo
-    {
-        [attributeCL]
-        public int Id { get; set; }
-        [absorbedCL]
-        public string Name { get; set; }
     }
 }

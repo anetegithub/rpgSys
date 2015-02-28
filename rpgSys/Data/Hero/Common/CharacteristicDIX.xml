@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CharacteristicDIXes>
+  <DIX Id="1">CON</DIX>
+  <DIX Id="2">FIT</DIX>
+  <DIX Id="3">INT</DIX>
+  <DIX Id="4">WIS</DIX>
+  <DIX Id="5">CHA</DIX>
+  <DIX Id="6">FTE</DIX>
+</CharacteristicDIXes>

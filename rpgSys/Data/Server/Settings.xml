@@ -6,7 +6,7 @@
     <ServerMessage>Тестовый сервер успешно запущен...</ServerMessage>
     <MessageOfTheDay>warning~Ведётся работа над внутренней структурой базы данных! Возможны перебои в работе сервиса!</MessageOfTheDay>
     <Modules>4</Modules>
-    <Scenarios>6</Scenarios>
+    <Scenarios>1</Scenarios>
     <Tickets>0</Tickets>
     <Characters>1</Characters>
   </Setting>

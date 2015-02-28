@@ -20,40 +20,40 @@ namespace rpgSys
          
          */
 
-        public void Send(string GameId, string HeroId, string Master, string System, string Text)
-        {
-            //Add message to base
-            xmlBase.Chat.Set(Convert.ToInt32(GameId), Convert.ToInt32(HeroId), Convert.ToBoolean(Master), Convert.ToBoolean(System), Text);
+        //public void Send(string GameId, string HeroId, string Master, string System, string Text)
+        //{
+        //    //Add message to base
+        //    xmlBase.Chat.Set(Convert.ToInt32(GameId), Convert.ToInt32(HeroId), Convert.ToBoolean(Master), Convert.ToBoolean(System), Text);
 
-            //update clients
-            Clients.All.update_chat();
-        }
+        //    //update clients
+        //    Clients.All.update_chat();
+        //}
 
-        public void Location(string GameId, string MasterId, string LocationId)
-        {
-            //change location
-            xmlBase.Games.ChangeLocation(GameId, MasterId, LocationId);
+        //public void Location(string GameId, string MasterId, string LocationId)
+        //{
+        //    //change location
+        //    xmlBase.Games.ChangeLocation(GameId, MasterId, LocationId);
 
-            //update clients
-            Clients.All.update_place();
-        }
+        //    //update clients
+        //    Clients.All.update_place();
+        //}
 
-        public void Event(string GameId, string MasterId, string LocationId)
-        {
-            //change location
-            xmlBase.Games.ChangeEvent(GameId, MasterId, LocationId);
+        //public void Event(string GameId, string MasterId, string LocationId)
+        //{
+        //    //change location
+        //    xmlBase.Games.ChangeEvent(GameId, MasterId, LocationId);
 
-            //update clients
-            Clients.All.update_place();
-        }
+        //    //update clients
+        //    Clients.All.update_place();
+        //}
 
-        public void Npc(string GameId, string MasterId, string LocationId)
-        {
-            //change location
-            xmlBase.Games.ChangeNpc(GameId, MasterId, LocationId);
+        //public void Npc(string GameId, string MasterId, string LocationId)
+        //{
+        //    //change location
+        //    xmlBase.Games.ChangeNpc(GameId, MasterId, LocationId);
 
-            //update clients
-            Clients.All.update_place();
-        }
+        //    //update clients
+        //    Clients.All.update_place();
+        //}
     }
 }

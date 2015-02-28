@@ -33,7 +33,7 @@
     <Info>
       ORM позволяющая получать данные из XML файла с помощью языка условий (CL)
     </Info>
-    <Version>0.2</Version>
+    <Version>0.7</Version>
     <DllInfo>
       How to use:
       See baseCL.exampleCL class

@@ -20,23 +20,4 @@ namespace rpgSys
         public int Tickets { get; set; }
         public int Characters { get; set; }
     }
-
-    public class Ticket
-    {
-
-    }
-
-    
-        //[referenceCL("/Server/Modules")]
-        //[outerCL("ServerId")]
-        //public List<Module> Modules { get; set; }
-        //[referenceCL("/Server/Scenarios")]
-        //[outerCL("ServerId")]
-        //public List<Scenario> Scenarios { get; set; }
-        //[referenceCL("/Server/Tickets")]
-        //[outerCL("ServerId")]
-        //public List<Ticket> Tickets { get; set; }
-        //[referenceCL("/Hero/Character/Info")]
-        //[outerCL("ServerId")]
-        //public List<Character> Info { get; set; }
 }

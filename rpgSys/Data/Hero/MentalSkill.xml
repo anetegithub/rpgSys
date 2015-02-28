@@ -1,51 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MentalSkill>
   <Skill Id="1" HeroId="1">
-    <Info>13</Info>
+    <Name>13</Name>
+    <DIX>4</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="2" HeroId="1">
-    <Info>14</Info>
+    <Name>14</Name>
+    <DIX>4</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="3" HeroId="1">
-    <Info>15</Info>
+    <Name>15</Name>
+    <DIX>5</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="4" HeroId="1">
-    <Info>16</Info>
+    <Name>16</Name>
+    <DIX>5</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="5" HeroId="1">
-    <Info>17</Info>
+    <Name>17</Name>
+    <DIX>3</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="6" HeroId="1">
-    <Info>18</Info>
+    <Name>18</Name>
+    <DIX>1</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="7" HeroId="1">
-    <Info>19</Info>
+    <Name>19</Name>
+    <DIX>3</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="8" HeroId="1">
-    <Info>20</Info>
+    <Name>20</Name>
+    <DIX>3</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="9" HeroId="1">
-    <Info>21</Info>
+    <Name>21</Name>
+    <DIX>5</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="10" HeroId="1">
-    <Info>22</Info>
+    <Name>22</Name>
+    <DIX>4</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="11" HeroId="1">
-    <Info>23</Info>
+    <Name>23</Name>
+    <DIX>3</DIX>
     <Value>0</Value>
   </Skill>
   <Skill Id="12" HeroId="1">
-    <Info>24</Info>
+    <Name>24</Name>
+    <DIX>3</DIX>
     <Value>0</Value>
   </Skill>
 </MentalSkill>

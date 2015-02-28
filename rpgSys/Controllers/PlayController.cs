@@ -15,61 +15,61 @@ namespace rpgSys.Controllers
 {
     public class PlayController : ApiControllerWithHub<PlayHub>
     {
-        public string[] Get_Messages(string GameId, string Count, string Descending, string Select)
-        {
-            List<xmlBase.Where> conditions = new List<xmlBase.Where>();
-            foreach (string condition in Select.Split(','))
-            {
-                string field = condition.Split(' ')[0];
-                string _if = condition.Split(' ')[1];
-                string value = condition.Split(' ')[2];               
+    //    public string[] Get_Messages(string GameId, string Count, string Descending, string Select)
+    //    {
+    //        List<xmlBase.Where> conditions = new List<xmlBase.Where>();
+    //        foreach (string condition in Select.Split(','))
+    //        {
+    //            string field = condition.Split(' ')[0];
+    //            string _if = condition.Split(' ')[1];
+    //            string value = condition.Split(' ')[2];               
 
-                conditions.Add(new xmlBase.Where(
-                    (Message m) =>
-                    {
-                        return CL.Satisfy(m, field, _if, value);
-                        //return ConditionLanguage.Compare<String>(_if, m.GetType().GetProperty(field).GetValue(m).ToString(), value);
-                    })
-               );
-            }
+    //            conditions.Add(new xmlBase.Where(
+    //                (Message m) =>
+    //                {
+    //                    return CL.Satisfy(m, field, _if, value);
+    //                    //return ConditionLanguage.Compare<String>(_if, m.GetType().GetProperty(field).GetValue(m).ToString(), value);
+    //                })
+    //           );
+    //        }
 
-            int gid, cnt;
-            xmlBase.Where[] cod;
-            bool dsc;
+    //        int gid, cnt;
+    //        xmlBase.Where[] cod;
+    //        bool dsc;
 
-            if (!Int32.TryParse(GameId, out gid))
-                return new string[0];
+    //        if (!Int32.TryParse(GameId, out gid))
+    //            return new string[0];
 
-            if (!Int32.TryParse(Count, out cnt))
-                return new string[0];
+    //        if (!Int32.TryParse(Count, out cnt))
+    //            return new string[0];
 
-            if (!Boolean.TryParse(Descending, out dsc))
-                return new string[0];
+    //        if (!Boolean.TryParse(Descending, out dsc))
+    //            return new string[0];
 
-            cod = conditions.ToArray();
+    //        cod = conditions.ToArray();
 
-            return xmlBase.Chat.Get(gid, cnt, dsc, cod);
-        }
+    //        return xmlBase.Chat.Get(gid, cnt, dsc, cod);
+    //    }
 
-        public string Put_Messages(string GameId,string HeroId,string IsMaster,string IsSystem,string Text)
-        {
-            int gid,hro;
-            bool ism,iss;
+    //    public string Put_Messages(string GameId,string HeroId,string IsMaster,string IsSystem,string Text)
+    //    {
+    //        int gid,hro;
+    //        bool ism,iss;
 
-            if (!Int32.TryParse(GameId, out gid))
-                return "";
+    //        if (!Int32.TryParse(GameId, out gid))
+    //            return "";
 
-            if (!Int32.TryParse(HeroId, out hro))
-                return "";
+    //        if (!Int32.TryParse(HeroId, out hro))
+    //            return "";
 
-            if (!Boolean.TryParse(IsMaster, out ism))
-                return "";
+    //        if (!Boolean.TryParse(IsMaster, out ism))
+    //            return "";
 
-            if (!Boolean.TryParse(IsSystem, out iss))
-                return "";
+    //        if (!Boolean.TryParse(IsSystem, out iss))
+    //            return "";
 
-            return xmlBase.Chat.Set(gid, hro, ism, iss, Text).ToString();
-        }
+    //        return xmlBase.Chat.Set(gid, hro, ism, iss, Text).ToString();
+    //    }
 
         //public Message Get_OneMessage(int id)
         //{

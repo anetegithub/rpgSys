@@ -23,7 +23,7 @@ namespace rpgSys.Controllers
         [ActionName("create")]
         public string NewCharacter([FromBody]string value)
         {            
-            Stat[] Character = new JavaScriptSerializer().Deserialize<Stat[]>(value);
+            //Stat[] Character = new JavaScriptSerializer().Deserialize<Stat[]>(value);
             return "1";
         }
 
@@ -67,148 +67,148 @@ namespace rpgSys.Controllers
             //}
         }
 
-        private IHttpActionResult materialskill(string UserId)
-        {
-            var stats = xmlBase.Characters.GetMaterial(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult materialskill(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetMaterial(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult mentalskill(string UserId)
-        {
-            var stats = xmlBase.Characters.GetMental(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult mentalskill(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetMental(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult classskill(string UserId)
-        {
-            var stats = xmlBase.Characters.GetClass(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult classskill(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetClass(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult getskills(string type)
-        {
-            var stats = xmlBase.Skills.GetSkills(type);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult getskills(string type)
+        //{
+        //    var stats = xmlBase.Skills.GetSkills(type);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult healthstate(string UserId)
-        {
-            var stats = xmlBase.Characters.GetHealth(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult healthstate(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetHealth(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult defencestate(string UserId)
-        {
-            var stats = xmlBase.Characters.GetDefence(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult defencestate(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetDefence(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult attackstate(string UserId)
-        {
-            var stats = xmlBase.Characters.GetAttack(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult attackstate(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetAttack(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult initiativestate(string UserId)
-        {
-            var stats = xmlBase.Characters.GetInitiative(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult initiativestate(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetInitiative(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult characteristics(string UserId)
-        {
-            var stats = xmlBase.Characters.GetChars(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult characteristics(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetChars(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult proficiency(string UserId)
-        {
-            var stats = xmlBase.Characters.GetProfi(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult proficiency(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetProfi(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        private IHttpActionResult info(string UserId)
-        {
-            var stats = xmlBase.Characters.GetInfo(UserId);
-            if (stats.Count > 0)
-            {
-                return Ok(stats);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //private IHttpActionResult info(string UserId)
+        //{
+        //    var stats = xmlBase.Characters.GetInfo(UserId);
+        //    if (stats.Count > 0)
+        //    {
+        //        return Ok(stats);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
     }
 }
 
