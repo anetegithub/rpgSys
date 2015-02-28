@@ -132,6 +132,7 @@
     <Content Include="Data\Npc\Npc.xml" />
     <Content Include="Data\Npc\NpcStat.xml" />
     <Content Include="Data\Scenario\Scenario.xml" />
+    <Content Include="Data\Server\Chat.xml" />
     <Content Include="Data\Server\Tickets.xml" />
     <Content Include="Data\Server\Modules.xml" />
     <Content Include="Data\Server\Settings.xml">
@@ -169,7 +170,7 @@
     <Content Include="site\img\unknown.png" />
     <Content Include="site\js\bootstrap.js" />
     <Content Include="site\js\bootstrap.min.js" />
-    <Content Include="site\js\cookie.js" />
+    <Content Include="site\js\auth.js" />
     <Content Include="site\js\custom.js" />
     <Content Include="site\js\dataTables\dataTables.bootstrap.css" />
     <Content Include="site\js\dataTables\dataTables.bootstrap.js" />

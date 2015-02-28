@@ -1,4 +1,10 @@
-﻿$('#log-btn').click(function () {
+﻿$(function () {
+    if (getUrlVars()["error"] == "0") {
+        fail('Вы не авторизованы!');
+    }
+})
+
+$('#log-btn').click(function () {
     var log = $('#log').val();
     var psw = $('#psw').val();
     $.getJSON('../api/users?name=' + log + "&psw=" + psw)

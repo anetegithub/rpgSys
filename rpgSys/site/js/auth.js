@@ -4,7 +4,7 @@ $(document).ready(function () {
         $('#plName').html("&nbsp;" + cookie);       
     }
     else {
-        window.location.replace("../Index.html?error=0");
+        window.location.replace("login?error=0");
     }
 });
 
@@ -49,7 +49,7 @@ function setCookie(name, value, options) {
 
 // удаляет cookie с именем name
 function deleteCookie(name) {
-  setCookie(name, null, { expires: -1, path: '/Area/' })
+  setCookie(name, null, { expires: -1, path: '/site/' })
 }
 
 function LogOff() {
@@ -57,5 +57,5 @@ function LogOff() {
     deleteCookie('user_id');
     deleteCookie('auth_key');
     deleteCookie('hero_id');
-    window.location.replace("../Index.html");
+    window.location.replace("login");
 }
