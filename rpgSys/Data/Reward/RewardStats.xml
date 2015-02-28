@@ -48,4 +48,44 @@
     <Info>10</Info>
     <Value>5</Value>
   </RewardStat>
+  <RewardStat Id="1" RewardId="1">
+    <Info>5</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="2" RewardId="1">
+    <Info>10</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="1" RewardId="1">
+    <Info>5</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="2" RewardId="1">
+    <Info>10</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="1" RewardId="1">
+    <Info>5</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="2" RewardId="1">
+    <Info>10</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="1" RewardId="1">
+    <Info>5</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="2" RewardId="1">
+    <Info>10</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="1" RewardId="1">
+    <Info>5</Info>
+    <Value>5</Value>
+  </RewardStat>
+  <RewardStat Id="2" RewardId="1">
+    <Info>10</Info>
+    <Value>5</Value>
+  </RewardStat>
 </RewardStats>

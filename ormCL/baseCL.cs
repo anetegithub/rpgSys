@@ -417,7 +417,7 @@ namespace ormCL
                 return "";
             if (List.Count == 1)
                 return "";
-            if (List.Count > 2)
+            if (List.Count >= 2)
             {
                 if (List[0].Name.LocalName == List[1].Name.LocalName)
                     return List[0].Name.LocalName;

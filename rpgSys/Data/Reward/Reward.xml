@@ -1,3 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Rewardeds>
+  <Reward Id="1">
+    <Name>Меч истины</Name>
+    <Rare>1</Rare>
+    <Target>2</Target>
+    <Conditions>To be</Conditions>
+    <Stats>
+      <RewardStat>1</RewardStat>
+    </Stats>
+  </Reward>
+  <Reward Id="2">
+    <Name>Меч истины</Name>
+    <Rare>1</Rare>
+    <Target>2</Target>
+    <Conditions>To be</Conditions>
+    <Stats>
+      <RewardStat>1</RewardStat>
+    </Stats>
+  </Reward>
+  <Reward Id="1">
+    <Name>Меч истины</Name>
+    <Rare>1</Rare>
+    <Target>2</Target>
+    <Conditions>To be</Conditions>
+    <Stats>
+      <RewardStat>1</RewardStat>
+    </Stats>
+  </Reward>
+  <Reward Id="2">
+    <Name>Меч истины</Name>
+    <Rare>1</Rare>
+    <Target>2</Target>
+    <Conditions>To be</Conditions>
+    <Stats>
+      <RewardStat>1</RewardStat>
+    </Stats>
+  </Reward>
+  <Reward Id="1">
+    <Name>Меч истины</Name>
+    <Rare>1</Rare>
+    <Target>2</Target>
+    <Conditions>To be</Conditions>
+    <Stats>
+      <RewardStat>1</RewardStat>
+    </Stats>
+  </Reward>
+  <Reward Id="2">
+    <Name>Меч истины</Name>
+    <Rare>1</Rare>
+    <Target>2</Target>
+    <Conditions>To be</Conditions>
+    <Stats>
+      <RewardStat>1</RewardStat>
+    </Stats>
+  </Reward>
 </Rewardeds>
