@@ -1,58 +1,131 @@
 ﻿$(function () {
+    // hub
+    var chat = $.connection.generalchat;
 
+    // create functions
+    chat.client.newmsg = function (userName,userAvatar, msgStamp, msgText) {
+        var msg = "";
+        if ($('#msgc').val() % 2 == 1) {
+            msg += "<li class='left clearfix'>";
+            msg += "<span class='chat-img pull-left'>";
+            msg += "<img src='" + userAvatar + "' alt='" + userName + "' height='50px' width='50px' class='img-circle'/></span>";
+            msg += "<div class='chat-body'><strong>" + userName + "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o fa-fw'></i>" + msgStamp.replace('T', ' ').replace(new RegExp('-', 'g'), '.') + "</small>";
+            msg += "<p>" + msgText + "</p>";
+            msg += "</div></li>";
+        } else {
+            msg += "<li class='right clearfix'>";
+            msg += "<span class='chat-img pull-right'>";
+            msg += "<img src='" + userAvatar + "' alt='" + userName + "' height='50px' width='50px' class='img-circle'/></span>";
+            msg += "<div class='chat-body'><small class='text-muted'><i class='fa fa-clock-o fa-fw'></i>" + msgStamp.replace('T', ' ').replace(new RegExp('-', 'g'), '.') + "</small><strong class='pull-right'>" + userName + "</strong>";
+            msg += "<p>" + msgText + "</p>";
+            msg += "</div></li>";
+        }
+        $('#msgc').val(parseInt($('#msgc').val()) + 1);
+        $('#chatBox').html($('#chatBox').html() + msg);
+        $("#chatWrapper").animate({ scrollTop: $('#chatWrapper')[0].scrollHeight }, 250);
+    };
+
+    chat.client.alert = function (omfg,ofg) {
+        alert(omfg + " " + ofg);
+    };
+
+    // start
+    $.connection.hub.start().done(function () {
+        $('#btn-chat').click(function () {
+            if ($('#btn-input').val() != '') {
+                if ($('#btn-input').val().replace(/\s/g, '').length) {
+                    chat.server.send(JSON.parse($.cookie('user')).Login, JSON.parse($.cookie('user')).Avatar, $('#btn-input').val());
+                    $('#btn-input').val('');
+                }
+            }
+        });
+    });
+
+    load_chat();
+    load_activity();
+    render();
 });
 
-$('#send').click(function () {
-
+$("#btn-input").keyup(function (e) {
+    if (e.keyCode == 13) {
+        $('#btn-chat').click();
+    }
 });
 
 function load_chat() {
     $.getJSON('../api/chat')
             .done(function (data) {
                 var html = "";
-                var left_right="left";
                 for (var i = 0; i < data.length; i++) {
-                    html += "<li class='" + left_right + " clearfix'>"
-                    html += "<span class='chat-img pull-" + left_right + "'>";
-                    html += "<img src='" + data.UserAvatar + "' alt='" + getCookie("pl_name") + "' class='img-circle'/></span>"
-                    html += "<div class='chat-body'><strong>" + getCookie("pl_name") + "</strong><small class='pull" + left_right + " text-muted'><i class='fa fa-clock-o fa-fw'><i>" + data.Stamp.toString() + "</small><p>";
-                    html += data.Text;
-                    html += "</p></div></li>";
+                    if (i % 2 == 0) {
+                        html += "<li class='left clearfix'>";
+                        html += "<span class='chat-img pull-left'>";
+                        html += "<img src='" + data[i].UserAvatar + "' alt='" + data[i].UserName + "' height='50px' width='50px' class='img-circle'/></span>";
+                        html += "<div class='chat-body'><strong>" + data[i].UserName + "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o fa-fw'></i>" + data[i].Stamp.replace('T', ' ').replace(new RegExp('-', 'g'), '.') + "</small>";
+                        html += "<p>" + data[i].Text + "</p>";
+                        html += "</div></li>";
+                    } else {
+                        html += "<li class='right clearfix'>";
+                        html += "<span class='chat-img pull-right'>";
+                        html += "<img src='" + data[i].UserAvatar + "' alt='" + data[i].UserName + "' height='50px' width='50px' class='img-circle'/></span>";
+                        html += "<div class='chat-body'><small class='text-muted'><i class='fa fa-clock-o fa-fw'></i>" + data[i].Stamp.replace('T', ' ').replace(new RegExp('-', 'g'), '.') + "</small><strong class='pull-right'>" + data[i].UserName + "</strong>";
+                        html += "<p>" + data[i].Text + "</p>";
+                        html += "</div></li>";
+                    }
+                    $('#msgc').val(parseInt($('#msgc').val()) + 1);
+
                 }
                 $('#chatBox').html(html);
+                $('#chatWrapper').scrollTop($('#chatWrapper').prop("scrollHeight"));
             });
 }
 
-//                                      <li class="left clearfix">
-//                                        <span class="chat-img pull-left">
-//                                            <img src="img/1.png" alt="User" class="img-circle" />
-//                                        </span>
-//                                        <div class="chat-body">
-//                                            <strong>Username</strong>
-//                                            <small class="pull-right text-muted">
-//                                                <i class="fa fa-clock-o fa-fw"></i>28.02.2015 05:15:10
-//                                            </small>
-//                                            <p>
-//                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-//                                            </p>
-//                                        </div>
-//                                    </li>
+function load_activity() {
+    $.getJSON('../api/activity?Id=' + JSON.parse($.cookie('user')).Id)
+                .done(function (data) {
+                    var html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<span class='list-group-item'>";
+                        html += "<span class='badge'>" + data[i].StampToString + "</span>";
+                        html += "<i class='fa fa-fw " + iconByenum(data[i].Action) + "'></i>&nbsp;";
+                        html += data[i].Action + " : " + data[i].Text + "</span>";
+                    }
+                    $('#activityList').html(html);
+                });
+}
 
+function iconByenum(activity_type)
+{
+    switch(activity_type)
+    {
+        case "Повышение уровня": return "fa-child";
+        case "Достижение": return "fa-trophy";
+        case "Пройден сценарий": return "fa-compass";
+        case "Получен предмет": return "fa-graduation-cap";
+        case "Изменено": return "fa-cogs";
+    }
+}
 
-
-//<li class="right clearfix">
-//                                       <span class="chat-img pull-right">
-
-//                                           <img src="img/2.png" alt="User" class="img-circle" />
-//                                       </span>
-//                                       <div class="chat-body clearfix">
-
-//                                           <small class=" text-muted">
-//                                               <i class="fa fa-clock-o fa-fw"></i>28.02.2015 05:15:10
-//                                           </small>
-//                                           <strong class="pull-right">Username</strong>
-//                                           <p>
-//                                               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-//                                           </p>
-//                                       </div>
-//                                   </li>
+function render() {
+    var user = JSON.parse($.cookie("user"));
+    $('#userAvatar').attr('src', user.Avatar);
+    $('#userLogin').html("Добро пожаловать, " + user.Login + "! Рады видеть вас вновь! ");
+    if (user.HeroId == 0) {
+        $('#userHero').html('Создать');
+    } else {
+        $.getJSON('../api/hero?UserId=' + JSON.parse($.cookie('user')).Id)
+                .done(function (data) {
+                    $('#userHero').html(data.Name);
+                });
+    }
+    if (user.GameId == 0) {
+        $('#userGame').html('Начать сценарий');
+    } else {
+        $('#userGame').html('GameControllerNeed');
+    }
+    $.getJSON('../api/server?UserId=' + JSON.parse($.cookie('user')).Id)
+                .done(function (data) {
+                    $('#userServer').html(data.Name);
+                });
+    $('#lastTime').html("Последняя авторизация: " + user.StampToString);
+}

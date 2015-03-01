@@ -1,8 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Users>
-  <User Id="1" HeroId="1">
+  <User Id="1" HeroId="1" GameId="0">
+    <Email>anete.anetes@gmail.com</Email>
+    <Avatar>img/admin.png</Avatar>
     <Login>Anete</Login>
     <Password>555033</Password>
-    <Auth>tqvq3vy244wh4wv3tqtc41c213534532523445</Auth>
+    <Auth>d419e6dc-76eb-43e5-b526-0a205ad34cfe</Auth>
+    <Stamp>01.03.2015 15:45:26</Stamp>
+    <StampToString></StampToString>
+  </User>
+  <User Id="2" HeroId="0" GameId="0">
+    <Login>Tester</Login>
+    <Password>123456</Password>
+    <Email>nothing@mail.com</Email>
+    <Avatar>img/tester.png</Avatar>
+    <Auth>a8b0a6b2-3ad2-486c-9f37-20c13467742a</Auth>
+    <Stamp>01.03.2015 16:48:18</Stamp>
+    <StampToString />
   </User>
 </Users>

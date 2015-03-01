@@ -16,16 +16,24 @@ namespace rpgSys.Controllers
     {
         public IHttpActionResult Get()
         {
-            return Ok(new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Server/Chat") }).Cast<GeneralMessage>().ToList());
+            var list = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Server/Chat") }).Cast<GeneralMessage>().Sort(new sortingCL("Id:Desc")).Limit(30).ToList();
+            list.Reverse();
+            return Ok(list);
         }
 
         [ActionName("send")]
-        public string Put([FromBody]string Message)
+        public string Post([FromBody]string Message)
         {
-            GeneralMessage Msg = new JavaScriptSerializer().Deserialize<GeneralMessage>(Message);
-            Msg.Id = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Server/Chat") }).Cast<GeneralMessage>().ToList().Count + 1;
-            Msg.Stamp = DateTime.Now;
-            return new baseCL("Data").Insert<GeneralMessage>(new irequestCl() { Table = new tableCl("/Server/Chat"), Object = Msg }).Successful.ToString();
+            string userName = Message.Split('`')[0];
+            string userAvatar = Message.Split('`')[1];
+            string msgText = Message.Split('`')[2];
+            baseCL b = new baseCL("Data");
+            int Id = b.Select(new requestCL() { Table = new tableCl("/Server/Chat") }).Cast<GeneralMessage>().ToList().Count + 1;
+            return b.Insert<GeneralMessage>(new irequestCl()
+            {
+                Table = new tableCl("/Server/Chat"),
+                Object = new GeneralMessage() { Id = Id, UserName = userName, UserAvatar = userAvatar, Stamp = DateTime.Now, Text = msgText }
+            }).Successful.ToString();
         }
     }
 }

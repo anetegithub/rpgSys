@@ -71,7 +71,7 @@ namespace ConditionsLanguage
             switch (op)
             {
                 case "==": return x.CompareTo(y) == 0;
-                case "!=": return x.CompareTo(y) != 0;
+                case "!=": return x.CompareTo(y) == 0;
                 case ">": return x.CompareTo(y) > 0;
                 case ">=": return x.CompareTo(y) >= 0;
                 case "<": return x.CompareTo(y) < 0;
