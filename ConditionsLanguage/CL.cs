@@ -38,7 +38,7 @@ namespace ConditionsLanguage
 
         public static bool Solve(XElement Object, string Condition)
         {
-            bool preResult = true;
+            bool preResult = false;
             string Field=Condition.Split('.')[0];
             string Operator = Condition.Split('.')[1];
             string Value = Condition.Split('.')[2];
@@ -47,6 +47,13 @@ namespace ConditionsLanguage
                 if (Element.Name.LocalName==Field)
                 {
                     preResult = Compare<String>(Operator, Element.Value, Value);
+                }
+            }
+            foreach(XAttribute Attribute in Object.Attributes())
+            {
+                if(Attribute.Name==Field)
+                {
+                    preResult = Compare<String>(Operator, Attribute.Value, Value);
                 }
             }
             return preResult;

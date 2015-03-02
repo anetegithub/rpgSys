@@ -5,7 +5,7 @@
     // create functions
     chat.client.newmsg = function (userName,userAvatar, msgStamp, msgText) {
         var msg = "";
-        if ($('#msgc').val() % 2 == 1) {
+        if ($('#msgc').val() % 2 == 0) {
             msg += "<li class='left clearfix'>";
             msg += "<span class='chat-img pull-left'>";
             msg += "<img src='" + userAvatar + "' alt='" + userName + "' height='50px' width='50px' class='img-circle'/></span>";

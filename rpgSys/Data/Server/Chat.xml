@@ -468,4 +468,58 @@
     <Stamp>01.03.2015 16:58:47</Stamp>
     <Text>Новый тестовый акк</Text>
   </GeneralMessage>
+  <GeneralMessage Id="79">
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin.png</UserAvatar>
+    <Stamp>01.03.2015 20:10:59</Stamp>
+    <Text>Мне лень хостить это</Text>
+  </GeneralMessage>
+  <GeneralMessage Id="80">
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin.png</UserAvatar>
+    <Stamp>01.03.2015 20:11:11</Stamp>
+    <Text>ещё раз для анимации</Text>
+  </GeneralMessage>
+  <GeneralMessage Id="81">
+    <UserName>Tester</UserName>
+    <UserAvatar>img/tester.png</UserAvatar>
+    <Stamp>02.03.2015 19:10:46</Stamp>
+    <Text>ЕШО</Text>
+  </GeneralMessage>
+  <GeneralMessage Id="82">
+    <UserName>Tester</UserName>
+    <UserAvatar>img/tester.png</UserAvatar>
+    <Stamp>02.03.2015 19:10:49</Stamp>
+    <Text>да почему</Text>
+  </GeneralMessage>
+  <GeneralMessage Id="83">
+    <UserName>Tester</UserName>
+    <UserAvatar>img/tester.png</UserAvatar>
+    <Stamp>02.03.2015 19:10:50</Stamp>
+    <Text>блядь</Text>
+  </GeneralMessage>
+  <GeneralMessage Id="84">
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin.png</UserAvatar>
+    <Stamp>02.03.2015 19:12:31</Stamp>
+    <Text>Do it like a dude</Text>
+  </GeneralMessage>
+  <GeneralMessage Id="85">
+    <UserName>Tester</UserName>
+    <UserAvatar>img/tester.png</UserAvatar>
+    <Stamp>02.03.2015 19:13:57</Stamp>
+    <Text>W e can do it</Text>
+  </GeneralMessage>
+  <GeneralMessage Id="86">
+    <UserName>Tester</UserName>
+    <UserAvatar>img/tester.png</UserAvatar>
+    <Stamp>02.03.2015 19:14:20</Stamp>
+    <Text>like a dude</Text>
+  </GeneralMessage>
+  <GeneralMessage Id="87">
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin.png</UserAvatar>
+    <Stamp>02.03.2015 19:14:32</Stamp>
+    <Text>Jessie J</Text>
+  </GeneralMessage>
 </GeneralMessages>
