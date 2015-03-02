@@ -1,448 +1,436 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
-
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SysD12</title>
-    <link rel="shortcut icon" href="/Img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/Img/favicon.ico" type="image/x-icon">
-
-    <!-- FastInfoModule-->
-    <link href="../Bootstrap/css/Modules/fastinfo.css" rel="stylesheet" />
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../Bootstrap/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../Bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rpgSystem: Персонаж</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
-
 <body>
-
     <div id="wrapper">
-
-        <!-- Navigation -->
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Ролевая платформа Dungeon 12</a>
+                <a class="navbar-brand" href="https://github.com/anetegithub/rpgSys">rpgSystem</a>
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><span id="plName"></span><b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="UserHero.html"><i class="fa fa-fw fa-table"></i> Персонаж</a>
-                        </li>
-                        <li>
-                            <a href="UserSettings.html"><i class="fa fa-fw fa-gear"></i> Настройки</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" onclick="LogOff();"><i class="fa fa-fw fa-power-off"></i> Выход</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="UserIndex.html"><i class="fa fa-fw fa-user"></i> Профиль</a>
+            <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"><span id="lastTime">Последняя авторизация: 28.02.2015 05:15:20</span>&nbsp;<a href="#" onclick="LogOff();" class="btn btn-primary square-btn-adjust">Выйти</a></div>
+        </nav>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center">
+                        <img id="userAvatar" src="img/find_user.png" height="200" width="200" class="user-image img-responsive" />
                     </li>
                     <li>
-                        <a href="UserServer.html"><i class="fa fa-fw fa-cogs"></i> Сервер</a>
+                        <a href="Profile.html"><i class="fa fa-fw fa-user fa-3x"></i> Профиль</a>
                     </li>
                     <li>
-                        <a href="UserHero.html"><i class="fa fa-fw fa-table"></i> Персонаж</a>
+                        <a class="active-menu" href="hero.html"><i class="fa fa-fw fa-table fa-3x"></i> Персонаж</a>
                     </li>
                     <li>
-                        <a href="UserScenario.html"><i class="fa fa-fw fa-edit"></i> Сценарий</a>
+                        <a href="game.html"><i class="fa fa-fw fa-desktop fa-3x"></i> Играть</a>
                     </li>
                     <li>
-                        <a href="UserPlay.html"><i class="fa fa-fw fa-desktop"></i> Играть</a>
+                        <a href="scenario.html"><i class="fa fa-fw fa-edit fa-3x"></i> Сценарий</a>
                     </li>
                     <li>
-                        <a href="UserSettings.html"><i class="fa fa-fw fa-wrench"></i> Настройки</a>
+                        <a href="server.html"><i class="fa fa-fw fa-cogs fa-3x"></i> Сервер</a>
+                    </li>
+                    <li>
+                        <a href="settings.html"><i class="fa fa-fw fa-wrench fa-3x"></i> Настройки</a>
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </nav>
-
+        <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
-            <div class="container-fluid" id="new" style="display:none">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Создание персонажа
-                        </h1>
+            <div id="page-inner">
+                <div class="container-fluid" id="new"><!--style="display:none">-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Создание персонажа</h2>
+                            <h5>Создайте своего персонажа и развивайте его так как вы хотите!</h5>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                     <div class="col-lg-6">
-                         <h2>Информация</h2>
-                         <div class="table-responsive">
-                             <table class="table table-hover">
-
-                                 <tbody>
-                                     <tr>
-                                         <td>Имя</td>
-                                         <td><input id="name" type="text" class="form-control"/></td>
-                                     </tr>
-                                     <tr>
-                                         <td>Класс</td>
-                                         <td>
-                                             <select class="form-control" id="clas">
-                                                 <option class="form-control">Воин</option>
-                                                 <option class="form-control">Послушник</option>
-                                                 <option class="form-control">Некромант</option>
-                                                 <option class="form-control">Разбойник</option>
-                                                 <option class="form-control">Волшебник</option>
-                                                 <option class="form-control">Друид</option>
-                                                 <option class="form-control">Рыцарь тьмы</option>
-                                                 <option class="form-control">Бард</option>
-                                                 <option class="form-control">Инженер</option>
-                                             </select> 
-                                         </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Раса</td>
-                                         <td>
-                                             <select class="form-control" id="race">
-                                                 <option class="form-control">Человек</option>
-                                                 <option class="form-control">Нежить</option>
-                                                 <option class="form-control">Каменный Гном</option>
-                                                 <option class="form-control">Стальной Гном</option>
-                                                 <option class="form-control">Лесной эльф</option>
-                                                 <option class="form-control">Лунный эльф</option>
-                                                 <option class="form-control">Тёмный эльф</option>
-                                                 <option class="form-control">Высший эльф</option>
-                                                 <option class="form-control">Красный орк</option>
-                                                 <option class="form-control">Зелёный орк</option>
-                                                 <option class="form-control">Горный тролль</option>
-                                                 <option class="form-control">Степной тролль</option>
-                                                 <option class="form-control">Полурослик</option>
-                                             </select> 
-                                         </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Божество</td>
-                                         <td><input id="god" type="text" class="form-control" /></td>
-                                     </tr>
-                                     <tr>
-                                         <td>Пол</td>
-                                         <td>
-                                             <select class="form-control" id="sex">
-                                                 <option class="form-control">Мужской</option>
-                                                 <option class="form-control">Женский</option>
-                                             </select>
-                                         </td>
-                                     </tr>
-                                 </tbody>
-                             </table>
-                         </div>
-                     </div>
-                    <div class="col-lg-6">                       
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <h2>Характеристики</h2>
-                                        </th>
-                                        <th></th>
-                                        <th class="text-center">
-                                            <img id="dice" style="cursor:pointer" src="../Img/unknown.png" height="35">
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Телосложение</td>
-                                        <td>CON</td>
-                                        <td id="con" class="form-control">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Тренированность</td>
-                                        <td>FIT</td>
-                                        <td id="fit" class="form-control">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Интеллект</td>
-                                        <td>INT</td>
-                                        <td id="int" class="form-control">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Мудрость</td>
-                                        <td>WIS</td>
-                                        <td id="wis" class="form-control">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Харизма</td>
-                                        <td>CHA</td>
-                                        <td id="cha" class="form-control">0</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <hr />
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2>Информация</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Имя</td>
+                                            <td><input id="newName" type="text" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Класс</td>
+                                            <td>
+                                                <select class="form-control" id="newClass">
+                                                    <!--<option class="form-control">Воин</option>-->
+                                                    <!--<option class="form-control">Послушник</option>
+                                                    <option class="form-control">Некромант</option>
+                                                    <option class="form-control">Разбойник</option>
+                                                    <option class="form-control">Волшебник</option>
+                                                    <option class="form-control">Друид</option>
+                                                    <option class="form-control">Рыцарь тьмы</option>
+                                                    <option class="form-control">Бард</option>
+                                                    <option class="form-control">Инженер</option>-->
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Раса</td>
+                                            <td>
+                                                <select class="form-control" id="newRace">
+                                                    <!--<option class="form-control">Человек</option>
+                                                    <option class="form-control">Нежить</option>
+                                                    <option class="form-control">Каменный Гном</option>
+                                                    <option class="form-control">Стальной Гном</option>
+                                                    <option class="form-control">Лесной эльф</option>
+                                                    <option class="form-control">Лунный эльф</option>
+                                                    <option class="form-control">Тёмный эльф</option>
+                                                    <option class="form-control">Высший эльф</option>
+                                                    <option class="form-control">Красный орк</option>
+                                                    <option class="form-control">Зелёный орк</option>
+                                                    <option class="form-control">Горный тролль</option>
+                                                    <option class="form-control">Степной тролль</option>
+                                                    <option class="form-control">Полурослик</option>-->
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Пол</td>
+                                            <td>
+                                                <select class="form-control" id="newSex">
+                                                    <!--<option class="form-control">Мужской</option>
+                <option class="form-control">Женский</option>-->
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Рост</td>
+                                            <td>
+                                                <select class="form-control" id="newHeight">
+                                                    <!--<option class="form-control">Мужской</option>
+                                                    <option class="form-control">Женский</option>-->
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Вес</td>
+                                            <td><input id="newWeight" type="text" class="form-control" /></td>
+                                        </tr>   
+                                        <tr>
+                                            <td>Возраст</td>
+                                            <td><input id="newAge" type="text" class="form-control" /></td>
+                                        </tr>                                     
+                                        <tr>
+                                            <td>Божество</td>
+                                            <td><input id="newGod" type="text" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Цвет глаз</td>
+                                            <td><input id="newEyes" type="text" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Цвет волос</td>
+                                            <td><input id="newHair" type="text" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Цвет кожи</td>
+                                            <td><input id="newSkin" type="text" class="form-control" /></td>
+                                        </tr>                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h2>Характеристики</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Телосложение</td>
+                                            <td>CON</td>
+                                            <td id="con" class="form-control">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Тренированность</td>
+                                            <td>FIT</td>
+                                            <td id="fit" class="form-control">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Интеллект</td>
+                                            <td>INT</td>
+                                            <td id="int" class="form-control">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Мудрость</td>
+                                            <td>WIS</td>
+                                            <td id="wis" class="form-control">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Харизма</td>
+                                            <td>CHA</td>
+                                            <td id="cha" class="form-control">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                Описание что такое характеристики, на что они влияют, с примерами и описание как их использовать и как их распределить правильно. Описание рандомной раскидки очков на характеристики в начале текста.
+                                                5.02.2009 Амит Сингал (Amit Singhal), руководитель команды ранжирования GoogleО работе Группы качества поиска вы узнали из поста Уди Манбера. Мы обычно называем эту группу просто "Качество" (Quality).
+                                                5.02.2009 Амит Сингал (Amit Singhal), руководитель команды ранжирования GoogleО работе Группы качества поиска вы узнали из поста Уди Манбера. Мы обычно называем эту группу просто "Качество" (Quality).
+                                                5.02.2009 Амит Сингал (Amit Singhal), руководитель команды ранжирования GoogleО работе Группы качества поиска вы узнали из поста Уди Манбера. Мы обычно называем эту группу просто "Качество" (Quality).
+                                                5.02.2009 Амит Сингал (Amit Singhal), руководитель команды ранжирования GoogleО работе Группы качества поиска вы узнали из поста Уди Манбера. Мы обычно называем эту группу просто "Качество" (Quality).
+                                                5.02.2009 Амит Сингал (Amit Singhal), руководитель команды ранжирования GoogleО работе Группы качества поиска вы узнали из поста Уди Манбера. Мы обычно называем эту группу просто "Качество" (Quality).
+                                                5.02.2009 Амит Сингал (Amit Singhal), руководитель команды ранжирования GoogleО работе Группы качества поиска вы узнали из поста Уди Манбера. Мы обычно называем эту группу просто "Качество" (Quality).
+                                                5.02.2009 Амит Сингал (Amit Singhal), руководитель команды ранжирования GoogleО работе Группы качества поиска вы узнали из поста Уди Манбера. Мы обычно называем эту группу просто "Качество" (Quality).
+                                                5.02.2009 Амит Сингал (Amit Singhal), руководитель команды ранжирования GoogleО работе Группы качества поиска вы узнали из поста Уди Манбера. Мы обычно называем эту группу просто "Качество" (Quality).
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <input type='hidden' id='npLimiter' value='10' />
+                        <div class="col-lg-4">
+                            <h2>Телесные навыки</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Навык</th>
+                                            <th>Хар-ка</th>
+                                            <th>Уровень</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table12"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>Ментальные навыки</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Навык</th>
+                                            <th>Хар-ка</th>
+                                            <th>Уровень</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table13"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>Классовые навыки</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Навык</th>
+                                            <th>Хар-ка</th>
+                                            <th>Уровень</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table14"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-lg-offset-5 ">
+                            <button type="submit" id="createChr" onclick="" class="btn btn-default">Создать</button>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <input type='hidden' id='npLimiter' value='10' />
-                    <div class="col-lg-4">
-                        <h2>Телесные навыки</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Навык</th>
-                                        <th>Хар-ка</th>
-                                        <th>Уровень</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table12"></tbody>
-                            </table>
+                <div class="container-fluid" id="old" style="display:none">
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Персонаж
+                            </h1>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <h2>Ментальные навыки</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Навык</th>
-                                        <th>Хар-ка</th>
-                                        <th>Уровень</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table13"></tbody>
-                            </table>
+                    <!-- /.row -->
+                    <span id="fiInfoContainer1"></span>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h2>Информация</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody id="table1"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <h2>Характеристики</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped">
+                                    <tbody id="table2"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <h2>Способности</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped">
+                                    <tbody id="table3"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>Экипировка</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Предмет</th>
+                                            <th>Модфикатор / Урон</th>
+                                            <th>Особенности</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table4"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <h2>Классовые навыки</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Навык</th>
-                                        <th>Хар-ка</th>
-                                        <th>Уровень</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table14"></tbody>
-                            </table>
+                    <!-- /.row -->
+                    <span id="fiInfoContainer2"></span>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h2>Показатели здоровья</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody id="table5"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <h2>Показатели защиты</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody id="table6"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <h2>Показатели атаки</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody id="table7"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <h2>Показатели инициативы</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody id="table8"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12 col-lg-offset-5 ">
-                        <button type="submit" id="createChr" onclick="" class="btn btn-default">Создать</button>
+                    <!-- /.row -->
+                    <span id="fiInfoContainer3"></span>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h2>Телесные навыки</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Навык</th>
+                                            <th>Хар-ка</th>
+                                            <th>Уровень</th>
+                                            <th>Бонус</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table9"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>Ментальные навыки</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Навык</th>
+                                            <th>Хар-ка</th>
+                                            <th>Уровень</th>
+                                            <th>Бонус</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table10"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>Классовые навыки</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Навык</th>
+                                            <th>Хар-ка</th>
+                                            <th>Уровень</th>
+                                            <th>Бонус</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table11"></tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <!-- /.row -->
+                </div> 
             </div>
-            <div class="container-fluid" id="old" style="display:none">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Персонаж
-                        </h1>
-                    </div>
-                </div>
-                <!-- /.row -->
-                <span id="fiInfoContainer1"></span>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <h2>Информация</h2>
-                        <div class="table-responsive">
-                            <table class="table table-hover">                              
-                                <tbody id="table1">                                 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <h2>Характеристики</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <tbody id="table2">                                    
-                                </tbody>
-                            </table>                           
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <h2>Способности</h2>
-                        <div class="table-responsive">
-                            <table class="table table-hover table-striped">
-                                <tbody id="table3">                                  
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h2>Экипировка</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Предмет</th>
-                                        <th>Модфикатор / Урон</th>
-                                        <th>Особенности</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table4">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- /.row -->
-                <span id="fiInfoContainer2"></span>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <h2>Показатели здоровья</h2>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <tbody id="table5">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <h2>Показатели защиты</h2>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <tbody id="table6">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <h2>Показатели атаки</h2>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <tbody id="table7">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <h2>Показатели инициативы</h2>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <tbody id="table8">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-                <span id="fiInfoContainer3"></span>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <h2>Телесные навыки</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Навык</th>
-                                        <th>Хар-ка</th>
-                                        <th>Уровень</th>
-                                        <th>Бонус</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table9">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h2>Ментальные навыки</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Навык</th>
-                                        <th>Хар-ка</th>
-                                        <th>Уровень</th>
-                                        <th>Бонус</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table10">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h2>Классовые навыки</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Навык</th>
-                                        <th>Хар-ка</th>
-                                        <th>Уровень</th>
-                                        <th>Бонус</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table11">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-            </div>
-            <!-- /.container-fluid -->
-
+            <!-- /. PAGE INNER  -->
         </div>
-        <!-- /#page-wrapper -->
-
+        <!-- /. PAGE WRAPPER  -->
     </div>
-    <!-- /#wrapper -->
-    <span id="fiContainer"></span>
-    <!-- jQuery -->
-    <script src="../../Bootstrap/js/jquery.js"></script>
-    <script src="../Bootstrap/js/cookie.js"></script>    
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../../Bootstrap/js/bootstrap.min.js"></script>
-    <!-- Render -->
-    <script src="../Bootstrap/js/renders/userHero.js"></script>
-    <!-- FastInfoModule-->
-    <script src="../Bootstrap/js/modules/fastinfo.js"></script>
-    <!-- Pain-->
-    <script src="../Bootstrap/js/plugins/numberpicker.js"></script>
-    
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="js/custom.js"></script>
+    <!-- Auth -->
+    <script src="js/auth.js"></script>
+    <!-- SignalR-->
+    <script src="../Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="../signalr/hubs" type="text/javascript"></script>
+    <!-- Page -->
+    <script src="js/pages/profile.js"></script>
 </body>
-
 </html>
+
