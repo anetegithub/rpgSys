@@ -63,7 +63,7 @@ font-size: 16px;"><span id="lastTime">Последняя авторизация:
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
-                <div class="container-fluid" id="new"><!--style="display:none">-->
+                <div class="container-fluid" id="new" style="display:none">
                     <div class="row">
                         <div class="col-md-12">
                             <h2>Создание персонажа</h2>
@@ -209,9 +209,9 @@ font-size: 16px;"><span id="lastTime">Последняя авторизация:
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                        
+                        </div>                        
                     </div>
+                <hr />
                     <div class="row">
                         <input type='hidden' id='npLimiter' value='10' />
                         <div class="col-lg-4">
@@ -266,58 +266,167 @@ font-size: 16px;"><span id="lastTime">Последняя авторизация:
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid" id="old" style="display:none">
+                <div class="container-fluid" id="old"> <!--style="display:none">-->
                     <!-- Page Heading -->
                     <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">
-                                Персонаж
-                            </h1>
+                        <div class="col-md-12">
+                            <h2 id="oldName1">Валора ан сием</h2>
+                            <h5>Персонаж расширения.</h5>
                         </div>
                     </div>
+                    <hr />
                     <!-- /.row -->
                     <span id="fiInfoContainer1"></span>
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <h2>Информация</h2>
                             <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <tbody id="table1"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <h2>Характеристики</h2>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped">
-                                    <tbody id="table2"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <h2>Способности</h2>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped">
-                                    <tbody id="table3"></tbody>
+                                <table class="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Имя</td>
+                                            <td id="oldName2">oldName2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Уровень</td>
+                                            <td id="oldLevel">oldLevel</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Опыт</td>
+                                            <td id="oldExp1">oldExp1/oldExp2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Класс</td>
+                                            <td id="oldCLass">oldCLass</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Расса</td>
+                                            <td id="oldRace">oldRace</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Божество</td>
+                                            <td id="oldGod">oldGod</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Особенности</td>
+                                            <td id="oldSpecial">oldSpecial</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <h2>Экипировка</h2>
+                            <h2>Внешность</h2>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Пол</td>
+                                            <td id="oldSex">oldSex</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Возраст</td>
+                                            <td id="oldAge">oldAge</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Рост</td>
+                                            <td id="oldHeight">oldHeight</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Вес</td>
+                                            <td id="oldWeight">oldWeight</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Цвет глаз</td>
+                                            <td id="oldEyes">oldEyes</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Цвет волос</td>
+                                            <td id="oldHair">oldHair</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Цвет кожи</td>
+                                            <td id="oldSkin">oldSkin</td>
+                                        </tr>                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>Характеристики</h2>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Предмет</th>
-                                            <th>Модфикатор / Урон</th>
-                                            <th>Особенности</th>
+                                            <th>Характеристика</th>
+                                            <th>Сокращение</th>
+                                            <th>Значение</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="table4"></tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td id="ch1n">Характеристика 1</td>
+                                            <td id="ch1d">Сокращение 1</td>
+                                            <td id="ch1v">Значение 1</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="ch2n">Характеристика 2</td>
+                                            <td id="ch2d">Сокращение 2</td>
+                                            <td id="ch2v">Значение 2</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="ch3n">Характеристика 3</td>
+                                            <td id="ch3d">Сокращение 3</td>
+                                            <td id="ch3v">Значение 3</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="ch4n">Характеристика 4</td>
+                                            <td id="ch4d">Сокращение 4</td>
+                                            <td id="ch4v">Значение 4</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="ch5n">Характеристика 5</td>
+                                            <td id="ch5d">Сокращение 5</td>
+                                            <td id="ch5v">Значение 5</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="ch6n">Характеристика 6</td>
+                                            <td id="ch6d">Сокращение 6</td>
+                                            <td id="ch6v">Значение 6</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <hr/>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="col-lg-10">
+                            <h2 id="spas1n">Спасбросок</h2>
+                        </div>
+                        <div class="col-lg-2">
+                            <h2 id="spas1v">1</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="col-lg-10">
+                            <h2 id="spas2n">Спасбросок</h2>
+                        </div>
+                        <div class="col-lg-2">
+                            <h2 id="spas2v">2</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="col-lg-10">
+                            <h2 id="spas3n">Спасбросок</h2>
+                        </div>
+                        <div class="col-lg-2">
+                            <h2 id="spas3v">3</h2>
+                        </div>
+                    </div>
+                </div>
+                <hr />
                     <!-- /.row -->
                     <span id="fiInfoContainer2"></span>
                     <div class="row">
@@ -325,7 +434,32 @@ font-size: 16px;"><span id="lastTime">Последняя авторизация:
                             <h2>Показатели здоровья</h2>
                             <div class="table-responsive">
                                 <table class="table table-hover">
-                                    <tbody id="table5"></tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>Очки здоровья</td>
+                                            <td id="hp">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Очки здоровья дополнительные</td>
+                                            <td id="ahp">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Регенерация</td>
+                                            <td id="reg">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Болезнь</td>
+                                            <td id="des">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Отравление</td>
+                                            <td id="intox">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Чары</td>
+                                            <td id="charm">0</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -333,7 +467,32 @@ font-size: 16px;"><span id="lastTime">Последняя авторизация:
                             <h2>Показатели защиты</h2>
                             <div class="table-responsive">
                                 <table class="table table-hover">
-                                    <tbody id="table6"></tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>Класс защиты</td>
+                                            <td id="defclass">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Защита</td>
+                                            <td id="defence">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Природная защита</td>
+                                            <td id="natdef">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Физическая защита</td>
+                                            <td id="armdef">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Магическая защита</td>
+                                            <td id="magdef">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Бонус защита</td>
+                                            <td id="bondef">0</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -341,19 +500,70 @@ font-size: 16px;"><span id="lastTime">Последняя авторизация:
                             <h2>Показатели атаки</h2>
                             <div class="table-responsive">
                                 <table class="table table-hover">
-                                    <tbody id="table7"></tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>Атака</td>
+                                            <td id="atk">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Бонус атаки</td>
+                                            <td id="bonatk">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Урон</td>
+                                            <td id="dmg">0-0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Урон оружием</td>
+                                            <td id="dmgweapon">0-0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Шанс критического удара</td>
+                                            <td id="critchance">0%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Множитель критического удара</td>
+                                            <td id="critbonus">x0</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <h2>Показатели инициативы</h2>
+                            <h2>Показатели действий</h2>
                             <div class="table-responsive">
                                 <table class="table table-hover">
-                                    <tbody id="table8"></tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>Инициатива</td>
+                                            <td id="iniz">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Инициатива от размера</td>
+                                            <td id="inizh">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Инициатива от мудрости</td>
+                                            <td id="inizw">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Инициатива от магии</td>
+                                            <td id="inizm">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Скорость</td>
+                                            <td id="spd">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Бонус скорости</td>
+                                            <td id="spdf">0</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                <hr />
                     <!-- /.row -->
                     <span id="fiInfoContainer3"></span>
                     <div class="row">
