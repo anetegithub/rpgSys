@@ -1,27 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Characteristicses>
   <Characteristics Id="1" HeroId="1">
-    <Info>1</Info>
+    <Name>1</Name>
+    <DIX>1</DIX>
     <Value>0</Value>
   </Characteristics>
   <Characteristics Id="2" HeroId="1">
-    <Info>2</Info>
-    <Value>0</Value>
+    <Name>2</Name>
+    <DIX>2</DIX>
   </Characteristics>
   <Characteristics Id="3" HeroId="1">
-    <Info>3</Info>
+    <Name>3</Name>
+    <DIX>3</DIX>
     <Value>0</Value>
   </Characteristics>
   <Characteristics Id="4" HeroId="1">
-    <Info>4</Info>
+    <Name>4</Name>
+    <DIX>4</DIX>
     <Value>0</Value>
   </Characteristics>
   <Characteristics Id="5" HeroId="1">
-    <Info>5</Info>
+    <Name>5</Name>
+    <DIX>5</DIX>
     <Value>0</Value>
   </Characteristics>
   <Characteristics Id="6" HeroId="1">
-    <Info>6</Info>
+    <Name>6</Name>
+    <DIX>6</DIX>
     <Value>0</Value>
   </Characteristics>
 </Characteristicses>

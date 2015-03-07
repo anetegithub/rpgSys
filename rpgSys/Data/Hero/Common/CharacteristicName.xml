@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CharacteristicNames>
-  <CharacteristicName Id="1">Телосложение</CharacteristicName>
-  <CharacteristicName Id="2">Тренированность</CharacteristicName>
-  <CharacteristicName Id="3">Интеллект</CharacteristicName>
-  <CharacteristicName Id="4">Мудрость</CharacteristicName>
-  <CharacteristicName Id="5">Харизма</CharacteristicName>
-  <CharacteristicName Id="6">Судьба</CharacteristicName>
+  <Name Id="1">Телосложение</Name>
+  <Name Id="2">Тренированность</Name>
+  <Name Id="3">Интеллект</Name>
+  <Name Id="4">Мудрость</Name>
+  <Name Id="5">Харизма</Name>
+  <Name Id="6">Судьба</Name>
 </CharacteristicNames>

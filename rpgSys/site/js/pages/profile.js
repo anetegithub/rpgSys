@@ -113,7 +113,7 @@ function render() {
     if (user.HeroId == 0) {
         $('#userHero').html('Создать');
     } else {
-        $.getJSON('../api/hero?UserId=' + JSON.parse($.cookie('user')).Id)
+        $.getJSON('../api/hero?HeroId=' + JSON.parse($.cookie('user')).HeroId)
                 .done(function (data) {
                     $('#userHero').html(data.Name);
                 });
