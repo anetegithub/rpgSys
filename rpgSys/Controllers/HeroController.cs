@@ -22,17 +22,15 @@ namespace rpgSys.Controllers
         /// <returns></returns>
         [ActionName("create")]
         public string NewCharacter([FromBody]string value)
-        {            
+        {
             //Stat[] Character = new JavaScriptSerializer().Deserialize<Stat[]>(value);
             return "1";
         }
 
-        public IHttpActionResult GetInfo(string UserId)
+        public IHttpActionResult GetInfo(string HeroId)
         {
-            baseCL b = new baseCL("Data");
-            string HeroId = b.Select(new requestCL() { Table = new tableCl("/User/Users") }).Cast<User>().Filter(new conditionCL("Id.==." + UserId)).ToList()[0].HeroId.ToString();
-            List<Hero> Heroes = b.Select(new requestCL() { Table = new tableCl("/Hero/Info") }).Cast<Hero>().Filter(new conditionCL("Id.==." + HeroId)).ToList();
-            if(Heroes.Count>0)
+            List<Hero> Heroes = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Hero/Info") }).Cast<Hero>().Filter(new conditionCL("Id.==." + HeroId)).ToList();
+            if (Heroes.Count > 0)
             {
                 return Ok(Heroes[0]);
             }
@@ -211,4 +209,3 @@ namespace rpgSys.Controllers
         //}
     }
 }
-

@@ -187,6 +187,7 @@
     <Content Include="site\js\jquery-1.10.2.js" />
     <Content Include="site\js\jquery.cookie.js" />
     <Content Include="site\js\jquery.metisMenu.js" />
+    <Content Include="site\js\pages\hero.js" />
     <Content Include="site\js\pages\login.js" />
     <Content Include="site\js\modules\fastinfo.js" />
     <Content Include="site\js\modules\imagepreview.js" />
