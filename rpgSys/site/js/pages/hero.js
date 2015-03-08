@@ -11,6 +11,7 @@
         });
     } else {
         $('#new').css('display', 'block');
+        new_render();
     }
 });
 
@@ -96,5 +97,21 @@ function old_render(Hero) {
         html += '<td>' + Hero.ClassSkill[i].Value + '</td></tr>';
     }
     $('#table9').html(html);
+}
 
+function new_render() {
+    $.getJSON('../api/hero').done(function (data) {
+        setLstSource(data[0], '#newClass');
+        setLstSource(data[1], '#newRace');
+        setLstSource(data[2], '#newSex');
+        setLstSource(data[3], '#newHeight');
+    });
+}
+
+function setLstSource(data, list) {
+    var html = '';
+    for (var i = 0; i < data.length; i++) {
+        html += '<option class="form-control">' + data[i].Value + '</option>';
+    }
+    $(list).html(html);
 }

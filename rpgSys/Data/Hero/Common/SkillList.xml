@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SkillList>
+  <Skill Id="1">
+    <Name>1</Name>
+    <DIX>1</DIX>
+  </Skill>
+  <Skill Id="2">
+    <Name>2</Name>
+    <DIX>6</DIX>
+  </Skill>
+  <Skill Id="3">
+    <Name>3</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="4">
+    <Name>4</Name>
+    <DIX>2</DIX>
+  </Skill>
+  <Skill Id="5">
+    <Name>5</Name>
+    <DIX>5</DIX>
+  </Skill>
+  <Skill Id="6">
+    <Name>6</Name>
+    <DIX>2</DIX>
+  </Skill>
+  <Skill Id="7">
+    <Name>7</Name>
+    <DIX>6</DIX>
+  </Skill>
+  <Skill Id="8">
+    <Name>8</Name>
+    <DIX>2</DIX>
+  </Skill>
+  <Skill Id="9">
+    <Name>9</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="10">
+    <Name>10</Name>
+    <DIX>6</DIX>
+  </Skill>
+  <Skill Id="11">
+    <Name>11</Name>
+    <DIX>2</DIX>
+  </Skill>
+  <Skill Id="12">
+    <Name>12</Name>
+    <DIX>2</DIX>
+  </Skill>
+  <Skill Id="13">
+    <Name>13</Name>
+    <DIX>4</DIX>
+  </Skill>
+  <Skill Id="14">
+    <Name>14</Name>
+    <DIX>4</DIX>
+  </Skill>
+  <Skill Id="15">
+    <Name>15</Name>
+    <DIX>5</DIX>
+  </Skill>
+  <Skill Id="16">
+    <Name>16</Name>
+    <DIX>5</DIX>
+  </Skill>
+  <Skill Id="17">
+    <Name>17</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="18">
+    <Name>18</Name>
+    <DIX>1</DIX>
+  </Skill>
+  <Skill Id="19">
+    <Name>19</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="20">
+    <Name>20</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="21">
+    <Name>21</Name>
+    <DIX>5</DIX>
+  </Skill>
+  <Skill Id="22">
+    <Name>22</Name>
+    <DIX>4</DIX>
+  </Skill>
+  <Skill Id="23">
+    <Name>23</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="24">
+    <Name>24</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="25">
+    <Name>25</Name>
+    <DIX>4</DIX>
+  </Skill>
+  <Skill Id="26">
+    <Name>26</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="27">
+    <Name>27</Name>
+    <DIX>5</DIX>
+  </Skill>
+  <Skill Id="28">
+    <Name>28</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="29">
+    <Name>29</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="30">
+    <Name>30</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="31">
+    <Name>31</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="32">
+    <Name>32</Name>
+    <DIX>4</DIX>
+  </Skill>
+  <Skill Id="33">
+    <Name>33</Name>
+    <DIX>5</DIX>
+  </Skill>
+  <Skill Id="34">
+    <Name>34</Name>
+    <DIX>4</DIX>
+  </Skill>
+  <Skill Id="35">
+    <Name>35</Name>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill Id="36">
+    <Name>36</Name>
+    <DIX>5</DIX>
+  </Skill>
+</SkillList>

@@ -116,6 +116,7 @@
     <Content Include="Data\Hero\Common\Intoxication.xml" />
     <Content Include="Data\Hero\Common\Race.xml" />
     <Content Include="Data\Hero\Common\Sex.xml" />
+    <Content Include="Data\Hero\Common\SkillList.xml" />
     <Content Include="Data\Hero\Common\SkillName.xml" />
     <Content Include="Data\Hero\DefenceState.xml" />
     <Content Include="Data\Hero\HealthState.xml" />
@@ -224,6 +225,7 @@
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\ScenarioController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
+    <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\Proxy\xmlBase.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +239,7 @@
     <Compile Include="Models\Hero\AttackState.cs" />
     <Compile Include="Models\Hero\CommonState.cs" />
     <Compile Include="Models\Hero\DefenceState.cs" />
+    <Compile Include="Models\Hero\Enums.cs" />
     <Compile Include="Models\Hero\HealthState.cs" />
     <Compile Include="Models\Hero\Hero.cs" />
     <Compile Include="Models\Hero\Characteristic.cs" />

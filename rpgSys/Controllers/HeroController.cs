@@ -65,6 +65,23 @@ namespace rpgSys.Controllers
             //}
         }
 
+        public IHttpActionResult GetEnums()
+        {
+            try
+            {
+                List<List<Enums>> List = new List<List<Enums>>();
+                baseCL b = new baseCL("Data");
+                List.Add(b.Select(new requestCL() { Table = new tableCl("/Hero/Common/Class") }).Cast<Enums>().ToList());
+                List.Add(b.Select(new requestCL() { Table = new tableCl("/Hero/Common/Race") }).Cast<Enums>().ToList());
+                List.Add(b.Select(new requestCL() { Table = new tableCl("/Hero/Common/Sex") }).Cast<Enums>().ToList());
+                List.Add(b.Select(new requestCL() { Table = new tableCl("/Hero/Common/Height") }).Cast<Enums>().ToList());
+                return Ok(List);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+        }
         //private IHttpActionResult materialskill(string UserId)
         //{
         //    var stats = xmlBase.Characters.GetMaterial(UserId);
