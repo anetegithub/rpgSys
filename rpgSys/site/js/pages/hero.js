@@ -82,21 +82,21 @@ function old_render(Hero) {
         html += '<td>' + Hero.MaterialSkill[i].DIX + '</td>';
         html += '<td>' + Hero.MaterialSkill[i].Value + '</td></tr>';
     }
-    $('#table10').html(html);
+    $('#table9').html(html);
     var html = '';
     for (var i = 0; i < Hero.MentalSkill.length; i++) {
         html += '<tr><td>' + Hero.MentalSkill[i].Name + '</td>';
         html += '<td>' + Hero.MentalSkill[i].DIX + '</td>';
         html += '<td>' + Hero.MentalSkill[i].Value + '</td></tr>';
     }
-    $('#table11').html(html);
+    $('#table10').html(html);
     var html = '';
     for (var i = 0; i < Hero.ClassSkill.length; i++) {
         html += '<tr><td>' + Hero.ClassSkill[i].Name + '</td>';
         html += '<td>' + Hero.ClassSkill[i].DIX + '</td>';
         html += '<td>' + Hero.ClassSkill[i].Value + '</td></tr>';
     }
-    $('#table9').html(html);
+    $('#table11').html(html);
 }
 
 function new_render() {
@@ -105,7 +105,58 @@ function new_render() {
         setLstSource(data[1], '#newRace');
         setLstSource(data[2], '#newSex');
         setLstSource(data[3], '#newHeight');
+        setRaceAttributes('Средний', 65, 20, 'Один', 'Синий', 'Русый', 'Телесный');
     });
+
+    $.getJSON('../api/skills').success(function (data) {
+        var stupid = data.length / 12;
+        var array = new Array(stupid);
+        for (var i = 0; i < stupid; i++) {
+            array[i] = data.splice(0, 12);
+        }
+        setTableSource(array[0], '#table12');
+        setTableSource(array[1], '#table13');
+        setTableSource(array[2], '#table14');
+        for (var i = 2; i < array.length; i++) {
+            localStorage.setItem('skills' + (i - 2).toString(), JSON.stringify(array[i]));
+        }
+    });
+}
+
+$('#newClass').change(function () {
+    var selector = 'skills' + $(this).find('option:selected')[0].index.toString();
+    setTableSource(JSON.parse(localStorage.getItem(selector)), '#table14');
+});
+
+$('#newRace').change(function () {
+    var id = $(this).find('option:selected')[0].index;
+    switch (id) {
+        case 0: setRaceAttributes('Средний', 65, 20, 'Один', 'Синий', 'Русый', 'Телесный'); break;
+        case 1: setRaceAttributes('Низкий', 30, 20, 'Уондала', 'Зелёный', 'Русый', 'Телесный'); break;
+        case 2: setRaceAttributes('Низкий', 70, 60, 'Тор', 'Коричневый', 'Черный', 'Серый'); break;
+        case 3: setRaceAttributes('Низкий', 75, 80, 'Тор', 'Серый', 'Серый', 'Серый'); break;
+        case 4: setRaceAttributes('Высокий', 50, 120, 'Теландрия', 'Зелёный', 'Зелёный', 'Светло-зелёный'); break;
+        case 5: setRaceAttributes('Высокий', 45, 120, 'Ангарадх', 'Тёмно-синий', 'Чёрно-синий', 'Светло-синий'); break;
+        case 6: setRaceAttributes('Высокий', 50, 120, 'Морраг', 'Красный', 'Черный', 'Тёмный'); break;
+        case 7: setRaceAttributes('Высокий', 45, 120, 'Фрея', 'Белый', 'Светлый', 'Светлый'); break;
+        case 8: setRaceAttributes('Средний', 70, 40, 'Грах', 'Чёрный', 'Черный', 'Светло-красный'); break;
+        case 9: setRaceAttributes('Средний', 80, 35, 'Хортаг', 'Чёрный', 'Чёрный', 'Зелёный'); break;
+        case 10: setRaceAttributes('Высокий', 65, 25, 'Гутхай', 'Серебрянный', 'Светло-голубой', 'Светло-голубой'); break;
+        case 11: setRaceAttributes('Высокий', 65, 25, 'Гутдул', 'Желтый', 'Русый', 'Песчаный'); break;
+        case 12: setRaceAttributes('Высокий', 30, 500, 'Нет', 'Белый', 'Светлый', 'Светлый'); break;
+        case 13: setRaceAttributes('Высокий', 90, 500, 'Нет', 'Красный', 'Чёрный', 'Красный'); break;
+        case 14: setRaceAttributes('Высокий', 5, 1000, 'Нет', 'Прозрачно-голубой', 'Прозрачно-голубой', 'Прозрачно-голубой'); break;
+    }
+});
+
+function setRaceAttributes(height, weight, age, god, eye, hair, skin) {
+    $('#newHeight').val(height);
+    $('#newWeight').val(weight);
+    $('#newAge').val(age);
+    $('#newGod').val(god);
+    $('#newEyes').val(eye);
+    $('#newHair').val(hair);
+    $('#newSkin').val(skin);
 }
 
 function setLstSource(data, list) {
@@ -114,4 +165,13 @@ function setLstSource(data, list) {
         html += '<option class="form-control">' + data[i].Value + '</option>';
     }
     $(list).html(html);
+}
+
+function setTableSource(data, table) {
+    var html = '';
+    $(table).html(html);
+    for (var i = 0; i < data.length; i++) {
+        html += '<tr><td>' + data[i].Name + '</td><td>' + data[i].DIX + '</td><td>' + data[i].Value + '</td></tr>';
+    }
+    $(table).html(html);
 }

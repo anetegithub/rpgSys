@@ -13,7 +13,7 @@ namespace rpgSys.Controllers
     {
         public IHttpActionResult Get()
         {
-            try { return Ok(new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Hero/Common/SkillList") }).Cast<Skill>().ToList()); }
+            try { var List = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Hero/Common/SkillList") }).Cast<Skill>().ToList(); return Ok(List); }
             catch { return InternalServerError(); }
         }
     }
