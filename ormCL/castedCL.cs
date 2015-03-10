@@ -72,18 +72,37 @@ namespace ormCL
                         string table = "";
                         bool reference = false;
                         bool absorbed = false;
+                        bool novalue = false;
                         string name = Property.Name;
 
-                        CheckAttributes(Property, ref name, ref absorbed, ref reference, ref table, ref outerField);
+                        CheckAttributes(Property, ref name, ref absorbed, ref reference, ref novalue, ref table, ref outerField);
 
                         if (name == dWhat.Key || (absorbed && dWhat.Key == "AbsorbedValue"))
                         {
                             var pType = Property.PropertyType;
                             if (!reference)
                             {
-                                if (dWhat.Value.GetType() == typeof(List<dynamic>))
+                                //May be bug
+                                if (dWhat.Value.GetType() == typeof(List<dynamic>) || dWhat.Value.GetType()==typeof(ExpandoObject))
                                 {
-                                    var CastedCollection = InvokeCastCollection(Property, dWhat.Value);
+                                    var collection=dWhat.Value;
+                                    Type collectiontype=Property.PropertyType;
+                                    if(dWhat.Value.GetType()==typeof(ExpandoObject))
+                                    {
+                                        collection = new List<dynamic>() { dWhat.Value };
+                                        MethodInfo method_inner = typeof(baseCL).GetMethod("CreateListOfM");
+                                        MethodInfo generic_inner = method_inner.MakeGenericMethod(Property.PropertyType);
+                                        object classInstance_inner = new baseCL("");
+                                        object[] parametersArray_inner = new object[] { };
+                                        collectiontype = generic_inner.Invoke(classInstance_inner, parametersArray_inner).GetType();
+                                    }
+
+                                    var CastedCollection = InvokeCastCollection(collectiontype, collection);
+                                    if (dWhat.Value.GetType() == typeof(ExpandoObject))
+                                    {
+                                        CastedCollection = CastedCollection[0];
+                                    }
+
                                     o.GetType()
                                         .GetProperty(Property.Name)
                                         .SetValue(
@@ -92,11 +111,19 @@ namespace ormCL
                                 }
                                 else
                                 {
-                                    o.GetType()
-                                        .GetProperty(Property.Name)
-                                        .SetValue(
-                                        o,
-                                        Convert.ChangeType(dWhat.Value, Property.PropertyType));
+                                    var value=Convert.ChangeType(dWhat.Value, Property.PropertyType);
+                                    try
+                                    {
+                                        o.GetType()
+                                            .GetProperty(Property.Name)
+                                            .SetValue(
+                                            o,
+                                            value);
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        Console.Write(ex.Message);
+                                    }
                                 }
                             }
                             else
@@ -115,11 +142,6 @@ namespace ormCL
                                     else
                                     {
                                         ////Cast or it didn't happen
-                                        //MethodInfo method = typeof(Enumerable).GetMethod("Cast");
-                                        //MethodInfo generic = method.MakeGenericMethod(Property.PropertyType);
-                                        //object[] parametersArray = new object[] { ReferenceObject };
-                                        //object classInstance=new List<object>();
-                                        //ReferenceObject = generic.Invoke(classInstance, parametersArray);
                                         o.GetType()
                                                 .GetProperty(Property.Name)
                                                 .SetValue
@@ -205,7 +227,7 @@ namespace ormCL
                 return null;
             }
         }
-        protected void CheckAttributes(PropertyInfo Property, ref string name, ref bool absorbed, ref bool reference, ref string table, ref string outerField)
+        protected void CheckAttributes(PropertyInfo Property, ref string name, ref bool absorbed, ref bool reference, ref bool novalue, ref string table, ref string outerField)
         {
             object[] attributes = Property.GetCustomAttributes(true);
             for (int i = 0; i < attributes.Length; i++)
@@ -227,12 +249,16 @@ namespace ormCL
                 {
                     outerField = (attributes[i] as outerCLAttribute).Key;
                 }
+                if (attributes[i].GetType() == typeof(novalueCLAttribute))
+                {
+                    novalue = true;   
+                }
             }
         }
-        protected object InvokeCastCollection(PropertyInfo Property, dynamic dWhatValue)
+        protected object InvokeCastCollection(Type PropertyType, dynamic dWhatValue)
         {
             MethodInfo method = typeof(castedCL<T>).GetMethod("CastCollection");
-            var CollectionType = GetListType(Property.PropertyType);
+            var CollectionType = GetListType(PropertyType);
             MethodInfo generic = method.MakeGenericMethod(CollectionType);
             object classInstance = new castedCL<T>();
             object[] parametersArray = new object[] { dWhatValue };

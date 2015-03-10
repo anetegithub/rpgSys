@@ -103,9 +103,9 @@ namespace ormCL
                 }
                 else
                 {
-                        XElement Element = ConvertToXElement<T>(Request.Object, ormCLcommand.Insert);
-                        doc.Root.Add(Element);
-                                       
+                    XElement Element = ConvertToXElement<T>(Request.Object, ormCLcommand.Insert);
+                    doc.Root.Add(Element);
+
                 }
                 lock (Safe)
                 {
@@ -138,7 +138,7 @@ namespace ormCL
                     }
                     if (ElementNeedUpdate)
                     {
-                        Element.ReplaceWith(ConvertToXElement<T>(Request.Object,ormCLcommand.Update));
+                        Element.ReplaceWith(ConvertToXElement<T>(Request.Object, ormCLcommand.Update));
                     }
                 }
                 doc.Save(GetPath(Request.Table.Path));
@@ -239,7 +239,7 @@ namespace ormCL
                          * Just not serialize this property.
                          * When object will be casted this property will be null.*/
                         Console.WriteLine("/* Null Property */");
-                    } 
+                    }
                 }
             }
             else
@@ -272,7 +272,7 @@ namespace ormCL
                 else
                 {
                     try
-                    {                        
+                    {
                         if (Property.PropertyType != typeof(string))
                         {
                             foreach (var InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
@@ -287,8 +287,8 @@ namespace ormCL
                             /* SpecialTypes */
                             Element = new XElement(Property.Name, Property.GetValue(Object, null).ToString());
                         }
-                    }                        
-                    catch(NullReferenceException)
+                    }
+                    catch (NullReferenceException)
                     {
                         /*This property is null, but object need to be serialized. 
                         * Just not serialize this property.
@@ -296,7 +296,7 @@ namespace ormCL
                         Console.WriteLine("/* Null Property */");
                     }
                 }
-                
+
                 if (Command == ormCLcommand.Insert)
                     invoke_ReferenceWrite(Property.GetValue(Object, null), Property.PropertyType, table);
                 else if (Command == ormCLcommand.Update)
@@ -422,7 +422,12 @@ namespace ormCL
                 foreach (XElement e in Element.Elements())
                 {
                     if (IsCollection(e) == "")
-                        (Object as IDictionary<string, object>).Add(e.Name.LocalName, e.Value);
+                    {
+                        if (IsNovalue(e) == "")
+                            (Object as IDictionary<string, object>).Add(e.Name.LocalName, e.Value);
+                        else
+                            (Object as IDictionary<string, object>).Add(e.Name.LocalName, DynamicElement(e));
+                    }
                     else
                         (Object as IDictionary<string, object>).Add(e.Name.LocalName, DynamicElement(e));
                 }
@@ -446,6 +451,16 @@ namespace ormCL
                 else
                     return "";
             }
+            return "";
+        }
+
+        private string IsNovalue(XElement Element)
+        {
+            List<XAttribute> List = Element.Attributes().ToList<XAttribute>();
+            if (Element.Elements().ToList<XElement>().Count != 0)
+                return "";
+            if (List.Count != 0)
+                return "NoValue";
             return "";
         }
     }
