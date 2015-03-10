@@ -196,10 +196,10 @@ namespace ormCL
         {
             string name = Property.Name, table = "", field = "";
             dynamicobjectType t = dynamicobjectType.Element;
-            bool reference = false, novalue=false;
+            bool reference = false;
 
 
-            atr(Property, ref t, ref name, ref reference,ref novalue, ref table, ref field);
+            atr(Property, ref t, ref name, ref reference,ref table, ref field);
 
             XObject Element = new XElement(name);
 
@@ -236,7 +236,19 @@ namespace ormCL
                             {
                                 foreach (PropertyInfo InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
                                 {
-                                    (Element as XElement).Add(new XElement(InnerProperty.Name, InnerProperty.GetValue(Property.GetValue(Object, null), null)));
+                                    bool atttr = false;
+                                    object[] attributes = InnerProperty.GetCustomAttributes(true);
+                                    for (int i = 0; i < attributes.Length; i++)
+                                    {
+                                        if (attributes[i].GetType() == typeof(attributeCLAttribute))
+                                        {
+                                            atttr = true;
+                                        }
+                                    }
+                                    if (!atttr)
+                                        (Element as XElement).Add(new XElement(InnerProperty.Name, InnerProperty.GetValue(Property.GetValue(Object, null), null)));
+                                    else
+                                        (Element as XElement).Add(new XAttribute(InnerProperty.Name, InnerProperty.GetValue(Property.GetValue(Object, null), null)));
                                 }
                             }
                             else
@@ -318,7 +330,7 @@ namespace ormCL
             }
             return Element;
         }
-        protected void atr(PropertyInfo Property, ref dynamicobjectType t, ref String name, ref Boolean reference,ref Boolean novalue, ref String table, ref String field)
+        protected void atr(PropertyInfo Property, ref dynamicobjectType t, ref String name, ref Boolean reference, ref String table, ref String field)
         {
             object[] attributes = Property.GetCustomAttributes(true);
             for (int i = 0; i < attributes.Length; i++)
@@ -339,10 +351,6 @@ namespace ormCL
                 if (attributes[i].GetType() == typeof(outerCLAttribute))
                 {
                     field = (attributes[i] as outerCLAttribute).Key;
-                }
-                if (attributes[i].GetType() == typeof(novalueCLAttribute))
-                {
-                    novalue = true;
                 }
             }
         }
@@ -439,10 +447,15 @@ namespace ormCL
                 {
                     if (IsCollection(e) == "")
                     {
-                        if (IsNovalue(e) == "")
-                            (Object as IDictionary<string, object>).Add(e.Name.LocalName, e.Value);
-                        else
+                        if (IsNovalue(e) == "NoValue")
                             (Object as IDictionary<string, object>).Add(e.Name.LocalName, DynamicElement(e));
+                        else
+                        {
+                            if (IsObject(e) == "")
+                                (Object as IDictionary<string, object>).Add(e.Name.LocalName, e.Value);
+                            else
+                                (Object as IDictionary<string, object>).Add(e.Name.LocalName, DynamicElement(e));
+                        }
                     }
                     else
                         (Object as IDictionary<string, object>).Add(e.Name.LocalName, DynamicElement(e));
@@ -478,6 +491,15 @@ namespace ormCL
             if (List.Count != 0)
                 return "NoValue";
             return "";
+        }
+
+        private string IsObject(XElement Element)
+        {
+            List<XElement> List = Element.Elements().ToList<XElement>();
+            if (List.Count == 0)
+                return "";
+            else
+                return "Object";
         }
     }
 }

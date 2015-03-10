@@ -72,10 +72,9 @@ namespace ormCL
                         string table = "";
                         bool reference = false;
                         bool absorbed = false;
-                        bool novalue = false;
                         string name = Property.Name;
 
-                        CheckAttributes(Property, ref name, ref absorbed, ref reference, ref novalue, ref table, ref outerField);
+                        CheckAttributes(Property, ref name, ref absorbed, ref reference,ref table, ref outerField);
 
                         if (name == dWhat.Key || (absorbed && dWhat.Key == "AbsorbedValue"))
                         {
@@ -227,7 +226,7 @@ namespace ormCL
                 return null;
             }
         }
-        protected void CheckAttributes(PropertyInfo Property, ref string name, ref bool absorbed, ref bool reference, ref bool novalue, ref string table, ref string outerField)
+        protected void CheckAttributes(PropertyInfo Property, ref string name, ref bool absorbed, ref bool reference, ref string table, ref string outerField)
         {
             object[] attributes = Property.GetCustomAttributes(true);
             for (int i = 0; i < attributes.Length; i++)
@@ -248,10 +247,6 @@ namespace ormCL
                 if (attributes[i].GetType() == typeof(outerCLAttribute))
                 {
                     outerField = (attributes[i] as outerCLAttribute).Key;
-                }
-                if (attributes[i].GetType() == typeof(novalueCLAttribute))
-                {
-                    novalue = true;   
                 }
             }
         }
