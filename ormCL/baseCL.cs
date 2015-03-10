@@ -196,10 +196,10 @@ namespace ormCL
         {
             string name = Property.Name, table = "", field = "";
             dynamicobjectType t = dynamicobjectType.Element;
-            bool reference = false;
+            bool reference = false, novalue=false;
 
 
-            atr(Property, ref t, ref name, ref reference, ref table, ref field);
+            atr(Property, ref t, ref name, ref reference,ref novalue, ref table, ref field);
 
             XObject Element = new XElement(name);
 
@@ -231,7 +231,19 @@ namespace ormCL
                             Element = new XAttribute(Property.Name, Property.GetValue(Object, null).ToString());
 
                         if (t == dynamicobjectType.Element)
-                            (Element as XElement).Value = Property.GetValue(Object, null).ToString();
+                        {
+                            if (!Property.PropertyType.IsPrimitive)
+                            {
+                                foreach (PropertyInfo InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
+                                {
+                                    (Element as XElement).Add(new XElement(InnerProperty.Name, InnerProperty.GetValue(Property.GetValue(Object, null), null)));
+                                }
+                            }
+                            else
+                            {
+                                (Element as XElement).Value = Property.GetValue(Object, null).ToString();
+                            }
+                        }
                     }
                     catch (NullReferenceException)
                     {
@@ -273,20 +285,20 @@ namespace ormCL
                 {
                     try
                     {
-                        if (Property.PropertyType != typeof(string))
-                        {
-                            foreach (var InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
+                            if (Property.PropertyType != typeof(string))
                             {
-                                if (InnerProperty.Name == field)
-                                    value = InnerProperty.GetValue(Property.GetValue(Object, null), null).ToString();
+                                foreach (var InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
+                                {
+                                    if (InnerProperty.Name == field)
+                                        value = InnerProperty.GetValue(Property.GetValue(Object, null), null).ToString();
+                                }
+                                (Element as XElement).Value = value;
                             }
-                            (Element as XElement).Value = value;
-                        }
-                        else
-                        {
-                            /* SpecialTypes */
-                            Element = new XElement(Property.Name, Property.GetValue(Object, null).ToString());
-                        }
+                            else
+                            {
+                                /* SpecialTypes */
+                                Element = new XElement(Property.Name, Property.GetValue(Object, null).ToString());
+                            }
                     }
                     catch (NullReferenceException)
                     {
@@ -306,7 +318,7 @@ namespace ormCL
             }
             return Element;
         }
-        protected void atr(PropertyInfo Property, ref dynamicobjectType t, ref String name, ref Boolean reference, ref String table, ref String field)
+        protected void atr(PropertyInfo Property, ref dynamicobjectType t, ref String name, ref Boolean reference,ref Boolean novalue, ref String table, ref String field)
         {
             object[] attributes = Property.GetCustomAttributes(true);
             for (int i = 0; i < attributes.Length; i++)
@@ -327,6 +339,10 @@ namespace ormCL
                 if (attributes[i].GetType() == typeof(outerCLAttribute))
                 {
                     field = (attributes[i] as outerCLAttribute).Key;
+                }
+                if (attributes[i].GetType() == typeof(novalueCLAttribute))
+                {
+                    novalue = true;
                 }
             }
         }
