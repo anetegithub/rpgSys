@@ -120,6 +120,7 @@ function new_render() {
         for (var i = 2; i < array.length; i++) {
             localStorage.setItem('skills' + (i - 2).toString(), JSON.stringify(array[i]));
         }
+        npCustomInit();
     });
 }
 
@@ -171,7 +172,22 @@ function setTableSource(data, table) {
     var html = '';
     $(table).html(html);
     for (var i = 0; i < data.length; i++) {
-        html += '<tr><td>' + data[i].Name + '</td><td>' + data[i].DIX + '</td><td>' + data[i].Value + '</td></tr>';
+        html += '<tr><td>' + data[i].Name + '</td><td>' + data[i].DIX + "</td><td><span class=\'picker\' selectr=\'" + i.toString() + table.split('#').join('g') + "\'></span></td></tr>";
     }
     $(table).html(html);
+}
+
+function randomCharacteristics() {
+    $('#con').html(getRandomArbitrary(5, 9));
+    $('#fit').html(getRandomArbitrary(2, 7));
+    var int = getRandomArbitrary(4, 9);
+    $('#int').html(int);
+    $('#wis').html(getRandomArbitrary(2, 8));
+    $('#cha').html(getRandomArbitrary(1, 6));
+
+    $('#npLimiter').val(int);
+}
+
+function getRandomArbitrary(min, max) {
+    return Math.ceil(Math.random() * (max - min) + min);
 }
