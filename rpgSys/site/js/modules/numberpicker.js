@@ -8,11 +8,29 @@
     v0.3
     custom initialization
 */
+var NumberPickerControl = {
+    Create: function () {
+        for (var i = 0; i < $('.picker').length; i++) {
+            $('.picker')[i].innerHTML = npCreatePicker($('.picker')[i].attributes.selectr.value);
+        }
+        this.SetLimit(this.Limit);
+    },
+    Colsize:0,
+    Init: function () {
+        for (var i = 0; i < $('.picker').length; i++) {
+            $('.picker')[i].innerHTML = npCreatePicker($('.picker')[i].attributes.selectr.value);
+        }
+    },
+    SetLimit: function (limit) {
+        if ($('#npLimiter').val() != undefined) {
+            return $('#npLimiter').val(limit);
+        }
+    },
+    Limit: 0
+}
 
 $(document).ready(function () {
-    for (var i = 0; i < $('.picker').length; i++) {
-        $('.picker')[i].innerHTML = npCreatePicker($('.picker')[i].attributes.selectr.value);
-    }
+    NumberPickerControl.Create();
 });
 
 function npCustomInit() {

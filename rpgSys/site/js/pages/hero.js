@@ -120,13 +120,14 @@ function new_render() {
         for (var i = 2; i < array.length; i++) {
             localStorage.setItem('skills' + (i - 2).toString(), JSON.stringify(array[i]));
         }
-        npCustomInit();
+        NumberPickerControl.Init();
     });
 }
 
 $('#newClass').change(function () {
     var selector = 'skills' + $(this).find('option:selected')[0].index.toString();
     setTableSource(JSON.parse(localStorage.getItem(selector)), '#table14');
+    NumberPickerControl.Init();
 });
 
 $('#newRace').change(function () {
@@ -172,7 +173,7 @@ function setTableSource(data, table) {
     var html = '';
     $(table).html(html);
     for (var i = 0; i < data.length; i++) {
-        html += '<tr><td>' + data[i].Name + '</td><td>' + data[i].DIX + "</td><td><span class=\'picker\' selectr=\'" + i.toString() + table.split('#').join('g') + "\'></span></td></tr>";
+        html += '<tr><td>' + data[i].Name + '</td><td>' + data[i].DIX + "</td><<td class='col-md-4'><span class=\'picker\' selectr=\'" + i.toString() + table.split('#').join('g') + "\'></span></td></tr>";
     }
     $(table).html(html);
 }
