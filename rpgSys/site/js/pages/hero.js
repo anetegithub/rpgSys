@@ -192,3 +192,64 @@ function randomCharacteristics() {
 function getRandomArbitrary(min, max) {
     return Math.ceil(Math.random() * (max - min) + min);
 }
+
+function createNewHero() {
+    $.post('../api/hero/create', { '': JSON.stringify(Hero()) }).done(function (data) {
+        alert(data);
+    });
+};
+
+function Hero() {
+    var o = new Object();
+    o.UserId = JSON.parse($.cookie('user')).UserId;
+    o.GameId = 0;
+    o.Level = 1;
+    o.Expirience = 0;
+    o.Class = $('#newClass').val();
+    o.Race = $('#newRace').val();
+    o.God = $('#newGod').val();
+    o.Height = $('#newHeight').val();
+    o.Age = $('#newAge').val();
+    o.Sex = $('#newSex').val();
+    o.Weight = $('#newWeight').val();
+    o.Eyes = $('#newEyes').val();
+    o.Hair = $('#newHair').val();
+    o.Skin = $('#newSkin').val();
+    o.Characteristics = [
+        Characteristic('Телосложение', 'CON', $('#con').val()),
+        Characteristic('Тренированность', 'FIT', $('#fit').val()),
+        Characteristic('Интеллект', 'INT', $('#int').val()),
+        Characteristic('Мудрость', 'WIS', $('#wis').val()),
+        Characteristic('Харизма', 'CHA', $('#cha').val())
+    ];
+    o.Abilities = [];
+    o.HealthState = null;
+    o.DefenceState = null;
+    o.AttackState = null;
+    o.CommonState = null;
+    o.MaterialSkill = SkillsArray('#table12');
+    o.MentalSkill = SkillsArray('#table13');
+    o.ClassSkill = SkillsArray('#table14');
+    return o;
+};
+
+function Characteristic(name, dix, value) {
+    var o = new Object();
+    o.Name = name;
+    o.DIX = dix;
+    o.Value = value;
+    return o;
+};
+
+function SkillsArray(tableSelector) {
+    var o = new Object();
+    o = [];
+    for (var i = 0; i < 12; i++) {
+        o.push({
+            Name: $(tableSelector)[0].children[i].children[0].innerText,
+            DIX: $(tableSelector)[0].children[i].children[1].innerText,
+            Value: $($(tableSelector)[0].children[i].children[2]).find('input')[1].value
+        });
+    };
+    return o;
+};

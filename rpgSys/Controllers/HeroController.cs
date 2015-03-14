@@ -23,8 +23,9 @@ namespace rpgSys.Controllers
         [ActionName("create")]
         public string NewCharacter([FromBody]string value)
         {
-            //Stat[] Character = new JavaScriptSerializer().Deserialize<Stat[]>(value);
-            return "1";
+            Hero NewHero = new JavaScriptSerializer().Deserialize<Hero>(value);
+            var result= new baseCL("Data").Insert<Hero>(new irequestCl() { Table = new tableCl("/Hero/Info"), Object = NewHero }).Successful.ToString();
+            return result;
         }
 
         public IHttpActionResult GetInfo(string HeroId)
