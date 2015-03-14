@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ormCL.Attributes
 {
+    /// <summary>
+    /// |ChangedName| ... |/ChangedName|
+    /// </summary>
     [AttributeUsage(AttributeTargets.All)]
     public class nameCLAttribute : Attribute
     {

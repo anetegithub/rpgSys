@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\stringifyCL.cs" />
     <Compile Include="Attributes\absorbedCL.cs" />
     <Compile Include="Attributes\attributeCL.cs" />
     <Compile Include="Attributes\nameCL.cs" />

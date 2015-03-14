@@ -11,8 +11,9 @@ $('#log-btn').click(function () {
         .done(function (data) {
             if (data.Password == psw) {
                 $.cookie('user', JSON.stringify(data), { path: '/site/' });
-                $.post('../api/users/update', { '': data.Id.toString() });
-                window.location.replace('profile');
+                $.post('../api/users/update', { '': data.Id.toString() }).done(function () {
+                    window.location.replace('profile');
+                });                
             }
         }).fail(function (jqXHR, textStatus, err) {
             fail('Такого пользователя не существует!');

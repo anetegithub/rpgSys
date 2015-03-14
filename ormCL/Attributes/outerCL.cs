@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ormCL.Attributes
 {
+    /// <summary>
+    /// |Element| |ReferenceElement| 1 |/ReferenceElement| |/Element|
+    /// |ReferenceElement OuterAttribute="1"| ... |/ReferenceElement|
+    /// </summary>
     [AttributeUsage(AttributeTargets.All)]
     public class outerCLAttribute : Attribute
     {

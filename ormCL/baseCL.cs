@@ -121,8 +121,8 @@ namespace ormCL
             returnCL result = new returnCL("");
             int i = 0;
             result.Successful = true;
-            try
-            {
+           // try
+            //{
                 var Collection = new baseCL(Path).Select(new requestCL() { Table = new tableCl(Request.Table.Path.Replace(".xml", "")) }).Cast<T>().Filter(Request.Conditions).ToList();
                 if (Collection.Count > 1)
                     return new returnCL("Double value") { Successful = false };
@@ -142,8 +142,8 @@ namespace ormCL
                     }
                 }
                 doc.Save(GetPath(Request.Table.Path));
-            }
-            catch (Exception ex) { result = new returnCL(ex.Message) { Successful = false }; }
+            //}
+            //catch (Exception ex) { result = new returnCL(ex.Message) { Successful = false }; }
             var f = i;
             return result;
         }
@@ -196,10 +196,10 @@ namespace ormCL
         {
             string name = Property.Name, table = "", field = "";
             dynamicobjectType t = dynamicobjectType.Element;
-            bool reference = false;
+            bool reference = false, stringify = false;
 
 
-            atr(Property, ref t, ref name, ref reference,ref table, ref field);
+            atr(Property, ref t, ref name, ref reference, ref stringify, ref table, ref field);
 
             XObject Element = new XElement(name);
 
@@ -232,7 +232,7 @@ namespace ormCL
 
                         if (t == dynamicobjectType.Element)
                         {
-                            if (!Property.PropertyType.IsPrimitive)
+                            if (!Property.PropertyType.IsPrimitive && (Property.PropertyType != typeof(string)) && !stringify)
                             {
                                 foreach (PropertyInfo InnerProperty in Property.GetValue(Object, null).GetType().GetProperties())
                                 {
@@ -330,7 +330,7 @@ namespace ormCL
             }
             return Element;
         }
-        protected void atr(PropertyInfo Property, ref dynamicobjectType t, ref String name, ref Boolean reference, ref String table, ref String field)
+        protected void atr(PropertyInfo Property, ref dynamicobjectType t, ref String name, ref Boolean reference,ref Boolean stringify, ref String table, ref String field)
         {
             object[] attributes = Property.GetCustomAttributes(true);
             for (int i = 0; i < attributes.Length; i++)
@@ -351,6 +351,10 @@ namespace ormCL
                 if (attributes[i].GetType() == typeof(outerCLAttribute))
                 {
                     field = (attributes[i] as outerCLAttribute).Key;
+                }
+                if (attributes[i].GetType() == typeof(stringifyCLAttribute))
+                {
+                    stringify = true;
                 }
             }
         }

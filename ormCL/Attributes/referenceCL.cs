@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace ormCL.Attributes
 {
+    /// <summary>
+    /// Reference File Path
+    /// |Element| |ReferenceElement| 1 |/ReferenceElement| |/Element|
+    /// |ReferenceElement OuterAttribute="1"| ... |/ReferenceElement|
+    /// </summary>
     [AttributeUsage(AttributeTargets.All)]
     public class referenceCLAttribute : Attribute
     {

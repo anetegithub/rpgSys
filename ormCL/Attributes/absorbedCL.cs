@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace ormCL.Attributes
 {
+    /// <summary>
+    /// |Element| AbsorbedFieldValue |/Element|
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class absorbedCLAttribute : Attribute
     {
-        public readonly bool Yes = true;
+        public readonly bool Yes = true;           
     }
 }

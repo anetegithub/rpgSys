@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 namespace ormCL.Attributes
 {
     /// <summary>
-    /// |Element AttributeField=AttributeFieldValue| ... |/Element|
+    /// |DateTimeElementWithoutStringify| |Field0| |Field1| |Field2| |/DateTimeElementWithoutStringify| 
+    /// |DateTimeElementStringify| 01.01.0001 0:00:00 |/DateTimeElementStringify|
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class attributeCLAttribute : Attribute
+    public class stringifyCLAttribute : Attribute
     {
         public readonly bool Yes = true;
     }

@@ -41,7 +41,8 @@ namespace rpgSys
             baseCL b = new baseCL("Data");
             User User = b.Select(new requestCL() { Table = new tableCl("/User/Users"), Conditions = new conditionCL("Id.==." + UserId) }).Cast<User>().Filter().ToList()[0];
             User.Stamp = DateTime.Now;
-            return b.Update<User>(new urequestCl(new conditionCL("Id.==." + UserId)) { Object = User, Table = new tableCl("/User/Users") }).Successful.ToString();
+            var result=b.Update<User>(new urequestCl(new conditionCL("Id.==." + UserId)) { Object = User, Table = new tableCl("/User/Users") }).Successful.ToString();
+            return result;
         }
 
         [ActionName("create")]

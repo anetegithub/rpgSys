@@ -21,7 +21,10 @@ namespace rpgSys
         public string Password { get; set; }
         public string Email { get; set; }
         public string Auth { get; set; }
+
+        [stringifyCL]
         public DateTime Stamp { get; set; }
+
         public string StampToString { get; set; }
     }
 }

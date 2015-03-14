@@ -82,11 +82,11 @@ namespace ormCL
                             if (!reference)
                             {
                                 //May be bug
-                                if (dWhat.Value.GetType() == typeof(List<dynamic>) || dWhat.Value.GetType()==typeof(ExpandoObject))
+                                if (dWhat.Value.GetType() == typeof(List<dynamic>) || dWhat.Value.GetType() == typeof(ExpandoObject))
                                 {
-                                    var collection=dWhat.Value;
-                                    Type collectiontype=Property.PropertyType;
-                                    if(dWhat.Value.GetType()==typeof(ExpandoObject))
+                                    var collection = dWhat.Value;
+                                    Type collectiontype = Property.PropertyType;
+                                    if (dWhat.Value.GetType() == typeof(ExpandoObject))
                                     {
                                         collection = new List<dynamic>() { dWhat.Value };
                                         MethodInfo method_inner = typeof(baseCL).GetMethod("CreateListOfM");
@@ -110,7 +110,20 @@ namespace ormCL
                                 }
                                 else
                                 {
-                                    var value=Convert.ChangeType(dWhat.Value, Property.PropertyType);
+                                    var value = new object();
+
+                                    if (Property.PropertyType.IsEnum)
+                                    {
+                                        Console.WriteLine("converting enum");
+                                        value = Enum.Parse(Property.PropertyType, dWhat.Value);
+                                    }
+                                    else if (Property.PropertyType == typeof(TimeSpan))
+                                    {
+                                        value = TimeSpan.Parse(dWhat.Value);
+                                    }
+                                    else
+                                        value = Convert.ChangeType(dWhat.Value, Property.PropertyType);
+
                                     try
                                     {
                                         o.GetType()
@@ -119,7 +132,7 @@ namespace ormCL
                                             o,
                                             value);
                                     }
-                                    catch(Exception ex)
+                                    catch (Exception ex)
                                     {
                                         Console.Write(ex.Message);
                                     }
