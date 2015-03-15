@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CommonStates>
   <CommonState Id="1" HeroId="1">
     <Initiative>4</Initiative>
@@ -7,5 +7,13 @@
     <InitiativeMagic>1</InitiativeMagic>
     <Speed>5</Speed>
     <SpeedFit>10</SpeedFit>
+  </CommonState>
+  <CommonState Id="0" HeroId="0">
+    <Initiative>0</Initiative>
+    <InitiativeSize>0</InitiativeSize>
+    <InitiativeWisdom>0</InitiativeWisdom>
+    <InitiativeMagic>0</InitiativeMagic>
+    <Speed>0</Speed>
+    <SpeedFit>0</SpeedFit>
   </CommonState>
 </CommonStates>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Infos>
   <Info Id="1" HeroId="1" UserId="1">
     <Name>Валора ан Сием</Name>
@@ -24,4 +24,73 @@
     <MentalSkill>1</MentalSkill>
     <ClassSkill>1</ClassSkill>
   </Info>
+  <Hero Id="0" UserId="0" GameId="0">
+    <Name />
+    <Level>1</Level>
+    <Expirience>0</Expirience>
+    <Class>Воин</Class>
+    <Race>Человек</Race>
+    <God>Один</God>
+    <Height>Средний</Height>
+    <Age>20</Age>
+    <Sex>Женский</Sex>
+    <Weight>65</Weight>
+    <Eyes>Синий</Eyes>
+    <Hair>Русый</Hair>
+    <Skin>Телесный</Skin>
+    <Characteristics>
+      <Characteristic>0</Characteristic>
+      <Characteristic>0</Characteristic>
+      <Characteristic>0</Characteristic>
+      <Characteristic>0</Characteristic>
+      <Characteristic>0</Characteristic>
+    </Characteristics>
+    <Abilities />
+    <HealthState>0</HealthState>
+    <DefenceState>0</DefenceState>
+    <AttackState>0</AttackState>
+    <CommonState>0</CommonState>
+    <MaterialSkill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+    </MaterialSkill>
+    <MentalSkill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+    </MentalSkill>
+    <ClassSkill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+      <Skill>0</Skill>
+    </ClassSkill>
+  </Hero>
 </Infos>

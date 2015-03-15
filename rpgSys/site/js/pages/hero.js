@@ -216,17 +216,17 @@ function Hero() {
     o.Hair = $('#newHair').val();
     o.Skin = $('#newSkin').val();
     o.Characteristics = [
-        Characteristic('Телосложение', 'CON', $('#con').val()),
-        Characteristic('Тренированность', 'FIT', $('#fit').val()),
-        Characteristic('Интеллект', 'INT', $('#int').val()),
-        Characteristic('Мудрость', 'WIS', $('#wis').val()),
-        Characteristic('Харизма', 'CHA', $('#cha').val())
+        Characteristic('Телосложение', 'CON', $('#con')[0].outerText),
+        Characteristic('Тренированность', 'FIT', $('#fit')[0].outerText),
+        Characteristic('Интеллект', 'INT', $('#int')[0].outerText),
+        Characteristic('Мудрость', 'WIS', $('#wis')[0].outerText),
+        Characteristic('Харизма', 'CHA', $('#cha')[0].outerText)
     ];
     o.Abilities = [];
-    o.HealthState = null;
-    o.DefenceState = null;
-    o.AttackState = null;
-    o.CommonState = null;
+    o.HealthState = {};
+    o.DefenceState = {};
+    o.AttackState = {};
+    o.CommonState = {};
     o.MaterialSkill = SkillsArray('#table12');
     o.MentalSkill = SkillsArray('#table13');
     o.ClassSkill = SkillsArray('#table14');

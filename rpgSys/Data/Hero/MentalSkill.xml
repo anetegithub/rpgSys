@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <MentalSkill>
   <Skill Id="1" HeroId="1">
     <Name>13</Name>
@@ -58,6 +58,66 @@
   <Skill Id="12" HeroId="1">
     <Name>24</Name>
     <DIX>3</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Слух</Name>
+    <DIX>WIS</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Ложь</Name>
+    <DIX>WIS</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Дипломатия</Name>
+    <DIX>CHA</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Блеф</Name>
+    <DIX>CHA</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Идентификация</Name>
+    <DIX>INT</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Концентрация</Name>
+    <DIX>CON</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Создание вещей</Name>
+    <DIX>INT</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Чтение свитков</Name>
+    <DIX>INT</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Приручение животных</Name>
+    <DIX>CHA</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Создание заклинаний</Name>
+    <DIX>WIS</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Сотворение заклинаний</Name>
+    <DIX>INT</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Использование маг. предметов</Name>
+    <DIX>INT</DIX>
     <Value>0</Value>
   </Skill>
 </MentalSkill>

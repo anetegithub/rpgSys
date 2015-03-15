@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Characteristicses>
   <Characteristics Id="1" HeroId="1">
     <Name>1</Name>
@@ -29,4 +29,29 @@
     <DIX>6</DIX>
     <Value>0</Value>
   </Characteristics>
+  <Characteristic Id="0" HeroId="0">
+    <Name>Телосложение</Name>
+    <DIX>CON</DIX>
+    <Value>8</Value>
+  </Characteristic>
+  <Characteristic Id="0" HeroId="0">
+    <Name>Тренированность</Name>
+    <DIX>FIT</DIX>
+    <Value>4</Value>
+  </Characteristic>
+  <Characteristic Id="0" HeroId="0">
+    <Name>Интеллект</Name>
+    <DIX>INT</DIX>
+    <Value>6</Value>
+  </Characteristic>
+  <Characteristic Id="0" HeroId="0">
+    <Name>Мудрость</Name>
+    <DIX>WIS</DIX>
+    <Value>8</Value>
+  </Characteristic>
+  <Characteristic Id="0" HeroId="0">
+    <Name>Харизма</Name>
+    <DIX>CHA</DIX>
+    <Value>6</Value>
+  </Characteristic>
 </Characteristicses>

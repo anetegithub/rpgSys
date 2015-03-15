@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassSkill>
   <Skill Id="1" HeroId="1">
     <Name>25</Name>
@@ -58,6 +58,66 @@
   <Skill Id="12" HeroId="1">
     <Name>36</Name>
     <DIX>5</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Использование доспехов</Name>
+    <DIX>CON</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Использование оружия</Name>
+    <DIX>CON</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Использование щитов</Name>
+    <DIX>CON</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Бой двумя руками</Name>
+    <DIX>CON</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Двуручное оружие в одной руке</Name>
+    <DIX>CON</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Уход и заточка оружия</Name>
+    <DIX>WIS</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Защитная стойка</Name>
+    <DIX>FIT</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Парирование</Name>
+    <DIX>FIT</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Уворачивание</Name>
+    <DIX>FIT</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Кровожадность</Name>
+    <DIX>FIT</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Воля к победе</Name>
+    <DIX>WIS</DIX>
+    <Value>0</Value>
+  </Skill>
+  <Skill Id="0" HeroId="0">
+    <Name>Боевые манёвры</Name>
+    <DIX>FIT</DIX>
     <Value>0</Value>
   </Skill>
 </ClassSkill>

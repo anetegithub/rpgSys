@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <HealthStates>
   <HealthState Id="1" HeroId="1">
     <CurrentHitPoints>50</CurrentHitPoints>
@@ -8,5 +8,14 @@
     <Desease>1</Desease>
     <Intoxication>1</Intoxication>
     <Charm>1</Charm>
+  </HealthState>
+  <HealthState Id="0" HeroId="0">
+    <CurrentHitPoints>0</CurrentHitPoints>
+    <MaximumHitPoints>0</MaximumHitPoints>
+    <AdditionalHitPoints>0</AdditionalHitPoints>
+    <Regeneration>0</Regeneration>
+    <Desease />
+    <Intoxication />
+    <Charm />
   </HealthState>
 </HealthStates>
