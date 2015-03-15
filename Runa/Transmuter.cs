@@ -41,7 +41,7 @@ namespace RuneFramework
 
             Document = XDocument.Load(PathToFile);
         }
-        
+
         protected void TransmuteToFile()
         {
             foreach (XElement Element in Document.Root.Elements())
@@ -89,7 +89,7 @@ namespace RuneFramework
         protected List<dynamic> WordsOnRunic = new List<dynamic>();
 
         #region Interface
-        
+
         public List<T> Get
         { get { return Words; } }
 
@@ -121,82 +121,46 @@ namespace RuneFramework
         #endregion
     }
 
-    public class Tablet<T>
+    public interface Letter<T>
     {
-        public Tablet(XElement Element)
-        { this.Element = Element; }
-
-        protected dynamic Word;
-        protected XElement Element;
-
-        public dynamic SayLetters
-        {
-            get
-            {
-                Word = new ExpandoObject();
-
-                //Object-class
-                if (Element.Elements().Count() > 0)
-                    foreach (XElement Property in Element.Elements())
-                        (Word as IDictionary<string, object>).Add(Property.Name.LocalName, Property.Value);
-                //Enum
-                else
-                    (Word as IDictionary<string, object>).Add(Element.Name.LocalName, Element.Value);
-
-                return Word;
-            }
-        }
-
-        protected XElement _WritedLetters;
-        public dynamic WriteLetters
-        {
-            set
-            {
-                _WritedLetters = new XElement(typeof(T).Name);
-                foreach(var v in (value as IDictionary<string,object>))
-                {
-                    if (typeof(T).GetType().GetProperty(v.Key) != null)
-                        _WritedLetters.Add(new XElement(v.Key, v.Value));
-                }
-            }
-        }
-        public XElement WritedLetters
-        {
-            get
-            {
-                return _WritedLetters;
-            }
-        }
+        void SetProperty(ref T Object, XElement Element, PropertyInfo Property);
+        void GetProperty(ref dynamic Object, XElement Element, PropertyInfo Property);
     }
 
-
-    public abstract class Letter<T>
-    {
-        public XElement Element;
-        public T Object;
-        public PropertyInfo Property;
-        public void SetProperty()
-        {
-            foreach (XElement E in Element.Elements())
-            {
-                if (E.Name.LocalName == Property.Name)
-                {
-                    Property.SetValue(Object, Convert.ChangeType(E.Value, Property.PropertyType));
-                }
-            }
-        }
-    }
+    //public abstract class Letter<T>
+    //{
+    //    public XElement Element;
+    //    public T Object;
+    //    public PropertyInfo Property;
+    //    public dynamic ObjectAtRunic;
+    //    public void SetProperty()
+    //    {
+    //        Property.SetValue(Object, Convert.ChangeType(Element.Value, Property.PropertyType));
+    //    }
+    //    public void GetProperty()
+    //    {
+    //        (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Element.Value);
+    //    }
+    //}
 
     public class PrimitiveLetter<T> : Letter<T>
     {
+        public void SetProperty(ref T Object, XElement Element, PropertyInfo Property)
+        {
+
+        }
+
+        public void GetProperty(ref dynamic Object, XElement Element, PropertyInfo Property)
+        {
+
+        }
+
         public PrimitiveLetter(XElement Element, ref T Object, PropertyInfo Letter)
         {
-            this.Element = Element;
-            this.Object = Object;
-            this.Property = Letter;
-            this.SetProperty();
+            //this.Element = Element;
+            //this.Object = Object;
+            //this.Property = Letter;
+            //this.SetProperty();
         }
     }
-
-
 }
