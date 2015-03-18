@@ -9,51 +9,30 @@ using System.Dynamic;
 
 namespace RuneFramework
 {
-    public class Tablet<T>
+    public static class Tablet<T>
     {
-        public Tablet(XElement Element)
-        { this.Element = Element; }
-
-        protected dynamic Word;
-        protected XElement Element;
-
-        public dynamic SayLetters
+        public static XElement ToRunic(dynamic ObjectAtRunic)
         {
-            get
+            XElement Element = new XElement(typeof(T).Name);
+
+            foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))
             {
-                Word = new ExpandoObject();
-
-                //Object-class
-                if (Element.Elements().Count() > 0)
-                    foreach (XElement Property in Element.Elements())
-                        (Word as IDictionary<string, object>).Add(Property.Name.LocalName, Property.Value);
-                //Enum
-                else
-                    (Word as IDictionary<string, object>).Add(Element.Name.LocalName, Element.Value);
-
-                return Word;
+                Element.Add(new XElement(Field.Key, Field.Value));
             }
+
+            return Element;
         }
 
-        protected XElement _WritedLetters;
-        public dynamic WriteLetters
+        public static dynamic ToWord(XElement RunicObject)
         {
-            set
+            dynamic Word = new ExpandoObject();
+
+            foreach(XElement RunicWord in RunicObject.Elements())
             {
-                _WritedLetters = new XElement(typeof(T).Name);
-                foreach (var v in (value as IDictionary<string, object>))
-                {
-                    if (typeof(T).GetType().GetProperty(v.Key) != null)
-                        _WritedLetters.Add(new XElement(v.Key, v.Value));
-                }
+                (Word as IDictionary<string, object>).Add(RunicWord.Name.LocalName, RunicWord.Value.ToString());
             }
-        }
-        public XElement WritedLetters
-        {
-            get
-            {
-                return _WritedLetters;
-            }
+
+            return Word;
         }
     }
 }

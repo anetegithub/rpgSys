@@ -13,32 +13,42 @@ namespace RuneFramework
         public RuneWord()
         {
             Ids();
-            Alchemist = new Transmuter<T>();
+            Transmuter = new Transmuter<T>();
         }
 
         protected void Ids()
         {
-            try { var Id = typeof(T).GetProperty(typeof(T).Name + "Id"); }
-            catch (Exception ex)
-            { throw new Exception("Id not founded!", ex); }
+            if (!typeof(T).IsEnum)
+            {
+                var Id = typeof(T).GetProperty("Id");
+                if (Id == null)
+                    Id = typeof(T).GetProperty(typeof(T).Name + "Id");
+                if (Id == null)
+                    throw new Exception(typeof(T).Name + " class : Id not found!");
+            }
         }
 
-        protected Transmuter<T> Alchemist;
+        protected Transmuter<T> Transmuter;
+
+        public void WriteRuneWord()
+        {
+            Transmuter.Transmute();
+        }
 
         public T this[int i]
         {
-            get { return Alchemist.Get[i]; }
-            set { Alchemist.Get[i] = value; }
+            get { return Transmuter.Get[i]; }
+            set { Transmuter.Get[i] = value; }
         }
 
         public void Add(T Item)
         {
-            Alchemist.Add(Item);
+            Transmuter.Add(Item);
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (T t in Alchemist)
+            foreach (T t in Transmuter)
             {
                 if (t == null)
                 {

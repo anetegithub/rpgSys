@@ -19,8 +19,16 @@ namespace RuneFramework
         public Rune()
         {
             DataDirectory();
-            SayRuneWords();
+            SayRuneWords();            
             Console.WriteLine("Init end");
+        }
+
+        public void SaveRune()
+        {
+            foreach (PropertyInfo RuneWord in this.GetType().GetProperties())
+            {
+                RuneWord.GetValue(this, null).GetType().GetMethod("WriteRuneWord").Invoke(RuneWord.GetValue(this, null), new object[0]);
+            }
         }
 
         protected void SayRuneWords()
@@ -28,9 +36,16 @@ namespace RuneFramework
             foreach (PropertyInfo RuneWord in this.GetType().GetProperties())
             {
                 var T = RuneWord.PropertyType.GetGenericArguments()[0];
+
                 if (!Initialize(T))
                     if (!CreateTable(T))
                         throw new Exception("Can't create table");
+
+                var Constructors = RuneWord.PropertyType.GetConstructors();
+                foreach(var Constructor in Constructors)
+                {
+                    RuneWord.SetValue(this, Constructor.Invoke(new object[0]));
+                }
             }
         }
 
@@ -83,33 +98,33 @@ namespace RuneFramework
         }
     }
 
-    public class HeroRuna : Rune
-    {
-        public RuneWord<Hero> Heroes { get; set; }
-        public RuneWord<Some> Somes { get; set; }
-        public RuneWord<Sex> Sexes { get; set; }
-    }
+    //public class HeroRuna : Rune
+    //{
+    //    public RuneWord<Hero> Heroes { get; set; }
+    //    public RuneWord<Some> Somes { get; set; }
+    //    public RuneWord<Sex> Sexes { get; set; }
+    //}
 
-    public class Hero
-    {
-        public int HeroId { get; set; }
+    //public class Hero
+    //{
+    //    public int HeroId { get; set; }
 
-        public string Name { get; set; }
+    //    public string Name { get; set; }
 
-        public List<Some> Fields { get; set; }
+    //    public List<Some> Fields { get; set; }
 
-        public Sex MySex { get; set; }
-    }
+    //    public Sex MySex { get; set; }
+    //}
 
-    public class Some
-    {
-        public string A { get; set; }
-        public string B { get; set; }
-    }
+    //public class Some
+    //{
+    //    public int A { get; set; }
+    //    public double B { get; set; }
+    //}
 
-    public enum Sex
-    {
-        Male = 0, Female = 1
-    }
+    //public enum Sex
+    //{
+    //    Male = 0, Female = 1
+    //}
 
 }

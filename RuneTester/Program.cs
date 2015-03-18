@@ -13,11 +13,17 @@ namespace RuneTester
         static void Main(string[] args)
         {
             Rune.Element = RuneElement.Earth;
-            using(var hr=new HeroRuna())
+            using (var hr = new HeroRuna())
             {
-                var v = (from b in hr.Heroes where b.HeroId > 0 select b).ToList();                
+                //hr.Heroes.Add(new Hero());
+                //var v = (from b in hr.Heroes where b.HeroId > 0 select b).ToList();                
                 //connection.Heroes//[0].HeroId = 5;
+                hr.Somes.Add(new Some() { A = 12, B = 0.009 });
+
+                hr.SaveRune();
             }
+            Console.WriteLine("done");
+            Console.ReadLine();
         }
 
         public class HeroRuna : Rune
@@ -40,8 +46,10 @@ namespace RuneTester
 
         public class Some
         {
-            public string A { get; set; }
-            public string B { get; set; }
+            public int SomeId { get; set; }
+
+            public int A { get; set; }
+            public double B { get; set; }
         }
 
         public enum Sex

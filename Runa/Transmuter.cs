@@ -33,38 +33,67 @@ namespace RuneFramework
             }
 
             //Init document
-            string PathToFile = "";
             if (Rune.Element == RuneElement.Air)
                 PathToFile = HttpContext.Current.Server.MapPath("~/Data/" + typeof(T).Name + ".xml");
             else if (Rune.Element == RuneElement.Earth)
                 PathToFile = Directory.GetCurrentDirectory() + "/Data/" + typeof(T).Name + ".xml";
 
-            Document = XDocument.Load(PathToFile);
+            Magican = new Lazy<RuneMage<T>>(() => new RuneMage<T>(PathToFile));            
         }
 
-        protected void TransmuteToFile()
+        protected string PathToFile;
+        protected string Id
         {
-            foreach (XElement Element in Document.Root.Elements())
+            get
             {
-                Tablet<T> Item = new Tablet<T>(Element);
-                //Item.WriteLetters
+                if (!typeof(T).IsEnum)
+                {
+                    var Id = typeof(T).GetProperty("Id");
+                    if (Id == null)
+                        Id = typeof(T).GetProperty(typeof(T).Name + "Id");
+                    if (Id == null)
+                        throw new Exception(typeof(T).Name + " class : Id not found!");
+                    return Id.Name;
+                }
+                else
+                    return "Id";
             }
         }
 
-        protected void TransmuteFromFile()
+        public void Transmute()
         {
-            foreach (XElement Element in Document.Root.Elements())
+            //but first see changes
+            //TransmuteToTablet();
+        }
+
+        protected XElement TransmuteToTablet(T Item)
+        {
+            dynamic WordAtRunic = new ExpandoObject();
+
+            using (var Letter = new PrimitiveLetter<T>())
             {
-                T Object = (T)Activator.CreateInstance(typeof(T));
-
-                Tablet<T> Item = new Tablet<T>(Element);
-                var ObjectAtRunic = Item.SayLetters;
-
-                AboutLetters();
-                //TransmutePrimitives(Element, ref Object);
-
-                Words.Add(Object);
+                foreach (var Property in Primitives)
+                {
+                    Letter.GetProperty(ref WordAtRunic, Item, Property);
+                }
             }
+            return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
+        }
+
+        protected void TransmuteFromTablet()
+        {
+            //foreach (XElement Element in Document.Root.Elements())
+            //{
+            //    T Object = (T)Activator.CreateInstance(typeof(T));
+
+            //    Tablet<T> Item = new Tablet<T>(Element);
+            //    var ObjectAtRunic = Item.SayLetters;
+
+            //    AboutLetters();
+            //    //TransmutePrimitives(Element, ref Object);
+
+            //    Words.Add(Object);
+            //}
         }
 
         protected void AboutLetters()
@@ -75,20 +104,28 @@ namespace RuneFramework
         {
             foreach (PropertyInfo Property in Primitives)
             {
-                new PrimitiveLetter<T>(Element, ref Object, Property);
+                //new PrimitiveLetter<T>(Element, ref Object, Property);
             }
         }
-
-
         protected List<PropertyInfo> Strings = new List<PropertyInfo>();
         protected List<PropertyInfo> Classes = new List<PropertyInfo>();
         protected List<PropertyInfo> Enums = new List<PropertyInfo>();
 
-        protected XDocument Document;
+        protected Lazy<RuneMage<T>> Magican;
+        private RuneMage<T> ShadowMage { get; set; }
+        protected RuneMage<T> Mage
+        {
+            get
+            {
+                if (!Magican.IsValueCreated)
+                    ShadowMage = Magican.Value;
+
+                return ShadowMage;
+            }
+        }
+
         protected List<T> Words = new List<T>();
         protected List<dynamic> WordsOnRunic = new List<dynamic>();
-
-        #region Interface
 
         public List<T> Get
         { get { return Words; } }
@@ -98,6 +135,11 @@ namespace RuneFramework
 
         public void Add(T Item)
         {
+            var MaxId = Mage.SelectMax(typeof(T).Name, this.Id);
+            Item.GetType().GetProperty(Id).SetValue(Item, Convert.ChangeType(++MaxId, Item.GetType().GetProperty(Id).PropertyType));
+
+            
+
             Words.Add(Item);
         }
 
@@ -116,51 +158,6 @@ namespace RuneFramework
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
-        }
-
-        #endregion
-    }
-
-    public interface Letter<T>
-    {
-        void SetProperty(ref T Object, XElement Element, PropertyInfo Property);
-        void GetProperty(ref dynamic Object, XElement Element, PropertyInfo Property);
-    }
-
-    //public abstract class Letter<T>
-    //{
-    //    public XElement Element;
-    //    public T Object;
-    //    public PropertyInfo Property;
-    //    public dynamic ObjectAtRunic;
-    //    public void SetProperty()
-    //    {
-    //        Property.SetValue(Object, Convert.ChangeType(Element.Value, Property.PropertyType));
-    //    }
-    //    public void GetProperty()
-    //    {
-    //        (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Element.Value);
-    //    }
-    //}
-
-    public class PrimitiveLetter<T> : Letter<T>
-    {
-        public void SetProperty(ref T Object, XElement Element, PropertyInfo Property)
-        {
-
-        }
-
-        public void GetProperty(ref dynamic Object, XElement Element, PropertyInfo Property)
-        {
-
-        }
-
-        public PrimitiveLetter(XElement Element, ref T Object, PropertyInfo Letter)
-        {
-            //this.Element = Element;
-            //this.Object = Object;
-            //this.Property = Letter;
-            //this.SetProperty();
         }
     }
 }
