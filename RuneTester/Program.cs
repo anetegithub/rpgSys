@@ -15,15 +15,61 @@ namespace RuneTester
             Rune.Element = RuneElement.Earth;
             using (var hr = new HeroRuna())
             {
-                //hr.Heroes.Add(new Hero());
-                //var v = (from b in hr.Heroes where b.HeroId > 0 select b).ToList();                
-                //connection.Heroes//[0].HeroId = 5;
-                hr.Somes.Add(new Some() { A = 12, B = 0.009 });
-
-                hr.SaveRune();
+                TestPrimitives(hr);
             }
             Console.WriteLine("done");
             Console.ReadLine();
+        }
+
+        static void TestPrimitives(HeroRuna hr)
+        {
+            hr.Somes.Add(new Some() { A = 10, B = 0.019 });
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine(s.A);
+            }
+
+
+            hr.Somes[hr.Somes.Count()-5].A = 2;
+
+            hr.SaveRune();
+            Console.WriteLine();
+            Console.WriteLine("After Change Value And Save - ACVAS xD");
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine(s.A);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("B Values:");
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine(s.B);
+            }
+
+            hr.Somes[hr.Somes.Count() - 3].B = 0.159;
+
+            hr.SaveRune();
+            Console.WriteLine();
+            Console.WriteLine("After Change B Value And Save - ACVAS xD");
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine(s.B);
+            }
+
+            hr.Somes.Remove(0);
+
+            Console.WriteLine();
+            Console.WriteLine("After DELETE Value And Save - ACVAS xD");
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine(s.B);
+            }
         }
 
         public class HeroRuna : Rune

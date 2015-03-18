@@ -13,6 +13,8 @@ using System.IO;
 
 using System.Dynamic;
 
+using System.Diagnostics;
+
 namespace RuneFramework
 {
     public class Transmuter<T> : IEnumerable<T>
@@ -62,8 +64,66 @@ namespace RuneFramework
 
         public void Transmute()
         {
-            //but first see changes
-            //TransmuteToTablet();
+            RuneBook Book = new RuneBook();
+            Book.Spells = new List<RuneSpell>();
+            Book.Spellage = new List<RuneSpellage>();
+
+            List<T> FromFile = LoadRunicWords;
+            for (int i = 0; i < FromFile.Count; i++)
+            {
+                using (var Letter = new PrimitiveLetter<T>())
+                {
+                    foreach (var Property in Primitives)
+                    {
+                        //if (Property.Name=="A" && (int)Property.GetValue(Words[i], null) == 2)
+                        //{
+                        bool NeedRuneSpell = false;
+                        Letter.NeedChanges(out NeedRuneSpell, FromFile[i], Words[i], Property);
+
+                        if (NeedRuneSpell)
+                        {
+                            Book.Spells.Add(
+                                    new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile[i], null))
+                                );
+                            Book.Spellage.Add(
+                                    new RuneSpellage(Property.Name, Property.GetValue(Words[i], null).ToString())
+                                );
+                        }
+                        //}
+                    }
+                }
+            }
+
+            Mage.Update(Book);
+        }
+
+        private bool Loaded;
+        protected void RunicWordsLoaded()
+        {
+            if (!Loaded)
+            { this.Words = LoadRunicWords; Loaded = true; }
+        }
+        protected List<T> LoadRunicWords
+        {
+            get
+            {
+                List<T> Result=new List<T>();
+                var RunicWords = Mage.Select(null);
+                if (RunicWords.Root != null)
+                {
+                    foreach (XElement RunicWord in RunicWords.Root.Elements())
+                    {
+                        Result.Add
+                            (
+                                TransmuteFromTablet
+                                    (
+                                        (Tablet<T>.ToWord(RunicWord) as ExpandoObject)
+                                    )
+                            );
+                    }
+                }
+                return Result;
+            }
         }
 
         protected XElement TransmuteToTablet(T Item)
@@ -80,20 +140,19 @@ namespace RuneFramework
             return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
         }
 
-        protected void TransmuteFromTablet()
+        protected T TransmuteFromTablet(dynamic Runic)
         {
-            //foreach (XElement Element in Document.Root.Elements())
-            //{
-            //    T Object = (T)Activator.CreateInstance(typeof(T));
+            T Item = Activator.CreateInstance<T>();
 
-            //    Tablet<T> Item = new Tablet<T>(Element);
-            //    var ObjectAtRunic = Item.SayLetters;
+            using(var Letter = new PrimitiveLetter<T>())
+            {
+                foreach(var Property in Primitives)
+                {
+                    Letter.SetProperty(ref Item, (Runic as ExpandoObject),Property);
+                }
+            }
 
-            //    AboutLetters();
-            //    //TransmutePrimitives(Element, ref Object);
-
-            //    Words.Add(Object);
-            //}
+            return Item;
         }
 
         protected void AboutLetters()
@@ -128,19 +187,39 @@ namespace RuneFramework
         protected List<dynamic> WordsOnRunic = new List<dynamic>();
 
         public List<T> Get
-        { get { return Words; } }
+        {
+            get
+            {
+                RunicWordsLoaded();
+                return Words;
+            }
+        }
 
         public void Set(T Value, int Index)
-        { Words[Index] = Value; }
+        {
+            Words[Index] = Value;
+        }
 
         public void Add(T Item)
         {
-            var MaxId = Mage.SelectMax(typeof(T).Name, this.Id);
+            var MaxId = Mage.SelectMax(this.Id);
             Item.GetType().GetProperty(Id).SetValue(Item, Convert.ChangeType(++MaxId, Item.GetType().GetProperty(Id).PropertyType));
 
-            
+            Mage.Insert(new RuneBook() { Elements = new List<XElement>() { TransmuteToTablet(Item) } });
 
             Words.Add(Item);
+        }
+
+        public void Remove(T Item)
+        {
+            Mage.Delete(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(Id, "==", (int)typeof(T).GetProperty(Id).GetValue(Item, null)) } });
+            this.Words.Remove(Item);
+        }
+
+        public void Remove(Int32 Index)
+        {
+            Mage.Delete(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(Id, "==", (int)typeof(T).GetProperty(Id).GetValue(this.Words[Index], null)) } });
+            this.Words.Remove(this.Words[Index]);
         }
 
         public IEnumerator<T> GetEnumerator()

@@ -35,7 +35,7 @@ namespace RuneFramework
             switch (Operator)
             {
                 case "==": return (Instance as IComparable).CompareTo(Value) == 0;
-                case "!=": return (Instance as IComparable).CompareTo(Value) == 0;
+                case "!=": return (Instance as IComparable).CompareTo(Value) != 0;
                 case ">": return (Instance as IComparable).CompareTo(Value) > 0;
                 case ">=": return (Instance as IComparable).CompareTo(Value) >= 0;
                 case "<": return (Instance as IComparable).CompareTo(Value) < 0;

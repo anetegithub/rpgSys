@@ -14,6 +14,7 @@ namespace RuneFramework
         {
             Ids();
             Transmuter = new Transmuter<T>();
+            var f = Transmuter.Get;
         }
 
         protected void Ids()
@@ -44,6 +45,16 @@ namespace RuneFramework
         public void Add(T Item)
         {
             Transmuter.Add(Item);
+        }
+
+        public void Remove(T Item)
+        {
+            Transmuter.Remove(Item);
+        }
+
+        public void Remove(Int32 Index)
+        {
+            Transmuter.Remove(Index);
         }
 
         public IEnumerator<T> GetEnumerator()

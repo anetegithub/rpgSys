@@ -6,24 +6,65 @@ using System.Threading.Tasks;
 
 using System.Xml.Linq;
 
+using System.Xml;
+
 namespace RuneFramework
 {
     public class RuneMage<T>
     {
-        public RuneMage(String Path)
+        public RuneMage(string Path)
         {
-            this.Path = Path;
-            LazyDocument = new Lazy<XDocument>(() => XDocument.Load(Path));
+            //Magican = new Lazy<Singleton<RuneMageCore<T>>>(() => new Singleton<RuneMageCore<T>>());//Path));
+            Singleton<RuneMageCore<T>>.Instance.Path = Path;
+            //.Select(null);
         }
 
-        protected String Path = "";
+        public XDocument Select(RuneBook Query)
+        {
+            if (Query == null)
+                Query = new RuneBook();
+            return Singleton<RuneMageCore<T>>.Instance.SelectStream(Query);
+        }
+
+        public double SelectMax(String Field)
+        {
+            return Singleton<RuneMageCore<T>>.Instance.SelectMaxStream(Field);
+        }
+
+        public XDocument Delete(RuneBook Query)
+        {
+            return Singleton<RuneMageCore<T>>.Instance.Delete(Query);
+        }
+
+        public XDocument Update(RuneBook Query)
+        {
+            return Singleton<RuneMageCore<T>>.Instance.Update(Query);
+        }
+
+        public XDocument Insert(RuneBook Query)
+        {
+            return Singleton<RuneMageCore<T>>.Instance.Insert(Query);
+        }
+    }
+
+    public class RuneMageCore<T>
+    {
+        //public RuneMageCore(String Path)
+        //{
+        //    this.Path = Path;
+        //    LazyDocument = new Lazy<XDocument>(() => XDocument.Load(Path));
+        //}
+
+        public String Path = "";
 
         protected Lazy<XDocument> LazyDocument;
         protected XDocument Document;
-        protected static object Key = new object();
+        protected object Key = new object();
 
         protected void PrepeareSpell()
         {
+            if (LazyDocument == null)
+                LazyDocument = new Lazy<XDocument>(() => XDocument.Load(Path));
             if (!LazyDocument.IsValueCreated)
                 Document = LazyDocument.Value;
             if (Path == "")
@@ -47,6 +88,7 @@ namespace RuneFramework
             }
         }
 
+        [Obsolete("Slow")]
         public XDocument Select(RuneBook Query)
         {
             if (Query.Spells == null || Query.Spells.Count == 0)
@@ -54,10 +96,9 @@ namespace RuneFramework
 
             PrepeareSpell();
 
-
             var some = (
                 from Item
-                in Document.Root.Descendants()
+                in Document.Root.Elements()
                 where Query.Spells[0].Spell(Item)
                 select Item
                 );
@@ -68,6 +109,28 @@ namespace RuneFramework
             return new XDocument(some);
         }
 
+        public XDocument SelectStream(RuneBook Query)
+        {
+            if (Query == null)
+                Query = new RuneBook();
+            if (Query.Spells == null || Query.Spells.Count == 0)
+                Query.Spells = new List<RuneSpell>() { new RuneSpell(Id, "!=", 0) };
+
+            //PrepeareSpell();
+
+            var some = (
+                from Item
+                in StreamRootChildDoc
+                where Query.Spells[0].Spell(Item)
+                select Item
+                );
+
+            foreach (RuneSpell RuneSp in Query.Spells.Skip(1))
+                some.Where(x => RuneSp.Spell(x));
+
+            return new XDocument(new XElement("Root", some));
+        }
+
         public XDocument Delete(RuneBook Query)
         {
             if (Query.Spells == null || Query.Spells.Count == 0)
@@ -75,14 +138,8 @@ namespace RuneFramework
 
             PrepeareSpell();
 
-
-            var some = (
-                from Item
-                in Document.Root.Descendants()
-                where Query.Spells[0].Spell(Item)
-                select Item
-                );
-
+            var some = Document.Root.Elements(typeof(T).Name).Where(x => Query.Spells[0].Spell(x));
+            
             foreach (RuneSpell RuneSp in Query.Spells.Skip(1))
                 some.Where(x => RuneSp.Spell(x));
 
@@ -95,22 +152,31 @@ namespace RuneFramework
 
         public XDocument Update(RuneBook Query)
         {
-            PrepeareSpell();
-
-            var Doc = Select(Query);
-            var Collection = Doc.Elements().ToList();
+            var Doc = SelectStream(null);
+            var XCollection = Doc.Elements().ToList();
+            var Collection = XCollection[0].Elements().ToList();
 
             for (int i = 0; i < Collection.Count; i++)
             {
-                XElement XEl = Collection[i];
-                foreach (RuneSpellage Spellage in Query.Spellage)
-                {
-                    Spellage.SetValue(ref XEl);
-                }
-                Collection[i] = XEl;
-            }
+                bool NeedToBeChanged = false;
 
-            lock (Key) { Document.Save(Path); }
+                foreach (RuneSpell RuneSp in Query.Spells)
+                    NeedToBeChanged = RuneSp.Spell(Collection[i]);
+
+                if (NeedToBeChanged)
+                {
+                    XElement XEl = Collection[i];
+                    foreach (RuneSpellage Spellage in Query.Spellage)
+                    {
+                        Spellage.SetValue(ref XEl);
+                    }
+                    Collection[i] = XEl;
+                }
+            }
+            if (Collection.ToList().Count != 0)
+            {
+                lock (Key) { Document = new XDocument(new XElement(typeof(T).Name + "s", Collection)); Document.Save(Path); }
+            }
 
             return new XDocument(Doc.Elements());
         }
@@ -127,6 +193,7 @@ namespace RuneFramework
             return new XDocument(Query.Elements);
         }
 
+        [Obsolete("Slow")]
         public double SelectMax(String ClassName, String FieldName)
         {
             PrepeareSpell();
@@ -138,6 +205,64 @@ namespace RuneFramework
             }
             else
                 return 0;
+        }
+
+        public double SelectMaxStream(String FieldName)
+        {
+            PrepeareSpell();
+
+            if (Document.Root.Elements().Count() != 0)
+            {
+                var some = StreamRootChildDoc.Max(c => (double)c.Element(FieldName));
+                return some;
+            }
+            else
+                return 0;
+        }
+        protected IEnumerable<XElement> StreamRootChildDoc
+        {
+            get
+            {
+                using (XmlReader reader = XmlReader.Create(Path))
+                {
+                    reader.MoveToContent();
+                    while (reader.Read())
+                    {
+                        switch (reader.NodeType)
+                        {
+                            case XmlNodeType.Element:
+                                {
+                                    XElement el = XElement.ReadFrom(reader) as XElement;
+                                    if (el != null)
+                                        yield return el;
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public sealed class Singleton<T> where T : class, new()
+    {
+        Singleton()
+        { }
+
+        public static T Instance
+        {
+            get
+            {
+                return Nested.instance;
+            }
+        }
+
+        class Nested
+        {
+            static Nested()
+            { }
+
+            internal static readonly T instance = new T();
         }
     }
 }
