@@ -32,6 +32,7 @@ namespace RuneTester
 
 
             hr.Somes[hr.Somes.Count()-5].A = 2;
+            hr.Somes[hr.Somes.Count() - 5].Name = "NewName";
 
             hr.SaveRune();
             Console.WriteLine();
@@ -96,6 +97,8 @@ namespace RuneTester
 
             public int A { get; set; }
             public double B { get; set; }
+
+            public string Name { get; set; }
         }
 
         public enum Sex

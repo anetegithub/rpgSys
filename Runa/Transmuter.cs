@@ -71,27 +71,9 @@ namespace RuneFramework
             List<T> FromFile = LoadRunicWords;
             for (int i = 0; i < FromFile.Count; i++)
             {
-                using (var Letter = new PrimitiveLetter<T>())
-                {
-                    foreach (var Property in Primitives)
-                    {
-                        //if (Property.Name=="A" && (int)Property.GetValue(Words[i], null) == 2)
-                        //{
-                        bool NeedRuneSpell = false;
-                        Letter.NeedChanges(out NeedRuneSpell, FromFile[i], Words[i], Property);
+                TransmutePrimitives(FromFile[i], Words[i], Book);
 
-                        if (NeedRuneSpell)
-                        {
-                            Book.Spells.Add(
-                                    new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile[i], null))
-                                );
-                            Book.Spellage.Add(
-                                    new RuneSpellage(Property.Name, Property.GetValue(Words[i], null).ToString())
-                                );
-                        }
-                        //}
-                    }
-                }
+                TransmuteStrings(FromFile[i], Words[i], Book);
             }
 
             Mage.Update(Book);
@@ -159,14 +141,49 @@ namespace RuneFramework
         { }
 
         protected List<PropertyInfo> Primitives = new List<PropertyInfo>();
-        protected void TransmutePrimitives(XElement Element, ref T Object)
+        protected void TransmutePrimitives(T FromFile, T Words, RuneBook Book)
         {
-            foreach (PropertyInfo Property in Primitives)
+            using (var Letter = new PrimitiveLetter<T>())
             {
-                //new PrimitiveLetter<T>(Element, ref Object, Property);
+                foreach (var Property in Primitives)
+                {
+                    bool NeedRuneSpell = false;
+                    Letter.NeedChanges(out NeedRuneSpell, FromFile[i], Words[i], Property);
+
+                    if (NeedRuneSpell)
+                    {
+                        Book.Spells.Add(
+                                new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile[i], null))
+                            );
+                        Book.Spellage.Add(
+                                new RuneSpellage(Property.Name, Property.GetValue(Words[i], null).ToString())
+                            );
+                    }
+                }
             }
         }
         protected List<PropertyInfo> Strings = new List<PropertyInfo>();
+        protected void TransmuteStrings(T FromFile, T Words, RuneBook Book)
+        {
+            using (var Letter = new PrimitiveLetter<T>())
+            {
+                foreach (var Property in Primitives)
+                {
+                    bool NeedRuneSpell = false;
+                    Letter.NeedChanges(out NeedRuneSpell, FromFile[i], Words[i], Property);
+
+                    if (NeedRuneSpell)
+                    {
+                        Book.Spells.Add(
+                                new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile[i], null))
+                            );
+                        Book.Spellage.Add(
+                                new RuneSpellage(Property.Name, Property.GetValue(Words[i], null).ToString())
+                            );
+                    }
+                }
+            }
+        }
         protected List<PropertyInfo> Classes = new List<PropertyInfo>();
         protected List<PropertyInfo> Enums = new List<PropertyInfo>();
 
