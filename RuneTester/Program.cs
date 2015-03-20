@@ -33,6 +33,7 @@ namespace RuneTester
 
             hr.Somes[hr.Somes.Count()-5].A = 2;
             hr.Somes[hr.Somes.Count() - 5].Name = "NewName";
+            hr.Somes[hr.Somes.Count() - 5].Sexes = Sex.Female;
 
             hr.SaveRune();
             Console.WriteLine();
@@ -71,6 +72,30 @@ namespace RuneTester
             {
                 Console.WriteLine(s.B);
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Strings: ");
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine(s.Name ?? "");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Enums int: ");
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine((int)s.Sexes);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Enums strings: ");
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine(s.Sexes.ToString());
+            }
         }
 
         public class HeroRuna : Rune
@@ -99,6 +124,8 @@ namespace RuneTester
             public double B { get; set; }
 
             public string Name { get; set; }
+
+            public Sex Sexes { get; set; }
         }
 
         public enum Sex

@@ -51,14 +51,14 @@ namespace RuneFramework
         { }
     }
 
-    public class StringLetter<T> : Letter<T>
+    public class EnumLetter<T> : Letter<T>
     {
         public void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property)
         {
             foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))
             {
                 if (Field.Key == Property.Name)
-                    Property.SetValue(Object, Convert.ChangeType(Field.Value.ToString().Replace('.', ','), Property.PropertyType));
+                    Property.SetValue(Object, Enum.Parse(Property.PropertyType, Field.Value.ToString()));
             }
         }
 
@@ -66,18 +66,15 @@ namespace RuneFramework
         {
             var Value = Property.GetValue(Object, null);
             if (Value != null)
-                (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Value);
+                (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Value.ToString());
         }
 
         public void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
         {
-            var A = "";
-            var B = "";
+            object A = Property.GetValue(ObjectA, null);
+            object B = Property.GetValue(ObjectA, null);
 
-            A = Property.GetValue(ObjectA, null);
-            B = Property.GetValue(ObjectB, null);
-
-            if (A.Equals(B))
+            if (A.ToString().Equals(B.ToString()))
                 Result = false;
             else
                 Result = true;
@@ -85,5 +82,19 @@ namespace RuneFramework
 
         public void Dispose()
         { }
+    }
+
+    public class StringLetter<T> : PrimitiveLetter<T>
+    {
+        public new void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
+        {
+            string A = (string)Property.GetValue(ObjectA, null) ?? "";
+            string B = (string)Property.GetValue(ObjectB, null) ?? "";
+
+            if (A.Equals(B))
+                Result = false;
+            else
+                Result = true;
+        }
     }
 }

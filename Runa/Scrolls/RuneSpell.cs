@@ -62,9 +62,16 @@ namespace RuneFramework
         protected string Field { get; set; }
         protected string Value { get; set; }
 
+        /// <summary>
+        /// If Element not exists create
+        /// </summary>
+        /// <param name="Element"></param>
         public void SetValue(ref XElement Element)
         {
-            Element.Element(Field).Value = Value;
+            if (Element.Element(Field) != null)
+                Element.Element(Field).Value = Value;
+            else
+                Element.Add(new XElement(Field, Value));
         }
     }
 }
