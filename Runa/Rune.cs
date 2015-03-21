@@ -19,7 +19,7 @@ namespace RuneFramework
         public Rune()
         {
             DataDirectory();
-            SayRuneWords();            
+            SayRuneWords();
             Console.WriteLine("Init end");
         }
 
@@ -35,16 +35,18 @@ namespace RuneFramework
         {
             foreach (PropertyInfo RuneWord in this.GetType().GetProperties())
             {
-                var T = RuneWord.PropertyType.GetGenericArguments()[0];
+                string Name = RuneWord.PropertyType.GetGenericArguments()[0].Name;
+                if (Name == "RuneString")
+                    Name = RuneWord.Name;
 
-                if (!Initialize(T))
-                    if (!CreateTable(T))
+                if (!Initialize(Name))
+                    if (!CreateTable(Name))
                         throw new Exception("Can't create table");
 
                 var Constructors = RuneWord.PropertyType.GetConstructors();
                 foreach(var Constructor in Constructors)
                 {
-                    RuneWord.SetValue(this, Constructor.Invoke(new object[0]));
+                    RuneWord.SetValue(this, Constructor.Invoke(new object[] { Name }));
                 }
             }
         }
@@ -61,31 +63,31 @@ namespace RuneFramework
                     Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/Data/");
         }
 
-        protected bool Initialize(Type Table)
+        protected bool Initialize(String Name)
         {
             if (Element == RuneElement.Air)
             {
-                if (File.Exists(HttpContext.Current.Server.MapPath("~/Data/" + Table.Name + ".xml")))
+                if (File.Exists(HttpContext.Current.Server.MapPath("~/Data/" + Name + ".xml")))
                     return true;
             }
             else if (Element == RuneElement.Earth)
-                if (File.Exists(Directory.GetCurrentDirectory() + "/Data/" + Table.Name + ".xml"))
+                if (File.Exists(Directory.GetCurrentDirectory() + "/Data/" + Name + ".xml"))
                     return true;
 
             return false;
         }
 
-        protected bool CreateTable(Type Table)
+        protected bool CreateTable(String Name)
         {
-            XDocument XmlTable = new XDocument(new XElement(Table.Name + "s"));
+            XDocument XmlTable = new XDocument(new XElement(Name + "s"));
             if (Element == RuneElement.Air)
             {
-                XmlTable.Save(HttpContext.Current.Server.MapPath("~/Data/" + Table.Name + ".xml"));
+                XmlTable.Save(HttpContext.Current.Server.MapPath("~/Data/" + Name + ".xml"));
                 return true;
             }
             else if (Element == RuneElement.Earth)
             {
-                XmlTable.Save(Directory.GetCurrentDirectory() + "/Data/" + Table.Name + ".xml");
+                XmlTable.Save(Directory.GetCurrentDirectory() + "/Data/" + Name + ".xml");
                 return true;
             }
 

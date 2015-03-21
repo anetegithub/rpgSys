@@ -10,10 +10,14 @@ namespace RuneFramework
 {
     public class RuneWord<T> : IEnumerable<T>
     {
-        public RuneWord()
+        public RuneWord(string TableName)
         {
             Ids();
-            Transmuter = new Transmuter<T>();
+            if (typeof(T) != typeof(RuneString))
+                Transmuter = new Transmuter<T>(typeof(T).Name);
+            else
+                Transmuter = new Transmuter<T>(TableName);
+
             var f = Transmuter.Get;
         }
 

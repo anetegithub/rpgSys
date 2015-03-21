@@ -19,13 +19,13 @@ namespace RuneFramework
 {
     public class Transmuter<T> : IEnumerable<T>
     {
-        public Transmuter()
+        public Transmuter(String TableName)
         {
             //Init Shamans
             Primitives = new RuneMage<T>(new PrimitiveLetter<T>());
             Strings = new RuneMage<T>(new StringLetter<T>());
             RuneStrings = new RuneMage<T>(new RuneStringLetter<T>());
-            Classes=new RuneMage<T>(new PrimitiveLetter<T>());
+            Classes = new RuneMage<T>(new PrimitiveLetter<T>());
 
             //Init properties
             foreach (PropertyInfo Property in typeof(T).GetProperties())
@@ -33,25 +33,25 @@ namespace RuneFramework
                 if (Property.PropertyType.IsPrimitive)
                     Primitives.Properties.Add(Property);
 
+                else if (Property.PropertyType == typeof(RuneString))
+                    RuneStrings.Properties.Add(Property);
+
                 else if (Property.PropertyType == typeof(String))
                     Strings.Properties.Add(Property);
 
                 else if (Property.PropertyType.IsGenericType)
-                    Classes.Properties.Add(Property);
-
-                else if (Property.PropertyType == typeof(RuneString))
-                    RuneStrings.Properties.Add(Property);
+                    Classes.Properties.Add(Property);               
             }
 
             //Init document
             if (Rune.Element == RuneElement.Air)
-                PathToFile = HttpContext.Current.Server.MapPath("~/Data/" + typeof(T).Name + ".xml");
+                PathToFile = HttpContext.Current.Server.MapPath("~/Data/" + TableName + ".xml");
             else if (Rune.Element == RuneElement.Earth)
-                PathToFile = Directory.GetCurrentDirectory() + "/Data/" + typeof(T).Name + ".xml";
+                PathToFile = Directory.GetCurrentDirectory() + "/Data/" + TableName + ".xml";
 
-            Magican = new Lazy<RuneMage<T>>(() => new RuneMage<T>(PathToFile));            
+            Shamanism = new Lazy<RuneShaman<T>>(() => new RuneShaman<T>(PathToFile));
         }
-                       
+
         protected string PathToFile;
         private string Id
         {
@@ -87,7 +87,7 @@ namespace RuneFramework
                 RuneStrings.Transmute(FromFile[i], Words[i], Book);
             }
 
-            Mage.Update(Book);
+            Shaman.Update(Book);
         }
 
         private bool Loaded;
@@ -100,8 +100,8 @@ namespace RuneFramework
         {
             get
             {
-                List<T> Result=new List<T>();
-                var RunicWords = Mage.Select(null);
+                List<T> Result = new List<T>();
+                var RunicWords = Shaman.Select(null);
                 if (RunicWords.Root != null)
                 {
                     foreach (XElement RunicWord in RunicWords.Root.Elements())
@@ -123,65 +123,47 @@ namespace RuneFramework
         {
             dynamic WordAtRunic = new ExpandoObject();
 
-            using (var Letter = new PrimitiveLetter<T>())
-                foreach (var Property in Primitives.Properties)
-                    Letter.GetProperty(ref WordAtRunic, Item, Property);
+            Primitives.ToTablet(Item, ref WordAtRunic);
 
-            using (var Letter = new StringLetter<T>())
-                foreach (var Property in Strings.Properties)
-                    Letter.GetProperty(ref WordAtRunic, Item, Property);
+            Strings.ToTablet(Item, ref WordAtRunic);
 
-            using (var Letter = new RuneStringLetter<T>())
-                foreach (var Property in RuneStrings)
-                    Letter.GetProperty(ref WordAtRunic, Item, Property);
+            RuneStrings.ToTablet(Item, ref WordAtRunic);
 
             return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
         }
-
         protected T TransmuteFromTablet(dynamic Runic)
         {
             T Item = Activator.CreateInstance<T>();
 
-            using(var Letter = new PrimitiveLetter<T>())
-                foreach(var Property in Primitives)
-                    Letter.SetProperty(ref Item, (Runic as ExpandoObject),Property);
+            Primitives.FromTablet(Runic as ExpandoObject, ref Item);
 
-            using (var Letter = new StringLetter<T>())
-                foreach (var Property in Strings)
-                    Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);
+            Strings.FromTablet(Runic as ExpandoObject, ref Item);
 
-            using (var Letter = new RuneStringLetter<T>())
-                foreach (var Property in RuneStrings)
-                    Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);
+            RuneStrings.FromTablet(Runic as ExpandoObject, ref Item);
 
             return Item;
         }
 
-        protected void AboutLetters()
-        { }
-
         protected RuneMage<T> Primitives { get; set; }
         protected RuneMage<T> Strings { get; set; }
         protected RuneMage<T> RuneStrings { get; set; }
-        protected RuneMage<T> Classes {get; set;}
-        
+        protected RuneMage<T> Classes { get; set; }
 
-        protected Lazy<RuneMage<T>> Magican;
-        private RuneMage<T> ShadowMage { get; set; }
-        protected RuneMage<T> Mage
+
+        protected Lazy<RuneShaman<T>> Shamanism;
+        private RuneShaman<T> ShadowShaman { get; set; }
+        protected RuneShaman<T> Shaman
         {
             get
             {
-                if (!Magican.IsValueCreated)
-                    ShadowMage = Magican.Value;
+                if (!Shamanism.IsValueCreated)
+                    ShadowShaman = Shamanism.Value;
 
-                return ShadowMage;
+                return ShadowShaman;
             }
         }
 
         protected List<T> Words = new List<T>();
-        protected List<dynamic> WordsOnRunic = new List<dynamic>();
-
         public List<T> Get
         {
             get
@@ -190,31 +172,27 @@ namespace RuneFramework
                 return Words;
             }
         }
-
         public void Set(T Value, int Index)
         {
             Words[Index] = Value;
         }
-
         public void Add(T Item)
         {
-            var MaxId = Mage.SelectMax(this.Id);
+            var MaxId = Shaman.SelectMax(this.Id);
             Item.GetType().GetProperty(Id).SetValue(Item, Convert.ChangeType(++MaxId, Item.GetType().GetProperty(Id).PropertyType));
 
-            Mage.Insert(new RuneBook() { Elements = new List<XElement>() { TransmuteToTablet(Item) } });
+            Shaman.Insert(new RuneBook() { Elements = new List<XElement>() { TransmuteToTablet(Item) } });
 
             Words.Add(Item);
         }
-
         public void Remove(T Item)
         {
-            Mage.Delete(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(Id, "==", (int)typeof(T).GetProperty(Id).GetValue(Item, null)) } });
+            Shaman.Delete(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(Id, "==", (int)typeof(T).GetProperty(Id).GetValue(Item, null)) } });
             this.Words.Remove(Item);
         }
-
         public void Remove(Int32 Index)
         {
-            Mage.Delete(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(Id, "==", (int)typeof(T).GetProperty(Id).GetValue(this.Words[Index], null)) } });
+            Shaman.Delete(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(Id, "==", (int)typeof(T).GetProperty(Id).GetValue(this.Words[Index], null)) } });
             this.Words.Remove(this.Words[Index]);
         }
 
@@ -229,7 +207,6 @@ namespace RuneFramework
                 yield return t;
             }
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();

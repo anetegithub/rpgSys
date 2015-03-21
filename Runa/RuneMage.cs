@@ -15,8 +15,8 @@ namespace RuneFramework
     public interface IRuneMage<T>
     {
         void Transmute(T FromFile, T Words, RuneBook Book);
-        XElement ToTablet(T Item);
-        T FromTablet(dynamic Runic);
+        XElement ToTablet(T Item, ref dynamic WordAtRunic);
+        T FromTablet(dynamic Runic, ref T Item);
     }
 
     public class RuneMage<T> : IRuneMage<T>
@@ -26,7 +26,7 @@ namespace RuneFramework
             this.SpecificLetter = Letters;
         }
 
-        public List<PropertyInfo> Properties { get; set; }
+        public List<PropertyInfo> Properties = new List<PropertyInfo>();
 
         private Letter<T> SpecificLetter;
 
@@ -70,19 +70,8 @@ namespace RuneFramework
             }
         }
 
-        /////////////////////////////// TODO:
-        ///////// ADD REFERENCE CUZ NEED ONE OBJECT BUT MUCH FIELD TYPES
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Item"></param>
-        /// <returns></returns>
-        public XElement ToTablet(T Item)
+        public XElement ToTablet(T Item, ref dynamic WordAtRunic)
         {
-            dynamic WordAtRunic = new ExpandoObject();
-
             using (var Letter = SpecificLetter)
                 foreach (var Property in Properties)
                     Letter.GetProperty(ref WordAtRunic, Item, Property);
@@ -90,10 +79,8 @@ namespace RuneFramework
             return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
         }
 
-        public T FromTablet(dynamic Runic)
+        public T FromTablet(dynamic Runic, ref T Item)
         {
-            T Item = Activator.CreateInstance<T>();
-
             using (var Letter = new PrimitiveLetter<T>())
                 foreach (var Property in Properties)
                     Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);

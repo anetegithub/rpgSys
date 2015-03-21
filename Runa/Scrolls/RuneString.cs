@@ -9,8 +9,12 @@ using System.Dynamic;
 
 namespace RuneFramework
 {
-    public class RuneString
+    public class RuneString : IEquatable<RuneString>
     {
+        [Obsolete("Enabled only for run-time.",true)]
+        public RuneString()
+        { }
+
         private RuneString(int i)
         {
             Id = i;
@@ -35,6 +39,15 @@ namespace RuneFramework
         public static implicit operator RuneString(int i)
         {
             return new RuneString(i) { Value = "VALUE_NOT_FOUND" };
+        }
+
+        public bool Equals(RuneString other)
+        {
+            if (this.Id == other.Id && this.Value == this.Value)
+                return true;
+            else
+                return false;
+
         }
     }
 }

@@ -71,10 +71,10 @@ namespace RuneFramework
 
         public void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
         {
-            object A = Property.GetValue(ObjectA, null);
-            object B = Property.GetValue(ObjectA, null);
+            RuneString A = (RuneString)Property.GetValue(ObjectA, null) ?? 0;
+            RuneString B = (RuneString)Property.GetValue(ObjectB, null) ?? 0;
 
-            if (A.ToString().Equals(B.ToString()))
+            if (A.Equals(B))
                 Result = false;
             else
                 Result = true;
@@ -84,9 +84,25 @@ namespace RuneFramework
         { }
     }
 
-    public class StringLetter<T> : PrimitiveLetter<T>
+    public class StringLetter<T> : Letter<T>
     {
-        public new void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
+        public void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property)
+        {
+            foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))
+            {
+                if (Field.Key == Property.Name)
+                    Property.SetValue(Object, Convert.ChangeType(Field.Value.ToString().Replace('.', ','), Property.PropertyType));
+            }
+        }
+
+        public void GetProperty(ref dynamic ObjectAtRunic, T Object, PropertyInfo Property)
+        {
+            var Value = Property.GetValue(Object, null);
+            if (Value != null)
+                (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Value);
+        }
+
+        public void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
         {
             string A = (string)Property.GetValue(ObjectA, null) ?? "";
             string B = (string)Property.GetValue(ObjectB, null) ?? "";
@@ -96,5 +112,8 @@ namespace RuneFramework
             else
                 Result = true;
         }
+
+        public void Dispose()
+        { }
     }
 }

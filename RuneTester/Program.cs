@@ -19,34 +19,11 @@ namespace RuneTester
         {
             Rune.Element = RuneElement.Earth;
 
-            Some s = new Some();
-            s.Sex = 2;
-
-            foreach (var Property in typeof(Some).GetProperties())
-            {
-                if (Property.PropertyType == typeof(RuneString))
-                {
-                    Console.WriteLine(Property.GetValue(s,null) as RuneString);
-                }
-            }
-            
             using (var hr = new HeroRuna())
             {
-                hr.Sex.Add(new RuneString("Male"));
-                hr.Sex.Add(new RuneString("Female"));
-                Console.WriteLine(hr.Sex[1]);
-                hr.Somes[0].Sex = 2;
-                Console.WriteLine(hr.Somes[0].Sex);
-
-                /*
-                 * 
-                 * Output :
-                 * Female
-                 * 
-                */
-
-                //TestPrimitives(hr);
+                TestPrimitives(hr);
             }
+
             Console.WriteLine("done");
             Console.ReadLine();
         }
@@ -61,10 +38,7 @@ namespace RuneTester
             }
 
 
-            //hr.Somes[hr.Somes.Count()-5].A = 2;
-            //hr.Somes[hr.Somes.Count() - 5].Name = "NewName";
-            //hr.Somes[hr.Somes.Count() - 5].Sexes = Sex.Female;
-
+            
             hr.SaveRune();
             Console.WriteLine();
             Console.WriteLine("After Change Value And Save - ACVAS xD");
@@ -83,6 +57,7 @@ namespace RuneTester
             }
 
             //hr.Somes[hr.Somes.Count() - 3].B = 0.159;
+            hr.Somes[0].Sex = 0;
 
             hr.SaveRune();
             Console.WriteLine();
@@ -117,6 +92,7 @@ namespace RuneTester
             public RuneWord<Hero> Heroes { get; set; }
             public RuneWord<Some> Somes { get; set; }
             public RuneWord<RuneString> Sex { get; set; }
+            public RuneWord<RuneString> Height { get; set; }
         }
         public class Hero
         {

@@ -14,9 +14,7 @@ namespace RuneFramework
     {
         public RuneShaman(string Path)
         {
-            //Magican = new Lazy<Singleton<RuneMageCore<T>>>(() => new Singleton<RuneMageCore<T>>());//Path));
             Singleton<RuneShamanCore<T>>.Instance.Path = Path;
-            //.Select(null);
         }
 
         public XDocument Select(RuneBook Query)
