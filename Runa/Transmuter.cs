@@ -21,17 +21,26 @@ namespace RuneFramework
     {
         public Transmuter()
         {
+            //Init Shamans
+            Primitives = new RuneMage<T>(new PrimitiveLetter<T>());
+            Strings = new RuneMage<T>(new StringLetter<T>());
+            RuneStrings = new RuneMage<T>(new RuneStringLetter<T>());
+            Classes=new RuneMage<T>(new PrimitiveLetter<T>());
+
             //Init properties
             foreach (PropertyInfo Property in typeof(T).GetProperties())
             {
                 if (Property.PropertyType.IsPrimitive)
-                    Primitives.Add(Property);
+                    Primitives.Properties.Add(Property);
+
                 else if (Property.PropertyType == typeof(String))
-                    Strings.Add(Property);
+                    Strings.Properties.Add(Property);
+
                 else if (Property.PropertyType.IsGenericType)
-                    Classes.Add(Property);
-                else if (Property.PropertyType.IsEnum)
-                    Enums.Add(Property);
+                    Classes.Properties.Add(Property);
+
+                else if (Property.PropertyType == typeof(RuneString))
+                    RuneStrings.Properties.Add(Property);
             }
 
             //Init document
@@ -42,13 +51,13 @@ namespace RuneFramework
 
             Magican = new Lazy<RuneMage<T>>(() => new RuneMage<T>(PathToFile));            
         }
-
+                       
         protected string PathToFile;
-        protected string Id
+        private string Id
         {
             get
             {
-                if (!typeof(T).IsEnum)
+                if (typeof(T) != typeof(RuneString))
                 {
                     var Id = typeof(T).GetProperty("Id");
                     if (Id == null)
@@ -71,11 +80,11 @@ namespace RuneFramework
             List<T> FromFile = LoadRunicWords;
             for (int i = 0; i < FromFile.Count; i++)
             {
-                TransmutePrimitives(FromFile[i], Words[i], Book);
+                Primitives.Transmute(FromFile[i], Words[i], Book);
 
-                TransmuteStrings(FromFile[i], Words[i], Book);
+                Strings.Transmute(FromFile[i], Words[i], Book);
 
-                TransmuteEnums(FromFile[i], Words[i], Book);
+                RuneStrings.Transmute(FromFile[i], Words[i], Book);
             }
 
             Mage.Update(Book);
@@ -115,15 +124,15 @@ namespace RuneFramework
             dynamic WordAtRunic = new ExpandoObject();
 
             using (var Letter = new PrimitiveLetter<T>())
-                foreach (var Property in Primitives)
+                foreach (var Property in Primitives.Properties)
                     Letter.GetProperty(ref WordAtRunic, Item, Property);
 
             using (var Letter = new StringLetter<T>())
-                foreach (var Property in Strings)
+                foreach (var Property in Strings.Properties)
                     Letter.GetProperty(ref WordAtRunic, Item, Property);
 
-            using (var Letter = new EnumLetter<T>())
-                foreach (var Property in Enums)
+            using (var Letter = new RuneStringLetter<T>())
+                foreach (var Property in RuneStrings)
                     Letter.GetProperty(ref WordAtRunic, Item, Property);
 
             return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
@@ -141,8 +150,8 @@ namespace RuneFramework
                 foreach (var Property in Strings)
                     Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);
 
-            using (var Letter = new EnumLetter<T>())
-                foreach (var Property in Enums)
+            using (var Letter = new RuneStringLetter<T>())
+                foreach (var Property in RuneStrings)
                     Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);
 
             return Item;
@@ -151,76 +160,11 @@ namespace RuneFramework
         protected void AboutLetters()
         { }
 
-        protected List<PropertyInfo> Primitives = new List<PropertyInfo>();
-        protected void TransmutePrimitives(T FromFile, T Words, RuneBook Book)
-        {
-            using (var Letter = new PrimitiveLetter<T>())
-            {
-                foreach (var Property in Primitives)
-                {
-                    bool NeedRuneSpell = false;
-                    Letter.NeedChanges(out NeedRuneSpell, FromFile, Words, Property);
-
-                    if (NeedRuneSpell)
-                    {
-                        Book.Spells.Add(
-                                new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
-                            );
-                        Book.Spellage.Add(
-                                new RuneSpellage(Property.Name, Property.GetValue(Words, null).ToString())
-                            );
-                    }
-                }
-            }
-        }
-
-        protected List<PropertyInfo> Strings = new List<PropertyInfo>();
-        protected void TransmuteStrings(T FromFile, T Words, RuneBook Book)
-        {
-            using (var Letter = new StringLetter<T>())
-            {
-                foreach (var Property in Strings)
-                {
-                    bool NeedRuneSpell = false;
-                    Letter.NeedChanges(out NeedRuneSpell, FromFile, Words, Property);
-
-                    if (NeedRuneSpell)
-                    {
-                        Book.Spells.Add(
-                                new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
-                            );
-                        Book.Spellage.Add(
-                                new RuneSpellage(Property.Name, Property.GetValue(Words, null).ToString())
-                            );
-                    }
-                }
-            }
-        }
+        protected RuneMage<T> Primitives { get; set; }
+        protected RuneMage<T> Strings { get; set; }
+        protected RuneMage<T> RuneStrings { get; set; }
+        protected RuneMage<T> Classes {get; set;}
         
-        protected List<PropertyInfo> Enums = new List<PropertyInfo>();
-        protected void TransmuteEnums(T FromFile, T Words, RuneBook Book)
-        {
-            using (var Letter = new EnumLetter<T>())
-            {
-                foreach (var Property in Enums)
-                {
-                    bool NeedRuneSpell = false;
-                    Letter.NeedChanges(out NeedRuneSpell, FromFile, Words, Property);
-
-                    if (NeedRuneSpell)
-                    {
-                        Book.Spells.Add(
-                                new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
-                            );
-                        Book.Spellage.Add(
-                                new RuneSpellage(Property.Name, Property.GetValue(Words, null).ToString())
-                            );
-                    }
-                }
-            }
-        }
-
-        protected List<PropertyInfo> Classes = new List<PropertyInfo>();
 
         protected Lazy<RuneMage<T>> Magican;
         private RuneMage<T> ShadowMage { get; set; }

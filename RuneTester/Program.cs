@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 using RuneFramework;
 
+using System.Reflection.Emit;
+using System.Reflection;
+
+using System.Dynamic;
+
 namespace RuneTester
 {
     class Program
@@ -13,9 +18,34 @@ namespace RuneTester
         static void Main(string[] args)
         {
             Rune.Element = RuneElement.Earth;
+
+            Some s = new Some();
+            s.Sex = 2;
+
+            foreach (var Property in typeof(Some).GetProperties())
+            {
+                if (Property.PropertyType == typeof(RuneString))
+                {
+                    Console.WriteLine(Property.GetValue(s,null) as RuneString);
+                }
+            }
+            
             using (var hr = new HeroRuna())
             {
-                TestPrimitives(hr);
+                hr.Sex.Add(new RuneString("Male"));
+                hr.Sex.Add(new RuneString("Female"));
+                Console.WriteLine(hr.Sex[1]);
+                hr.Somes[0].Sex = 2;
+                Console.WriteLine(hr.Somes[0].Sex);
+
+                /*
+                 * 
+                 * Output :
+                 * Female
+                 * 
+                */
+
+                //TestPrimitives(hr);
             }
             Console.WriteLine("done");
             Console.ReadLine();
@@ -31,9 +61,9 @@ namespace RuneTester
             }
 
 
-            hr.Somes[hr.Somes.Count()-5].A = 2;
-            hr.Somes[hr.Somes.Count() - 5].Name = "NewName";
-            hr.Somes[hr.Somes.Count() - 5].Sexes = Sex.Female;
+            //hr.Somes[hr.Somes.Count()-5].A = 2;
+            //hr.Somes[hr.Somes.Count() - 5].Name = "NewName";
+            //hr.Somes[hr.Somes.Count() - 5].Sexes = Sex.Female;
 
             hr.SaveRune();
             Console.WriteLine();
@@ -52,7 +82,7 @@ namespace RuneTester
                 Console.WriteLine(s.B);
             }
 
-            hr.Somes[hr.Somes.Count() - 3].B = 0.159;
+            //hr.Somes[hr.Somes.Count() - 3].B = 0.159;
 
             hr.SaveRune();
             Console.WriteLine();
@@ -80,40 +110,21 @@ namespace RuneTester
             {
                 Console.WriteLine(s.Name ?? "");
             }
-
-            Console.WriteLine();
-            Console.WriteLine("Enums int: ");
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine((int)s.Sexes);
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("Enums strings: ");
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine(s.Sexes.ToString());
-            }
         }
 
         public class HeroRuna : Rune
         {
             public RuneWord<Hero> Heroes { get; set; }
             public RuneWord<Some> Somes { get; set; }
-            public RuneWord<Sex> Sexes { get; set; }
+            public RuneWord<RuneString> Sex { get; set; }
         }
-
         public class Hero
         {
             public int HeroId { get; set; }
 
             public string Name { get; set; }
 
-            public List<Some> Fields { get; set; }
-
-            public Sex MySex { get; set; }
+            public List<Some> Fields { get; set; }            
         }
 
         public class Some
@@ -125,7 +136,7 @@ namespace RuneTester
 
             public string Name { get; set; }
 
-            public Sex Sexes { get; set; }
+            public RuneString Sex { get; set; }
         }
 
         public enum Sex

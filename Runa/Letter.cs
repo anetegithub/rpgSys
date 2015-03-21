@@ -51,7 +51,7 @@ namespace RuneFramework
         { }
     }
 
-    public class EnumLetter<T> : Letter<T>
+    public class RuneStringLetter<T> : Letter<T>
     {
         public void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property)
         {

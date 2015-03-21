@@ -19,7 +19,7 @@ namespace RuneFramework
 
         protected void Ids()
         {
-            if (!typeof(T).IsEnum)
+            if (typeof(T)!=typeof(RuneString))
             {
                 var Id = typeof(T).GetProperty("Id");
                 if (Id == null)
@@ -38,7 +38,17 @@ namespace RuneFramework
 
         public T this[int i]
         {
-            get { return Transmuter.Get[i]; }
+            get
+            {
+                try
+                {
+                    return Transmuter.Get[i];
+                }
+                catch (ArgumentOutOfRangeException Ex)
+                {
+                    throw new ArgumentOutOfRangeException("Index out of range", Ex);
+                }
+            }
             set { Transmuter.Get[i] = value; }
         }
 

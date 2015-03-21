@@ -4,77 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Reflection;
+
 using System.Xml.Linq;
 
-using System.Xml;
+using System.Dynamic;
 
 namespace RuneFramework
 {
-    public class RuneMage<T>
+    public interface IRuneMage<T>
     {
-        public RuneMage(string Path)
-        {
-            //Magican = new Lazy<Singleton<RuneMageCore<T>>>(() => new Singleton<RuneMageCore<T>>());//Path));
-            Singleton<RuneMageCore<T>>.Instance.Path = Path;
-            //.Select(null);
-        }
-
-        public XDocument Select(RuneBook Query)
-        {
-            if (Query == null)
-                Query = new RuneBook();
-            return Singleton<RuneMageCore<T>>.Instance.SelectStream(Query);
-        }
-
-        public double SelectMax(String Field)
-        {
-            return Singleton<RuneMageCore<T>>.Instance.SelectMaxStream(Field);
-        }
-
-        public XDocument Delete(RuneBook Query)
-        {
-            return Singleton<RuneMageCore<T>>.Instance.Delete(Query);
-        }
-
-        public XDocument Update(RuneBook Query)
-        {
-            return Singleton<RuneMageCore<T>>.Instance.Update(Query);
-        }
-
-        public XDocument Insert(RuneBook Query)
-        {
-            return Singleton<RuneMageCore<T>>.Instance.Insert(Query);
-        }
+        void Transmute(T FromFile, T Words, RuneBook Book);
+        XElement ToTablet(T Item);
+        T FromTablet(dynamic Runic);
     }
 
-    public class RuneMageCore<T>
+    public class RuneMage<T> : IRuneMage<T>
     {
-        //public RuneMageCore(String Path)
-        //{
-        //    this.Path = Path;
-        //    LazyDocument = new Lazy<XDocument>(() => XDocument.Load(Path));
-        //}
-
-        public String Path = "";
-
-        protected Lazy<XDocument> LazyDocument;
-        protected XDocument Document;
-        protected object Key = new object();
-
-        protected void PrepeareSpell()
+        public RuneMage(Letter<T> Letters)
         {
-            if (LazyDocument == null)
-                LazyDocument = new Lazy<XDocument>(() => XDocument.Load(Path));
-            if (!LazyDocument.IsValueCreated)
-                Document = LazyDocument.Value;
-            if (Path == "")
-                throw new Exception("Path to file not found!");
+            this.SpecificLetter = Letters;
         }
-        protected string Id
+
+        public List<PropertyInfo> Properties { get; set; }
+
+        private Letter<T> SpecificLetter;
+
+        private string Id
         {
             get
             {
-                if (!typeof(T).IsEnum)
+                if (typeof(T) != typeof(RuneString))
                 {
                     var Id = typeof(T).GetProperty("Id");
                     if (Id == null)
@@ -88,181 +48,57 @@ namespace RuneFramework
             }
         }
 
-        [Obsolete("Slow")]
-        public XDocument Select(RuneBook Query)
+        public void Transmute(T FromFile, T Words, RuneBook Book)
         {
-            if (Query.Spells == null || Query.Spells.Count == 0)
-                Query.Spells = new List<RuneSpell>() { new RuneSpell(Id, "!=", 0) };
-
-            PrepeareSpell();
-
-            var some = (
-                from Item
-                in Document.Root.Elements()
-                where Query.Spells[0].Spell(Item)
-                select Item
-                );
-
-            foreach (RuneSpell RuneSp in Query.Spells.Skip(1))
-                some.Where(x => RuneSp.Spell(x));
-
-            return new XDocument(some);
-        }
-
-        public XDocument SelectStream(RuneBook Query)
-        {
-            if (Query == null)
-                Query = new RuneBook();
-            if (Query.Spells == null || Query.Spells.Count == 0)
-                Query.Spells = new List<RuneSpell>() { new RuneSpell(Id, "!=", 0) };
-
-            //PrepeareSpell();
-
-            var some = (
-                from Item
-                in StreamRootChildDoc
-                where Query.Spells[0].Spell(Item)
-                select Item
-                );
-
-            foreach (RuneSpell RuneSp in Query.Spells.Skip(1))
-                some.Where(x => RuneSp.Spell(x));
-
-            return new XDocument(new XElement("Root", some));
-        }
-
-        public XDocument Delete(RuneBook Query)
-        {
-            if (Query.Spells == null || Query.Spells.Count == 0)
-                Query.Spells = new List<RuneSpell>() { new RuneSpell(Id, "!=", 0) };
-
-            PrepeareSpell();
-
-            var some = Document.Root.Elements(typeof(T).Name).Where(x => Query.Spells[0].Spell(x));
-            
-            foreach (RuneSpell RuneSp in Query.Spells.Skip(1))
-                some.Where(x => RuneSp.Spell(x));
-
-            some.Remove();
-
-            lock (Key) { Document.Save(Path); }
-
-            return new XDocument();
-        }
-
-        public XDocument Update(RuneBook Query)
-        {
-            var Doc = SelectStream(null);
-            var XCollection = Doc.Elements().ToList();
-            var Collection = XCollection[0].Elements().ToList();
-
-            for (int i = 0; i < Collection.Count; i++)
+            using (var Letter = SpecificLetter)
             {
-                bool NeedToBeChanged = false;
-
-                foreach (RuneSpell RuneSp in Query.Spells)
-                    NeedToBeChanged = RuneSp.Spell(Collection[i]);
-
-                if (NeedToBeChanged)
+                foreach (var Property in Properties)
                 {
-                    XElement XEl = Collection[i];
-                    foreach (RuneSpellage Spellage in Query.Spellage)
+                    bool NeedRuneSpell = false;
+                    Letter.NeedChanges(out NeedRuneSpell, FromFile, Words, Property);
+
+                    if (NeedRuneSpell)
                     {
-                        Spellage.SetValue(ref XEl);
-                    }
-                    Collection[i] = XEl;
-                }
-            }
-            if (Collection.ToList().Count != 0)
-            {
-                lock (Key) { Document = new XDocument(new XElement(typeof(T).Name + "s", Collection)); Document.Save(Path); }
-            }
-
-            return new XDocument(Doc.Elements());
-        }
-
-        public XDocument Insert(RuneBook Query)
-        {
-            PrepeareSpell();
-
-            foreach (XElement XEl in Query.Elements)
-                Document.Root.Add(XEl);
-
-            lock (Key) { Document.Save(Path); }
-
-            return new XDocument(Query.Elements);
-        }
-
-        [Obsolete("Slow")]
-        public double SelectMax(String ClassName, String FieldName)
-        {
-            PrepeareSpell();
-
-            if (Document.Root.Elements().Count() != 0)
-            {
-                var some = Document.Root.Elements(ClassName).Max(c => (double)c.Element(FieldName));
-                return some;
-            }
-            else
-                return 0;
-        }
-
-        public double SelectMaxStream(String FieldName)
-        {
-            PrepeareSpell();
-
-            if (Document.Root.Elements().Count() != 0)
-            {
-                var some = StreamRootChildDoc.Max(c => (double)c.Element(FieldName));
-                return some;
-            }
-            else
-                return 0;
-        }
-        protected IEnumerable<XElement> StreamRootChildDoc
-        {
-            get
-            {
-                using (XmlReader reader = XmlReader.Create(Path))
-                {
-                    reader.MoveToContent();
-                    while (reader.Read())
-                    {
-                        switch (reader.NodeType)
-                        {
-                            case XmlNodeType.Element:
-                                {
-                                    XElement el = XElement.ReadFrom(reader) as XElement;
-                                    if (el != null)
-                                        yield return el;
-                                }
-                                break;
-                        }
+                        Book.Spells.Add(
+                                new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
+                            );
+                        Book.Spellage.Add(
+                                new RuneSpellage(Property.Name, Property.GetValue(Words, null).ToString())
+                            );
                     }
                 }
             }
         }
-    }
 
-    public sealed class Singleton<T> where T : class, new()
-    {
-        Singleton()
-        { }
+        /////////////////////////////// TODO:
+        ///////// ADD REFERENCE CUZ NEED ONE OBJECT BUT MUCH FIELD TYPES
 
-        public static T Instance
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Item"></param>
+        /// <returns></returns>
+        public XElement ToTablet(T Item)
         {
-            get
-            {
-                return Nested.instance;
-            }
+            dynamic WordAtRunic = new ExpandoObject();
+
+            using (var Letter = SpecificLetter)
+                foreach (var Property in Properties)
+                    Letter.GetProperty(ref WordAtRunic, Item, Property);
+
+            return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
         }
 
-        class Nested
+        public T FromTablet(dynamic Runic)
         {
-            static Nested()
-            { }
+            T Item = Activator.CreateInstance<T>();
 
-            internal static readonly T instance = new T();
+            using (var Letter = new PrimitiveLetter<T>())
+                foreach (var Property in Properties)
+                    Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);
+
+            return Item;
         }
     }
 }
