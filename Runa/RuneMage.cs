@@ -27,6 +27,7 @@ namespace RuneFramework
         }
 
         public List<PropertyInfo> Properties = new List<PropertyInfo>();
+        public Rune Rune;
 
         private Letter<T> SpecificLetter;
 
@@ -84,7 +85,12 @@ namespace RuneFramework
         {
             using (var Letter = SpecificLetter)
                 foreach (var Property in Properties)
-                    Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);
+                {
+                    if (!Letter.NeedRune())
+                        Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);
+                    else
+                        Letter.SetPropertyRune(ref Item, (Runic as ExpandoObject), Property, Rune);
+                }
 
             return Item;
         }

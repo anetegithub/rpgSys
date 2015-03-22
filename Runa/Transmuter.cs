@@ -25,7 +25,7 @@ namespace RuneFramework
             Primitives = new RuneMage<T>(new PrimitiveLetter<T>());
             Strings = new RuneMage<T>(new StringLetter<T>());
             RuneStrings = new RuneMage<T>(new RuneStringLetter<T>());
-            Classes = new RuneMage<T>(new PrimitiveLetter<T>());
+            Classes = new RuneMage<T>(new PrimitiveLetter<T>());            
 
             //Init properties
             foreach (PropertyInfo Property in typeof(T).GetProperties())
@@ -79,6 +79,8 @@ namespace RuneFramework
             Book.Spells = new List<RuneSpell>();
             Book.Spellage = new List<RuneSpellage>();
 
+            RunicWordsLoaded();
+
             List<T> FromFile = LoadRunicWords;
             for (int i = 0; i < FromFile.Count; i++)
             {
@@ -88,6 +90,8 @@ namespace RuneFramework
 
                 RuneStrings.Transmute(FromFile[i], Words[i], Book);
 
+                if (Classes.Rune == null)
+                    Classes.Rune = Rune;
                 Classes.Transmute(FromFile[i], Words[i], Book);
             }
 

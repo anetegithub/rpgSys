@@ -40,8 +40,8 @@ namespace RuneTester
 
             hr.AdditionalClass.Add(new Somome() { C = 55 });
 
-            
-            hr.SaveRune();
+            Console.WriteLine(hr.Somes[0]);
+            //hr.SaveRune();
             Console.WriteLine();
             Console.WriteLine("After Change Value And Save - ACVAS xD");
 

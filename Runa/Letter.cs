@@ -149,15 +149,23 @@ namespace RuneFramework
                 if (Field.Key == Property.Name)
                 {
                     int Id = Int32.Parse(Field.Value.ToString());
+                    string IdName;
+
+                    if(Property.PropertyType.GetProperty("Id")==null)
+                        IdName=Property.PropertyType.Name+"Id";
+                    else
+                        IdName="Id";
 
                     foreach (PropertyInfo RuneWord in Rune.GetType().GetProperties())
                     {
                         if(RuneWord.Name==Property.Name)
                         {
-                            var ListOfGenerics = typeof(RuneWord<>).GetMethod("Query").MakeGenericMethod(Property.PropertyType).Invoke(RuneWord.GetValue(Rune, null), new object[] { null });
-
-                            var f = 5;
-                            //foreach item in list ( if item.Id==Id then set value of this item)
+                            RuneBook Rb = new RuneBook();
+                            Rb.Spells = new List<RuneSpell>();
+                            RuneSpell Rs = new RuneSpell(IdName, "==", Id);
+                            Rb.Spells.Add(Rs);
+                            var Value = typeof(RuneWord<>).GetMethod("QueryUniq").MakeGenericMethod(Property.PropertyType).Invoke(RuneWord.GetValue(Rune, null), new object[] { Rb });
+                            Property.SetValue(Object, Value);
                         }
                     }
                 }
