@@ -11,7 +11,7 @@ namespace RuneFramework
 {
     public class RuneString : IEquatable<RuneString>
     {
-        [Obsolete("Enabled only for run-time.",true)]
+        [Obsolete("Enabled only for run-time.", true)]
         public RuneString()
         { }
 
@@ -28,11 +28,17 @@ namespace RuneFramework
 
         public static explicit operator int(RuneString s)
         {
+            if (s == null)
+                throw new NullReferenceException();
+
             return s.Id;
         }
 
         public static implicit operator string(RuneString s)
         {
+            if (s == null)
+                throw new NullReferenceException();
+
             return s.Value;
         }
 
@@ -47,7 +53,14 @@ namespace RuneFramework
                 return true;
             else
                 return false;
+        }
 
+        public override string ToString()
+        {
+            if (this == null)
+                throw new NullReferenceException();
+
+            return this.Id.ToString();
         }
     }
 }

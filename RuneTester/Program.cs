@@ -30,7 +30,7 @@ namespace RuneTester
 
         static void TestPrimitives(HeroRuna hr)
         {
-            hr.Somes.Add(new Some() { A = 10, B = 0.019 });
+            //hr.Somes.Add(new Some() { A = 10, B = 0.019 });
 
             foreach (Some s in hr.Somes)
             {
@@ -57,18 +57,20 @@ namespace RuneTester
             }
 
             //hr.Somes[hr.Somes.Count() - 3].B = 0.159;
-            hr.Somes[0].Sex = 0;
 
             hr.SaveRune();
+
             Console.WriteLine();
-            Console.WriteLine("After Change B Value And Save - ACVAS xD");
+            Console.WriteLine(hr.Somes[0].Sex);
 
             foreach (Some s in hr.Somes)
             {
-                Console.WriteLine(s.B);
+                Console.WriteLine(s.Sex??"null");
             }
 
-            hr.Somes.Remove(0);
+            hr.SaveRune();
+
+            //hr.Somes.Remove(0);
 
             Console.WriteLine();
             Console.WriteLine("After DELETE Value And Save - ACVAS xD");
@@ -84,6 +86,11 @@ namespace RuneTester
             foreach (Some s in hr.Somes)
             {
                 Console.WriteLine(s.Name ?? "");
+            }
+
+            foreach (Some s in hr.Somes)
+            {
+                Console.WriteLine(s.Sex ?? "null");
             }
         }
 

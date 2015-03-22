@@ -14,44 +14,8 @@ namespace RuneFramework
     {
         public RuneShaman(string Path)
         {
-            Singleton<RuneShamanCore<T>>.Instance.Path = Path;
+            this.Path = Path;
         }
-
-        public XDocument Select(RuneBook Query)
-        {
-            if (Query == null)
-                Query = new RuneBook();
-            return Singleton<RuneShamanCore<T>>.Instance.SelectStream(Query);
-        }
-
-        public double SelectMax(String Field)
-        {
-            return Singleton<RuneShamanCore<T>>.Instance.SelectMaxStream(Field);
-        }
-
-        public XDocument Delete(RuneBook Query)
-        {
-            return Singleton<RuneShamanCore<T>>.Instance.Delete(Query);
-        }
-
-        public XDocument Update(RuneBook Query)
-        {
-            return Singleton<RuneShamanCore<T>>.Instance.Update(Query);
-        }
-
-        public XDocument Insert(RuneBook Query)
-        {
-            return Singleton<RuneShamanCore<T>>.Instance.Insert(Query);
-        }
-    }
-
-    public class RuneShamanCore<T>
-    {
-        //public RuneMageCore(String Path)
-        //{
-        //    this.Path = Path;
-        //    LazyDocument = new Lazy<XDocument>(() => XDocument.Load(Path));
-        //}
 
         public String Path = "";
 
@@ -242,25 +206,25 @@ namespace RuneFramework
         }
     }
 
-    public sealed class Singleton<T> where T : class, new()
-    {
-        Singleton()
-        { }
+    //public sealed class Singleton<T> where T : class, new()
+    //{
+    //    Singleton()
+    //    { }
 
-        public static T Instance
-        {
-            get
-            {
-                return Nested.instance;
-            }
-        }
+    //    public static T Instance
+    //    {
+    //        get
+    //        {
+    //            return Nested.instance;
+    //        }
+    //    }
 
-        class Nested
-        {
-            static Nested()
-            { }
+    //    class Nested
+    //    {
+    //        static Nested()
+    //        { }
 
-            internal static readonly T instance = new T();
-        }
-    }
+    //        internal static readonly T instance = new T();
+    //    }
+    //}
 }

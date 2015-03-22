@@ -88,6 +88,8 @@ namespace RuneFramework
             }
 
             Shaman.Update(Book);
+
+            Loaded = false;
         }
 
         private bool Loaded;
@@ -101,7 +103,7 @@ namespace RuneFramework
             get
             {
                 List<T> Result = new List<T>();
-                var RunicWords = Shaman.Select(null);
+                var RunicWords = Shaman.SelectStream(null);
                 if (RunicWords.Root != null)
                 {
                     foreach (XElement RunicWord in RunicWords.Root.Elements())
@@ -117,6 +119,25 @@ namespace RuneFramework
                 }
                 return Result;
             }
+        }
+        public List<T> RealiseQuery(RuneBook Book)
+        {
+            List<T> Result = new List<T>();
+            var RunicWords = Shaman.SelectStream(Book);
+            if (RunicWords.Root != null)
+            {
+                foreach (XElement RunicWord in RunicWords.Root.Elements())
+                {
+                    Result.Add
+                        (
+                            TransmuteFromTablet
+                                (
+                                    (Tablet<T>.ToWord(RunicWord) as ExpandoObject)
+                                )
+                        );
+                }
+            }
+            return Result;
         }
 
         protected XElement TransmuteToTablet(T Item)
@@ -178,7 +199,7 @@ namespace RuneFramework
         }
         public void Add(T Item)
         {
-            var MaxId = Shaman.SelectMax(this.Id);
+            var MaxId = Shaman.SelectMaxStream(this.Id);
             Item.GetType().GetProperty(Id).SetValue(Item, Convert.ChangeType(++MaxId, Item.GetType().GetProperty(Id).PropertyType));
 
             Shaman.Insert(new RuneBook() { Elements = new List<XElement>() { TransmuteToTablet(Item) } });

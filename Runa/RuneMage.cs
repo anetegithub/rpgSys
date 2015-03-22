@@ -62,8 +62,9 @@ namespace RuneFramework
                         Book.Spells.Add(
                                 new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
                             );
+                        var Value=Property.GetValue(Words, null);
                         Book.Spellage.Add(
-                                new RuneSpellage(Property.Name, Property.GetValue(Words, null).ToString())
+                                new RuneSpellage(Property.Name, Value.ToString())
                             );
                     }
                 }
@@ -81,7 +82,7 @@ namespace RuneFramework
 
         public T FromTablet(dynamic Runic, ref T Item)
         {
-            using (var Letter = new PrimitiveLetter<T>())
+            using (var Letter = SpecificLetter)
                 foreach (var Property in Properties)
                     Letter.SetProperty(ref Item, (Runic as ExpandoObject), Property);
 

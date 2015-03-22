@@ -20,7 +20,6 @@ namespace RuneFramework
 
             var f = Transmuter.Get;
         }
-
         protected void Ids()
         {
             if (typeof(T)!=typeof(RuneString))
@@ -34,10 +33,14 @@ namespace RuneFramework
         }
 
         protected Transmuter<T> Transmuter;
-
         public void WriteRuneWord()
         {
             Transmuter.Transmute();
+        }
+
+        public List<T> Query(RuneBook Book)
+        {
+            return Transmuter.RealiseQuery(Book);
         }
 
         public T this[int i]
@@ -55,17 +58,14 @@ namespace RuneFramework
             }
             set { Transmuter.Get[i] = value; }
         }
-
         public void Add(T Item)
         {
             Transmuter.Add(Item);
         }
-
         public void Remove(T Item)
         {
             Transmuter.Remove(Item);
         }
-
         public void Remove(Int32 Index)
         {
             Transmuter.Remove(Index);
@@ -82,7 +82,6 @@ namespace RuneFramework
                 yield return t;
             }
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
