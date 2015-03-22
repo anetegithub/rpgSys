@@ -46,7 +46,7 @@ namespace RuneFramework
                 var Constructors = RuneWord.PropertyType.GetConstructors();
                 foreach(var Constructor in Constructors)
                 {
-                    RuneWord.SetValue(this, Constructor.Invoke(new object[] { Name }));
+                    RuneWord.SetValue(this, Constructor.Invoke(new object[] { Name,this }));
                 }
             }
         }

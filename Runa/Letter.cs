@@ -15,6 +15,8 @@ namespace RuneFramework
 {
     public interface Letter<T> : IDisposable
     {
+        bool NeedRune();
+        void SetPropertyRune(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property, Rune Rune);        
         void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property);
         void GetProperty(ref dynamic ObjectAtRunic, T Object, PropertyInfo Property);
         void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property);
@@ -22,6 +24,12 @@ namespace RuneFramework
 
     public class PrimitiveLetter<T> : Letter<T>
     {
+        public bool NeedRune()
+        { return false; }
+
+        public void SetPropertyRune(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property, Rune Rune)
+        { }
+
         public void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property)
         {
             foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))
@@ -58,6 +66,12 @@ namespace RuneFramework
 
     public class RuneStringLetter<T> : Letter<T>
     {
+        public bool NeedRune()
+        { return false; }
+
+        public void SetPropertyRune(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property, Rune Rune)
+        { }
+
         public void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property)
         {
             foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))
@@ -83,8 +97,8 @@ namespace RuneFramework
                      */
 
                     if (typeof(T) != typeof(RuneString))
-                    {                        
-                        RuneWord<RuneString> Runum = new RuneWord<RuneString>(Property.Name);
+                    {
+                        RuneWord<RuneString> Runum = new RuneWord<RuneString>(Property.Name, null);
                         //var Query = Runum.Query(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", Value.Id.ToString()) } });
                         //Value.Value = Query[0].Value;
                         foreach (var RunumItem in Runum)
@@ -123,8 +137,73 @@ namespace RuneFramework
         { }
     }
 
+    public class ClassLetter<T> : Letter<T>
+    {
+        public bool NeedRune()
+        { return true; }
+
+        public void SetPropertyRune(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property,Rune Rune)
+        {
+            foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))
+            {
+                if (Field.Key == Property.Name)
+                {
+                    int Id = Int32.Parse(Field.Value.ToString());
+
+                    foreach (PropertyInfo RuneWord in Rune.GetType().GetProperties())
+                    {
+                        if(RuneWord.Name==Property.Name)
+                        {
+                            var ListOfGenerics = typeof(RuneWord<>).GetMethod("Query").MakeGenericMethod(Property.PropertyType).Invoke(RuneWord.GetValue(Rune, null), new object[] { null });
+
+                            var f = 5;
+                            //foreach item in list ( if item.Id==Id then set value of this item)
+                        }
+                    }
+                }
+            }
+        }
+
+        public void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property)
+        {}
+
+        public void GetProperty(ref dynamic ObjectAtRunic, T Object, PropertyInfo Property)
+        {
+            var Value = Property.GetValue(Object, null);
+
+            string Id;
+            if (typeof(T).GetProperty("Id") == null)
+                Id = typeof(T).Name + "Id";
+            else
+                Id = "Id";
+            
+            if (Value != null)
+                (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Value.GetType().GetProperty(Id).ToString());
+        }
+
+        public void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
+        {
+            RuneString A = (RuneString)Property.GetValue(ObjectA, null) ?? 0;
+            RuneString B = (RuneString)Property.GetValue(ObjectB, null) ?? 0;
+
+            if (A.Equals(B))
+                Result = false;
+            else
+                Result = true;
+        }
+
+        public void Dispose()
+        { }
+    }
+
     public class StringLetter<T> : Letter<T>
     {
+        public bool NeedRune()
+        { return false; }
+
+        public void SetPropertyRune(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property, Rune Rune)
+        { }
+
         public void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property)
         {
             foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))

@@ -52,6 +52,8 @@ namespace RuneFramework
             Shamanism = new Lazy<RuneShaman<T>>(() => new RuneShaman<T>(PathToFile));
         }
 
+        public Rune Rune;
+
         protected string PathToFile;
         private string Id
         {
@@ -85,6 +87,8 @@ namespace RuneFramework
                 Strings.Transmute(FromFile[i], Words[i], Book);
 
                 RuneStrings.Transmute(FromFile[i], Words[i], Book);
+
+                Classes.Transmute(FromFile[i], Words[i], Book);
             }
 
             Shaman.Update(Book);
@@ -150,6 +154,8 @@ namespace RuneFramework
 
             RuneStrings.ToTablet(Item, ref WordAtRunic);
 
+            Classes.ToTablet(Item, ref WordAtRunic);
+
             return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
         }
         protected T TransmuteFromTablet(dynamic Runic)
@@ -161,6 +167,8 @@ namespace RuneFramework
             Strings.FromTablet(Runic as ExpandoObject, ref Item);
 
             RuneStrings.FromTablet(Runic as ExpandoObject, ref Item);
+
+            Classes.FromTablet(Runic as ExpandoObject, ref Item);
 
             return Item;
         }

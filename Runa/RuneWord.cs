@@ -10,7 +10,7 @@ namespace RuneFramework
 {
     public class RuneWord<T> : IEnumerable<T>
     {
-        public RuneWord(string TableName)
+        public RuneWord(string TableName,Rune Rune)
         {
             Ids();
             if (typeof(T) != typeof(RuneString))
@@ -18,7 +18,7 @@ namespace RuneFramework
             else
                 Transmuter = new Transmuter<T>(TableName);
 
-            var f = Transmuter.Get;
+            Transmuter.Rune = Rune;
         }
         protected void Ids()
         {
@@ -42,6 +42,7 @@ namespace RuneFramework
         {
             return Transmuter.RealiseQuery(Book);
         }
+        private Rune Rune;
 
         public T this[int i]
         {

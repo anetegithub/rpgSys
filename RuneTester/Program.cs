@@ -38,6 +38,8 @@ namespace RuneTester
             }
 
 
+            hr.AdditionalClass.Add(new Somome() { C = 55 });
+
             
             hr.SaveRune();
             Console.WriteLine();
@@ -100,6 +102,7 @@ namespace RuneTester
             public RuneWord<Some> Somes { get; set; }
             public RuneWord<RuneString> Sex { get; set; }
             public RuneWord<RuneString> Height { get; set; }
+            public RuneWord<Somome> AdditionalClass { get; set; }
         }
         public class Hero
         {
@@ -120,6 +123,15 @@ namespace RuneTester
             public string Name { get; set; }
 
             public RuneString Sex { get; set; }
+
+            public Somome AdditionalClass { get; set; }
+        }
+
+        public class Somome
+        {
+            public int Id { get; set; }
+
+            public int C { get; set; }
         }
 
         public enum Sex
