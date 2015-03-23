@@ -25,7 +25,7 @@ namespace RuneFramework
             Primitives = new RuneMage<T>(new PrimitiveLetter<T>());
             Strings = new RuneMage<T>(new StringLetter<T>());
             RuneStrings = new RuneMage<T>(new RuneStringLetter<T>());
-            Classes = new RuneMage<T>(new PrimitiveLetter<T>());            
+            Classes = new RuneMage<T>(new ClassLetter<T>());            
 
             //Init properties
             foreach (PropertyInfo Property in typeof(T).GetProperties())
@@ -39,7 +39,9 @@ namespace RuneFramework
                 else if (Property.PropertyType == typeof(String))
                     Strings.Properties.Add(Property);
 
-                else if (Property.PropertyType.IsGenericType && Property.PropertyType!=typeof(RuneString))
+                else if (Property.PropertyType.IsClass 
+                                                && Property.PropertyType!=typeof(RuneString)
+                                                && Property.PropertyType!=typeof(String))
                     Classes.Properties.Add(Property);               
             }
 
@@ -91,7 +93,7 @@ namespace RuneFramework
                 if (RuneStrings.Rune == null)
                     RuneStrings.Rune = Rune;
                 RuneStrings.Transmute(FromFile[i], Words[i], Book);
-
+                
                 if (Classes.Rune == null)
                     Classes.Rune = Rune;
                 Classes.Transmute(FromFile[i], Words[i], Book);

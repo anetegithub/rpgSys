@@ -56,6 +56,7 @@ namespace RuneFramework
                 foreach (var Property in Properties)
                 {
                     bool NeedRuneSpell = false;
+                    
                     Letter.NeedChanges(out NeedRuneSpell, FromFile, Words, Property);
 
                     if (NeedRuneSpell)
@@ -63,9 +64,17 @@ namespace RuneFramework
                         Book.Spells.Add(
                                 new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
                             );
-                        var Value=Property.GetValue(Words, null);
+                        var Value = Property.GetValue(Words, null);
+
+                        var StrId = "0";
+                        var ObjId = Value.GetType().GetProperty("Id");
+                        if (ObjId == null)
+                            StrId = Value.GetType().Name + "Id";
+                        else
+                            StrId = "Id";
+
                         Book.Spellage.Add(
-                                new RuneSpellage(Property.Name, Value.ToString())
+                                new RuneSpellage(Property.Name, Value.GetType().GetProperty(StrId).GetValue(Value, null).ToString())
                             );
                     }
                 }

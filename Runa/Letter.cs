@@ -54,6 +54,8 @@ namespace RuneFramework
             A = Property.GetValue(ObjectA, null);
             B = Property.GetValue(ObjectB, null);
 
+
+
             if (A.Equals(B))
                 Result = false;
             else
@@ -87,28 +89,12 @@ namespace RuneFramework
                     {
                         if (RuneWord.Name == Property.Name)
                         {
-                            RuneBook Rb = new RuneBook();
-                            Rb.Spells = new List<RuneSpell>();
-                            RuneSpell Rs = new RuneSpell(IdName, "==", Id);
-                            Rb.Spells.Add(Rs);
+                            var Value = RuneWord.GetValue(Rune, null)
+                                .GetType()
+                                .GetMethod("QueryUniq")
+                                .Invoke(RuneWord.GetValue(Rune, null),
+                                new object[] { new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(IdName, "==", Id) } } });
 
-
-
-                            // Create generic type
-                            //Type myClassType = typeof(RuneWord<>);
-                            //Type[] typeArgs = { typeof(object) };
-                            //Type constructed = myClassType.MakeGenericType(typeArgs);
-
-                            //// Create instance of generic type
-                            ////var myClassInstance = Activator.CreateInstance(constructed);
-
-                            //// Find GetAll() method and invoke
-                            //MethodInfo getAllMethod = constructed.GetMethod("QueryUniq");
-                            //var result = getAllMethod.Invoke(RuneWord.GetValue(Rune, null), new object[] { Rb }); 
-
-                            var instance=RuneWord.GetValue(Rune, null);
-
-                            var Value = instance.GetType().GetMethod("QueryUniq").Invoke(instance, new object[] { Rb }); //.MakeGenericMethod(Property.PropertyType)
                             Property.SetValue(Object, Value);
                         }
                     }
@@ -195,20 +181,21 @@ namespace RuneFramework
                     int Id = Int32.Parse(Field.Value.ToString());
                     string IdName;
 
-                    if(Property.PropertyType.GetProperty("Id")==null)
-                        IdName=Property.PropertyType.Name+"Id";
+                    if (Property.PropertyType.GetProperty("Id") == null)
+                        IdName = Property.PropertyType.Name + "Id";
                     else
-                        IdName="Id";
+                        IdName = "Id";
 
                     foreach (PropertyInfo RuneWord in Rune.GetType().GetProperties())
                     {
-                        if(RuneWord.Name==Property.Name)
+                        if (RuneWord.Name == Property.Name)
                         {
-                            RuneBook Rb = new RuneBook();
-                            Rb.Spells = new List<RuneSpell>();
-                            RuneSpell Rs = new RuneSpell(IdName, "==", Id);
-                            Rb.Spells.Add(Rs);
-                            var Value = typeof(RuneWord<>).GetMethod("QueryUniq").MakeGenericMethod(Property.PropertyType).Invoke(RuneWord.GetValue(Rune, null), new object[] { Rb });
+                            var Value = RuneWord.GetValue(Rune, null)
+                                .GetType()
+                                .GetMethod("QueryUniq")
+                                .Invoke(RuneWord.GetValue(Rune, null),
+                                new object[] { new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(IdName, "==", Id) } } });
+
                             Property.SetValue(Object, Value);
                         }
                     }
@@ -224,24 +211,60 @@ namespace RuneFramework
             var Value = Property.GetValue(Object, null);
 
             string Id;
-            if (typeof(T).GetProperty("Id") == null)
+            if (Property.PropertyType.GetProperty("Id") == null)
                 Id = typeof(T).Name + "Id";
             else
                 Id = "Id";
             
             if (Value != null)
-                (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Value.GetType().GetProperty(Id).ToString());
+                (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Value.GetType().GetProperty(Id).GetValue(Value,null).ToString());
         }
 
         public void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
         {
-            RuneString A = (RuneString)Property.GetValue(ObjectA, null) ?? 0;
-            RuneString B = (RuneString)Property.GetValue(ObjectB, null) ?? 0;
+            var A = Property.GetValue(ObjectA, null) ?? Activator.CreateInstance(Property.PropertyType);
+            var B = Property.GetValue(ObjectB, null) ?? Activator.CreateInstance(Property.PropertyType);
 
-            if (A.Equals(B))
-                Result = false;
-            else
-                Result = true;
+            FieldByFieldCompare(out Result, Property, A, B);
+        }
+
+        private void FieldByFieldCompare(out bool Result, PropertyInfo Property, object A, object B)
+        {
+            Result = false;
+            foreach (var InnerProperty in Property.PropertyType.GetProperties())
+            {
+                var AProperty = InnerProperty.GetValue(A, null);
+                var BProperty = InnerProperty.GetValue(B, null);
+
+                if (!InnerProperty.PropertyType.IsClass || InnerProperty.PropertyType == typeof(String) || InnerProperty.PropertyType == typeof(RuneString))
+                {
+                    if (InnerProperty.PropertyType == typeof(String))
+                    {
+                        AProperty = AProperty ?? "";
+                        BProperty = BProperty ?? "";
+                    }                    
+
+                    if (AProperty.Equals(BProperty))
+                        Result = false;
+                    else
+                        Result = true;
+                }
+                else
+                {
+                    if (AProperty == null && BProperty == null)
+                    {
+                        Result = false;
+                        return;
+                    }
+
+                    if ((AProperty == null && BProperty != null) || (BProperty == null && AProperty != null))
+                    {
+                        Result = true;
+                        return;
+                    }
+                    FieldByFieldCompare(out Result, InnerProperty, AProperty, BProperty);
+                }
+            }
         }
 
         public void Dispose()
