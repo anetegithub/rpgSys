@@ -78,8 +78,6 @@ namespace RuneFramework
             if (Query.Spells == null || Query.Spells.Count == 0)
                 Query.Spells = new List<RuneSpell>() { new RuneSpell(Id, "!=", 0) };
 
-            //PrepeareSpell();
-
             var some = (
                 from Item
                 in StreamRootChildDoc

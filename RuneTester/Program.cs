@@ -19,19 +19,30 @@ namespace RuneTester
         {
             Rune.Element = RuneElement.Earth;
 
-            FirstInit();
+            using (var db = new HeroRune())
+            {
+                foreach (var Hero in db.Hero)
+                    foreach (var Item in Hero.Coords ?? new List<string>())
+                        Console.WriteLine(Item);
 
-            SecondInit();
+                //db.Hero[0].Coords = new List<int>() { 0, 1, 2, 3, 5, 4 };
+                //db.Hero[0].Coords = new List<string>() { "Apple", "Pear", "Lemon" };
+                //db.Hero.Add(new Hero() { Coords = new List<int>() { 0, 1, 2, 3, 4, 5 } });
+                //db.SaveRune();
+            }
 
-            ThirdInit();
+            //FirstInit();
 
-            //Console.WriteLine("done");
+            //SecondInit();
+
+            //ThirdInit();
+
             Console.ReadLine();
         }
 
         static void FirstInit()
         {
-            using (var Session=new HeroRune())
+            using (var Session = new HeroRune())
             {
                 Session.Sex.Add(new RuneString("Male"));
                 Session.Sex.Add(new RuneString("Female"));
@@ -59,7 +70,7 @@ namespace RuneTester
 
         static void SecondInit()
         {
-            using (var Session =new AdditionalHeroRune())
+            using (var Session = new AdditionalHeroRune())
             {
                 Session.PetsFood.Add(new Food() { FoodName = "Fish", FoodCount = 5 });
                 Session.PetsFood.Add(new Food() { FoodName = "Meat", FoodCount = 5 });
@@ -80,7 +91,7 @@ namespace RuneTester
             }
             using (var Session = new AdditionalHeroRune())
             {
-                Console.WriteLine("But Paul pet food actually is "+Session.Hero[0].PersonalPet.PetsFood.FoodName);
+                Console.WriteLine("But Paul pet food actually is " + Session.Hero[0].PersonalPet.PetsFood.FoodName);
             }
         }
 
@@ -132,6 +143,16 @@ namespace RuneTester
             public RuneWord<Food> PetsFood { get; set; }
         }
 
+        public class FullHeroRune : Rune
+        {
+            public RuneWord<Hero> Hero { get; set; }
+            public RuneWord<RuneString> Sex { get; set; }
+            public RuneWord<Pet> PersonalPet { get; set; }
+            public RuneWord<Food> PetsFood { get; set; }
+            public RuneWord<RuneString> ClothTYPE { get; set; }
+            public RuneWord<Cloth> HeroClothes { get; set; }
+        }
+
         public class Hero
         {
             public int HeroId { get; set; }
@@ -144,6 +165,9 @@ namespace RuneTester
             public RuneString Sex { get; set; }
 
             public Pet PersonalPet { get; set; }
+
+            public List<string> Coords { get; set; }
+            //public List<Cloth> HeroClothes { get; set; }
         }
 
         public class Pet
@@ -160,6 +184,15 @@ namespace RuneTester
 
             public string FoodName { get; set; }
             public int FoodCount { get; set; }
+        }
+
+        public class Cloth
+        {
+            public int Id { get; set; }
+
+            public RuneString ClothTYPE { get; set; }
+
+            public int Size { get; set; }
         }
     }
 }

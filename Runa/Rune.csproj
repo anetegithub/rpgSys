@@ -47,6 +47,7 @@
     <Compile Include="RuneMage.cs" />
     <Compile Include="RuneWord.cs" />
     <Compile Include="Scrolls\RuneElement.cs" />
+    <Compile Include="Scrolls\RuneList.cs" />
     <Compile Include="Scrolls\RuneMageSpells.cs" />
     <Compile Include="Scrolls\RuneSpell.cs" />
     <Compile Include="Scrolls\RuneString.cs" />

@@ -53,14 +53,14 @@ namespace RuneFramework
 
     public class RuneSpellage
     {
-        public RuneSpellage(String Field, String Value)
+        public RuneSpellage(String Field, Object Value)
         {
             this.Field = Field;
             this.Value = Value;
         }
 
         protected string Field { get; set; }
-        protected string Value { get; set; }
+        protected Object Value { get; set; }
 
         /// <summary>
         /// If Element not exists create
@@ -68,10 +68,18 @@ namespace RuneFramework
         /// <param name="Element"></param>
         public void SetValue(ref XElement Element)
         {
-            if (Element.Element(Field) != null)
-                Element.Element(Field).Value = Value;
+            if (Value.GetType() != typeof(XElement))
+                if (Element.Element(Field) != null)
+                    Element.Element(Field).Value = (string)Value;
+                else
+                    Element.Add(new XElement(Field, Value));
             else
-                Element.Add(new XElement(Field, Value));
+            {
+                if (Element.Element(Field) != null)
+                    Element.Element(Field).ReplaceWith(Value);
+                else
+                    Element.Add(Value);
+            }
         }
     }
 }
