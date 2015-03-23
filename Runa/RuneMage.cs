@@ -56,12 +56,11 @@ namespace RuneFramework
                 foreach (var Property in Properties)
                 {
                     bool NeedRuneSpell = false;
-                    
+
                     Letter.NeedChanges(out NeedRuneSpell, FromFile, Words, Property);
 
                     if (NeedRuneSpell)
                     {
-
                         Book.Spells.Add(
                                 new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
                             );
@@ -80,17 +79,14 @@ namespace RuneFramework
                                 );
                         else
                         {
-                            if (Value.GetType().GetGenericArguments()[0].IsPrimitive || Value.GetType().GetGenericArguments()[0] == typeof(String))
-                            {
-                                dynamic D = new ExpandoObject();
-                                var TInstance = (T)Activator.CreateInstance(typeof(T));
-                                Property.SetValue(TInstance, Value);
-                                var XElementValue = ToTablet(TInstance, ref D);
-                                
-                                Book.Spellage.Add(
-                                    new RuneSpellage(Property.Name, XElementValue.Element(Property.Name))
-                                );
-                            }
+                            dynamic D = new ExpandoObject();
+                            var TInstance = (T)Activator.CreateInstance(typeof(T));
+                            Property.SetValue(TInstance, Value);
+                            var XElementValue = ToTablet(TInstance, ref D);
+
+                            Book.Spellage.Add(
+                                new RuneSpellage(Property.Name, XElementValue.Element(Property.Name))
+                            );
                         }
                     }
                 }

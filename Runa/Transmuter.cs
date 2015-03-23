@@ -26,7 +26,8 @@ namespace RuneFramework
             Strings = new RuneMage<T>(new StringLetter<T>());
             RuneStrings = new RuneMage<T>(new RuneStringLetter<T>());
             Classes = new RuneMage<T>(new ClassLetter<T>());
-            Lists = new RuneMage<T>(new ListsLetter<T>());
+            PrimitiveLists = new RuneMage<T>(new PrimitiveListsLetter<T>());
+            GenericLists = new RuneMage<T>(new GenericListsLetter<T>());
 
             //Init properties
             foreach (PropertyInfo Property in typeof(T).GetProperties())
@@ -47,7 +48,10 @@ namespace RuneFramework
                     Classes.Properties.Add(Property);
                 else if (Property.PropertyType.GetInterface("IList") != null)
                 {
-                    Lists.Properties.Add(Property);
+                    if (Property.PropertyType.GetGenericArguments()[0].IsPrimitive || Property.PropertyType.GetGenericArguments()[0] == typeof(String))
+                        PrimitiveLists.Properties.Add(Property);
+                    else
+                        GenericLists.Properties.Add(Property);
                 }
             }
 
@@ -104,7 +108,11 @@ namespace RuneFramework
                     Classes.Rune = Rune;
                 Classes.Transmute(FromFile[i], Words[i], Book);
 
-                Lists.Transmute(FromFile[i], Words[i], Book);
+                PrimitiveLists.Transmute(FromFile[i], Words[i], Book);
+
+                if (GenericLists.Rune == null)
+                    GenericLists.Rune = Rune;
+                GenericLists.Transmute(FromFile[i], Words[i], Book);
             }
 
             Shaman.Update(Book);
@@ -176,7 +184,11 @@ namespace RuneFramework
                 Classes.Rune = Rune;
             Classes.ToTablet(Item, ref WordAtRunic);
 
-            Lists.ToTablet(Item, ref WordAtRunic);
+            PrimitiveLists.ToTablet(Item, ref WordAtRunic);
+
+            if (GenericLists.Rune == null)
+                GenericLists.Rune = Rune;
+            GenericLists.ToTablet(Item, ref WordAtRunic);
 
             return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
         }
@@ -196,7 +208,11 @@ namespace RuneFramework
                 Classes.Rune = Rune;
             Classes.FromTablet(Runic as ExpandoObject, ref Item);
 
-            Lists.FromTablet(Runic as ExpandoObject, ref Item);
+            PrimitiveLists.FromTablet(Runic as ExpandoObject, ref Item);
+
+            if (GenericLists.Rune == null)
+                GenericLists.Rune = Rune;
+            GenericLists.FromTablet(Runic as ExpandoObject, ref Item);
 
             return Item;
         }
@@ -205,7 +221,8 @@ namespace RuneFramework
         protected RuneMage<T> Strings { get; set; }
         protected RuneMage<T> RuneStrings { get; set; }
         protected RuneMage<T> Classes { get; set; }
-        protected RuneMage<T> Lists { get; set; }
+        protected RuneMage<T> PrimitiveLists { get; set; }
+        protected RuneMage<T> GenericLists { get; set; }
 
 
         protected Lazy<RuneShaman<T>> Shamanism;

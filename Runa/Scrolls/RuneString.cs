@@ -47,6 +47,9 @@ namespace RuneFramework
             return new RuneString(i) { Value = "VALUE_NOT_FOUND" };
         }
 
+        public static implicit operator RuneString(string s)
+        { return new RuneString(s); }
+
         public bool Equals(RuneString other)
         {
             if (this.Id == other.Id && this.Value == this.Value)
