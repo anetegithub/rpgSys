@@ -42,9 +42,13 @@ namespace RuneFramework
         {
             return Transmuter.RealiseQuery(Book);
         }
-        public T QueryUniq(RuneBook Book)
+        public object QueryUniq(RuneBook Book)
         {
-            return Transmuter.RealiseQuery(Book)[0];
+            var QueryResult = Transmuter.RealiseQuery(Book);
+            if (QueryResult.Count!=0)
+                return Transmuter.RealiseQuery(Book)[0];
+            else
+                return null;
         }
 
         public T this[int i]

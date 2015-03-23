@@ -39,7 +39,7 @@ namespace RuneFramework
                 else if (Property.PropertyType == typeof(String))
                     Strings.Properties.Add(Property);
 
-                else if (Property.PropertyType.IsGenericType)
+                else if (Property.PropertyType.IsGenericType && Property.PropertyType!=typeof(RuneString))
                     Classes.Properties.Add(Property);               
             }
 
@@ -88,6 +88,8 @@ namespace RuneFramework
 
                 Strings.Transmute(FromFile[i], Words[i], Book);
 
+                if (RuneStrings.Rune == null)
+                    RuneStrings.Rune = Rune;
                 RuneStrings.Transmute(FromFile[i], Words[i], Book);
 
                 if (Classes.Rune == null)
@@ -156,8 +158,12 @@ namespace RuneFramework
 
             Strings.ToTablet(Item, ref WordAtRunic);
 
+            if (RuneStrings.Rune == null)
+                RuneStrings.Rune = Rune;
             RuneStrings.ToTablet(Item, ref WordAtRunic);
 
+            if (Classes.Rune == null)
+                Classes.Rune = Rune;
             Classes.ToTablet(Item, ref WordAtRunic);
 
             return Tablet<T>.ToRunic(WordAtRunic as ExpandoObject);
@@ -170,8 +176,12 @@ namespace RuneFramework
 
             Strings.FromTablet(Runic as ExpandoObject, ref Item);
 
+            if (RuneStrings.Rune == null)
+                RuneStrings.Rune = Rune;
             RuneStrings.FromTablet(Runic as ExpandoObject, ref Item);
 
+            if (Classes.Rune == null)
+                Classes.Rune = Rune;
             Classes.FromTablet(Runic as ExpandoObject, ref Item);
 
             return Item;

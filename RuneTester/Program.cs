@@ -21,79 +21,13 @@ namespace RuneTester
 
             using (var hr = new HeroRuna())
             {
-                TestPrimitives(hr);
+                hr.Somes[0].Sex = 1;
+                hr.SaveRune();
+                Console.WriteLine(hr.Somes[0].Sex);
             }
 
             Console.WriteLine("done");
             Console.ReadLine();
-        }
-
-        static void TestPrimitives(HeroRuna hr)
-        {
-            //hr.Somes.Add(new Some() { A = 10, B = 0.019 });
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine(s.A);
-            }
-
-
-            hr.AdditionalClass.Add(new Somome() { C = 55 });
-
-            Console.WriteLine(hr.Somes[0]);
-            //hr.SaveRune();
-            Console.WriteLine();
-            Console.WriteLine("After Change Value And Save - ACVAS xD");
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine(s.A);
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("B Values:");
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine(s.B);
-            }
-
-            //hr.Somes[hr.Somes.Count() - 3].B = 0.159;
-
-            hr.SaveRune();
-
-            Console.WriteLine();
-            Console.WriteLine(hr.Somes[0].Sex);
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine(s.Sex??"null");
-            }
-
-            hr.SaveRune();
-
-            //hr.Somes.Remove(0);
-
-            Console.WriteLine();
-            Console.WriteLine("After DELETE Value And Save - ACVAS xD");
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine(s.B);
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("Strings: ");
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine(s.Name ?? "");
-            }
-
-            foreach (Some s in hr.Somes)
-            {
-                Console.WriteLine(s.Sex ?? "null");
-            }
         }
 
         public class HeroRuna : Rune

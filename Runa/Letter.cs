@@ -67,10 +67,54 @@ namespace RuneFramework
     public class RuneStringLetter<T> : Letter<T>
     {
         public bool NeedRune()
-        { return false; }
+        { return true; }
 
         public void SetPropertyRune(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property, Rune Rune)
-        { }
+        {
+            foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))
+            {
+                if (Field.Key == Property.Name)
+                {
+                    int Id = Int32.Parse(Field.Value.ToString());
+                    string IdName;
+
+                    if (Property.PropertyType.GetProperty("Id") == null)
+                        IdName = Property.PropertyType.Name + "Id";
+                    else
+                        IdName = "Id";
+
+                    foreach (PropertyInfo RuneWord in Rune.GetType().GetProperties())
+                    {
+                        if (RuneWord.Name == Property.Name)
+                        {
+                            RuneBook Rb = new RuneBook();
+                            Rb.Spells = new List<RuneSpell>();
+                            RuneSpell Rs = new RuneSpell(IdName, "==", Id);
+                            Rb.Spells.Add(Rs);
+
+
+
+                            // Create generic type
+                            //Type myClassType = typeof(RuneWord<>);
+                            //Type[] typeArgs = { typeof(object) };
+                            //Type constructed = myClassType.MakeGenericType(typeArgs);
+
+                            //// Create instance of generic type
+                            ////var myClassInstance = Activator.CreateInstance(constructed);
+
+                            //// Find GetAll() method and invoke
+                            //MethodInfo getAllMethod = constructed.GetMethod("QueryUniq");
+                            //var result = getAllMethod.Invoke(RuneWord.GetValue(Rune, null), new object[] { Rb }); 
+
+                            var instance=RuneWord.GetValue(Rune, null);
+
+                            var Value = instance.GetType().GetMethod("QueryUniq").Invoke(instance, new object[] { Rb }); //.MakeGenericMethod(Property.PropertyType)
+                            Property.SetValue(Object, Value);
+                        }
+                    }
+                }
+            }
+        }
 
         public void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property)
         {
