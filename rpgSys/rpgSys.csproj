@@ -254,6 +254,7 @@
     <Compile Include="Models\Hero\Skill.cs" />
     <Compile Include="Models\User\User.cs" />
     <Compile Include="Models\User\UserActivity.cs" />
+    <Compile Include="Models\User\UserRune.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -325,6 +326,10 @@
     <ProjectReference Include="..\ormCL\ormCL.csproj">
       <Project>{a3051d0d-ac77-456c-9b5c-0f999f60093e}</Project>
       <Name>ormCL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Runa\Rune.csproj">
+      <Project>{49373242-02e9-4de2-83c3-488531672f2b}</Project>
+      <Name>Rune</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

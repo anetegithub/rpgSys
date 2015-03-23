@@ -18,7 +18,7 @@ namespace rpgSys
                 var Collection = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/User/Activity") }).Cast<UserActivity>().ToList();
                 foreach(var Item in Collection)
                 {
-                    Item.StampToString = Item.Stamp.Ago();
+                    //Item.StampToString = Item.Stamp.Ago();
                 }
                 return Ok(Collection);
             }
@@ -40,7 +40,7 @@ namespace rpgSys
                     .ToList();
                 foreach (var Item in Collection)
                 {
-                    Item.StampToString = Item.Stamp.Ago();
+                    //Item.StampToString = Item.Stamp.Ago();
                 }
                 return Ok(Collection);
             }
