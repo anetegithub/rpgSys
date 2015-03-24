@@ -9,10 +9,8 @@ namespace rpgSys
 {
     public class AttackState
     {
-        [attributeCL]
         public int Id { get; set; }
-        [attributeCL]
-        public int HeroId { get; set; }
+
         public int Attack { get; set; }
         public int FitAttack { get; set; }
         public int MinimalDamage { get; set; }

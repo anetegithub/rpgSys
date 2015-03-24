@@ -11,6 +11,8 @@ namespace rpgSys
     public class User
     {
         public int Id { get; set; }
+        public int HeroId { get; set; }
+        public int GameId { get; set; }
 
         public string Avatar { get; set; }
         public string Login { get; set; }
@@ -18,8 +20,6 @@ namespace rpgSys
         public string Email { get; set; }
         public string Stamp { get; set; }
 
-        public Hero Hero { get; set; }
-        public Game Game { get; set; }
         public List<UserActivity> Activity { get; set; }
     }
 }

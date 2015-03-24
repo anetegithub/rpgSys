@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuneStrings>
+  <RuneString>
+    <Id>1</Id>
+    <Value>CON</Value>
+  </RuneString>
+  <RuneString>
+    <Id>2</Id>
+    <Value>FIT</Value>
+  </RuneString>
+  <RuneString>
+    <Id>3</Id>
+    <Value>INT</Value>
+  </RuneString>
+  <RuneString>
+    <Id>4</Id>
+    <Value>WIS</Value>
+  </RuneString>
+  <RuneString>
+    <Id>5</Id>
+    <Value>CHA</Value>
+  </RuneString>
+  <RuneString>
+    <Id>6</Id>
+    <Value>FTE</Value>
+  </RuneString>
+</RuneStrings>

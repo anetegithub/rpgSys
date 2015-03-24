@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuneStrings>
+  <RuneString>
+    <Id>1</Id>
+    <Value>Создание брони и оружия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>2</Id>
+    <Value>Разоружиение ловушек</Value>
+  </RuneString>
+  <RuneString>
+    <Id>3</Id>
+    <Value>Внимание</Value>
+  </RuneString>
+  <RuneString>
+    <Id>4</Id>
+    <Value>Скрытность</Value>
+  </RuneString>
+  <RuneString>
+    <Id>5</Id>
+    <Value>Устрашение</Value>
+  </RuneString>
+  <RuneString>
+    <Id>6</Id>
+    <Value>Прыжки</Value>
+  </RuneString>
+  <RuneString>
+    <Id>7</Id>
+    <Value>Открывание замков</Value>
+  </RuneString>
+  <RuneString>
+    <Id>8</Id>
+    <Value>Езда верхом</Value>
+  </RuneString>
+  <RuneString>
+    <Id>9</Id>
+    <Value>Выслеживание</Value>
+  </RuneString>
+  <RuneString>
+    <Id>10</Id>
+    <Value>Выживание</Value>
+  </RuneString>
+  <RuneString>
+    <Id>11</Id>
+    <Value>Плавание</Value>
+  </RuneString>
+  <RuneString>
+    <Id>12</Id>
+    <Value>Акробатика</Value>
+  </RuneString>
+  <RuneString>
+    <Id>13</Id>
+    <Value>Слух</Value>
+  </RuneString>
+  <RuneString>
+    <Id>14</Id>
+    <Value>Ложь</Value>
+  </RuneString>
+  <RuneString>
+    <Id>15</Id>
+    <Value>Дипломатия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>16</Id>
+    <Value>Блеф</Value>
+  </RuneString>
+  <RuneString>
+    <Id>17</Id>
+    <Value>Идентификация</Value>
+  </RuneString>
+  <RuneString>
+    <Id>18</Id>
+    <Value>Концентрация</Value>
+  </RuneString>
+  <RuneString>
+    <Id>19</Id>
+    <Value>Создание вещей</Value>
+  </RuneString>
+  <RuneString>
+    <Id>20</Id>
+    <Value>Чтение свитков</Value>
+  </RuneString>
+  <RuneString>
+    <Id>21</Id>
+    <Value>Приручение животных</Value>
+  </RuneString>
+  <RuneString>
+    <Id>22</Id>
+    <Value>Создание заклинаний</Value>
+  </RuneString>
+  <RuneString>
+    <Id>23</Id>
+    <Value>Сотворение заклинаний</Value>
+  </RuneString>
+  <RuneString>
+    <Id>24</Id>
+    <Value>Использование маг. предметов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>25</Id>
+    <Value>Использование доспехов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>26</Id>
+    <Value>Использование оружия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>27</Id>
+    <Value>Использование щитов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>28</Id>
+    <Value>Бой двумя руками</Value>
+  </RuneString>
+  <RuneString>
+    <Id>29</Id>
+    <Value>Двуручное оружие в одной руке</Value>
+  </RuneString>
+  <RuneString>
+    <Id>30</Id>
+    <Value>Уход и заточка оружия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>31</Id>
+    <Value>Защитная стойка</Value>
+  </RuneString>
+  <RuneString>
+    <Id>32</Id>
+    <Value>Парирование</Value>
+  </RuneString>
+  <RuneString>
+    <Id>33</Id>
+    <Value>Уворачивание</Value>
+  </RuneString>
+  <RuneString>
+    <Id>34</Id>
+    <Value>Кровожадность</Value>
+  </RuneString>
+  <RuneString>
+    <Id>35</Id>
+    <Value>Воля к победе</Value>
+  </RuneString>
+  <RuneString>
+    <Id>36</Id>
+    <Value>Боевые манёвры</Value>
+  </RuneString>
+  <RuneString>
+    <Id>37</Id>
+    <Value>Святость</Value>
+  </RuneString>
+  <RuneString>
+    <Id>38</Id>
+    <Value>Рукопашный бой</Value>
+  </RuneString>
+  <RuneString>
+    <Id>39</Id>
+    <Value>Избранное оружие</Value>
+  </RuneString>
+  <RuneString>
+    <Id>40</Id>
+    <Value>Ангельская сила</Value>
+  </RuneString>
+  <RuneString>
+    <Id>41</Id>
+    <Value>Демоническая сила</Value>
+  </RuneString>
+  <RuneString>
+    <Id>42</Id>
+    <Value>Суд</Value>
+  </RuneString>
+  <RuneString>
+    <Id>43</Id>
+    <Value>Барьер света</Value>
+  </RuneString>
+  <RuneString>
+    <Id>44</Id>
+    <Value>Святое оружие</Value>
+  </RuneString>
+  <RuneString>
+    <Id>45</Id>
+    <Value>Магия света</Value>
+  </RuneString>
+  <RuneString>
+    <Id>46</Id>
+    <Value>Магия исцеления</Value>
+  </RuneString>
+  <RuneString>
+    <Id>47</Id>
+    <Value>Благословения</Value>
+  </RuneString>
+  <RuneString>
+    <Id>48</Id>
+    <Value>Медитация</Value>
+  </RuneString>
+  <RuneString>
+    <Id>49</Id>
+    <Value>Темная магия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>50</Id>
+    <Value>Поднятие мёртвых</Value>
+  </RuneString>
+  <RuneString>
+    <Id>51</Id>
+    <Value>Управление мёртвыми</Value>
+  </RuneString>
+  <RuneString>
+    <Id>52</Id>
+    <Value>Магия костей</Value>
+  </RuneString>
+  <RuneString>
+    <Id>53</Id>
+    <Value>Создание костей</Value>
+  </RuneString>
+  <RuneString>
+    <Id>54</Id>
+    <Value>Создание оберегов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>55</Id>
+    <Value>Сотворение проклятий</Value>
+  </RuneString>
+  <RuneString>
+    <Id>56</Id>
+    <Value>Поддержание проклятий</Value>
+  </RuneString>
+  <RuneString>
+    <Id>57</Id>
+    <Value>Разговоры с мёртвыми</Value>
+  </RuneString>
+  <RuneString>
+    <Id>58</Id>
+    <Value>Управление кошмарами</Value>
+  </RuneString>
+  <RuneString>
+    <Id>59</Id>
+    <Value>Посещение снов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>60</Id>
+    <Value>Управление тенями</Value>
+  </RuneString>
+  <RuneString>
+    <Id>61</Id>
+    <Value>Тренировка боем</Value>
+  </RuneString>
+  <RuneString>
+    <Id>62</Id>
+    <Value>Заточка оружия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>63</Id>
+    <Value>Фехтование</Value>
+  </RuneString>
+  <RuneString>
+    <Id>64</Id>
+    <Value>Метание предметов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>65</Id>
+    <Value>Собирание растений</Value>
+  </RuneString>
+  <RuneString>
+    <Id>66</Id>
+    <Value>Создание ядов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>67</Id>
+    <Value>Смертельные удары</Value>
+  </RuneString>
+  <RuneString>
+    <Id>68</Id>
+    <Value>Воровство</Value>
+  </RuneString>
+  <RuneString>
+    <Id>69</Id>
+    <Value>Хитрости</Value>
+  </RuneString>
+  <RuneString>
+    <Id>70</Id>
+    <Value>Собирание частей</Value>
+  </RuneString>
+  <RuneString>
+    <Id>71</Id>
+    <Value>Создание ловушек</Value>
+  </RuneString>
+  <RuneString>
+    <Id>72</Id>
+    <Value>Быстрые размышления</Value>
+  </RuneString>
+  <RuneString>
+    <Id>73</Id>
+    <Value>Левитация</Value>
+  </RuneString>
+  <RuneString>
+    <Id>74</Id>
+    <Value>Насыщение магией</Value>
+  </RuneString>
+  <RuneString>
+    <Id>75</Id>
+    <Value>Астральные путешествия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>76</Id>
+    <Value>Магия Арканы</Value>
+  </RuneString>
+  <RuneString>
+    <Id>77</Id>
+    <Value>Магия Огня</Value>
+  </RuneString>
+  <RuneString>
+    <Id>78</Id>
+    <Value>Магия Воды</Value>
+  </RuneString>
+  <RuneString>
+    <Id>79</Id>
+    <Value>Магия Земли</Value>
+  </RuneString>
+  <RuneString>
+    <Id>80</Id>
+    <Value>Магия Воздуха</Value>
+  </RuneString>
+  <RuneString>
+    <Id>81</Id>
+    <Value>Магия Природы</Value>
+  </RuneString>
+  <RuneString>
+    <Id>82</Id>
+    <Value>Магия Света</Value>
+  </RuneString>
+  <RuneString>
+    <Id>83</Id>
+    <Value>Магия Тьмы</Value>
+  </RuneString>
+  <RuneString>
+    <Id>84</Id>
+    <Value>Чары</Value>
+  </RuneString>
+  <RuneString>
+    <Id>85</Id>
+    <Value>Поиск следов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>86</Id>
+    <Value>Выращивание растений</Value>
+  </RuneString>
+  <RuneString>
+    <Id>87</Id>
+    <Value>Сбор</Value>
+  </RuneString>
+  <RuneString>
+    <Id>88</Id>
+    <Value>Информация о растениях</Value>
+  </RuneString>
+  <RuneString>
+    <Id>89</Id>
+    <Value>Разговоры с животными</Value>
+  </RuneString>
+  <RuneString>
+    <Id>90</Id>
+    <Value>Превращение в животных</Value>
+  </RuneString>
+  <RuneString>
+    <Id>91</Id>
+    <Value>Призыв животных</Value>
+  </RuneString>
+  <RuneString>
+    <Id>92</Id>
+    <Value>Уход за животными</Value>
+  </RuneString>
+  <RuneString>
+    <Id>93</Id>
+    <Value>Магия Природы</Value>
+  </RuneString>
+  <RuneString>
+    <Id>94</Id>
+    <Value>Магия Жизни</Value>
+  </RuneString>
+  <RuneString>
+    <Id>95</Id>
+    <Value>Магия Энергии</Value>
+  </RuneString>
+  <RuneString>
+    <Id>96</Id>
+    <Value>Магия Стихий</Value>
+  </RuneString>
+  <RuneString>
+    <Id>97</Id>
+    <Value>Использование тёмных доспехов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>98</Id>
+    <Value>Использование тёмного оружия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>99</Id>
+    <Value>Создание тёмного оружия и брони</Value>
+  </RuneString>
+  <RuneString>
+    <Id>100</Id>
+    <Value>Предчувствие ударов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>101</Id>
+    <Value>Тёмная сила</Value>
+  </RuneString>
+  <RuneString>
+    <Id>102</Id>
+    <Value>Жертвенные удары</Value>
+  </RuneString>
+  <RuneString>
+    <Id>103</Id>
+    <Value>Магия Тьмы</Value>
+  </RuneString>
+  <RuneString>
+    <Id>104</Id>
+    <Value>Проклинание вещей</Value>
+  </RuneString>
+  <RuneString>
+    <Id>105</Id>
+    <Value>Тёмная энергия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>106</Id>
+    <Value>Создание ордена</Value>
+  </RuneString>
+  <RuneString>
+    <Id>107</Id>
+    <Value>Вербование в орден</Value>
+  </RuneString>
+  <RuneString>
+    <Id>108</Id>
+    <Value>Призыв ордена</Value>
+  </RuneString>
+  <RuneString>
+    <Id>109</Id>
+    <Value>Бой музыкальными инструментами</Value>
+  </RuneString>
+  <RuneString>
+    <Id>110</Id>
+    <Value>Метание предметов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>111</Id>
+    <Value>Воодушевление</Value>
+  </RuneString>
+  <RuneString>
+    <Id>112</Id>
+    <Value>Магия Звука</Value>
+  </RuneString>
+  <RuneString>
+    <Id>113</Id>
+    <Value>Магия Воздуха</Value>
+  </RuneString>
+  <RuneString>
+    <Id>114</Id>
+    <Value>Магия Энергии</Value>
+  </RuneString>
+  <RuneString>
+    <Id>115</Id>
+    <Value>Магия Музыки</Value>
+  </RuneString>
+  <RuneString>
+    <Id>116</Id>
+    <Value>Музыкальные инструменты</Value>
+  </RuneString>
+  <RuneString>
+    <Id>117</Id>
+    <Value>Сочинение музыки</Value>
+  </RuneString>
+  <RuneString>
+    <Id>118</Id>
+    <Value>Писательство</Value>
+  </RuneString>
+  <RuneString>
+    <Id>119</Id>
+    <Value>Умение обучать других</Value>
+  </RuneString>
+  <RuneString>
+    <Id>120</Id>
+    <Value>Манипуляция мировозрением</Value>
+  </RuneString>
+  <RuneString>
+    <Id>121</Id>
+    <Value>Поиск деталей</Value>
+  </RuneString>
+  <RuneString>
+    <Id>122</Id>
+    <Value>Создание деталей</Value>
+  </RuneString>
+  <RuneString>
+    <Id>123</Id>
+    <Value>Создание примитивов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>124</Id>
+    <Value>Создане конструкций</Value>
+  </RuneString>
+  <RuneString>
+    <Id>125</Id>
+    <Value>Проектирование механизмов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>126</Id>
+    <Value>Конструирование механизмов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>127</Id>
+    <Value>Механика</Value>
+  </RuneString>
+  <RuneString>
+    <Id>128</Id>
+    <Value>Энергия</Value>
+  </RuneString>
+  <RuneString>
+    <Id>129</Id>
+    <Value>Использование механизмов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>130</Id>
+    <Value>Починка механизмов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>131</Id>
+    <Value>Создание снарядов</Value>
+  </RuneString>
+  <RuneString>
+    <Id>132</Id>
+    <Value>Создание бомб</Value>
+  </RuneString>
+</RuneStrings>

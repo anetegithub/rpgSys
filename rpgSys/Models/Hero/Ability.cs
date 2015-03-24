@@ -3,21 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-using ormCL.Attributes;
+using RuneFramework;
 
 namespace rpgSys
 {
     public class Ability
     {
-        [attributeCL]
         public int Id { get; set; }
 
-        [attributeCL]
-        public int HeroId { get; set; }
-
-        [referenceCL("Hero/Common/AbilityInfo")]
-        [outerCL("Id")]
-        public string Info { get; set; }
+        public RuneString AbilityName { get; set; }
 
         public int Value { get; set; }
     }

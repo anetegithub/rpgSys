@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuneStrings>
+  <RuneString>
+    <Id>1</Id>
+    <Value>Человек</Value>
+  </RuneString>
+  <RuneString>
+    <Id>2</Id>
+    <Value>Полурослик</Value>
+  </RuneString>
+  <RuneString>
+    <Id>3</Id>
+    <Value>Каменный Гном</Value>
+  </RuneString>
+  <RuneString>
+    <Id>4</Id>
+    <Value>Стальной Гном</Value>
+  </RuneString>
+  <RuneString>
+    <Id>5</Id>
+    <Value>Лесной эльф</Value>
+  </RuneString>
+  <RuneString>
+    <Id>6</Id>
+    <Value>Лунный эльф</Value>
+  </RuneString>
+  <RuneString>
+    <Id>7</Id>
+    <Value>Тёмный эльф</Value>
+  </RuneString>
+  <RuneString>
+    <Id>8</Id>
+    <Value>Светлый эльф</Value>
+  </RuneString>
+  <RuneString>
+    <Id>9</Id>
+    <Value>Красный орк</Value>
+  </RuneString>
+  <RuneString>
+    <Id>10</Id>
+    <Value>Зелёный орк</Value>
+  </RuneString>
+  <RuneString>
+    <Id>11</Id>
+    <Value>Горный тролль</Value>
+  </RuneString>
+  <RuneString>
+    <Id>12</Id>
+    <Value>Степной тролль</Value>
+  </RuneString>
+  <RuneString>
+    <Id>13</Id>
+    <Value>Высший: Ангел</Value>
+  </RuneString>
+  <RuneString>
+    <Id>14</Id>
+    <Value>Высший: Демон</Value>
+  </RuneString>
+  <RuneString>
+    <Id>15</Id>
+    <Value>Высший: Дух</Value>
+  </RuneString>
+</RuneStrings>

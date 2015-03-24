@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Abilitys>
+  <Ability>
+    <Id>1</Id>
+    <Value>0</Value>
+    <AbilityName>1</AbilityName>
+  </Ability>
+  <Ability>
+    <Id>2</Id>
+    <Value>0</Value>
+    <AbilityName>2</AbilityName>
+  </Ability>
+  <Ability>
+    <Id>3</Id>
+    <Value>0</Value>
+    <AbilityName>3</AbilityName>
+  </Ability>
+</Abilitys>

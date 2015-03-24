@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuneStrings>
+  <RuneString>
+    <Id>1</Id>
+    <Value>Телосложение</Value>
+  </RuneString>
+  <RuneString>
+    <Id>2</Id>
+    <Value>Тренированность</Value>
+  </RuneString>
+  <RuneString>
+    <Id>3</Id>
+    <Value>Интеллект</Value>
+  </RuneString>
+  <RuneString>
+    <Id>4</Id>
+    <Value>Мудрость</Value>
+  </RuneString>
+  <RuneString>
+    <Id>5</Id>
+    <Value>Харизма</Value>
+  </RuneString>
+  <RuneString>
+    <Id>6</Id>
+    <Value>Судьба</Value>
+  </RuneString>
+</RuneStrings>

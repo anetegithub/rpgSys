@@ -4,7 +4,7 @@
     $('#userAvatar').attr('src', user.Avatar);
     $('#lastTime').html("Последняя авторизация: " + user.Stamp);
 
-    if (JSON.parse(localStorage.getItem('User')) != null) {
+    if (user.HeroId != 0) {
         $('#old').css('display', 'block');
         old_render(JSON.parse(localStorage.getItem('User')))
     } else {
@@ -98,7 +98,7 @@ function old_render(Hero) {
 }
 
 function new_render() {
-    $.getJSON('../api/hero').done(function (data) {
+    $.getJSON('../api/hero/enums').done(function (data) {
         setLstSource(data[0], '#newClass');
         setLstSource(data[1], '#newRace');
         setLstSource(data[2], '#newSex');
@@ -171,7 +171,7 @@ function setTableSource(data, table) {
     var html = '';
     $(table).html(html);
     for (var i = 0; i < data.length; i++) {
-        html += '<tr><td>' + data[i].Name + '</td><td>' + data[i].DIX + "</td><<td class='col-md-4'><span class=\'picker\' selectr=\'" + i.toString() + table.split('#').join('g') + "\'></span></td></tr>";
+        html += '<tr><td>' + data[i].SkillName.Value + '</td><td>' + data[i].DIX.Value + "</td><<td class='col-md-4'><span class=\'picker\' selectr=\'" + i.toString() + table.split('#').join('g') + "\'></span></td></tr>";
     }
     $(table).html(html);
 }
@@ -193,22 +193,37 @@ function getRandomArbitrary(min, max) {
 
 function createNewHero() {
     $.post('../api/hero/create', { '': JSON.stringify(Hero()) }).done(function (data) {
-        alert(data);
+        if (parseInt(data) != 0) {
+            var data=JSON.parse($.cookie("user"));
+            data.HeroId = parseInt(data);
+            $.cookie('user', JSON.stringify(data), { path: '/site/' });
+            location.reload();
+        }
+        else
+            alert("Ошибка создания персонажа!");
     });
 };
 
+function RuneString(Value)
+{
+    var RS=new Object();
+    RS.Id=0;
+    RS.Value=Value;
+    return RS;
+}
+
 function Hero() {
     var o = new Object();
-    o.UserId = JSON.parse($.cookie('user')).UserId;
-    o.GameId = 0;
+    o.UserId= JSON.parse($.cookie("user")).Id;
     o.Level = 1;
+    o.Name = $('#newName').val();
     o.Expirience = 0;
-    o.Class = $('#newClass').val();
-    o.Race = $('#newRace').val();
+    o.Class = RuneString($('#newClass').val());
+    o.Race = RuneString($('#newRace').val());
     o.God = $('#newGod').val();
-    o.Height = $('#newHeight').val();
+    o.Height = RuneString($('#newHeight').val());
     o.Age = $('#newAge').val();
-    o.Sex = $('#newSex').val();
+    o.Sex = RuneString($('#newSex').val());
     o.Weight = $('#newWeight').val();
     o.Eyes = $('#newEyes').val();
     o.Hair = $('#newHair').val();
@@ -225,29 +240,44 @@ function Hero() {
     o.DefenceState = {};
     o.AttackState = {};
     o.CommonState = {};
-    o.MaterialSkill = SkillsArray('#table12');
-    o.MentalSkill = SkillsArray('#table13');
-    o.ClassSkill = SkillsArray('#table14');
+    o.Skills = SkillsArray('#table12', '#table13', '#table14');
     return o;
 };
 
 function Characteristic(name, dix, value) {
     var o = new Object();
-    o.Name = name;
-    o.DIX = dix;
+    o.CharacteristicName = RuneString(name);
+    o.DIX = RuneString(dix);
     o.Value = value;
     return o;
 };
 
-function SkillsArray(tableSelector) {
+function SkillsArray(tableSelector1, tableSelector2, tableSelector3) {
     var o = new Object();
     o = [];
     for (var i = 0; i < 12; i++) {
         o.push({
-            Name: $(tableSelector)[0].children[i].children[0].innerText,
-            DIX: $(tableSelector)[0].children[i].children[1].innerText,
-            Value: $($(tableSelector)[0].children[i].children[2]).find('input')[1].value
+            SkillName: RuneString($(tableSelector1)[0].children[i].children[0].innerText),
+            DIX: RuneString($(tableSelector1)[0].children[i].children[1].innerText),
+            Value: $($(tableSelector1)[0].children[i].children[2]).find('input')[1].value
         });
     };
+
+    for (var i = 0; i < 12; i++) {
+        o.push({
+            SkillName: RuneString($(tableSelector2)[0].children[i].children[0].innerText),
+            DIX: RuneString($(tableSelector2)[0].children[i].children[1].innerText),
+            Value: $($(tableSelector2)[0].children[i].children[2]).find('input')[1].value
+        });
+    };
+
+    for (var i = 0; i < 12; i++) {
+        o.push({
+            SkillName: RuneString($(tableSelector3)[0].children[i].children[0].innerText),
+            DIX: RuneString($(tableSelector3)[0].children[i].children[1].innerText),
+            Value: $($(tableSelector3)[0].children[i].children[2]).find('input')[1].value
+        });
+    };
+
     return o;
 };

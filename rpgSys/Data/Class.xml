@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuneStrings>
+  <RuneString>
+    <Id>1</Id>
+    <Value>Воин</Value>
+  </RuneString>
+  <RuneString>
+		<Id>2</Id>
+		<Value>Послушник</Value>
+	</RuneString>
+  <RuneString>
+		<Id>3</Id>
+		<Value>Некромант</Value>
+	</RuneString>
+  <RuneString>
+		<Id>4</Id>
+		<Value>Разбойник</Value>
+	</RuneString>
+  <RuneString>
+		<Id>5</Id>
+		<Value>Волшебник</Value>
+	</RuneString>
+  <RuneString>
+		<Id>6</Id>
+		<Value>Друид</Value>
+	</RuneString>
+  <RuneString>
+		<Id>7</Id>
+		<Value>Рыцарь тьмы</Value>
+	</RuneString>
+  <RuneString>
+		<Id>8</Id>
+		<Value>Бард</Value>
+	</RuneString>
+  <RuneString>
+		<Id>9</Id>
+		<Value>Инженер</Value>
+	</RuneString>
+</RuneStrings>

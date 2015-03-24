@@ -14,6 +14,9 @@ namespace rpgSys
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+
+            config.Routes.MapHttpRoute("DefaultApiWithAction", "api/{controller}/{action}");
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

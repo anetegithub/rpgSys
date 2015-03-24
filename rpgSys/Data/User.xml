@@ -6,19 +6,19 @@
     <Avatar>img/admin.png</Avatar>
     <Password>555033</Password>
     <Email>anete.anetes@gmail.com</Email>
-    <Stamp>24.03.2015 10:29:30</Stamp>
+    <Stamp>24.03.2015 16:55:35</Stamp>
 	<Activity>
 		<UserActivity>2</UserActivity>
 	</Activity>
-  </User>
+<HeroId>1</HeroId></User>
   <User>
     <Id>2</Id>
 	<Avatar>img/tester.png</Avatar>
     <Login>Tester</Login>
     <Password>123456</Password>
     <Email>anete.anetes@yandex.ru</Email>
-    <Stamp>24.03.2015 10:17:55</Stamp>
+    <Stamp>24.03.2015 16:42:58</Stamp>
 	<Activity>
 	  <UserActivity>1</UserActivity>
-	</Activity></User>
+	</Activity><HeroId>0</HeroId></User>
 </Users>

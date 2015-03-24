@@ -16,7 +16,7 @@ namespace RuneFramework
     {
         public static RuneElement Element;
 
-        private object loject;
+        private object loject = new object();
 
         public Rune()
         {

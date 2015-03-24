@@ -111,7 +111,13 @@ namespace RuneFramework
 
             while ((EnumA.MoveNext()) && (EnumB.MoveNext()))
             {
-                FieldByFieldCompareCollection(out Result, Property, EnumA.Current, EnumA.Current);
+                if (ObjectA.GetType().GetInterface("IList") != null)
+                    FieldByFieldCompareCollection(out Result, Property, EnumA.Current, EnumA.Current);
+                else
+                    if(Property.PropertyType.GetInterface("IList") != null)
+                        FieldByFieldCompare(out Result, Property.PropertyType.GetGenericArguments()[0], EnumA.Current, EnumB.Current);
+                else
+                        FieldByFieldCompare(out Result, Property.PropertyType, EnumA.Current, EnumB.Current);
             }
         }
 
@@ -153,7 +159,7 @@ namespace RuneFramework
                 else
                 {
                     if (InnerProperty.PropertyType.GetInterface("IList") == null)
-                        FieldByFieldCompare(out Result, InnerProperty, AProperty, BProperty);
+                        FieldByFieldCompare(out Result, InnerProperty.PropertyType, AProperty, BProperty);
                     else
                         FieldByFieldCompareCollection(out Result, InnerProperty, AProperty, BProperty);
 
@@ -162,11 +168,11 @@ namespace RuneFramework
             }
         }
 
-        private void FieldByFieldCompare(out bool Result, PropertyInfo Property, object A, object B)
+        private void FieldByFieldCompare(out bool Result, Type Property, object A, object B)
         {
             Result = false;
 
-            foreach (var InnerProperty in Property.PropertyType.GetProperties())
+            foreach (var InnerProperty in Property.GetProperties())
             {
                 var AProperty = InnerProperty.GetValue(A, null);
                 var BProperty = InnerProperty.GetValue(B, null);
@@ -199,7 +205,7 @@ namespace RuneFramework
                     }
 
                     if (InnerProperty.PropertyType.GetInterface("IList") == null)
-                        FieldByFieldCompare(out Result, InnerProperty, AProperty, BProperty);
+                        FieldByFieldCompare(out Result, InnerProperty.PropertyType, AProperty, BProperty);
                     else
                         FieldByFieldCompareCollection(out Result, InnerProperty, AProperty, BProperty);
                     //NeedChangesCollection(out Result, AProperty, BProperty, InnerProperty);
@@ -507,17 +513,39 @@ namespace RuneFramework
             var A = Property.GetValue(ObjectA, null) ?? Activator.CreateInstance(Property.PropertyType);
             var B = Property.GetValue(ObjectB, null) ?? Activator.CreateInstance(Property.PropertyType);
 
-            FieldByFieldCompare(out Result, Property, A, B);
+            Result = true;
+                        
+            var a = Activator.CreateInstance(typeof(EqualityComparer<>).MakeGenericType(typeof(T)));
+
+            //FieldByFieldCompare(ref Result, Property, A, B);
         }
 
-        private void FieldByFieldCompare(out bool Result, PropertyInfo Property, object A, object B)
+        public bool IsDataChanged<T>()
         {
-            Result = false;
+            T value1 = GetValue2;
+            T value2 = GetValue1();
 
+            return !EqualityComparer<T>.Default.Equals(valueInDB, valueFromView);
+        }
+
+        private void FieldByFieldCompare(ref bool Result, PropertyInfo Property, object A, object B)
+        {
             foreach (var InnerProperty in Property.PropertyType.GetProperties())
             {
                 var AProperty = InnerProperty.GetValue(A, null);
                 var BProperty = InnerProperty.GetValue(B, null);
+
+                if (AProperty == null && BProperty == null)
+                {
+                    Result = false;
+                    return;
+                }
+
+                if ((AProperty == null && BProperty != null) || (BProperty == null && AProperty != null))
+                {
+                    //Result = true;
+                    return;
+                }
 
                 if (!InnerProperty.PropertyType.IsClass || InnerProperty.PropertyType == typeof(String) || InnerProperty.PropertyType == typeof(RuneString))
                 {
@@ -529,25 +557,14 @@ namespace RuneFramework
 
                     if (AProperty.Equals(BProperty))
                         Result = false;
-                    else
-                        Result = true;
+                    //else
+                    //    Result = true;
                 }
                 else
-                {
-                    if (AProperty == null && BProperty == null)
-                    {
-                        Result = false;
-                        return;
-                    }
-
-                    if ((AProperty == null && BProperty != null) || (BProperty == null && AProperty != null))
-                    {
-                        Result = true;
-                        return;
-                    }
+                {                   
 
                     if (InnerProperty.PropertyType.GetInterface("IList") == null)
-                        FieldByFieldCompare(out Result, InnerProperty, AProperty, BProperty);
+                        FieldByFieldCompare(ref Result, InnerProperty, AProperty, BProperty);
                     else
                         FieldByFieldCompareCollection(out Result, InnerProperty, AProperty, BProperty);
                         //NeedChangesCollection(out Result, AProperty, BProperty, InnerProperty);
@@ -582,39 +599,45 @@ namespace RuneFramework
             Result = false;
             foreach (var InnerProperty in Property.PropertyType.GetGenericArguments()[0].GetProperties())
             {
-                var AProperty = InnerProperty.GetValue(A, null);
-                var BProperty = InnerProperty.GetValue(B, null);
+                IEnumerator EnumA = (A as IEnumerable).GetEnumerator();
+                IEnumerator EnumB = (B as IEnumerable).GetEnumerator();
 
-                if (AProperty == null && BProperty == null)
+                while ((EnumA.MoveNext()) && (EnumB.MoveNext()))
                 {
-                    Result = false;
-                    return;
-                }
+                    var AProperty = InnerProperty.GetValue(EnumA.Current, null);
+                    var BProperty = InnerProperty.GetValue(EnumB.Current, null);
 
-                if ((AProperty == null && BProperty != null) || (BProperty == null && AProperty != null))
-                {
-                    Result = true;
-                    return;
-                }
-
-                if (!InnerProperty.PropertyType.IsClass || InnerProperty.PropertyType == typeof(String) || InnerProperty.PropertyType == typeof(RuneString))
-                {
-                    if (InnerProperty.PropertyType == typeof(String))
+                    if (AProperty == null && BProperty == null)
                     {
-                        AProperty = AProperty ?? "";
-                        BProperty = BProperty ?? "";
+                        Result = false;
+                        return;
                     }
 
-                    if (AProperty == null)
+                    if ((AProperty == null && BProperty != null) || (BProperty == null && AProperty != null))
+                    {
+                        Result = true;
+                        return;
+                    }
 
-                        if (AProperty.Equals(BProperty))
-                            Result = false;
-                        else
-                            Result = true;
-                }
-                else
-                {
-                    FieldByFieldCompareCollection(out Result, InnerProperty, AProperty, BProperty);
+                    if (!InnerProperty.PropertyType.IsClass || InnerProperty.PropertyType == typeof(String) || InnerProperty.PropertyType == typeof(RuneString))
+                    {
+                        if (InnerProperty.PropertyType == typeof(String))
+                        {
+                            AProperty = AProperty ?? "";
+                            BProperty = BProperty ?? "";
+                        }
+
+                        if (AProperty == null)
+
+                            if (AProperty.Equals(BProperty))
+                                Result = false;
+                            else
+                                Result = true;
+                    }
+                    else
+                    {
+                        FieldByFieldCompareCollection(out Result, InnerProperty, AProperty, BProperty);
+                    }
                 }
             }
         }

@@ -106,12 +106,15 @@ function render() {
     var user = JSON.parse($.cookie("user"));
     $('#userAvatar').attr('src', user.Avatar);
     $('#userLogin').html("Добро пожаловать, " + user.Login + "! Рады видеть вас вновь! ");
-    if (JSON.parse(localStorage.getItem('User')) == null) {
+    if (user.HeroId==0) {
         $('#userHero').html('Создать');
     } else {
-        $('#userHero').html(user.Hero.Name);
+        $.getJSON('../api/hero?UserId=' + user.Id)
+                 .done(function (data) {
+                     $('#userHero').html(data.Name);
+                 });
     }
-    if (JSON.parse(localStorage.getItem('Game')) == null) {
+    if (user.GameId == 0) {
         $('#userGame').html('Начать сценарий');
     } else {
         $('#userGame').html('GameControllerNeed');

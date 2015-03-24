@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SkillTemplates>
+  <SkillTemplate><Id>1</Id>
+    <SkillName>1</SkillName>
+    <DIX>1</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>2</Id>
+    <SkillName>2</SkillName>
+    <DIX>6</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>3</Id>
+    <SkillName>3</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>4</Id>
+    <SkillName>4</SkillName>
+    <DIX>2</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>5</Id>
+    <SkillName>5</SkillName>
+    <DIX>5</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>6</Id>
+    <SkillName>6</SkillName>
+    <DIX>2</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>7</Id>
+    <SkillName>7</SkillName>
+    <DIX>6</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>8</Id>
+    <SkillName>8</SkillName>
+    <DIX>2</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>9</Id>
+    <SkillName>9</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>10</Id>
+    <SkillName>10</SkillName>
+    <DIX>6</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>11</Id>
+    <SkillName>11</SkillName>
+    <DIX>2</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>12</Id>
+    <SkillName>12</SkillName>
+    <DIX>2</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>13</Id>
+    <SkillName>13</SkillName>
+    <DIX>4</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>14</Id>
+    <SkillName>14</SkillName>
+    <DIX>4</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>15</Id>
+    <SkillName>15</SkillName>
+    <DIX>5</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>16</Id>
+    <SkillName>16</SkillName>
+    <DIX>5</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>17</Id>
+    <SkillName>17</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>18</Id>
+    <SkillName>18</SkillName>
+    <DIX>1</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>19</Id>
+    <SkillName>19</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>20</Id>
+    <SkillName>20</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>21</Id>
+    <SkillName>21</SkillName>
+    <DIX>5</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>22</Id>
+    <SkillName>22</SkillName>
+    <DIX>4</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>23</Id>
+    <SkillName>23</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>24</Id>
+    <SkillName>24</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+
+  <!--Воин-общее-->
+  <SkillTemplate><Id>25</Id>
+    <SkillName>25</SkillName>
+    <DIX>1</DIX>
+  </SkillTemplate>
+  
+  <SkillTemplate><Id>26</Id>
+    <SkillName>26</SkillName>
+  <DIX>1</DIX></SkillTemplate>
+  <SkillTemplate><Id>27</Id>
+    <SkillName>27</SkillName>
+  <DIX>1</DIX></SkillTemplate>
+  <SkillTemplate><Id>28</Id>
+    <SkillName>28</SkillName>
+  <DIX>1</DIX></SkillTemplate>
+  <SkillTemplate><Id>29</Id>
+    <SkillName>29</SkillName>
+  <DIX>1</DIX></SkillTemplate>
+  <SkillTemplate><Id>30</Id>
+    <SkillName>30</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+
+  <!--Воин-защитник-->
+  <SkillTemplate><Id>31</Id>
+    <SkillName>31</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>32</Id>
+    <SkillName>32</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>33</Id>
+    <SkillName>33</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+
+  <!--Воин-боец-->
+  <SkillTemplate><Id>34</Id>
+    <SkillName>34</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>35</Id>
+    <SkillName>35</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>36</Id>
+    <SkillName>36</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+
+  <!--Общий послушник-->
+  <SkillTemplate><Id>37</Id>
+    <SkillName>37</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>38</Id>
+    <SkillName>38</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>39</Id>
+    <SkillName>39</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Инквизитор-послушник-->
+  <SkillTemplate><Id>40</Id>
+    <SkillName>40</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>41</Id>
+    <SkillName>41</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>42</Id>
+    <SkillName>42</SkillName>
+  <DIX>6</DIX></SkillTemplate>
+
+  <!--Паладин-послушник-->
+  <SkillTemplate><Id>43</Id>
+    <SkillName>43</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>44</Id><SkillName>44</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>45</Id>
+    <SkillName>45</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Жрец-послушник-->
+  <SkillTemplate><Id>46</Id>
+    <SkillName>46</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>47</Id>
+    <SkillName>47</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>48</Id>
+    <SkillName>48</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Некромант-->
+  <SkillTemplate><Id>49</Id><SkillName>49</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>50</Id>
+    <SkillName>50</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>51</Id>
+    <SkillName>51</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>52</Id>
+    <SkillName>52</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>53</Id>
+    <SkillName>53</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>54</Id>
+    <SkillName>54</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>55</Id>
+    <SkillName>5</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>56</Id>
+    <SkillName>56</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>57</Id>
+    <SkillName>57</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>58</Id>
+    <SkillName>58</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>59</Id>
+    <SkillName>59</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>60</Id>
+    <SkillName>60</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+
+  <!--Разбойник общее-->
+  <SkillTemplate><Id>61</Id>
+    <SkillName>61</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>62</Id>
+    <SkillName>62</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+
+  <!--Разбойник убийца-->
+  <SkillTemplate><Id>63</Id>
+    <SkillName>63</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>64</Id><SkillName>64</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>65</Id>
+    <SkillName>65</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>66</Id><SkillName>66</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>67</Id>
+    <SkillName>67</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+
+  <!--Разбойник вор-->
+  <SkillTemplate><Id>68</Id>
+    <SkillName>68</SkillName>
+  <DIX>6</DIX></SkillTemplate>
+  <SkillTemplate><Id>69</Id>
+    <SkillName>69</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>70</Id>
+    <SkillName>70</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>71</Id>
+    <SkillName>71</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>72</Id>
+    <SkillName>72</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+
+  <!--Волшебник - волшебство-->
+  <SkillTemplate><Id>73</Id>
+    <SkillName>73</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>74</Id>
+    <SkillName>74</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>75</Id>
+    <SkillName>75</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>76</Id>
+    <SkillName>76</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Волшебник - стихии-->
+  <SkillTemplate><Id>77</Id>
+    <SkillName>77</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>78</Id>
+    <SkillName>78</SkillName>
+    <DIX>3</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>79</Id>
+    <SkillName>79</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>80</Id>
+    <SkillName>80</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Волшебник - чародей-->
+  <SkillTemplate><Id>81</Id>
+    <SkillName>81</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>82</Id>
+    <SkillName>82</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>83</Id>
+    <SkillName>83</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>84</Id>
+    <SkillName>84</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+
+  <!--Друид - егерь-->
+  <SkillTemplate><Id>85</Id>
+    <SkillName>85</SkillName>
+    <DIX>4</DIX>
+  </SkillTemplate>
+  <SkillTemplate><Id>86</Id>
+    <SkillName>86</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>87</Id>
+    <SkillName>87</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>88</Id>
+    <SkillName>88</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Друид - животные-->
+  <SkillTemplate><Id>89</Id>
+    <SkillName>89</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>90</Id>
+    <SkillName>90</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>91</Id>
+    <SkillName>91</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>92</Id>
+    <SkillName>92</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+
+  <!--Друид - природа-->
+  <SkillTemplate><Id>93</Id>
+    <SkillName>93</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>94</Id>
+    <SkillName>94</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>95</Id>
+    <SkillName>95</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>96</Id>
+    <SkillName>96</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Рыцарь тьмы - воин-->
+  <SkillTemplate><Id>97</Id>
+    <SkillName>97</SkillName>
+  <DIX>1</DIX></SkillTemplate>
+  <SkillTemplate><Id>98</Id>
+    <SkillName>98</SkillName>
+  <DIX>1</DIX></SkillTemplate>
+  <SkillTemplate><Id>99</Id>
+    <SkillName>99</SkillName>
+  <DIX>1</DIX></SkillTemplate>
+  <SkillTemplate><Id>100</Id>
+    <SkillName>100</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>101</Id>
+    <SkillName>101</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>102</Id>
+    <SkillName>102</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+
+
+  <!--Рыцарь тьмы - маг-->
+  <SkillTemplate><Id>103</Id>
+    <SkillName>103</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>104</Id>
+    <SkillName>104</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>105</Id>
+    <SkillName>105</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>106</Id>
+    <SkillName>106</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>107</Id>
+    <SkillName>107</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>108</Id>
+    <SkillName>108</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+
+  <!--Бард-воин-->
+  <SkillTemplate><Id>109</Id>
+    <SkillName>109</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>110</Id>
+    <SkillName>110</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>111</Id>
+    <SkillName>111</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+
+  <!--Бард-маг-->
+  <SkillTemplate><Id>112</Id>
+    <SkillName>112</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>113</Id>
+    <SkillName>113</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>114</Id>
+    <SkillName>114</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Бард-песенник-->
+  <SkillTemplate><Id>115</Id>
+    <SkillName>115</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>116</Id>
+    <SkillName>116</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>117</Id>
+    <SkillName>117</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+
+  <!--Бард-разговор-->
+  <SkillTemplate><Id>118</Id>
+    <SkillName>118</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>119</Id>
+    <SkillName>119</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+  <SkillTemplate><Id>120</Id>
+    <SkillName>120</SkillName>
+  <DIX>5</DIX></SkillTemplate>
+
+  <!--Инженер-базовый-->
+  <SkillTemplate><Id>121</Id>
+    <SkillName>121</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>122</Id>
+    <SkillName>122</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Инженер-создатель-->
+  <SkillTemplate><Id>123</Id>
+    <SkillName>123</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+  <SkillTemplate><Id>124</Id>
+    <SkillName>124</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+
+  <!--Инженер-инженер-->
+  <SkillTemplate><Id>125</Id>
+    <SkillName>125</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>126</Id>
+    <SkillName>126</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+
+  <!--Инженер-основы-->
+  <SkillTemplate><Id>127</Id>
+    <SkillName>127</SkillName>
+  <DIX>3</DIX></SkillTemplate>
+  <SkillTemplate><Id>128</Id>
+    <SkillName>128</SkillName>
+  <DIX>4</DIX></SkillTemplate>
+
+  <!--Инженер-практика-->
+  <SkillTemplate><Id>129</Id>
+    <SkillName>129</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>130</Id>
+    <SkillName>130</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+
+  <!--Инженер-дополнительно-->
+  <SkillTemplate><Id>131</Id>
+    <SkillName>131</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  <SkillTemplate><Id>132</Id>
+    <SkillName>132</SkillName>
+  <DIX>2</DIX></SkillTemplate>
+  
+  
+</SkillTemplates>

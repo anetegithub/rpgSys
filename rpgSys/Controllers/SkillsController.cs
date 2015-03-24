@@ -7,14 +7,18 @@ using System.Web.Http;
 
 using ormCL;
 
+using RuneFramework;
+
 namespace rpgSys.Controllers
 {
     public class SkillsController : ApiController
     {
         public IHttpActionResult Get()
         {
-            try { var List = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Hero/Common/SkillList") }).Cast<Skill>().ToList(); return Ok(List); }
-            catch { return InternalServerError(); }
+            using(var db=new Runes.SkillRune())
+            {
+                return Ok(db.SkillsTemplate.ToList());
+            }
         }
     }
 }

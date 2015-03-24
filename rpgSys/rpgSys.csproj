@@ -241,10 +241,11 @@
     <Compile Include="Models\Hero\AttackState.cs" />
     <Compile Include="Models\Hero\CommonState.cs" />
     <Compile Include="Models\Hero\DefenceState.cs" />
-    <Compile Include="Models\Hero\Enums.cs" />
     <Compile Include="Models\Hero\HealthState.cs" />
     <Compile Include="Models\Hero\Hero.cs" />
     <Compile Include="Models\Hero\Characteristic.cs" />
+    <Compile Include="Models\Hero\HeroRune.cs" />
+    <Compile Include="Models\Hero\SkillRune.cs" />
     <Compile Include="Models\Scenario\Event.cs" />
     <Compile Include="Models\Scenario\Location.cs" />
     <Compile Include="Models\Scenario\Npc.cs" />

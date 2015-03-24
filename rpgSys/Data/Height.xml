@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuneStrings>
+  <RuneString>
+		<Id>1</Id>
+		<Value>Средний</Value>
+	</RuneString>
+  <RuneString>
+		<Id>2</Id>
+		<Value>Высокий</Value>
+	</RuneString>
+  <RuneString>
+		<Id>3</Id>
+		<Value>Низкий</Value>
+	</RuneString>
+</RuneStrings>
