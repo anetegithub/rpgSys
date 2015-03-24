@@ -2,13 +2,11 @@
 
     var user = JSON.parse($.cookie("user"));
     $('#userAvatar').attr('src', user.Avatar);
-    $('#lastTime').html("Последняя авторизация: " + user.StampToString);
+    $('#lastTime').html("Последняя авторизация: " + user.Stamp);
 
-    if (JSON.parse($.cookie('user')).HeroId != 0) {
+    if (JSON.parse(localStorage.getItem('User')) != null) {
         $('#old').css('display', 'block');
-        $.getJSON('../api/hero?HeroId=' + user.HeroId).done(function (data) {
-            old_render(data)
-        });
+        old_render(JSON.parse(localStorage.getItem('User')))
     } else {
         $('#new').css('display', 'block');
         new_render();

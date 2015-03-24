@@ -10,6 +10,10 @@ $('#log-btn').click(function () {
     $.getJSON('../api/users?name=' + log + "&psw=" + psw)
         .done(function (data) {
             if (data.Password == psw) {
+                localStorage.setItem('Hero',JSON.stringify(data.Hero));
+                data.Hero = null;
+                localStorage.setItem('Game',JSON.stringify(data.Game));
+                data.Game = null;
                 $.cookie('user', JSON.stringify(data), { path: '/site/' });
                 $.post('../api/users/update', { '': data.Id.toString() }).done(function () {
                     window.location.replace('profile');

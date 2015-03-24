@@ -5,7 +5,7 @@ using System.Web;
 
 using RuneFramework;
 
-namespace rpgSys.Models
+namespace rpgSys.Runes
 {
     public class UserRune : Rune
     {

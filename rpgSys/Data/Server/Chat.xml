@@ -522,4 +522,27 @@
     <Stamp>02.03.2015 19:14:32</Stamp>
     <Text>Jessie J</Text>
   </GeneralMessage>
+  <GeneralMessage Id="88">
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin,png</UserAvatar>
+    <Stamp>
+      <Date>2015-03-24T00:00:00+05:00</Date>
+      <Day>24</Day>
+      <DayOfWeek>Tuesday</DayOfWeek>
+      <DayOfYear>83</DayOfYear>
+      <Hour>8</Hour>
+      <Kind>Local</Kind>
+      <Millisecond>757</Millisecond>
+      <Minute>53</Minute>
+      <Month>3</Month>
+      <Now>2015-03-24T08:53:39.7811137+05:00</Now>
+      <UtcNow>2015-03-24T03:53:39.7811137Z</UtcNow>
+      <Second>39</Second>
+      <Ticks>635627840197571124</Ticks>
+      <TimeOfDay>PT8H53M39.7571124S</TimeOfDay>
+      <Today>2015-03-24T00:00:00+05:00</Today>
+      <Year>2015</Year>
+    </Stamp>
+    <Text>LIke a?</Text>
+  </GeneralMessage>
 </GeneralMessages>

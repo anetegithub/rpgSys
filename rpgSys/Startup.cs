@@ -54,7 +54,7 @@ namespace rpgSys
             int numb = Convert.ToInt32(Number.ToString()[Number.ToString().Length - 1].ToString());
             if (numb == 0)
                 retrn += variants[2];
-            else if (numb == 1)
+            else if (numb == 1 || numb == 2)
                 retrn += variants[0];
             else if (numb < 5)
                 retrn += variants[1];

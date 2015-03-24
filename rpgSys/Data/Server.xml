@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Servers>
+  <Server>
+	<Id>1</Id>
+	<Name>Тестовый сервер</Name>
+    <Uptime>01.02.2015 00:00:00</Uptime>
+    <ServerMessage>Тестовый сервер успешно запущен...</ServerMessage>
+    <MessageOfTheDay>warning~Ведётся работа над внутренней структурой базы данных! Возможны перебои в работе сервиса!</MessageOfTheDay>
+    <Modules>4</Modules>
+    <Scenarios>1</Scenarios>
+    <Tickets>0</Tickets>
+    <Characters>1</Characters>
+	</Server>
+</Servers>

@@ -7,46 +7,41 @@ using System.Web.Http;
 
 using ormCL;
 
+using RuneFramework;
+
 namespace rpgSys
 {
     public class ActivityController : ApiController
     {
         public IHttpActionResult Get()
         {
-            try
+            List<UserActivity> Activities = new List<UserActivity>();
+
+            using (var db = new Runes.UserRune())
             {
-                var Collection = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/User/Activity") }).Cast<UserActivity>().ToList();
-                foreach(var Item in Collection)
+                foreach (var Activity in db.Activity)
                 {
-                    //Item.StampToString = Item.Stamp.Ago();
+                    Activities.Add(Activity);
                 }
-                return Ok(Collection);
             }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+            return Ok(Activities);
         }
 
         public IHttpActionResult Get(int Id)
         {
-            try
+            using (var db = new Runes.UserRune())
             {
-                var Collection = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/User/Activity") })
-                    .Cast<UserActivity>()
-                    .Filter(new conditionCL("UserId.==."+Id.ToString()))
-                    .Sort(new sortingCL("Id:Desc"))
-                    .Limit(10)
-                    .ToList();
-                foreach (var Item in Collection)
+                var user = (db.Users.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", Id) } }));
+                if (user != null)
                 {
-                    //Item.StampToString = Item.Stamp.Ago();
+                    foreach(var A in (user as User).Activity)
+                    {
+                        A.Stamp = DateTime.Parse(A.Stamp).Ago();
+                    }
+                    return Ok((user as User).Activity);
                 }
-                return Ok(Collection);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
+                else
+                    return InternalServerError();
             }
         }
 

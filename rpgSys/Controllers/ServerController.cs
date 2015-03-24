@@ -5,10 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-using System.Runtime.Serialization.Json;
-using System.Web.Script.Serialization;
-
-using ormCL;
+using RuneFramework;
 
 namespace rpgSys.Controllers
 {
@@ -16,14 +13,9 @@ namespace rpgSys.Controllers
     {
         public IHttpActionResult Get()
         {
-            ServerSettings Server = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/Server/Settings") }).Cast<ServerSettings>().ToList()[0];
-            if(Server!=null)
+            using (var db = new Runes.ServerRune())
             {
-                return Ok(Server);
-            }
-            else
-            {
-                return NotFound();
+                return Ok(db.Servers[0]);
             }
         }
     }

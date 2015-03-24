@@ -227,7 +227,7 @@ namespace RuneFramework
         {
             if ((ObjectAtRunic as IDictionary<string, object>).ContainsKey(Property.Name))
             {
-                if ((ObjectAtRunic as IDictionary<string, object>)[Property.Name] != "")
+                if ((ObjectAtRunic as IDictionary<string, string>)[Property.Name] != "")
                 {
                     RuneList RList = (RuneList)(ObjectAtRunic as IDictionary<string, object>)[Property.Name];
 
@@ -637,7 +637,7 @@ namespace RuneFramework
             foreach (var Field in (ObjectAtRunic as IDictionary<string, object>))
             {
                 if (Field.Key == Property.Name)
-                    Property.SetValue(Object, Convert.ChangeType(Field.Value.ToString().Replace('.', ','), Property.PropertyType));
+                    Property.SetValue(Object, Convert.ChangeType(Field.Value.ToString(), Property.PropertyType));
             }
         }
 

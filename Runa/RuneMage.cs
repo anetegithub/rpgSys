@@ -74,9 +74,14 @@ namespace RuneFramework
                             StrId = "Id";
 
                         if (Value.GetType().GetInterface("IList") == null)
-                            Book.Spellage.Add(
-                                    new RuneSpellage(Property.Name, Value.GetType().GetProperty(StrId).GetValue(Value, null).ToString())
-                                );
+                            if (!Value.GetType().IsPrimitive && Value.GetType() != typeof(String))
+                                Book.Spellage.Add(
+                                        new RuneSpellage(Property.Name, Value.GetType().GetProperty(StrId).GetValue(Value, null).ToString())
+                                    );
+                            else
+                                Book.Spellage.Add(
+                                        new RuneSpellage(Property.Name, Value.ToString())
+                                    );
                         else
                         {
                             dynamic D = new ExpandoObject();

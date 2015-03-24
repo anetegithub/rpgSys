@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GeneralChatMessages>
+  <GeneralMessage>
+    <Id>1</Id>
+    <UserName>Администратор</UserName>
+    <UserAvatar>img/unknown.png</UserAvatar>
+    <Stamp>01.01.2000 01:01:01</Stamp>
+    <Text>Hello World!</Text>
+  </GeneralMessage>
+  <GeneralChatMessage>
+    <Id>2</Id>
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin.png</UserAvatar>
+    <Stamp>24.03.2015 10:13:18</Stamp>
+    <Text>Try it</Text>
+  </GeneralChatMessage>
+  <GeneralChatMessage>
+    <Id>3</Id>
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin.png</UserAvatar>
+    <Stamp>24.03.2015 10:13:26</Stamp>
+    <Text>and again</Text>
+  </GeneralChatMessage>
+  <GeneralChatMessage>
+    <Id>4</Id>
+    <UserName>Tester</UserName>
+    <UserAvatar>img/tester.png</UserAvatar>
+    <Stamp>24.03.2015 10:18:03</Stamp>
+    <Text>Fuck yeah?</Text>
+  </GeneralChatMessage>
+  <GeneralChatMessage>
+    <Id>5</Id>
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin.png</UserAvatar>
+    <Stamp>24.03.2015 10:19:28</Stamp>
+    <Text>yeah...</Text>
+  </GeneralChatMessage>
+</GeneralChatMessages>

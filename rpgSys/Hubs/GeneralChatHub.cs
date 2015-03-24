@@ -3,7 +3,7 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 using System;
 
-using ormCL;
+using RuneFramework;
 
 namespace rpgSys
 {
@@ -12,10 +12,13 @@ namespace rpgSys
     {
         public void Send(string userName, string userAvatar, string msgText)
         {
-            baseCL b=new baseCL("Data");
-            int Id = b.Select(new requestCL() { Table = new tableCl("/Server/Chat") }).Cast<GeneralMessage>().ToList().Count + 1;
-            b.Insert<GeneralMessage>(new irequestCl() { Table = new tableCl("/Server/Chat"), 
-                Object = new GeneralMessage() { Id = Id, UserName = userName, UserAvatar = userAvatar, Stamp = DateTime.Now, Text = msgText } });
+            using (var db = new Runes.ServerRune())
+            {
+                GeneralChatMessage gcm = new GeneralChatMessage() { UserAvatar = userAvatar, UserName = userName, Text = msgText };
+                gcm.Stamp = DateTime.Now.ToString();
+                db.GeneralChat.Add(gcm);
+                db.SaveRune();                
+            }
             Clients.All.newmsg(userName, userAvatar, DateTime.Now.ToString(), msgText);
         }
     }

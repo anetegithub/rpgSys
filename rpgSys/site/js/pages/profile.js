@@ -25,10 +25,6 @@
         $("#chatWrapper").animate({ scrollTop: $('#chatWrapper')[0].scrollHeight }, 250);
     };
 
-    chat.client.alert = function (omfg,ofg) {
-        alert(omfg + " " + ofg);
-    };
-
     // start
     $.connection.hub.start().done(function () {
         $('#btn-chat').click(function () {
@@ -86,9 +82,9 @@ function load_activity() {
                     var html = "";
                     for (var i = 0; i < data.length; i++) {
                         html += "<span class='list-group-item'>";
-                        html += "<span class='badge'>" + data[i].StampToString + "</span>";
+                        html += "<span class='badge'>" + data[i].Stamp + "</span>";
                         html += "<i class='fa fa-fw " + iconByenum(data[i].Action) + "'></i>&nbsp;";
-                        html += data[i].Action + " : " + data[i].Text + "</span>";
+                        html += " " + data[i].Text + "</span>";
                     }
                     $('#activityList').html(html);
                 });
@@ -98,11 +94,11 @@ function iconByenum(activity_type)
 {
     switch(activity_type)
     {
-        case "Повышение уровня": return "fa-child";
-        case "Достижение": return "fa-trophy";
-        case "Пройден сценарий": return "fa-compass";
-        case "Получен предмет": return "fa-graduation-cap";
-        case "Изменено": return "fa-cogs";
+        case "0": return "fa-child";
+        case "1": return "fa-trophy";
+        case "2": return "fa-compass";
+        case "3": return "fa-graduation-cap";
+        case "4": return "fa-cogs";
     }
 }
 
@@ -110,22 +106,19 @@ function render() {
     var user = JSON.parse($.cookie("user"));
     $('#userAvatar').attr('src', user.Avatar);
     $('#userLogin').html("Добро пожаловать, " + user.Login + "! Рады видеть вас вновь! ");
-    if (user.HeroId == 0) {
+    if (JSON.parse(localStorage.getItem('User')) == null) {
         $('#userHero').html('Создать');
     } else {
-        $.getJSON('../api/hero?HeroId=' + JSON.parse($.cookie('user')).HeroId)
-                .done(function (data) {
-                    $('#userHero').html(data.Name);
-                });
+        $('#userHero').html(user.Hero.Name);
     }
-    if (user.GameId == 0) {
+    if (JSON.parse(localStorage.getItem('Game')) == null) {
         $('#userGame').html('Начать сценарий');
     } else {
         $('#userGame').html('GameControllerNeed');
     }
-    $.getJSON('../api/server?UserId=' + JSON.parse($.cookie('user')).Id)
+    $.getJSON('../api/server')
                 .done(function (data) {
                     $('#userServer').html(data.Name);
                 });
-    $('#lastTime').html("Последняя авторизация: " + user.StampToString);
+    $('#lastTime').html("Последняя авторизация: " + user.Stamp);
 }

@@ -12,85 +12,48 @@ using System.Dynamic;
 using ormCL;
 using RuneFramework;
 
-using System.Diagnostics;
-
 namespace rpgSys
 {
     public class UsersController : ApiController
     {
         public IHttpActionResult Get(string name, string psw)
         {
-            Stopwatch sw = new Stopwatch();
-
-            sw.Start();
             Rune.Element = RuneElement.Air;
 
-            LocalUser userq = new LocalUser();
-            using(var db=new Models.UserRune())
+            using (var db = new Runes.UserRune())
             {
-                //Single query                
-                userq = (LocalUser)db.Users.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Login", "==", "Anete") } });
-
-                //MassQuery
-                //foreach(LocalUser userItem in db.Users)
-                //{
-                //    if (userItem.Login == "Anete")
-                //        user = userItem;
-                //}
-
-
-                //LocalUser lu = new LocalUser();
-                //lu.Login = "Anete";
-                //lu.Password = "555033";
-                //lu.Avatar = "img/admin.png";
-                //lu.Email = "anete.anetes@gmail.com";
-                //lu.Auth = Guid.NewGuid().ToString();
-
-                //db.Users.Add(lu);
-
-                //db.SaveRune();                
+                User user = (User)db.Users.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Login", "==", name), new RuneSpell("Password", "==", psw) } });
+                if (user != null)
+                {
+                    user.Stamp = DateTime.Parse(user.Stamp).Ago();
+                    return Ok(user);
+                }
             }
-            sw.Stop();
-            Console.WriteLine(sw.ElapsedTicks);
-            sw.Start();
-            var users = new baseCL("Data").Select(new requestCL() { Table = new tableCl("/User/Users") }).Cast<User>().Filter(new conditionCL("Login.==." + name + ",Password.==." + psw)).ToList();
-            sw.Stop();
-            Console.WriteLine(sw.ElapsedTicks);
-            if (users.Count == 0)
-            {
-                return NotFound();
-            }
-            else if (users.Count == 1)
-            {
-                var user = users[0];
-                //user.StampToString = user.Stamp.Ago();
-                return Ok(user);
-            }
-            else
-            {
-                return Conflict();
-            }
-        }
-
-        public class LocalUser
-        {
-            public int Id { get; set; }
-            public string Avatar { get; set; }
-            public string Login { get; set; }
-            public string Password { get; set; }
-            public string Email { get; set; }
-            public string Auth { get; set; }
+            return Conflict();
         }
 
         [ActionName("update")]
         [HttpPost]
         public string UpdateUserStamp([FromBody]string UserId)
         {
-            baseCL b = new baseCL("Data");
-            User User = b.Select(new requestCL() { Table = new tableCl("/User/Users"), Conditions = new conditionCL("Id.==." + UserId) }).Cast<User>().Filter().ToList()[0];
-            User.Stamp = DateTime.Now.ToString();
-            var result=b.Update<User>(new urequestCl(new conditionCL("Id.==." + UserId)) { Object = User, Table = new tableCl("/User/Users") }).Successful.ToString();
-            return result;
+            int id = 0;
+            if (!Int32.TryParse(UserId, out id))
+                return "False";
+
+            using (var db = new Runes.UserRune())
+            {
+                foreach (User u in db.Users)
+                {
+                    if (u.Id == id)
+                    {
+                        u.Stamp = DateTime.Now.ToString();
+                        db.SaveRune();
+                        return "True";
+                    }
+                }
+            }
+
+            return "False";
         }
 
         [ActionName("create")]
@@ -100,32 +63,19 @@ namespace rpgSys
             User user = new JavaScriptSerializer().Deserialize<User>(User);
             user.Stamp = DateTime.Now.ToString();
 
-            using(var db=new Models.UserRune())
+            using(var db=new Runes.UserRune())
             {
                 if (db.Users.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Login", "==", user.Login) } }) != null)
                     return "Такой пользователь уже существует!";
                 else
                 {
+                    user.Avatar = "img/unknown.png";
                     db.Users.Add(user);
+                    db.Activity.Add(new UserActivity() { Action = "1", Stamp = DateTime.Now.ToString(), Text = "Вы успешно зарегистрировались!" });
+                    db.Users.Last().Activity = new List<UserActivity>() { db.Activity.Last() };
                     db.SaveRune();
                     return "True";
                 }
-            }
-
-            //user.Auth = Guid.NewGuid().ToString();
-            //user.GameId = 0;
-            //user.HeroId = 0;
-            baseCL b = new baseCL("Data");
-            tableCl t = new tableCl("/User/Users");
-            var users=b.Select(new requestCL() { Table = t }).Cast<User>().Filter(new conditionCL("Login.!=." + user.Login)).ToList();
-            if (users.Count== 0)
-            {
-                user.Id = b.Select(new requestCL() { Table = t }).Cast<User>().ToList().Count + 1;
-                return b.Insert<User>(new irequestCl() { Table = t, Object = user }).Successful.ToString();
-            }
-            else
-            {
-                return "Пользователь с таким именем уже существует!";
             }
         }
     }

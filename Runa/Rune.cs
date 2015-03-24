@@ -16,6 +16,8 @@ namespace RuneFramework
     {
         public static RuneElement Element;
 
+        private object loject;
+
         public Rune()
         {
             DataDirectory();
@@ -80,16 +82,19 @@ namespace RuneFramework
 
         protected bool CreateTable(String Name)
         {
-            XDocument XmlTable = new XDocument(new XElement(Name + "s"));
-            if (Element == RuneElement.Air)
+            lock (this.loject)
             {
-                XmlTable.Save(HttpContext.Current.Server.MapPath("~/Data/" + Name + ".xml"));
-                return true;
-            }
-            else if (Element == RuneElement.Earth)
-            {
-                XmlTable.Save(Directory.GetCurrentDirectory() + "/Data/" + Name + ".xml");
-                return true;
+                XDocument XmlTable = new XDocument(new XElement(Name + "s"));
+                if (Element == RuneElement.Air)
+                {
+                    XmlTable.Save(HttpContext.Current.Server.MapPath("~/Data/" + Name + ".xml"));
+                    return true;
+                }
+                else if (Element == RuneElement.Earth)
+                {
+                    XmlTable.Save(Directory.GetCurrentDirectory() + "/Data/" + Name + ".xml");
+                    return true;
+                }
             }
 
             return false;

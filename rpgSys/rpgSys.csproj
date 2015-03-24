@@ -139,6 +139,8 @@
     <Content Include="Data\Server\Settings.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Data\User.xml" />
+    <Content Include="Data\UserActivity.xml" />
     <Content Include="Data\User\Activity.xml" />
     <Content Include="Data\User\ActivityType.xml" />
     <Content Include="Data\User\Users.xml" />
@@ -250,7 +252,8 @@
     <Compile Include="Models\Scenario\Reward.cs" />
     <Compile Include="Models\Scenario\Scenario.cs" />
     <Compile Include="Models\Server\GeneralMessage.cs" />
-    <Compile Include="Models\Server\ServerSettings.cs" />
+    <Compile Include="Models\Server\ServerRune.cs" />
+    <Compile Include="Models\Server\Server.cs" />
     <Compile Include="Models\Hero\Skill.cs" />
     <Compile Include="Models\User\User.cs" />
     <Compile Include="Models\User\UserActivity.cs" />

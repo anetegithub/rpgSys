@@ -21,7 +21,7 @@ namespace RuneFramework
 
         protected Lazy<XDocument> LazyDocument;
         protected XDocument Document;
-        protected object Key = new object();
+        protected static object Key = new object();
 
         protected void PrepeareSpell()
         {
