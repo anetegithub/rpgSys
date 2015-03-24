@@ -21,7 +21,7 @@ namespace RuneFramework
 
     public class RuneMage<T> : IRuneMage<T>
     {
-        public RuneMage(Letter<T> Letters)
+        public RuneMage(ILetter<T> Letters)
         {
             this.SpecificLetter = Letters;
         }
@@ -29,7 +29,7 @@ namespace RuneFramework
         public List<PropertyInfo> Properties = new List<PropertyInfo>();
         public Rune Rune;
 
-        private Letter<T> SpecificLetter;
+        private ILetter<T> SpecificLetter;
 
         private string Id
         {

@@ -26,8 +26,8 @@ namespace RuneFramework
             Strings = new RuneMage<T>(new StringLetter<T>());
             RuneStrings = new RuneMage<T>(new RuneStringLetter<T>());
             Classes = new RuneMage<T>(new ClassLetter<T>());
-            PrimitiveLists = new RuneMage<T>(new PrimitiveListsLetter<T>());
-            GenericLists = new RuneMage<T>(new GenericListsLetter<T>());
+            PrimitiveLists = new RuneMage<T>(new PrimitiveListLetter<T>());
+            GenericLists = new RuneMage<T>(new GenericListLetter<T>());
 
             //Init properties
             foreach (PropertyInfo Property in typeof(T).GetProperties())
