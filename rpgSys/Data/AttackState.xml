@@ -1,14 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<AttackStates>
-  <AttackState>
-    <Id>1</Id>
-    <Attack>0</Attack>
-    <FitAttack>0</FitAttack>
-    <MinimalDamage>1</MinimalDamage>
-    <MaximalDamage>2</MaximalDamage>
-    <WeaponMinimalDamage>0</WeaponMinimalDamage>
-    <WeaponMaximalDamage>0</WeaponMaximalDamage>
-    <CritChance>5</CritChance>
-    <CritBonus>5</CritBonus>
-  </AttackState>
-</AttackStates>
+<AttackStates />

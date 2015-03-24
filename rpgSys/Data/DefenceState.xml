@@ -1,12 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DefenceStates>
-  <DefenceState>
-    <Id>1</Id>
-    <Defence>0</Defence>
-    <NaturalDefence>0</NaturalDefence>
-    <ArmorDefence>0</ArmorDefence>
-    <MagicDefence>0</MagicDefence>
-    <DefenceClass>0</DefenceClass>
-    <DefenceBonus>0</DefenceBonus>
-  </DefenceState>
-</DefenceStates>
+<DefenceStates />

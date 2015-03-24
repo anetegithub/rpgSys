@@ -7,12 +7,12 @@
     <Expirience>0</Expirience>
     <Age>20</Age>
     <Weight>65</Weight>
-    <Name>Валора ан Сием</Name>
+    <Name>dsa</Name>
     <God>Один</God>
     <Eyes>Синий</Eyes>
     <Hair>Русый</Hair>
     <Skin>Телесный</Skin>
-    <Class>8</Class>
+    <Class>1</Class>
     <Race>1</Race>
     <Height>1</Height>
     <Sex>1</Sex>
@@ -21,14 +21,14 @@
     <AttackState>0</AttackState>
     <CommonState>0</CommonState>
     <Characteristics>
-      <Characteristic>13</Characteristic>
-      <Characteristic>14</Characteristic>
-      <Characteristic>15</Characteristic>
-      <Characteristic>16</Characteristic>
-      <Characteristic>17</Characteristic>
-      <Characteristic>18</Characteristic>
+      <Characteristic>1</Characteristic>
+      <Characteristic>2</Characteristic>
+      <Characteristic>3</Characteristic>
+      <Characteristic>4</Characteristic>
+      <Characteristic>5</Characteristic>
+      <Characteristic>6</Characteristic>
     </Characteristics>
-    <Abilities><Ability>1</Ability><Ability>2</Ability><Ability>3</Ability></Abilities>
+    <Abilities />
     <Skills>
       <Skill>1</Skill>
       <Skill>2</Skill>

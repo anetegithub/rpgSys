@@ -515,30 +515,20 @@ namespace RuneFramework
 
             Result = true;
                         
-            var a = Activator.CreateInstance(typeof(EqualityComparer<>).MakeGenericType(typeof(T)));
-
+            ABEquals(A, B, Property.PropertyType);
             //FieldByFieldCompare(ref Result, Property, A, B);
         }
 
-        public bool IsDataChanged<T>()
-        {
-            //T value1 = GetValue2;
-            //T value2 = GetValue1();
-
-            //return !EqualityComparer<T>.Default.Equals(valueInDB, valueFromView);
-
-        }
-
-        public bool Equals(T value)
+        private bool ABEquals(object A, object B, Type TheyType)
         {
             // uses Reflection to check if a Type-specific `Equals` exists...
-            var specificEquals = typeof(T).GetMethod("Equals", new Type[] { typeof(T) });
+            var specificEquals = TheyType.GetMethod("Equals", new Type[] { TheyType });
             if (specificEquals != null &&
                 specificEquals.ReturnType == typeof(bool))
             {
-                return (bool)specificEquals.Invoke(this.Value, new object[] { value });
+                return (bool)specificEquals.Invoke(A, new object[] { B });
             }
-            return this.Value.Equals(value);
+            return A.Equals(B);
         }
 
         private void FieldByFieldCompare(ref bool Result, PropertyInfo Property, object A, object B)

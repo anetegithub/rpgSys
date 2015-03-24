@@ -2,108 +2,36 @@
 <Characteristics>
   <Characteristic>
     <Id>1</Id>
-    <Value>9</Value>
+    <Value>0</Value>
     <CharacteristicName>1</CharacteristicName>
     <DIX>1</DIX>
   </Characteristic>
   <Characteristic>
     <Id>2</Id>
-    <Value>4</Value>
+    <Value>0</Value>
     <CharacteristicName>2</CharacteristicName>
     <DIX>2</DIX>
   </Characteristic>
   <Characteristic>
     <Id>3</Id>
-    <Value>9</Value>
+    <Value>0</Value>
     <CharacteristicName>3</CharacteristicName>
     <DIX>3</DIX>
   </Characteristic>
   <Characteristic>
     <Id>4</Id>
-    <Value>6</Value>
+    <Value>0</Value>
     <CharacteristicName>4</CharacteristicName>
     <DIX>4</DIX>
   </Characteristic>
   <Characteristic>
     <Id>5</Id>
-    <Value>3</Value>
+    <Value>0</Value>
     <CharacteristicName>5</CharacteristicName>
     <DIX>5</DIX>
   </Characteristic>
   <Characteristic>
     <Id>6</Id>
-    <Value>0</Value>
-    <CharacteristicName>6</CharacteristicName>
-    <DIX>6</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>7</Id>
-    <Value>8</Value>
-    <CharacteristicName>1</CharacteristicName>
-    <DIX>1</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>8</Id>
-    <Value>4</Value>
-    <CharacteristicName>2</CharacteristicName>
-    <DIX>2</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>9</Id>
-    <Value>8</Value>
-    <CharacteristicName>3</CharacteristicName>
-    <DIX>3</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>10</Id>
-    <Value>6</Value>
-    <CharacteristicName>4</CharacteristicName>
-    <DIX>4</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>11</Id>
-    <Value>6</Value>
-    <CharacteristicName>5</CharacteristicName>
-    <DIX>5</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>12</Id>
-    <Value>0</Value>
-    <CharacteristicName>6</CharacteristicName>
-    <DIX>6</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>13</Id>
-    <Value>0</Value>
-    <CharacteristicName>1</CharacteristicName>
-    <DIX>1</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>14</Id>
-    <Value>0</Value>
-    <CharacteristicName>2</CharacteristicName>
-    <DIX>2</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>15</Id>
-    <Value>0</Value>
-    <CharacteristicName>3</CharacteristicName>
-    <DIX>3</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>16</Id>
-    <Value>0</Value>
-    <CharacteristicName>4</CharacteristicName>
-    <DIX>4</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>17</Id>
-    <Value>0</Value>
-    <CharacteristicName>5</CharacteristicName>
-    <DIX>5</DIX>
-  </Characteristic>
-  <Characteristic>
-    <Id>18</Id>
     <Value>0</Value>
     <CharacteristicName>6</CharacteristicName>
     <DIX>6</DIX>
