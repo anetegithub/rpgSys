@@ -522,10 +522,23 @@ namespace RuneFramework
 
         public bool IsDataChanged<T>()
         {
-            T value1 = GetValue2;
-            T value2 = GetValue1();
+            //T value1 = GetValue2;
+            //T value2 = GetValue1();
 
-            return !EqualityComparer<T>.Default.Equals(valueInDB, valueFromView);
+            //return !EqualityComparer<T>.Default.Equals(valueInDB, valueFromView);
+
+        }
+
+        public bool Equals(T value)
+        {
+            // uses Reflection to check if a Type-specific `Equals` exists...
+            var specificEquals = typeof(T).GetMethod("Equals", new Type[] { typeof(T) });
+            if (specificEquals != null &&
+                specificEquals.ReturnType == typeof(bool))
+            {
+                return (bool)specificEquals.Invoke(this.Value, new object[] { value });
+            }
+            return this.Value.Equals(value);
         }
 
         private void FieldByFieldCompare(ref bool Result, PropertyInfo Property, object A, object B)
