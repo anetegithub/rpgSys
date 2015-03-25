@@ -32,22 +32,6 @@ namespace RuneFramework
                 (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Value);
         }
 
-        public void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
-        {
-            var A = Activator.CreateInstance(Property.PropertyType);
-            var B = Activator.CreateInstance(Property.PropertyType);
-
-            A = Property.GetValue(ObjectA, null);
-            B = Property.GetValue(ObjectB, null);
-
-
-
-            if (A.Equals(B))
-                Result = false;
-            else
-                Result = true;
-        }
-
         public void Dispose()
         { }
     }

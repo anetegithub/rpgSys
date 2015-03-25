@@ -146,74 +146,74 @@
   </Skill>
   <Skill>
     <Id>25</Id>
-    <Value>0</Value>
-    <SkillName>25</SkillName>
-    <DIX>1</DIX>
-  </Skill>
-  <Skill>
-    <Id>26</Id>
-    <Value>0</Value>
-    <SkillName>26</SkillName>
-    <DIX>1</DIX>
-  </Skill>
-  <Skill>
-    <Id>27</Id>
-    <Value>0</Value>
-    <SkillName>27</SkillName>
-    <DIX>1</DIX>
-  </Skill>
-  <Skill>
-    <Id>28</Id>
-    <Value>0</Value>
-    <SkillName>28</SkillName>
-    <DIX>1</DIX>
-  </Skill>
-  <Skill>
-    <Id>29</Id>
-    <Value>0</Value>
-    <SkillName>29</SkillName>
-    <DIX>1</DIX>
-  </Skill>
-  <Skill>
-    <Id>30</Id>
-    <Value>0</Value>
-    <SkillName>30</SkillName>
+    <Value>1</Value>
+    <SkillName>37</SkillName>
     <DIX>4</DIX>
   </Skill>
   <Skill>
-    <Id>31</Id>
-    <Value>0</Value>
-    <SkillName>31</SkillName>
+    <Id>26</Id>
+    <Value>1</Value>
+    <SkillName>38</SkillName>
     <DIX>2</DIX>
+  </Skill>
+  <Skill>
+    <Id>27</Id>
+    <Value>1</Value>
+    <SkillName>39</SkillName>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill>
+    <Id>28</Id>
+    <Value>1</Value>
+    <SkillName>40</SkillName>
+    <DIX>4</DIX>
+  </Skill>
+  <Skill>
+    <Id>29</Id>
+    <Value>1</Value>
+    <SkillName>41</SkillName>
+    <DIX>3</DIX>
+  </Skill>
+  <Skill>
+    <Id>30</Id>
+    <Value>1</Value>
+    <SkillName>42</SkillName>
+    <DIX>6</DIX>
+  </Skill>
+  <Skill>
+    <Id>31</Id>
+    <Value>1</Value>
+    <SkillName>43</SkillName>
+    <DIX>4</DIX>
   </Skill>
   <Skill>
     <Id>32</Id>
-    <Value>0</Value>
-    <SkillName>32</SkillName>
-    <DIX>2</DIX>
+    <Value>1</Value>
+    <SkillName>44</SkillName>
+    <DIX>4</DIX>
   </Skill>
   <Skill>
     <Id>33</Id>
-    <Value>0</Value>
-    <SkillName>33</SkillName>
-    <DIX>2</DIX>
+    <Value>1</Value>
+    <SkillName>45</SkillName>
+    <DIX>3</DIX>
   </Skill>
   <Skill>
     <Id>34</Id>
     <Value>0</Value>
-    <SkillName>34</SkillName>
-    <DIX>2</DIX>
+    <SkillName>46</SkillName>
+    <DIX>3</DIX>
   </Skill>
   <Skill>
     <Id>35</Id>
     <Value>0</Value>
-    <SkillName>35</SkillName>
-    <DIX>4</DIX>
+    <SkillName>47</SkillName>
+    <DIX>3</DIX>
   </Skill>
   <Skill>
     <Id>36</Id>
     <Value>0</Value>
-    <SkillName>36</SkillName>
-    <DIX>2</DIX>
+    <SkillName>48</SkillName>
+    <DIX>3</DIX>
   </Skill>
 </Skills>

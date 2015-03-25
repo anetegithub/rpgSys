@@ -1,2 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CommonStates />
+<CommonStates>
+  <CommonState>
+    <Id>1</Id>
+    <Initiative>5</Initiative>
+    <InitiativeSize>1</InitiativeSize>
+    <InitiativeWisdom>1</InitiativeWisdom>
+    <InitiativeMagic>0</InitiativeMagic>
+    <Speed>3</Speed>
+    <SpeedFit>0</SpeedFit>
+  </CommonState>
+</CommonStates>

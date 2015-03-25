@@ -65,35 +65,6 @@ namespace RuneFramework
             }
         }
 
-        public void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
-        {
-            Result = false;
-
-            var ListA = (IList)Property.GetValue(ObjectA, null) ?? (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(Property.PropertyType.GetGenericArguments()[0]));
-            var ListB = (IList)Property.GetValue(ObjectB, null) ?? (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(Property.PropertyType.GetGenericArguments()[0]));
-
-            if (ListA.Count != ListB.Count)
-            {
-                Result = true;
-                return;
-            }
-
-            if (Property.PropertyType.GetGenericArguments()[0].IsPrimitive || Property.PropertyType.GetGenericArguments()[0] == typeof(String))
-            {
-                IEnumerator EnumA = ListA.GetEnumerator();
-                IEnumerator EnumB = ListB.GetEnumerator();
-
-                while ((EnumA.MoveNext()) && (EnumB.MoveNext()))
-                {
-                    if (EnumA.Current.Equals(EnumB.Current))
-                        Result = false;
-                    else
-                        Result = true;
-
-                }
-            }
-        }
-
         public void Dispose()
         { }
     }

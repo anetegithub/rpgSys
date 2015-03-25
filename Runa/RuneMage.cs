@@ -55,43 +55,42 @@ namespace RuneFramework
             {
                 foreach (var Property in Properties)
                 {
-                    bool NeedRuneSpell = false;
-
-                    Letter.NeedChanges(out NeedRuneSpell, FromFile, Words, Property);
-
-                    if (NeedRuneSpell)
+                    if (!RuneComparer.IsEqual(FromFile, Words))
                     {
                         Book.Spells.Add(
                                 new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
                             );
                         var Value = Property.GetValue(Words, null);
 
-                        var StrId = "0";
-                        var ObjId = Value.GetType().GetProperty("Id");
-                        if (ObjId == null)
-                            StrId = Value.GetType().Name + "Id";
-                        else
-                            StrId = "Id";
-
-                        if (Value.GetType().GetInterface("IList") == null)
-                            if (!Value.GetType().IsPrimitive && Value.GetType() != typeof(String))
-                                Book.Spellage.Add(
-                                        new RuneSpellage(Property.Name, Value.GetType().GetProperty(StrId).GetValue(Value, null).ToString())
-                                    );
-                            else
-                                Book.Spellage.Add(
-                                        new RuneSpellage(Property.Name, Value.ToString())
-                                    );
-                        else
+                        if (Value != null)
                         {
-                            dynamic D = new ExpandoObject();
-                            var TInstance = (T)Activator.CreateInstance(typeof(T));
-                            Property.SetValue(TInstance, Value);
-                            var XElementValue = ToTablet(TInstance, ref D);
+                            var StrId = "0";
+                            var ObjId = Value.GetType().GetProperty("Id");
+                            if (ObjId == null)
+                                StrId = Value.GetType().Name + "Id";
+                            else
+                                StrId = "Id";
 
-                            Book.Spellage.Add(
-                                new RuneSpellage(Property.Name, XElementValue.Element(Property.Name))
-                            );
+                            if (Value.GetType().GetInterface("IList") == null)
+                                if (!Value.GetType().IsPrimitive && Value.GetType() != typeof(String))
+                                    Book.Spellage.Add(
+                                            new RuneSpellage(Property.Name, Value.GetType().GetProperty(StrId).GetValue(Value, null).ToString())
+                                        );
+                                else
+                                    Book.Spellage.Add(
+                                            new RuneSpellage(Property.Name, Value.ToString())
+                                        );
+                            else
+                            {
+                                dynamic D = new ExpandoObject();
+                                var TInstance = (T)Activator.CreateInstance(typeof(T));
+                                Property.SetValue(TInstance, Value);
+                                var XElementValue = ToTablet(TInstance, ref D);
+
+                                Book.Spellage.Add(
+                                    new RuneSpellage(Property.Name, XElementValue.Element(Property.Name))
+                                );
+                            }
                         }
                     }
                 }

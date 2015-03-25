@@ -2,31 +2,31 @@
 <Characteristics>
   <Characteristic>
     <Id>1</Id>
-    <Value>0</Value>
+    <Value>7</Value>
     <CharacteristicName>1</CharacteristicName>
     <DIX>1</DIX>
   </Characteristic>
   <Characteristic>
     <Id>2</Id>
-    <Value>0</Value>
+    <Value>3</Value>
     <CharacteristicName>2</CharacteristicName>
     <DIX>2</DIX>
   </Characteristic>
   <Characteristic>
     <Id>3</Id>
-    <Value>0</Value>
+    <Value>9</Value>
     <CharacteristicName>3</CharacteristicName>
     <DIX>3</DIX>
   </Characteristic>
   <Characteristic>
     <Id>4</Id>
-    <Value>0</Value>
+    <Value>6</Value>
     <CharacteristicName>4</CharacteristicName>
     <DIX>4</DIX>
   </Characteristic>
   <Characteristic>
     <Id>5</Id>
-    <Value>0</Value>
+    <Value>3</Value>
     <CharacteristicName>5</CharacteristicName>
     <DIX>5</DIX>
   </Characteristic>

@@ -1,2 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<HealthStates />
+<HealthStates>
+  <HealthState>
+    <Id>1</Id>
+    <CurrentHitPoints>14</CurrentHitPoints>
+    <MaximumHitPoints>14</MaximumHitPoints>
+    <AdditionalHitPoints>0</AdditionalHitPoints>
+    <Regeneration>0</Regeneration>
+    <Desease>1</Desease>
+    <Intoxication>1</Intoxication>
+    <Charm>1</Charm>
+  </HealthState>
+</HealthStates>

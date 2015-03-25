@@ -14,6 +14,5 @@ namespace RuneFramework
         void SetPropertyRune(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property, Rune Rune);
         void SetProperty(ref T Object, dynamic ObjectAtRunic, PropertyInfo Property);
         void GetProperty(ref dynamic ObjectAtRunic, T Object, PropertyInfo Property);
-        void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property);
     }
 }

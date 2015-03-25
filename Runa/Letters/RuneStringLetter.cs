@@ -94,17 +94,6 @@ namespace RuneFramework
                 (ObjectAtRunic as IDictionary<string, object>).Add(Property.Name, Value.ToString());
         }
 
-        public void NeedChanges(out bool Result, T ObjectA, T ObjectB, PropertyInfo Property)
-        {
-            RuneString A = (RuneString)Property.GetValue(ObjectA, null) ?? 0;
-            RuneString B = (RuneString)Property.GetValue(ObjectB, null) ?? 0;
-
-            if (A.Equals(B))
-                Result = false;
-            else
-                Result = true;
-        }
-
         public void Dispose()
         { }
     }
