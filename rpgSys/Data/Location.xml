@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Locations>
+  <Location>
+    <Id>1</Id>
+    <Name>Таверна</Name>
+    <Description>Обычная таверна</Description>
+    <Specification>Нет</Specification>
+    <Map>C:\Users\Anete\Source\Repo\rpgSys\rpgSys\site\img\Taverna.png</Map>
+  </Location>
+</Locations>

@@ -1,95 +1,77 @@
 ﻿<!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>SysD12</title>
-    <link rel="shortcut icon" href="/Img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/Img/favicon.ico" type="image/x-icon">
-    <!-- Bootstrap Core CSS -->
-    <link  href="../../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="../Bootstrap/css/sb-admin.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="../Bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rpgSystem: Сервер</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Ролевая платформа Dungeon 12</a>
+                <a class="navbar-brand" href="https://github.com/anetegithub/rpgSys">rpgSystem</a>
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><span id="plName"></span><b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="UserHero.html"><i class="fa fa-fw fa-table"></i> Персонаж</a>
-                        </li>
-                        <li>
-                            <a href="UserSettings.html"><i class="fa fa-fw fa-gear"></i> Настройки</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" onclick="LogOff();"><i class="fa fa-fw fa-power-off"></i> Выход</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="UserIndex.html"><i class="fa fa-fw fa-user"></i> Профиль</a>
+            <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"><span id="lastTime"></span>&nbsp;<a href="#" onclick="LogOff();" class="btn btn-primary square-btn-adjust">Выйти</a></div>
+        </nav>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center">
+                        <img id="userAvatar" height="200" width="200" class="user-image img-responsive" />
                     </li>
                     <li>
-                        <a href="UserServer.html"><i class="fa fa-fw fa-cogs"></i> Сервер</a>
+                        <a href="profile"><i class="fa fa-fw fa-user fa-3x"></i> Профиль</a>
                     </li>
                     <li>
-                        <a href="UserHero.html"><i class="fa fa-fw fa-table"></i> Персонаж</a>
+                        <a href="hero"><i class="fa fa-fw fa-table fa-3x"></i> Персонаж</a>
                     </li>
                     <li>
-                        <a href="UserScenario.html"><i class="fa fa-fw fa-edit"></i> Сценарий</a>
+                        <a href="game"><i class="fa fa-fw fa-desktop fa-3x"></i> Играть</a>
                     </li>
                     <li>
-                        <a href="UserPlay.html"><i class="fa fa-fw fa-desktop"></i> Играть</a>
+                        <a href="scenario"><i class="fa fa-fw fa-edit fa-3x"></i> Сценарий</a>
                     </li>
                     <li>
-                        <a href="UserSettings.html"><i class="fa fa-fw fa-wrench"></i> Настройки</a>
+                        <a class="active-menu" href="server"><i class="fa fa-fw fa-cogs fa-3x"></i> Сервер</a>
+                    </li>
+                    <li>
+                        <a href="settings"><i class="fa fa-fw fa-wrench fa-3x"></i> Настройки</a>
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </nav>
+        <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
-            <div class="container-fluid">
-                <!-- Page Heading -->
+            <div id="page-inner">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Сервер <small>Статистика</small>
-                        </h1>
-                        <span id="ServerMessage"></span>
+                    <div class="col-md-12">
+                        <h2 id="serverName"></h2>
+                        <h5>Активный сервер</h5>
                     </div>
                 </div>
+                <!-- /. ROW  -->
+                <hr />
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -99,95 +81,60 @@
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><span id="ServerScenario"></span></div>
-                                        <div>Сценариев</div>
-                                    </div>
-                                </div>
+                        <div class="panel panel-primary text-center no-boder bg-color-corporative">
+                            <div class="panel-body">
+                                <i class="fa fa-comments fa-5x"></i>
+                                <h3 id="scenarioCount">0 Сценариев</h3>
                             </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Подробнее</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
+                            <div class="panel-footer back-footer-corporative" style="cursor: pointer" onclick="showScenarInfo();">
+                                Посмотреть подробнее
+
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><span id="ServerModule"></span></div>
-                                        <div>Модулей</div>
-                                    </div>
-                                </div>
+                        <div class="panel panel-primary text-center no-boder bg-color-blue">
+                            <div class="panel-body">
+                                <i class="fa fa-tasks fa-5x"></i>
+                                <h3 id="moduleCount">0 Модулей</h3>
                             </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Подробнее</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
+                            <div class="panel-footer back-footer-blue" style="cursor: pointer" onclick="showModuleInfo();">
+                                Посмотреть подробнее
+
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-users fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><span id="ServerCharacter"></span></div>
-                                        <div>Персонажей</div>
-                                    </div>
-                                </div>
+                        <div class="panel panel-primary text-center no-boder bg-color-green">
+                            <div class="panel-body">
+                                <i class="fa fa-users fa-5x"></i>
+                                <h3 id="heroCount">0 Персонажей</h3>
                             </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Подробнее</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
+                            <div class="panel-footer back-footer-green" style="cursor: pointer" onclick="showHeroesInfo();">
+                                Посмотреть подробнее
+
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-gavel fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"><span id="ServerItem"></span></div>
-                                        <div>Тикетов</div>
-                                    </div>
-                                </div>
+                        <div class="panel panel-primary text-center no-boder bg-color-red">
+                            <div class="panel-body">
+                                <i class="fa fa-gavel fa-5x"></i>
+                                <h3 id="bugCount">0 Багов</h3>
                             </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">Подробнее</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
+                            <div class="panel-footer back-footer-red" style="cursor: pointer" onclick="showTicketsInfo();">
+                                Посмотреть подробнее
+
+                            </div>
                         </div>
+                    </div>                    
+                </div>
+                <span id="uaContainer"></span>
+                <div class="row alert-dismissable">
+                    <div id="info" class="col-lg-offset-2 col-lg-8 col-sm-12 col-xs-12">
+                        
                     </div>
                 </div>
-                <span id="uaContainer"></span>                
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
@@ -195,15 +142,23 @@
         <!-- /#page-wrapper -->
     </div>
     <span id="fiContainer"></span>
-    <!-- /#wrapper -->
-    <!-- jQuery -->
-    <script src="../Bootstrap/js/jquery.js"></script>
-    <script src="../Bootstrap/js/cookie.js"></script>    
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../Bootstrap/js/bootstrap.min.js"></script>
-    <!-- Render -->
-    <script src="../Bootstrap/js/renders/userServer.js"></script>
-    <!-- UserActivityModule-->
-    <script src="../Bootstrap/js/modules/useractivity.js"></script>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="js/custom.js"></script>
+    <!-- Auth -->
+    <script src="js/auth.js"></script>
+    <!-- SignalR-->
+    <script src="../Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="../signalr/hubs" type="text/javascript"></script>
+    <!-- Page -->
+    <script src="/site/js/pages/server.js"></script>
 </body>
 </html>

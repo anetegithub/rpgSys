@@ -5,10 +5,12 @@ using System.Web;
 
 namespace rpgSys
 {
-    public class Event
+    public class Bug
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
+
+        public bool Open { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string Info { get; set; }
     }
 }

@@ -1,112 +1,78 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
-
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SysD12</title>
-    <link rel="shortcut icon" href="/Img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/Img/favicon.ico" type="image/x-icon">
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../Bootstrap/css/sb-admin.css" rel="stylesheet">
-    <link href="../Bootstrap/css/basiccss.css" rel="stylesheet">
-    <link href="../Bootstrap/css/jquery.fileupload.css" rel="stylesheet">
-    <link href="../Bootstrap/css/plugins/numberpicker.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../Bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rpgSystem: Сценарии</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="css/custom.css" rel="stylesheet" />
+    <link href="css/jquery.fileupload.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
-
 <body>
-
     <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Ролевая платформа Dungeon 12</a>
+                <a class="navbar-brand" href="https://github.com/anetegithub/rpgSys">rpgSystem</a>
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><span id="plName"></span><b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="UserHero.html"><i class="fa fa-fw fa-table"></i> Персонаж</a>
-                        </li>
-                        <li>
-                            <a href="UserSettings.html"><i class="fa fa-fw fa-gear"></i> Настройки</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" onclick="LogOff();"><i class="fa fa-fw fa-power-off"></i> Выход</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="UserIndex.html"><i class="fa fa-fw fa-user"></i> Профиль</a>
+            <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"><span id="lastTime"></span>&nbsp;<a href="#" onclick="LogOff();" class="btn btn-primary square-btn-adjust">Выйти</a></div>
+        </nav>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center">
+                        <img id="userAvatar" height="200" width="200" class="user-image img-responsive" />
                     </li>
                     <li>
-                        <a href="UserServer.html"><i class="fa fa-fw fa-cogs"></i> Сервер</a>
+                        <a href="profile"><i class="fa fa-fw fa-user fa-3x"></i> Профиль</a>
                     </li>
                     <li>
-                        <a href="UserHero.html"><i class="fa fa-fw fa-table"></i> Персонаж</a>
+                        <a href="hero"><i class="fa fa-fw fa-table fa-3x"></i> Персонаж</a>
                     </li>
                     <li>
-                        <a href="UserScenario.html"><i class="fa fa-fw fa-edit"></i> Сценарий</a>
+                        <a href="game"><i class="fa fa-fw fa-desktop fa-3x"></i> Играть</a>
                     </li>
                     <li>
-                        <a href="UserPlay.html"><i class="fa fa-fw fa-desktop"></i> Играть</a>
+                        <a class="active-menu" href="scenario"><i class="fa fa-fw fa-edit fa-3x"></i> Сценарий</a>
                     </li>
                     <li>
-                        <a href="UserSettings.html"><i class="fa fa-fw fa-wrench"></i> Настройки</a>
+                        <a href="server"><i class="fa fa-fw fa-cogs fa-3x"></i> Сервер</a>
+                    </li>
+                    <li>
+                        <a href="settings"><i class="fa fa-fw fa-wrench fa-3x"></i> Настройки</a>
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </nav>
-
         <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Создание сценария
-                        </h1>
-                        <input type="hidden" value="1" id="pageControl" />
+            <div id="page-inner">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Создание сценария</h2>
+                            <h5>Придумайте и оформите свою историю!</h5>
+                            <input type="hidden" value="1" id="pageControl" />
+                        </div>
                     </div>
-                </div>                
+                    <hr />
+                </div>
                 <ol class="breadcrumb">
                     <li id="Lipage1" class="active">
                         <i class="fa fa-edit"></i> Начало
@@ -125,9 +91,8 @@
                     </li>
                 </ol>
                 <!-- /.row -->
-
                 <span id="errContainer"></span>
-                
+
                 <div class="row" id="page1">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -146,11 +111,10 @@
                             <label>Краткое содержание</label>
                             <textarea id="scenarioTextMaster" class="form-control" rows="8"></textarea>
                             <p class="help-block">Видно только мастеру</p>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <!-- /Title -->
-
                 <div class="row" id="page2" style="display:none">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -169,7 +133,7 @@
                             <p class="help-block">Видно только мастеру</p>
                         </div>
                         <div class="form-group">
-                            <label>Карта локации</label>                            
+                            <label>Карта локации</label>
                         </div>
                         <div class="text-center">
                             <p class="help-block">Не обязательно! Используется только если планируется вести бой</p>
@@ -177,20 +141,19 @@
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>Загрузить карту</span>
                                 <input id="fileUpload" type="file">
-                            </span>   
+                            </span>
                             <button type="button" id="fileUploadClean" class="btn btn-danger delete">
                                 <i class="glyphicon glyphicon-trash"></i>
                                 <span>Очистить</span>
-                            </button>                         
+                            </button>
                         </div>
                         <div class="form-group text-center">
-                            <img id="preview"/>
+                            <img id="preview" />
                         </div>
-                        <div class="text-center">         
+                        <div class="text-center">
                             <button type="button" id="addLocation" class="btn btn-default">Добавить</button>
                         </div>
                     </div>
-
                     <div class="col-lg-6">
                         <div class="form-group">
                             <div class='panel panel-default'>
@@ -204,10 +167,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- Locations-->
-
                 <div class="row" id="page3" style="display:none">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -236,7 +197,7 @@
                                     </div>
                                 </div>
                                 <span id="charContainer"></span>
-                                
+
                                 <div class="form-group">
                                     <label for="dmg1Text" class="col-sm-3 control-label" id="dmg1Labbel">Урон: </label>
                                     <label for="dmg1Text" style="display:none" class="col-sm-3 control-label" id="dmg2Labbel">Урон: </label>
@@ -246,8 +207,8 @@
                                     <div class="col-sm-3">
                                         <span class="picker" selectr="dmg2"></span>
                                     </div>
-                                </div>    
-                                <hr />                            
+                                </div>
+                                <hr />
                             </form>
                             <div class="text-center">
                                 <button type="button" id="addCharacter" class="btn btn-default">Добавить</button>
@@ -265,11 +226,10 @@
                                 <div class="list-group" id="characterList">
                                 </div>
                             </div>
-                        </div>                 
+                        </div>
                     </div>
                 </div>
                 <!-- Characters -->
-
                 <div class="row" id="page4" style="display:none">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -285,12 +245,11 @@
                             <label>Описание события</label>
                             <textarea id="eventInfo" class="form-control" rows="3"></textarea>
                             <p class="help-block">Видно только мастеру</p>
-                        </div>                       
+                        </div>
                         <div class="text-center">
                             <button type="button" id="addEvent" class="btn btn-default">Добавить</button>
                         </div>
                     </div>
-
                     <div class="col-lg-6">
                         <div class="form-group">
                             <div class='panel panel-default'>
@@ -306,7 +265,6 @@
                     </div>
                 </div>
                 <!-- Events-->
-
                 <div class="row" id="page5" style="display:none">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -319,74 +277,46 @@
                                     <label for="rewardName" class="col-sm-3 control-label">Наименование: </label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" id="rewardName" />
-                                        <p class="help-block">Примечание: для добавления характеристики назовите именем этой характеристики. Если вы хотите добавить опыт то назовите предмет "Опыт", аналогично действует команда "Золото", "Уровень" и любая другая.</p>
+                                        <p class="help-block">Примечание: для добавления характеристики назовите награду именем этой характеристики. Если вы хотите добавить опыт то назовите предмет "Опыт", аналогично действует команда "Золото", "Уровень" и любая другая.</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="rewardChar" class="col-sm-3 control-label">Персонажи: </label>
                                     <div class="col-sm-6">
                                         <select class="form-control" id="rewardChar" onchange="if ($('#rewardChar').val() != 'Всем') { $('#rewardCharAdditional').css('display', 'block'); } else { $('#rewardCharAdditional').css('display', 'none'); }">
-                                            <option class="form-control">Всем</option>
-                                            <option class="form-control">Одному выполняющему условие(я)</option>
-                                            <option class="form-control">Всем выполняющем условие(я)</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group" style="display:none" id="rewardCharAdditional">
                                     <label for="rewardCharAdditional" class="col-sm-3 control-label">Условие: </label>
                                     <div class="col-sm-6">
-                                        <textarea class="form-control" id="rewardCharAdditional" rows="1"></textarea>
+                                        <textarea class="form-control" id="rewardCharAdditionalTEXT" rows="1"></textarea>
                                     </div>
                                 </div>
                                 <hr />
-                                <div class="form-group">                                   
+                                <div class="form-group">
                                     <label for="dmg1Text" class="col-sm-3 control-label">Характеристики: </label>
                                     <div class="col-sm-3">
                                         <select class="form-control" id="rewardCharact">
-                                            <option class="form-control">Золото</option>
-                                            <option class="form-control">Опыт</option>
-                                            <option class="form-control">Уровень</option>
-                                            <option class="form-control">Навык</option>
-                                            <option class="form-control">Телосложение</option>
-                                            <option class="form-control">Тренированность</option>
-                                            <option class="form-control">Интеллект</option>
-                                            <option class="form-control">Мудрость</option>
-                                            <option class="form-control">Харизма</option>
-                                            <option class="form-control">Судьба</option>
-                                            <option class="form-control">Стойкость</option>
-                                            <option class="form-control">Реакция</option>
-                                            <option class="form-control">Воля</option>
-                                            <option class="form-control">Дополнительные ОЗ</option>
-                                            <option class="form-control">Регенерация</option>
-                                            <option class="form-control">Физическая защита</option>
-                                            <option class="form-control">Магическая защита</option>
-                                            <option class="form-control">Атака</option>
-                                            <option class="form-control">УронМин</option>
-                                            <option class="form-control">УронМакс</option>
-                                            <option class="form-control">Шанс крит.</option>
-                                            <option class="form-control">Бонус крит.</option>
-                                            <option class="form-control">Инициатива</option>
-                                            <option class="form-control">Скорость</option>
-                                        </select>                                        
+                                        </select>
                                     </div>
                                     <div class="col-sm-3">
-                                        <span class="picker" selectr="chr"></span>                                        
+                                        <span class="picker" selectr="chr"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="dmg1Text" class="col-sm-3 control-label"></label>
                                     <div class="col-sm-6">
                                         <button type="button" id="addCharact" class="btn btn-default form-control">Добавить награду</button>
-                                        </div>
                                     </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="dmg1Text" class="col-sm-3 control-label"></label>
                                     <div class="col-sm-6">
                                         <div class="panel panel-info">
                                             <div class="panel-heading">Добавленные характеристики</div>
                                             <div class="panel-body">
-                                                <ul class="list-group" id="charas">
-                                                </ul>
+                                                <ul class="list-group" id="charas"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -396,11 +326,11 @@
                                     <label for="dmg1Text" class="col-sm-3 control-label">Редкость: </label>
                                     <div class="col-sm-6">
                                         <select class="form-control btn-default" id="rewardRare">
-                                            <option class="form-control btn-default">Обычный</option>
+                                            <!--<option class="form-control btn-default">Обычный</option>
                                             <option class="form-control btn-info">Магический</option>
                                             <option class="form-control btn-warning">Волшебный</option>
                                             <option class="form-control btn-success">Артефакт</option>
-                                            <option class="form-control  btn-danger">Сломано</option>
+                                            <option class="form-control  btn-danger">Сломано</option>-->
                                         </select>
                                     </div>
                                 </div>
@@ -431,10 +361,9 @@
                     </div>
                 </div>
                 <!-- Rewards-->
-
                 <!-- page Switcher-->
                 <div class="row" id="page6">
-                    <div class="col-lg-12 col-lg-offset-5 ">
+                    <div class="col-lg-7 col-lg-offset-5 ">
                         <button type="button" id="prevPage" style="visibility:hidden" class="btn btn-default">Назад</button>
                         <button type="button" id="nextPage" class="btn btn-default">Далее</button>
                         <button type="submit" id="sendPage" style="visibility:hidden" onclick="ReleaseDogs();" class="btn btn-default">Создать</button>
@@ -457,27 +386,33 @@
                         </div>
                     </div>
                 </div>
-
+                    <!-- /.row -->
+                </div>
             </div>
-            <!-- /.container-fluid -->
-
-        </div>
+            <!-- /. PAGE INNER  -->
+        </div>        
         <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="../Bootstrap/js/jquery.js"></script>
-    <script src="../Bootstrap/js/cookie.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../Bootstrap/js/bootstrap.min.js"></script>
-    <!-- Render -->
-    <script src="../Bootstrap/js/renders/userScenario.js"></script>
-    <!-- Image preview-->    
-    <script src="../Bootstrap/js/plugins/imagepreview.js"></script>
-    <!-- NumberPicker-->    
-    <script src="../Bootstrap/js/plugins/numberpicker.js"></script>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="js/custom.js"></script>
+    <!-- Auth -->
+    <script src="js/auth.js"></script>
+    <!-- SignalR-->
+    <script src="../Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="../signalr/hubs" type="text/javascript"></script>
+    <!-- NumberPicker -->
+    <script src="js/modules/numberpicker.js"></script>
+    <!-- ImagePreview-->
+    <script src="js/modules/imagepreview.js"></script>
+    <!-- Page -->
+    <script src="js/pages/scenario.js"></script>
 </body>
-
 </html>

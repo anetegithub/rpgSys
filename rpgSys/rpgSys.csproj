@@ -163,6 +163,7 @@
     <Content Include="site\css\custom.css" />
     <Content Include="site\css\font-awesome.css" />
     <Content Include="site\css\font-awesome.min.css" />
+    <Content Include="site\css\jquery.fileupload.css" />
     <Content Include="site\font-awesome\css\font-awesome.css" />
     <Content Include="site\font-awesome\css\font-awesome.min.css" />
     <Content Include="site\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -204,6 +205,8 @@
     <Content Include="site\hero.html" />
     <Content Include="site\js\pages\profile.js" />
     <Content Include="site\js\pages\registry.js" />
+    <Content Include="site\js\pages\scenario.js" />
+    <Content Include="site\js\pages\server.js" />
     <Content Include="site\js\renders\userHero.js" />
     <Content Include="site\js\renders\userIndex.js" />
     <Content Include="site\js\renders\userScenario.js" />
@@ -222,7 +225,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\ApiControllerWithHub.cs" />
+    <Compile Include="Controllers\BugController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\PlayController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\ScenarioController.cs" />
@@ -252,7 +257,10 @@
     <Compile Include="Models\Scenario\NpcStat.cs" />
     <Compile Include="Models\Scenario\Reward.cs" />
     <Compile Include="Models\Scenario\Scenario.cs" />
+    <Compile Include="Models\Scenario\ScenarioRune.cs" />
+    <Compile Include="Models\Server\Bug.cs" />
     <Compile Include="Models\Server\GeneralMessage.cs" />
+    <Compile Include="Models\Server\Module.cs" />
     <Compile Include="Models\Server\ServerRune.cs" />
     <Compile Include="Models\Server\Server.cs" />
     <Compile Include="Models\Hero\Skill.cs" />

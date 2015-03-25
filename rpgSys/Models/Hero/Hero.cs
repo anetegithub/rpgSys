@@ -13,6 +13,7 @@ namespace rpgSys
         public int UserId { get; set; }
 
         public string Name { get; set; }
+        public bool Active { get; set; }
 
         public int Level { get; set; }
 

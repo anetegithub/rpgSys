@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NpcStats>
+  <NpcStat>
+    <Id>1</Id>
+    <LVL>1</LVL>
+    <CON>1</CON>
+    <FIT>0</FIT>
+    <INT>5</INT>
+    <WIS>0</WIS>
+    <CHA>2</CHA>
+    <FTE>0</FTE>
+    <STA>1</STA>
+    <RFX>1</RFX>
+    <WIL>1</WIL>
+    <CHP>1</CHP>
+    <MHP>1</MHP>
+    <REG>1</REG>
+    <DEF>1</DEF>
+    <DLS>1</DLS>
+    <nDEF>1</nDEF>
+    <mDEF>1</mDEF>
+    <ATK>1</ATK>
+    <MID>1</MID>
+    <MAD>1</MAD>
+    <WID>1</WID>
+    <WAD>1</WAD>
+    <CRC>1</CRC>
+    <CRB>1</CRB>
+    <INI>1</INI>
+    <SPD>1</SPD>
+  </NpcStat>
+</NpcStats>

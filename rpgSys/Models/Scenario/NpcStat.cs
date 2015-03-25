@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-using ormCL.Attributes;
+using RuneFramework;
 
 namespace rpgSys
 {
     public class NpcStat
     {
-        [attributeCL]
         public int Id { get; set; }
+
+        public int LVL { get; set; }
 
         /// <summary>
         /// Constitution
@@ -66,15 +67,15 @@ namespace rpgSys
         /// <summary>
         /// Desiase
         /// </summary>
-        public string DES { get; set; }
+        public RuneString Desease { get; set; }
         /// <summary>
         /// Intoxication
         /// </summary>
-        public string INX { get; set; }
+        public RuneString Intoxication { get; set; }
         /// <summary>
         /// Charm
         /// </summary>
-        public string CHM { get; set; }
+        public RuneString Charm { get; set; }
 
         /// <summary>
         /// Defence
@@ -84,6 +85,14 @@ namespace rpgSys
         /// Defence class
         /// </summary>
         public int DLS { get; set; }
+        /// <summary>
+        /// natural Defence
+        /// </summary>
+        public int nDEF { get; set; }
+        /// <summary>
+        /// magic Defence
+        /// </summary>
+        public int mDEF { get; set; }
 
         /// <summary>
         /// Attack

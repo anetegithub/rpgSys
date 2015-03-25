@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Scenarios>
+  <Scenario>
+    <Id>1</Id>
+    <Active>true</Active>
+    <Title>Тверна</Title>
+    <Recomendation>Приватная чат комната.</Recomendation>
+    <Fable>Чат комната</Fable>
+    <Locations>
+      <Location>1</Location>
+    </Locations>
+    <Events>
+      <Event>1</Event>
+    </Events>
+    <Npcs>
+      <Npc>1</Npc>
+    </Npcs>
+    <Rewards>
+      <Reward>1</Reward>
+    </Rewards>
+  </Scenario>
+</Scenarios>

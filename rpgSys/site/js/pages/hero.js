@@ -6,95 +6,102 @@
 
     if (user.HeroId != 0) {
         $('#old').css('display', 'block');
-        old_render(JSON.parse(localStorage.getItem('User')))
+        old_render();
     } else {
         $('#new').css('display', 'block');
         new_render();
     }
 });
 
-function old_render(Hero) {    
-    $('#oldName2').html(Hero.Name);
-    $('#oldLevel').html(Hero.Level);
-    $('#oldExp1').html(Hero.Expirience);
-    $('#oldCLass').html(Hero.Class);
-    $('#oldRace').html(Hero.Race);
-    $('#oldGod').html(Hero.God);
-    $('#oldSpecial').html('В разработке');
+function old_render() {
+    Hero = new Object();
+    var user = JSON.parse($.cookie("user"));
+    $.getJSON('../api/hero?UserId=' + user.Id)
+                 .done(function (data) {
+                     Hero = data;
+                     $('#oldName1').html(Hero.Name);
+                     $('#oldName2').html(Hero.Name);
+                     $('#oldLevel').html(Hero.Level);
+                     $('#oldExp1').html(Hero.Expirience);
+                     $('#oldCLass').html(Hero.Class.Value);
+                     $('#oldRace').html(Hero.Race.Value);
+                     $('#oldGod').html(Hero.God);
+                     $('#oldSpecial').html('В разработке');
 
-    $('#oldSex').html(Hero.Sex);
-    $('#oldAge').html(Hero.Age);
-    $('#oldHeight').html(Hero.Height);
-    $('#oldWeight').html(Hero.Weight);
-    $('#oldEyes').html(Hero.Eyes);
-    $('#oldHair').html(Hero.Hair);
-    $('#oldSkin').html(Hero.Skin);
+                     $('#oldSex').html(Hero.Sex.Value);
+                     $('#oldAge').html(Hero.Age);
+                     $('#oldHeight').html(Hero.Height.Value);
+                     $('#oldWeight').html(Hero.Weight);
+                     $('#oldEyes').html(Hero.Eyes);
+                     $('#oldHair').html(Hero.Hair);
+                     $('#oldSkin').html(Hero.Skin);
 
-    var html = '';
-    for (var i = 0; i < Hero.Characteristics.length; i++) {
-        html += '<tr><td>' + Hero.Characteristics[i].Name + '</td>';
-        html += '<td>' + Hero.Characteristics[i].DIX + '</td>';
-        html += '<td>' + Hero.Characteristics[i].Value + '</td></tr>';
-    }
-    $('#oldchar').html(html);
+                     var html = '';
+                     for (var i = 0; i < Hero.Characteristics.length; i++) {
+                         html += '<tr><td>' + Hero.Characteristics[i].CharacteristicName.Value + '</td>';
+                         html += '<td>' + Hero.Characteristics[i].DIX.Value + '</td>';
+                         html += '<td>' + Hero.Characteristics[i].Value + '</td></tr>';
+                     }
+                     $('#oldchar').html(html);
 
-    for (var i = 0; i < Hero.Abilities.length; i++) {
-        var selector = '#spas' + i.toString();
-        var s0 = selector + 'n';
-        var s1 = selector + 'v';
-        $(s0).html(Hero.Abilities[i].Info);
-        $(s1).html(Hero.Abilities[i].Value);
-    }
+                     for (var i = 0; i < Hero.Abilities.length; i++) {
+                         var selector = '#spas' + i.toString();
+                         var s0 = selector + 'n';
+                         var s1 = selector + 'v';
+                         $(s0).html(Hero.Abilities[i].AbilityName.Value);
+                         $(s1).html(Hero.Abilities[i].Value);
+                     }
 
-    $('#hp').html(Hero.HealthState.MaximumHitPoints);
-    $('#ahp').html(Hero.HealthState.AdditionalHitPoints);
-    $('#reg').html(Hero.HealthState.Regeneration);
-    $('#des').html(Hero.HealthState.Desease);
-    $('#intox').html(Hero.HealthState.Intoxication);
-    $('#charm').html(Hero.HealthState.Charm);
+                     $('#hp').html(Hero.HealthState.MaximumHitPoints);
+                     $('#ahp').html(Hero.HealthState.AdditionalHitPoints);
+                     $('#reg').html(Hero.HealthState.Regeneration);
+                     $('#des').html(Hero.HealthState.Desease.Value);
+                     $('#intox').html(Hero.HealthState.Intoxication.Value);
+                     $('#charm').html(Hero.HealthState.Charm.Value);
 
-    $('#defclass').html(Hero.DefenceState.DefenceClass);
-    $('#defence').html(Hero.DefenceState.Defence);
-    $('#natdef').html(Hero.DefenceState.NaturalDefence);
-    $('#armdef').html(Hero.DefenceState.ArmorDefence);
-    $('#magdef').html(Hero.DefenceState.MagicDefence);
-    $('#bondef').html(Hero.DefenceState.DefenceBonus);
+                     $('#defclass').html(Hero.DefenceState.DefenceClass);
+                     $('#defence').html(Hero.DefenceState.Defence);
+                     $('#natdef').html(Hero.DefenceState.NaturalDefence);
+                     $('#armdef').html(Hero.DefenceState.ArmorDefence);
+                     $('#magdef').html(Hero.DefenceState.MagicDefence);
+                     $('#bondef').html(Hero.DefenceState.DefenceBonus);
 
-    $('#atk').html(Hero.AttackState.Attack);
-    $('#bonatk').html(Hero.AttackState.FitAttack);
-    $('#dmg').html(Hero.AttackState.MinimalDamage + '-' + Hero.AttackState.MaximalDamage);
-    $('#dmgweapon').html(Hero.AttackState.WeaponMinimalDamage + '-' + Hero.AttackState.WeaponMaximalDamage);
-    $('#critchance').html(Hero.AttackState.CritChance);
-    $('#critbonus').html(Hero.AttackState.CritBonus);
+                     $('#atk').html(Hero.AttackState.Attack);
+                     $('#bonatk').html(Hero.AttackState.FitAttack);
+                     $('#dmg').html(Hero.AttackState.MinimalDamage + '-' + Hero.AttackState.MaximalDamage);
+                     $('#dmgweapon').html(Hero.AttackState.WeaponMinimalDamage + '-' + Hero.AttackState.WeaponMaximalDamage);
+                     $('#critchance').html(Hero.AttackState.CritChance);
+                     $('#critbonus').html(Hero.AttackState.CritBonus);
 
-    $('#iniz').html(Hero.CommonState.Initiative);
-    $('#inizh').html(Hero.CommonState.InitiativeSize);
-    $('#inizw').html(Hero.CommonState.InitiativeWisdom);
-    $('#inizm').html(Hero.CommonState.InitiativeMagic);
-    $('#spd').html(Hero.CommonState.Speed);
-    $('#spdf').html(Hero.CommonState.SpeedFit);
+                     $('#iniz').html(Hero.CommonState.Initiative);
+                     $('#inizh').html(Hero.CommonState.InitiativeSize);
+                     $('#inizw').html(Hero.CommonState.InitiativeWisdom);
+                     $('#inizm').html(Hero.CommonState.InitiativeMagic);
+                     $('#spd').html(Hero.CommonState.Speed);
+                     $('#spdf').html(Hero.CommonState.SpeedFit);
 
-    var html = '';
-    for (var i = 0; i < Hero.MaterialSkill.length; i++) {
-        html += '<tr><td>' + Hero.MaterialSkill[i].Name + '</td>';
-        html += '<td>' + Hero.MaterialSkill[i].DIX + '</td>';
-        html += '<td>' + Hero.MaterialSkill[i].Value + '</td></tr>';
-    }
-    $('#table9').html(html);
-    var html = '';
-    for (var i = 0; i < Hero.MentalSkill.length; i++) {
-        html += '<tr><td>' + Hero.MentalSkill[i].Name + '</td>';
-        html += '<td>' + Hero.MentalSkill[i].DIX + '</td>';
-        html += '<td>' + Hero.MentalSkill[i].Value + '</td></tr>';
-    }
-    $('#table10').html(html);
-    var html = '';
-    for (var i = 0; i < Hero.ClassSkill.length; i++) {
-        html += '<tr><td>' + Hero.ClassSkill[i].Name + '</td>';
-        html += '<td>' + Hero.ClassSkill[i].DIX + '</td>';
-        html += '<td>' + Hero.ClassSkill[i].Value + '</td></tr>';
-    }
-    $('#table11').html(html);
+                     var html = '';
+                     for (var i = 0; i < 12; i++) {
+                         html += '<tr><td>' + Hero.Skills[i].SkillName.Value + '</td>';
+                         html += '<td>' + Hero.Skills[i].DIX.Value + '</td>';
+                         html += '<td>' + Hero.Skills[i].Value + '</td></tr>';
+                     }
+                     $('#table9').html(html);
+                     var html = '';
+                     for (var i = 12; i < 24; i++) {
+                         html += '<tr><td>' + Hero.Skills[i].SkillName.Value + '</td>';
+                         html += '<td>' + Hero.Skills[i].DIX.Value + '</td>';
+                         html += '<td>' + Hero.Skills[i].Value + '</td></tr>';
+                     }
+                     $('#table10').html(html);
+                     var html = '';
+                     for (var i = 24; i < 36; i++) {
+                         html += '<tr><td>' + Hero.Skills[i].SkillName.Value + '</td>';
+                         html += '<td>' + Hero.Skills[i].DIX.Value + '</td>';
+                         html += '<td>' + Hero.Skills[i].Value + '</td></tr>';
+                     }
+                     $('#table11').html(html);
+                 });   
 }
 
 function new_render() {
@@ -192,16 +199,20 @@ function getRandomArbitrary(min, max) {
 }
 
 function createNewHero() {
-    $.post('../api/hero/create', { '': JSON.stringify(Hero()) }).done(function (data) {
-        if (parseInt(data) != 0) {
-            var data=JSON.parse($.cookie("user"));
-            data.HeroId = parseInt(data);
-            $.cookie('user', JSON.stringify(data), { path: '/site/' });
-            location.reload();
-        }
-        else
-            alert("Ошибка создания персонажа!");
-    });
+    if ($('#newName').val() != "") {
+        $.post('../api/hero/create', { '': JSON.stringify(Hero()) }).done(function (data) {
+            if (parseInt(data) != 0) {
+                var data = JSON.parse($.cookie("user"));
+                data.HeroId = parseInt(data);
+                $.cookie('user', JSON.stringify(data), { path: '/site/' });
+                location.reload();
+            }
+            else
+                alert("Ошибка создания персонажа!");
+        })
+    }
+    else
+        alert('Введите имя! ~И ещё несколько проверок~');
 };
 
 function RuneString(Value)

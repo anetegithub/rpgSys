@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Events>
+  <Event>
+    <Id>1</Id>
+    <Title>Открытие таверны</Title>
+    <Description>Без дополнений</Description>
+  </Event>
+</Events>

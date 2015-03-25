@@ -11,5 +11,7 @@ namespace rpgSys.Runes
     {
         public RuneWord<Server> Servers { get; set; }
         public RuneWord<GeneralChatMessage> GeneralChat { get; set; }
+        public RuneWord<Module> Modules { get; set; }
+        public RuneWord<Bug> Bugs { get; set; }
     }
 }

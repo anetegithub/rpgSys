@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bugs>
+  <Bug>    
+    <Id>1</Id>
+	<Open>true</Open>
+	<Title>Пример открытого бага</Title>
+	<Info>Пример открытого бага</Info>
+  </Bug>
+	<Bug>    
+		<Id>2</Id>
+		<Open>false</Open>
+		<Title>Пример закрытого бага</Title>
+		<Info>Пример закрытого бага</Info>
+	</Bug>
+</Bugs>

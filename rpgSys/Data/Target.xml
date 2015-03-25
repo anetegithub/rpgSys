@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Targets>
+  <RuneString><Id>1</Id><Value>Всем</Value></RuneString>
+  <RuneString><Id>2</Id><Value>Всем, кто выполнил условия</Value></RuneString>
+  <RuneString><Id>3</Id><Value>Одному, кто выполнил условия</Value></RuneString>
+</Targets>

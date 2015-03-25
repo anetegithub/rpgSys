@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Npcs>
+  <Npc>
+    <Id>1</Id>
+    <Name>Официантка</Name>
+    <View>Без дополнительных действий.</View>
+    <Specification>Милая официантка</Specification>
+    <NpcStats>1</NpcStats>
+  </Npc>
+</Npcs>

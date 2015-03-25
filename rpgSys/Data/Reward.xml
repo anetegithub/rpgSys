@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rewards>
+  <Reward>
+    <Id>1</Id>
+    <Name>Настроение</Name>
+    <Additional></Additional>
+    <Conditions>Быть в хорошем настроении</Conditions>
+    <Rare>1</Rare>
+    <Target>2</Target>
+    <RewardStats>
+      <RewardStat>1</RewardStat>
+    </RewardStats>
+  </Reward>
+</Rewards>

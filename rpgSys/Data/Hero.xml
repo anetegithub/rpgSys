@@ -2,6 +2,7 @@
 <Heros>
   <Hero>
     <Id>1</Id>
+	<Active>true</Active>
     <UserId>1</UserId>
     <Level>1</Level>
     <Expirience>0</Expirience>
@@ -15,7 +16,7 @@
     <Class>2</Class>
     <Race>8</Race>
     <Height>2</Height>
-    <Sex>1</Sex>
+    <Sex>2</Sex>
     <HealthState>1</HealthState>
     <DefenceState>1</DefenceState>
     <AttackState>1</AttackState>

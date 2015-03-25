@@ -24,6 +24,18 @@ namespace rpgSys.Controllers
             return HeroProcessing.Processing(NewHero).ToString();
         }
 
+        [HttpGet]
+        public IHttpActionResult List()
+        {
+            using (var db = new Runes.HeroRune())
+            {
+                List<BadgeItem> L = new List<BadgeItem>();
+                foreach (var Item in db.Hero)
+                    L.Add(new BadgeItem() { Text = Item.Name, Badge = Item.Active == true ? "Активен" : "Не активен" });
+                return Ok(L);
+            }
+        }
+
         public IHttpActionResult Get(string UserId)
         {
             Hero FindHero = null;
