@@ -79,9 +79,4 @@ namespace rpgSys
             }
         }
     }
-
-    public class Game
-    {
-        public int ScriptId;
-    }
 }

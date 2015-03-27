@@ -1,206 +1,240 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
-
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SysD12</title>
-    <link rel="shortcut icon" href="/Img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/Img/favicon.ico" type="image/x-icon">
-
-    <!-- FastInfoModule-->
-    <link href="../Bootstrap/css/Modules/fastinfo.css" rel="stylesheet" />
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../Bootstrap/css/sb-admin.css" rel="stylesheet">
-    <link href="../Bootstrap/css/basiccss.css"  rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../Bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rpgSystem: Приключение</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
-
 <body>
-
     <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Ролевая платформа Dungeon 12</a>
+                <a class="navbar-brand" href="https://github.com/anetegithub/rpgSys">rpgSystem</a>
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><span id="plName"></span><b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="UserHero.html"><i class="fa fa-fw fa-table"></i> Персонаж</a>
-                        </li>
-                        <li>
-                            <a href="UserSettings.html"><i class="fa fa-fw fa-gear"></i> Настройки</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" onclick="LogOff();"><i class="fa fa-fw fa-power-off"></i> Выход</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="UserIndex.html"><i class="fa fa-fw fa-user"></i> Профиль</a>
+            <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"><span id="lastTime"></span>&nbsp;<a href="#" onclick="LogOff();" class="btn btn-primary square-btn-adjust">Выйти</a></div>
+        </nav>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center">
+                        <img id="userAvatar" height="200" width="200" class="user-image img-responsive" />
                     </li>
                     <li>
-                        <a href="UserServer.html"><i class="fa fa-fw fa-cogs"></i> Сервер</a>
+                        <a href="profile"><i class="fa fa-fw fa-user fa-3x"></i> Профиль</a>
                     </li>
                     <li>
-                        <a href="UserHero.html"><i class="fa fa-fw fa-table"></i> Персонаж</a>
+                        <a href="hero"><i class="fa fa-fw fa-table fa-3x"></i> Персонаж</a>
                     </li>
                     <li>
-                        <a href="UserScenario.html"><i class="fa fa-fw fa-edit"></i> Сценарий</a>
+                        <a class="active-menu" href="game"><i class="fa fa-fw fa-desktop fa-3x"></i> Играть</a>
                     </li>
                     <li>
-                        <a href="UserPlay.html"><i class="fa fa-fw fa-desktop"></i> Играть</a>
+                        <a href="scenario"><i class="fa fa-fw fa-edit fa-3x"></i> Сценарий</a>
                     </li>
                     <li>
-                        <a href="UserSettings.html"><i class="fa fa-fw fa-wrench"></i> Настройки</a>
+                        <a href="server"><i class="fa fa-fw fa-cogs fa-3x"></i> Сервер</a>
+                    </li>
+                    <li>
+                        <a href="settings"><i class="fa fa-fw fa-wrench fa-3x"></i> Настройки</a>
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </nav>
-
+        <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 id="Header" class="page-header">
-                            Сценарий: Тролли в огне
-                        </h1>                        
+            <div id="page-inner">
+                <div id="old" style="display:none">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 id="gameName">Приключение: Тролли в огне</h2>
+                            <h5 id="userLogin"></h5>
+                        </div>
                     </div>
-                </div>
-                <!-- /.row -->
-
-                <!-- Main jumbotron for a primary marketing message or call to action -->
-                <div class="breadcrumb" style="padding:1%;margin:0">
-                    <div class="row" style="">
-                        <div class="col-lg-2">
-                            <div class="form-control breadcrumb" style=" height: 400px;"></div>
-                            <div class="form-control breadcrumb text-center" style="height:114px">
-                                <strong>
-                                    Событие: Прибытие в город древних ангелов йоптэ братуха как житуха
-                                </strong>
+                    <hr />
+                    <!-- /.row -->
+                    <!-- Main jumbotron for a primary marketing message or call to action -->
+                    <div style="padding:1%;margin:0">
+                        <div class="row" style="">
+                            <div class="col-lg-2">
+                                <div id="gameParty" class="form-control breadcrumb" style=" height: 400px;"></div>
+                                <div class="form-control breadcrumb text-center" style="height:114px">
+                                    <strong id="currentEvent" style="color:#045FB4">
+                                        Событие: Прибытие в город древних ангелов йоптэ братуха как житуха
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="form-control breadcrumb" id="chat" style=" height: 400px;overflow-x:auto"></div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <textarea id="textFoRsend" style="resize:none" class="form-control" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="button" class="form-control btn btn-default" id="send_btn" value="Отправить" style="height:114px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div id="gameNpc" class="form-control breadcrumb" style=" height: 400px;"></div>
+                                <div class="form-control breadcrumb text-center" style="height:114px">
+                                    <strong id="currentLocation" style="color:#045FB4">
+                                        Локация: Побережье отбитых пацанов которые ждут чего-то но так и не могут
+                                    </strong>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-8">
-                            <div class="form-control breadcrumb" id="chat" style=" height: 400px;overflow-x:auto"></div>
+                    </div>
+                    <ol class="breadcrumb text-center h3" style="color:#045FB4">
+                        <li style="cursor:pointer">
+                            <i class="fa fa-info"></i> Описание
+                        </li>
+                        <li style="cursor:pointer">
+                            <i class="fa fa-ellipsis-v"></i> Показатели
+                        </li>
+                        <li style="cursor:pointer">
+                            <i class="fa fa-magic"></i> Навыки
+                        </li>
+                        <li style="cursor:pointer">
+                            <i class="fa fa-sun-o"></i> Броски
+                        </li>
+                        <li style="cursor:pointer">
+                            <i class="fa fa-list-alt"></i> Инвентарь
+                        </li>
+                        <li id="masterMain" style="cursor:pointer;">
+                            <i class="fa fa-male"></i> Мастер
+                        </li>
+                        <li id="masterDisplay" style="cursor:pointer;">
+                            <i class="fa fa-share-square-o"></i> Изменить экраны <!--NPC,Location,Event-->
+                        </li>
+                        <li id="masterGenerator" style="cursor:pointer;">
+                            <i class="fa fa-cogs"></i> Генераторы
+                        </li>
+                    </ol>
+                    <div class="row" id="mapContainer">
+                        <img id="mapImg" class="img-responsive" style="margin: 0 auto" />
+                    </div>
+                </div>
+                <div>
+                    <div class="panel panel-back noti-box" id="newPt0">
+                        <input type="hidden" id="newPt0Value" />
+                        <span class="icon-box bg-color-corporative">
+                            <i class="fa fa-comments"></i>
+                        </span>
+                        <div>
+                            <p class="main-text"> Новое приключение</p>
+                            <hr>
                             <div class="row">
-                                <div class="col-lg-10">
-                                    <textarea id="textFoRsend" class="form-control" rows="5"></textarea>
+                                <div class="col-lg-6">
+                                    <div class="panel back-dash-corporative" id="newPt0btn0" style="cursor:pointer">
+                                        <i class="fa fa-check-circle fa-4x"></i><strong> &nbsp; Создать новое приключение и быть мастером.</strong>
+                                    </div>
                                 </div>
-                                <div class="col-lg-2">
-                                    <input type="button" class="form-control btn btn-default" id="send_btn" value="Отправить" style="height:114px;">
+                                <div class="col-lg-6">
+                                    <div class="panel back-dash-corporative" id="newPt0btn1" style="cursor:pointer">
+                                        <i class="fa fa-check-circle-o fa-4x"></i><strong> &nbsp; Присоедениться к новому приключению и быть героем.</strong>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-control breadcrumb" style=" height: 400px;"></div>
-                            <div class="form-control breadcrumb text-center" style="height:114px">
-                                <strong>
-                                    Локация: Побережье отбитых пацанов которые ждут чего-то но так и не могут
-                                </strong>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <ol class="breadcrumb text-center">
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Характеристики
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Боевые показатели
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Навыки
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Броски
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Инвентарь
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Карта
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Действия мастера
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Сменить NPC
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Сменить локацию
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Сменить событие
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Генератор предметов
-                    </li>
-                    <li style="cursor:pointer">
-                        <i class="fa fa-dashboard"></i> Генератор NPC
-                    </li>
-                </ol>
-               
-            </div>
+                    <div class="panel panel-back noti-box" id="scenarioBlock" style="display:none">
+                        <input type="hidden" id="newPart1Value" />
+                        <span class="icon-box bg-color-corporative">
+                            <i class="fa fa-comments"></i>
+                        </span>
+                        <div class="text-box">
+                            <p id="scenarioLabel" class="main-text"> Доступные сценарии</p>
+                            <hr>
+                            <p class="text-muted"></p>
+                            <div class="panel panel-default">
+                                <div id="scenarioList" class="list-group">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-back noti-box" id="roleBlock" style="display:none">
+                        <span class="icon-box bg-color-corporative">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <div class="text-box">
+                            <p class="main-text"> Доступные роли</p>
+                            <hr>
+                            <p class="text-muted"></p>
+                            <div class="panel panel-default">
+                                <div class="list-group">
+                                    <span class="list-group-item" style="cursor:pointer">
+                                        <i class="fa fa-fw fa-user"></i>&nbsp;<span id="roleName">Герой</span>
+                                    </span>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-back noti-box" id="magicBlock" style="display:none">
+                        <span class="icon-box bg-color-corporative">
+                            <i class="fa fa-users"></i>
+                        </span>
+                        <div class="text-box">
+                            <p id="magicUsersName" class="main-text"> Присоединившиеся</p>
+                            <hr>
+                            <p class="text-muted"></p>
+                            <div class="panel panel-default">
+                                <div id="magicUsersList" class="list-group">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-lg-offset-5">
+                                <a id="btnConnect" style="display:none" class="btn btn-primary square-btn-adjust">Присоединиться</a>
+                                <a id="btnCreate" style="display:none" class="btn btn-primary square-btn-adjust">Создать</a>
+                                <a id="btnStart" style="display:none" class="btn btn-primary square-btn-adjust">Запустить</a>
+                                <a id="btnDelete" style="display:none" class="btn btn-primary square-btn-adjust">Удалить</a>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>      
             <!-- /.container-fluid -->
-
         </div>
         <!-- /#page-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="../Bootstrap/js/jquery.js"></script>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="js/custom.js"></script>
+    <!-- Auth -->
+    <script src="js/auth.js"></script>
     <!-- SignalR-->
     <script src="../Scripts/jquery.signalR-2.2.0.js"></script>
     <script src="../signalr/hubs" type="text/javascript"></script>
-    <script src="../Bootstrap/js/signalr/play.js"></script>
-
-    <script src="../Bootstrap/js/cookie.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../Bootstrap/js/bootstrap.min.js"></script>    
-
+    <!-- watch-->
+    <script src="js/modules/object-watch.js"></script>
+    <!-- Page -->
+    <script src="js/pages/game.js"></script>
 </body>
-
 </html>

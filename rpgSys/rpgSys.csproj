@@ -191,6 +191,8 @@
     <Content Include="site\js\jquery-1.10.2.js" />
     <Content Include="site\js\jquery.cookie.js" />
     <Content Include="site\js\jquery.metisMenu.js" />
+    <Content Include="site\js\modules\object-watch.js" />
+    <Content Include="site\js\pages\game.js" />
     <Content Include="site\js\pages\hero.js" />
     <Content Include="site\js\pages\login.js" />
     <Content Include="site\js\modules\fastinfo.js" />
@@ -227,6 +229,7 @@
     <Compile Include="Controllers\ApiControllerWithHub.cs" />
     <Compile Include="Controllers\BugController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\PlayController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
@@ -242,6 +245,8 @@
     <Compile Include="Hubs\GeneralChatHub.cs" />
     <Compile Include="Hubs\PlayHub.cs" />
     <Compile Include="Hubs\UserActivityHub.cs" />
+    <Compile Include="Models\Game\Game.cs" />
+    <Compile Include="Models\Game\GameRune.cs" />
     <Compile Include="Models\Hero\Ability.cs" />
     <Compile Include="Models\Hero\AttackState.cs" />
     <Compile Include="Models\Hero\CommonState.cs" />

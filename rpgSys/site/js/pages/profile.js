@@ -115,7 +115,7 @@ function render() {
                  });
     }
     if (user.GameId == 0) {
-        $('#userGame').html('Начать сценарий');
+        $('#userGame').html('Новое приключение');
     } else {
         $('#userGame').html('GameControllerNeed');
     }
