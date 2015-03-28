@@ -12,7 +12,9 @@ function GameLobby() {
     NewLobby.Main.Init();
 
     NewLobby.Main.Change = function (newval) {
+        $('#showNextBlock').removeClass('bg-color-corporative');
         NewLobby.Role.Visible(false);
+        NewLobby.MagicBlock.Visible(false);
         NewLobby.Scenario.Visible(true);
         if (newval == 0) {
             NewLobby.Scenario.ShowTemplates();
@@ -24,15 +26,83 @@ function GameLobby() {
     };
 
     NewLobby.Scenario = ScenarioBlock();
-    NewLobby.Scenario.Change = function (newval) {        
+    NewLobby.Scenario.Change = function (newval) {
         NewLobby.Role.Visible(true);
-    };
+    };    
 
     NewLobby.Role = RoleBlock();
     NewLobby.Role.OnClick = function () {
-        alert('yep');
+        $('#showNextBlock').addClass('bg-color-corporative');
+        NewLobby.MagicBlock.ShowFakeList();
+        NewLobby.MagicBlock.Visible(true);
+        NewLobby.MagicBlock.Label = "Создать и запустить приключение";
+        NewLobby.MagicBlock.CreateBtn.Visible(true);
+        NewLobby.MagicBlock.CreateBtn.Enabled(true);
+        NewLobby.MagicBlock.StartBtn.Visible(true);
+        NewLobby.MagicBlock.DeleteBtn.Visible(true);
     };
+    NewLobby.Role.Init();
 
+    NewLobby.MagicBlock = MagicBlock();
+    NewLobby.MagicBlock.Init();
+    NewLobby.MagicBlock.ConnectBtn.OnClick = function () {
+        var user = JSON.parse($.cookie("user"));
+        $.getJSON('../api/game/connect?GameId=' + NewLobby.Scenario.SelectedScenario.Id + "&UserId=" + User.Id)
+            .done(function (data) {
+                if (data == "true") {
+                    //WAIT UNTIL GAME STARTED
+                    NewLobby.MagicBlock.SubLabel = "Вы присоеденились к игре, ждите старта...";
+                }
+                else
+                    NewLobby.MagicBlock.Break();
+            });
+    };
+    NewLobby.MagicBlock.ConnectBtn.Init();
+    NewLobby.MagicBlock.CreateBtn.OnClick = function () {
+        var user = JSON.parse($.cookie("user"));
+        var Game = NewGame();
+        Game.Master.Id = user.Id;
+        Game.Scenario.Id = NewLobby.Scenario.SelectedScenario.Id;
+        $.post('../api/game/create', { '': JSON.stringify(Game) }).done(function (data) {
+            if (data.Id != 0) {
+                NewLobby.MagicBlock.CreateBtn.Enabled(false);
+                NewLobby.MagicBlock.DeleteBtn.Enabled(true);
+                NewLobby.MagicBlock.StartBtn.Enabled(true);
+            }
+            else
+                NewLobby.MagicBlock.Break();
+        });
+    };
+    NewLobby.MagicBlock.CreateBtn.Init();
+    NewLobby.MagicBlock.StartBtn.OnClick = function () {
+        var user = JSON.parse($.cookie("user"));
+        $.getJSON('../api/game/start?GameId=' + NewLobby.Scenario.SelectedScenario.Id)
+            .done(function (data) {
+                if (data == "true") {                    
+                    var user = JSON.parse($.cookie("user"));
+                    user.GameId = NewLobby.Scenario.SelectedScenario.Id;
+                    $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                    //SAY OTHERS GAME WAS STARTED
+                    window.location.reload();
+                }
+                else
+                    NewLobby.MagicBlock.Break();
+            });
+    };
+    NewLobby.MagicBlock.StartBtn.Init();
+    NewLobby.MagicBlock.DeleteBtn.OnClick = function () {
+        var user = JSON.parse($.cookie("user"));
+        $.getJSON('../api/game/delete?GameId=' + NewLobby.Scenario.SelectedScenario.Id)
+            .done(function (data) {
+                if (data == "true") {
+                    //SAY OTHERS GAME WAS DELETED
+                    window.location.reload();
+                }
+                else
+                    NewLobby.MagicBlock.Break();
+            });
+    };
+    NewLobby.MagicBlock.DeleteBtn.Init();
 
     return NewLobby;
 }
@@ -55,6 +125,24 @@ function MagicBlock() {
         $('#magicUsersName').html(newval);
         return newval;
     })
+    mb.SubLabel="Unknown";
+    mb.watch('SubLabel', function (id, oldval, newval) {
+        $('#infoUsersmagicBlock').html(newval);
+        return newval;
+    });
+    mb.Start=false;
+    mb.watch('Start', function (id, oldval, newval) {
+        //здесь надо начать игру
+        return newval;
+    });
+    mb.SubLabelVisible=function(bool){
+        if (bool) {
+            $('#infoUsersmagicBlock').css('display', 'block');
+            return true;
+        } else {
+            $('#infoUsersmagicBlock').css('display', 'none');
+        }
+    };
     mb.ShowList = function () {
         $.getJSON('../api/game/heroes?GameId=' + this.GameId)
                 .done(function (data) {
@@ -65,17 +153,27 @@ function MagicBlock() {
                     $('#magicUsersList').html(html);
                 });
     };
+    mb.ShowFakeList = function () {
+        var user = JSON.parse($.cookie("user"));
+        $.getJSON('../api/hero?UserId=' + user.Id)
+                 .done(function (data) {
+                     $('#magicUsersList').html("<span class='list-group-item'><i class='fa fa-fw fa-" + (data.Id == 0 ? "" : "fe") + "male'></i>&nbsp;" + data.Name + "</span>");
+                 });
+    };
     mb.ConnectBtn = null;
     mb.CreateBtn = null;
     mb.StartBtn = null;
     mb.DeleteBtn = null;
-    mb.Init = function () {
-        mb.ConnectBtn = Button('#btnConnect');
-        mb.ConnectBtn.OnClick = function () {
-
-        };
+    mb.Break = function () {
+        alert("Произошла ошибка! Отправьте баг-репорт!");
+        window.location("profile");
     };
-    
+    mb.Init = function () {
+        this.ConnectBtn = Button('#btnConnect');
+        this.CreateBtn = Button('#btnCreate');
+        this.StartBtn = Button('#btnStart');
+        this.DeleteBtn = Button('#btnDelete')
+    };
 
     return mb;
 }
@@ -86,14 +184,14 @@ function Button(Selector) {
     btn.Selector = Selector;
     btn.Visible = function (bool) {
         if (bool) {
-            $(this.Selector).css('display', 'block');
+            $(this.Selector).css('display', 'inline');
             return true;
         } else {
             $(this.Selector).css('display', 'none');
         }
     };
-    btn.Disable = function (bool) {
-        if (bool) {
+    btn.Enabled = function (bool) {
+        if (!bool) {
             $(this.Selector).addClass('disabled');
             return true;
         } else {
@@ -109,6 +207,8 @@ function Button(Selector) {
     btn.Init = function () {
         $(btn.Selector).click(btn.OnClick);
     }
+
+    return btn;
 }
 
 function MainBlock() {
@@ -161,13 +261,18 @@ function ScenarioBlock() {
                 .done(function (data) {
                     var html = "";
                     for (var i = 0; i < data.length; i++) {
-                        html += "<span class='list-group-item' style='cursor:pointer' onclick='Lobby.Scenario.SelectedScenario=ScenarioMiniObject(" + data[i].Id + ",\"" + data[i].Text + "\");'>";
+                        html += "<span id='" + data[i].Id + "ScListItem' class='list-group-item' style='cursor:pointer' onclick='Lobby.Scenario.SelectedScenario=ScenarioMiniObject(" + data[i].Id + ",\"" + data[i].Text + "\"); Lobby.Scenario.SelectThisItem(\"#" + data[i].Id + "ScListItem\")'>";
                         html += "<i class='fa fa-fw fa-comments'></i>&nbsp;";
                         html += data[i].Text + "</span>";
                     }
                     $('#scenarioList').html(html);
                     sb.Label = "Доступные сценарии";
                 });
+    };
+    sb.SelectThisItem = function (itemId) {        
+        for (var i = 0; i < $('#scenarioList')[0].children.length; i++)
+            $($('#scenarioList')[0].children[i]).removeClass('bg-color-corporative');
+        $(itemId).addClass('bg-color-corporative');
     };
     sb.ShowGames = function () {
         $.getJSON('../api/game/list')
@@ -208,6 +313,9 @@ function RoleBlock() {
         return newval;
     })
     rb.OnClick = function () { };
+    rb.Init = function () {
+        $('#showNextBlock').click(this.OnClick);
+    }
 
     return rb;
 }
@@ -219,148 +327,11 @@ function ScenarioMiniObject(Id,Name){
     return cmo;
 }
 
-//constructor
-function PageController(IsNew) {
-
-    var pc = new Object();
-
-    pc.IsNew = false;
-    pc.Game = null;
-    pc.HeroList = NewHeroList();
-
-    pc.Initialize = function () {
-        var user = JSON.parse($.cookie("user"));
-        if (user.GameId != 0) {
-            if (this.Game.Active) {
-                $('#old').css('display', 'block');
-            }
-            else {
-                $('#new').css('display', 'block');
-                IsNew = true;
-                if (this.Game.Scenario != null)
-                    this.Part1();
-            }
-        } else {
-            $('#new').css('display', 'block');
-            IsNew = true;
-        }
-    };
-
-    pc.Part1 = function () {
-        $('#newPart1').css('display', 'block');
-        $('#scenarioList').html("<span class='list-group-item'><i class='fa fa-fw fa-comments'></i>&nbsp;" + pc.Game.Scenario.Title + "</span>");
-        this.Part2();
-    };
-
-    pc.Part2 = function () {
-        $('#newPart2').css('display', 'block');
-        $('#scenarioList').html("<span class='list-group-item'><i class='fa fa-fw fa-user'></i>&nbsp; Мастер</span>");
-        this.Part3();
-    };
-
-    pc.Part3 = function () {
-        $('#newPart3').css('display', 'block');
-        $('#newPart3Title').html("Создать и начать");
-        this.HeroList.SetList(this.Game.Heroes);
-    };
-
-    var user = JSON.parse($.cookie("user"));
-    $.getJSON('../api/game/GameId='+user.GameId).done(function (data) {
-        pc.Game = data;
-        pc.Initialize();
-    });
-};
-
-function ButtonManager() {
-    var BtnMng = new Object();
-
-    BtnMng.Init = function (Game) {
-        var user = JSON.parse($.cookie("user"));
-
-        if (user.GameId == 0) {
-            $('#btnCreate').css('display', 'block');
-            $('#btnStart').css('display', 'block');
-            $('#btnDelete').css('display', 'block');
-
-            $('#btnCreate').click(this.Create());
-
-            $('#btnStart').click(function () { });
-            $('#btnStart').addClass("disabled");
-            $('#btnDelete').click(function () { });
-            $('#btnDelete').addClass("disabled");
-        } else {
-
-        }
-    };
-
-    BtnMng.Create = function () {
-        var user = JSON.parse($.cookie("user"));
-        var data = NewGame();
-        data.Master.Id = user.Id;
-        data.Scenario.Id = parseInt($('#newPart1Value'));
-        $.post('../api/game/create', { '': JSON.stringify(data) })
-            .done(function (Game) {
-                if (Game.Id != 0) {
-                    $('#btnStart').removeClass("disabled");
-                    $('#btnStart').click(BtnMng.Start());
-
-                    $('#btnDelete').removeClass("disabled");
-                    $('#btnDelete').click(BtnMng.Delete());
-                } else {
-                    alert('Произошла ошибка при создании игры, попробуйте позже или отправьте баг-репорт!');
-                    window.location.replace('profile');
-                }
-            });
-    }
-
-    BtnMng.Start = function (Game) {
-        $.getJSON('../api/game/start?GameId=' + Game.Id).done(function (data) {
-            //UPDATE all clients to exit lobby and start game
-        });
-    }
-
-    BtnMng.Delete = function (Game) {
-        $.getJSON('../api/game/delete?GameId=' + Game.Id).done(function (data) {
-            //UPDATE all clients to reset lobby and send msg game is deleted
-        });
-    }
-
-    BtnMng.Connect = function (Game) {
-        var user = JSON.parse($.cookie("user"));
-        $.getJSON('../api/game/connect?GameId=' + Game.Id + "&UserId=" + user.Id).done(function (data) {
-            //UPDATE all clients to reset lobby and send msg game is deleted
-        });
-    }
-}
-
 function NewGame() {
     var Game = new Object();
+    Game.Id = 0;
     Game.Master = { Id: 0 };
     Game.Heroes = [];
     Game.Scenario = { Id: 0 };
     return Game;
-}
-
-function NewHeroList(Game) {
-
-    var HeroList = new Object;
-
-    HeroList.SetList = function (Heroes) {
-        var html = "";
-        for (var i = 0; i < Heroes; i++) {
-            html += "<span class='list-group-item'><i class='fa fa-fw fa-" + (Heroes[i].Sex.Id == 0 ? "male" : "female") + "'></i>&nbsp; " + Heroes[i].Name + "</span>";
-        }
-        $('#newPart3HeroList').html(html);
-    };
-
-    HeroList.AddToList = function (Hero) {
-        var html = "<span class='list-group-item'><i class='fa fa-fw fa-" + (Hero.Sex.Id == 0 ? "male" : "female") + "'></i>&nbsp; " + Hero.Name + "</span>";
-        $('#newPart3HeroList').html($('#newPart3HeroList').html() + html);
-    }
-
-    HeroList.DeleteFromList = function (HeroName) {
-        //foreach child where name==HeroName remove from this
-    }
-
-    return HeroList;
 }

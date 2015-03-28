@@ -17,9 +17,7 @@ namespace rpgSys.Controllers
         public IHttpActionResult New([FromBody]string value)
         {
             Game Game = new JavaScriptSerializer().Deserialize<Game>(value);
-            //ScenarioProcessing.Processing(Scenario);
-            //return "Сценарий отправлен на рассмотрение.\nЕсли на сервере включена ручная проверка сценариев, тогда сценарий будет доступен только после проверки.";
-            return Ok("true");
+            return Ok(GameProcessing.Write(Game));
         }
 
         [HttpGet]
@@ -44,6 +42,7 @@ namespace rpgSys.Controllers
                 List<BadgeItem> L = new List<BadgeItem>();
                 foreach (var Item in Game.Heroes)
                     L.Add(new BadgeItem() { Text = Item.Name, Id = (int)Item.Sex });
+                L.Add(new BadgeItem() { Text = Game.Master.Name, Id = (int)Game.Master.Sex });
                 return Ok(L);
             }
         }
@@ -116,11 +115,22 @@ namespace rpgSys.Controllers
 
     public static class GameProcessing
     {
-        public bool Write(Game G)
+        public static Game Write(Game G)
         {
-            using(var db=new Runes.GameRune())
+            using (var db = new Runes.GameRune())
             {
-                User U=new Runes.UserRune().Users.QueryUniq(new RuneBook(){ Spells=new List<RuneSpell>(){ new Spel}})
+                User U = (User)new Runes.UserRune().Users.QueryUniq(new RuneSpell("Id", "==", G.Master.UserId));
+                Hero H = (Hero)db.Heroes.QueryUniq(new RuneSpell("Id", "==", U.HeroId));
+
+                G.Master = H;
+
+                Scenario S = (Scenario)db.Scenario.QueryUniq(new RuneSpell("Id", "==", G.Scenario.Id));
+
+                G.Scenario = S;
+
+                db.Game.Add(G);
+                db.SaveRune();
+                return G;
             }
         }
     }

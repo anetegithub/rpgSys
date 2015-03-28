@@ -40,10 +40,9 @@ namespace RuneFramework
                             {
                                 var Value = RuneWord.GetValue(Rune, null)
                                     .GetType()
-                                    .GetMethod("QueryUniq")
+                                    .GetMethod("QueryUniq", new Type[] { typeof(RuneBook) })
                                     .Invoke(RuneWord.GetValue(Rune, null),
                                     new object[] { new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(IdName, "==", Id) } } });
-
 
                                 ListOfItems.Add(Value);
                             }

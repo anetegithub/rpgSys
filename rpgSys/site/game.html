@@ -183,7 +183,7 @@ font-size: 16px;"><span id="lastTime"></span>&nbsp;<a href="#" onclick="LogOff()
                             <p class="text-muted"></p>
                             <div class="panel panel-default">
                                 <div class="list-group">
-                                    <span class="list-group-item" style="cursor:pointer">
+                                    <span id="showNextBlock" class="list-group-item" style="cursor:pointer">
                                         <i class="fa fa-fw fa-user"></i>&nbsp;<span id="roleName">Герой</span>
                                     </span>                                    
                                 </div>
@@ -203,10 +203,11 @@ font-size: 16px;"><span id="lastTime"></span>&nbsp;<a href="#" onclick="LogOff()
                                 </div>
                             </div>
                             <div class="col-lg-4 col-lg-offset-5">
-                                <a id="btnConnect" style="display:none" class="btn btn-primary square-btn-adjust">Присоединиться</a>
-                                <a id="btnCreate" style="display:none" class="btn btn-primary square-btn-adjust">Создать</a>
-                                <a id="btnStart" style="display:none" class="btn btn-primary square-btn-adjust">Запустить</a>
-                                <a id="btnDelete" style="display:none" class="btn btn-primary square-btn-adjust">Удалить</a>
+                                <h4 id="infoUsersmagicBlock" style="display:none"></h4>
+                                <a id="btnConnect" style="display:none" class="btn btn-primary square-btn-adjust disabled">Присоединиться</a>
+                                <a id="btnCreate" style="display:none" class="btn btn-primary square-btn-adjust disabled">Создать</a>
+                                <a id="btnStart" style="display:none" class="btn btn-primary square-btn-adjust disabled">Запустить</a>
+                                <a id="btnDelete" style="display:none" class="btn btn-primary square-btn-adjust disabled">Удалить</a>
                             </div>
                             <br />
                         </div>
