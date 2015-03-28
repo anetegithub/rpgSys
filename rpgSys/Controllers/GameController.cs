@@ -40,8 +40,10 @@ namespace rpgSys.Controllers
             {
                 var Game = (Game)db.Game.QueryUniq(new RuneFramework.RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", GameId) } });
                 List<BadgeItem> L = new List<BadgeItem>();
-                foreach (var Item in Game.Heroes)
-                    L.Add(new BadgeItem() { Text = Item.Name, Id = (int)Item.Sex });
+                if (Game.Heroes != null && Game.Heroes.Count > 0)
+                    foreach (var Item in Game.Heroes)
+                        L.Add(new BadgeItem() { Text = Item.Name, Id = (int)Item.Sex });
+                
                 L.Add(new BadgeItem() { Text = Game.Master.Name, Id = (int)Game.Master.Sex });
                 return Ok(L);
             }

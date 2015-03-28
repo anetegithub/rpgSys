@@ -13,5 +13,6 @@ namespace rpgSys.Runes
         public RuneWord<Scenario> Scenario { get; set; }
         public RuneWord<Hero> Heroes { get; set; }
         public RuneWord<Hero> Master { get; set; }
+        public RuneWord<RuneString> Sex { get; set; }
     }
 }

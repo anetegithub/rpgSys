@@ -1,2 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Games />
+<Games>
+	<Game>
+		<Id>1</Id>
+		<Scenario>2</Scenario>
+	</Game>
+	<Game>
+		<Id>2</Id>
+		<Scenario>2</Scenario>
+	</Game>
+	<Game>
+		<Id>3</Id>
+		<Scenario>2</Scenario>
+		<Master>1</Master>
+	</Game>
+</Games>

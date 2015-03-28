@@ -32,14 +32,24 @@ function GameLobby() {
 
     NewLobby.Role = RoleBlock();
     NewLobby.Role.OnClick = function () {
-        $('#showNextBlock').addClass('bg-color-corporative');
-        NewLobby.MagicBlock.ShowFakeList();
-        NewLobby.MagicBlock.Visible(true);
-        NewLobby.MagicBlock.Label = "Создать и запустить приключение";
-        NewLobby.MagicBlock.CreateBtn.Visible(true);
-        NewLobby.MagicBlock.CreateBtn.Enabled(true);
-        NewLobby.MagicBlock.StartBtn.Visible(true);
-        NewLobby.MagicBlock.DeleteBtn.Visible(true);
+        if (NewLobby.Main.Value == 0) {
+            $('#showNextBlock').addClass('bg-color-corporative');
+            NewLobby.MagicBlock.ShowFakeList();
+            NewLobby.MagicBlock.Visible(true);
+            NewLobby.MagicBlock.Label = "Создать и запустить приключение";
+            NewLobby.MagicBlock.CreateBtn.Visible(true);
+            NewLobby.MagicBlock.CreateBtn.Enabled(true);
+            NewLobby.MagicBlock.StartBtn.Visible(true);
+            NewLobby.MagicBlock.DeleteBtn.Visible(true);
+        } else {
+            $('#showNextBlock').addClass('bg-color-corporative');
+            NewLobby.MagicBlock.GameId = NewLobby.Scenario.SelectedScenario.Id;
+            NewLobby.MagicBlock.ShowList();
+            NewLobby.MagicBlock.Visible(true);
+            NewLobby.MagicBlock.Label = "Присоеденились";
+            NewLobby.MagicBlock.ConnectBtn.Visible(true);
+            NewLobby.MagicBlock.ConnectBtn.Enabled(true);
+        }
     };
     NewLobby.Role.Init();
 
@@ -279,7 +289,7 @@ function ScenarioBlock() {
                 .done(function (data) {
                     var html = "";
                     for (var i = 0; i < data.length; i++) {
-                        html += "<span class='list-group-item' style='cursor:pointer' onclick='Lobby.Scenario.SelectedScenario=ScenarioMiniObject(" + data[i].Id + ",\"" + data[i].Text + "\");'>";
+                        html += "<span id='" + data[i].Id + "ScListItem' class='list-group-item' style='cursor:pointer' onclick='Lobby.Scenario.SelectedScenario=ScenarioMiniObject(" + data[i].Id + ",\"" + data[i].Text + "\"); Lobby.Scenario.SelectThisItem(\"#" + data[i].Id + "ScListItem\")'>";
                         html += "<i class='fa fa-fw fa-comments'></i>&nbsp;";
                         html += data[i].Text + "</span>";
                     }
