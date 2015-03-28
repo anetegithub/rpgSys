@@ -5,12 +5,23 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using System.Web.Script.Serialization;
+
 using RuneFramework;
 
 namespace rpgSys.Controllers
 {
     public class GameController : ApiController
     {
+        [ActionName("create")]
+        public IHttpActionResult New([FromBody]string value)
+        {
+            Game Game = new JavaScriptSerializer().Deserialize<Game>(value);
+            //ScenarioProcessing.Processing(Scenario);
+            //return "Сценарий отправлен на рассмотрение.\nЕсли на сервере включена ручная проверка сценариев, тогда сценарий будет доступен только после проверки.";
+            return Ok("true");
+        }
+
         [HttpGet]
         public IHttpActionResult List()
         {
@@ -19,7 +30,7 @@ namespace rpgSys.Controllers
                 List<BadgeItem> L = new List<BadgeItem>();
                 foreach (var Item in db.Game)
                     if (Item.Scenario.Id != 0 && !Item.IsActive)
-                        L.Add(new BadgeItem() { Id = Item.Id, Text = Item.Scenario.Title, Badge = Item.IsActive == true ? "Активен" : "Не активен" });
+                        L.Add(new BadgeItem() { Id = Item.Id, Text = Item.Scenario.Title });
                 return Ok(L);
             }
         }
@@ -54,26 +65,6 @@ namespace rpgSys.Controllers
                                     Success = !Success;
                                 }
                 }
-            }
-            if (Success)
-                return Ok("true");
-            else
-                return Ok("false");
-        }
-
-        [HttpGet]
-        public IHttpActionResult Get(string GameId)
-        {
-            bool Success = false;
-            using (var db = new Runes.GameRune())
-            {
-                foreach (Game G in db.Game)
-                    if (G.Id == Int32.Parse(GameId))
-                    {
-                        G.IsActive = true;
-                        Success = !Success;
-                        db.SaveRune();
-                    }
             }
             if (Success)
                 return Ok("true");
@@ -120,6 +111,17 @@ namespace rpgSys.Controllers
                 return Ok("true");
             else
                 return Ok("false");
+        }
+    }
+
+    public static class GameProcessing
+    {
+        public bool Write(Game G)
+        {
+            using(var db=new Runes.GameRune())
+            {
+                User U=new Runes.UserRune().Users.QueryUniq(new RuneBook(){ Spells=new List<RuneSpell>(){ new Spel}})
+            }
         }
     }
 }

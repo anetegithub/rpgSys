@@ -50,6 +50,15 @@ namespace RuneFramework
             else
                 return null;
         }
+        public object QueryUniq(RuneSpell Spell)
+        {
+            RuneBook Book = new RuneBook() { Spells = new List<RuneSpell>() { Spell } };
+            var QueryResult = Transmuter.RealiseQuery(Book);
+            if (QueryResult.Count != 0)
+                return Transmuter.RealiseQuery(Book)[0];
+            else
+                return null;
+        }
 
         public T this[int i]
         {
