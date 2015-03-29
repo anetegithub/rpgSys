@@ -70,7 +70,7 @@ function GameLobby() {
     NewLobby.MagicBlock.Init();
     NewLobby.MagicBlock.ConnectBtn.OnClick = function () {
         var user = JSON.parse($.cookie("user"));
-        $.getJSON('../api/game/connect?GameId=' + NewLobby.Scenario.SelectedScenario.Id + "&UserId=" + User.Id)
+        $.getJSON('../api/game/connect?GameId=' + NewLobby.Scenario.SelectedScenario.Id + "&UserId=" + user.Id)
             .done(function (data) {
                 if (data == "true") {                    
                     //WAIT UNTIL GAME STARTED

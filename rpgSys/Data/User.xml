@@ -16,5 +16,5 @@
     <Password>123456</Password>
     <Email>anete.anetes@yandex.ru</Email>
     <Stamp>29.03.2015 17:02:52</Stamp>
-	<Activity><UserActivity>1</UserActivity></Activity><HeroId>0</HeroId><GameId>0</GameId></User>
+	<Activity><UserActivity>1</UserActivity></Activity><HeroId>0</HeroId><GameId>1</GameId></User>
 </Users>

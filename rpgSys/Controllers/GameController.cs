@@ -62,7 +62,6 @@ namespace rpgSys.Controllers
         [HttpGet]
         public IHttpActionResult Connect(string GameId, string UserId)
         {
-            bool Success = false;
             using (var db = new Runes.GameRune())
             {
                 using (var db2 = new Runes.UserRune())
@@ -93,24 +92,8 @@ namespace rpgSys.Controllers
                         return Ok("false");
                     }
                 }
-                //db.Game.ReferenceUniq(new SimpleRuneSpell("Id","==",GameId)).h
-
-                using (var dbh = new Runes.HeroRune())
-                {
-                    foreach (Hero H in dbh.Hero)
-                        if (H.UserId == Int32.Parse(UserId))
-                            foreach (Game G in db.Game)
-                                if (G.Id == Int32.Parse(GameId))
-                                {
-                                    G.Heroes.Add(H);
-                                    Success = !Success;
-                                }
-                }
             }
-            if (Success)
-                return Ok("true");
-            else
-                return Ok("false");
+            return Ok("true");
         }
 
         [HttpGet]
