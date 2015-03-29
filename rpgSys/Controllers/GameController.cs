@@ -21,6 +21,15 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult ById(string Id)
+        {
+            using (var db = new Runes.GameRune())
+            {
+                return Ok((db.Game.QueryUniq(new RuneSpell("Id", "==", Id)) as Game) ?? new Game());
+            }
+        }
+
+        [HttpGet]
         public IHttpActionResult List()
         {
             using (var db = new Runes.GameRune())
@@ -28,7 +37,7 @@ namespace rpgSys.Controllers
                 List<BadgeItem> L = new List<BadgeItem>();
                 foreach (var Item in db.Game)
                     if (Item.Scenario.Id != 0 && !Item.IsActive)
-                        L.Add(new BadgeItem() { Id = Item.Id, Text = Item.Scenario.Title });
+                        L.Add(new BadgeItem() { Id = Item.Id, Text = Item.Scenario.Title, Param1 = Item.Scenario.Recomendation });
                 return Ok(L);
             }
         }
@@ -43,8 +52,9 @@ namespace rpgSys.Controllers
                 if (Game.Heroes != null && Game.Heroes.Count > 0)
                     foreach (var Item in Game.Heroes)
                         L.Add(new BadgeItem() { Text = Item.Name, Id = (int)Item.Sex });
-                
-                L.Add(new BadgeItem() { Text = Game.Master.Name, Id = (int)Game.Master.Sex });
+
+                if (Game.Master != null)
+                    L.Add(new BadgeItem() { Text = Game.Master.Name, Id = (int)Game.Master.Sex });
                 return Ok(L);
             }
         }
@@ -53,20 +63,32 @@ namespace rpgSys.Controllers
         public IHttpActionResult Connect(string GameId, string UserId)
         {
             bool Success = false;
-            using (var db = new Runes.GameRune())
+            using(var db=new Runes.UserRune())
             {
-                using (var dbh = new Runes.HeroRune())
-                {
-                    foreach (Hero H in dbh.Hero)
-                        if (H.UserId == Int32.Parse(UserId))
-                            foreach (Game G in db.Game)
-                                if (G.Id == Int32.Parse(GameId))
-                                {
-                                    G.Heroes.Add(H);
-                                    Success = !Success;
-                                }
-                }
+                //(db.Users.QueryUniq(new RuneSpell("Id", "==", UserId)) as User).GameId = 666;
+
+                //(from a in db.Users where a.Id == Int32.Parse(UserId) select a).ToList()[0].GameId = 666;
+
+                db.Users.Reference(new SimpleRuneBook() { Spells = new List<SimpleRuneSpell>() { new SimpleRuneSpell("Id", "==", UserId), new SimpleRuneSpell("Id", "==", UserId) } })[0].GameId = 1;
+
+
+                db.SaveRune();
+
             }
+            //using (var db = new Runes.GameRune())
+            //{
+            //    using (var dbh = new Runes.HeroRune())
+            //    {
+            //        foreach (Hero H in dbh.Hero)
+            //            if (H.UserId == Int32.Parse(UserId))
+            //                foreach (Game G in db.Game)
+            //                    if (G.Id == Int32.Parse(GameId))
+            //                    {
+            //                        G.Heroes.Add(H);
+            //                        Success = !Success;
+            //                    }
+            //    }
+            //}
             if (Success)
                 return Ok("true");
             else
@@ -96,19 +118,16 @@ namespace rpgSys.Controllers
         [HttpGet]
         public IHttpActionResult Delete(string GameId)
         {
-            bool Success = false;
+            int indexOf = -1;
             using (var db = new Runes.GameRune())
             {
                 foreach (Game G in db.Game)
                     if (G.Id == Int32.Parse(GameId))
-                    {
-                        G.IsActive = true;
-                        Success = !Success;
-                        db.Game.Remove(G);
-                        db.SaveRune();
-                    }
+                        indexOf = db.Game.ToList().IndexOf(G);
+                if (indexOf != -1)
+                    db.Game.Remove(db.Game[indexOf]);
             }
-            if (Success)
+            if (indexOf != -1)
                 return Ok("true");
             else
                 return Ok("false");
@@ -132,6 +151,15 @@ namespace rpgSys.Controllers
 
                 db.Game.Add(G);
                 db.SaveRune();
+
+                using (var db2 = new Runes.UserRune())
+                    foreach (var user in db2.Users)
+                        if (user.Id == G.Master.UserId)
+                        {
+                            user.GameId = G.Id;
+                            db2.SaveRune();
+                        }
+
                 return G;
             }
         }

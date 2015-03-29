@@ -15,8 +15,26 @@ namespace RuneFramework
         public List<XElement> Elements { get; set; }
     }
 
+    public class SimpleRuneBook
+    {
+        public List<SimpleRuneSpell> Spells { get; set; }
+    }
+
+    public class SpellEmptyException : NullReferenceException
+    {
+        public SpellEmptyException(string Message)
+            : base(Message)
+        { }
+    }
+
     public class RuneSpell
     {
+        public RuneSpell()
+        {
+            if (this.GetType() != typeof(SimpleRuneSpell))
+                throw new SpellEmptyException("Current spell have empty field, operator and value!");
+        }
+
         public RuneSpell(String Field, String Operator, Object Value)
         {
             this.Field = Field;
@@ -32,6 +50,40 @@ namespace RuneFramework
         public bool Spell(XElement Source)
         {
             Instance = Convert.ChangeType(Source.Element(Field).Value, Value.GetType());
+            switch (Operator)
+            {
+                case "==": return (Instance as IComparable).CompareTo(Value) == 0;
+                case "!=": return (Instance as IComparable).CompareTo(Value) != 0;
+                case ">": return (Instance as IComparable).CompareTo(Value) > 0;
+                case ">=": return (Instance as IComparable).CompareTo(Value) >= 0;
+                case "<": return (Instance as IComparable).CompareTo(Value) < 0;
+                case "<=": return (Instance as IComparable).CompareTo(Value) <= 0;
+
+                case "@": return (Instance as string).CompareToIn(Value) >= 0;
+                case "!@": return (Instance as string).CompareToIn(Value) < 0;
+                case "%": return (Instance as string).CompareToLike(Value) != 0;
+                case "!%": return (Instance as string).CompareToLike(Value) != 0;
+
+                default: return false;
+            }
+        }
+    }
+
+    public class SimpleRuneSpell : RuneSpell
+    {
+        public SimpleRuneSpell(String Field, String Operator, Object Value)
+        {
+            this.Field = Field;
+            this.Operator = Operator;
+            this.Value = Value;
+        }
+        public string GetField
+        { get { return this.Field; } }
+        public object GetValue
+        { get { return this.Value; } }
+        public bool Spell(Object Source)
+        {
+            Instance = Convert.ChangeType(Source.GetType().GetProperty(Field).GetValue(Source), Value.GetType());
             switch (Operator)
             {
                 case "==": return (Instance as IComparable).CompareTo(Value) == 0;

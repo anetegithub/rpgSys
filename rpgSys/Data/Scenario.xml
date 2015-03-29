@@ -19,7 +19,7 @@
       <Reward>1</Reward>
     </Rewards>
   </Scenario>
-	<Scenario>
+  <Scenario>
 		<Id>2</Id>
 		<Active>true</Active>
 		<Title>Таверна 2</Title>

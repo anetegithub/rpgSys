@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Collections;
+using System.Xml.Linq;
 
 namespace RuneFramework
 {
@@ -58,6 +59,48 @@ namespace RuneFramework
                 return Transmuter.RealiseQuery(Book)[0];
             else
                 return null;
+        }
+
+        public List<T> Reference(SimpleRuneBook Book)
+        {
+            if (Book.Spells == null)
+                return new List<T>();
+            if (Book.Spells.Count == 0)
+                return new List<T>();
+
+            var LinqQuery = (from a in Transmuter.Get where Book.Spells[0].Spell(a) select a).ToList();
+
+            foreach (SimpleRuneSpell RuneSp in Book.Spells.Skip(1))
+                LinqQuery.Where(x => RuneSp.Spell(x));
+
+            if (LinqQuery.Count != 0)
+                return LinqQuery;
+            else
+                return new List<T>();
+        }
+        public List<T> Reference(SimpleRuneSpell Spell)
+        {
+            var LinqQuery = (from a in Transmuter.Get where Spell.Spell(a) select a).ToList();
+            if (LinqQuery.Count != 0)
+                return LinqQuery;
+            else
+                return new List<T>();
+        }
+        public T ReferenceUniq(SimpleRuneSpell Spell)
+        {
+            var ReferenceList = this.Reference(Spell);
+            if (ReferenceList.Count != 0)
+                return ReferenceList[0];
+            else
+                return (T)new object();
+        }
+        public T ReferenceUniq(SimpleRuneBook Book)
+        {
+            var ReferenceList = this.Reference(Book);
+            if (ReferenceList.Count != 0)
+                return ReferenceList[0];
+            else
+                return (T)new object();
         }
 
         public T this[int i]

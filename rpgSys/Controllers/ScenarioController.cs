@@ -48,7 +48,7 @@ namespace rpgSys.Controllers
             {
                 List<BadgeItem> L = new List<BadgeItem>();
                 foreach (var Item in db.Scenarios)
-                    L.Add(new BadgeItem() { Id = Item.Id, Text = Item.Title, Badge = Item.Active == true ? "Активен" : "Не активен" });
+                    L.Add(new BadgeItem() { Id = Item.Id, Text = Item.Title, Badge = Item.Active == true ? "Активен" : "Не активен", Param1 = Item.Fable });
                 return Ok(L);
             }
         }
@@ -213,5 +213,6 @@ namespace rpgSys.Controllers
         public int Id { get; set; }
         public string Text { get; set; }
         public string Badge { get; set; }
+        public string Param1 { get; set; }
     }
 }

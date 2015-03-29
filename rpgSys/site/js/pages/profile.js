@@ -117,7 +117,16 @@ function render() {
     if (user.GameId == 0) {
         $('#userGame').html('Новое приключение');
     } else {
-        $('#userGame').html('GameControllerNeed');
+        $.getJSON('../api/game/byid?Id=' + user.GameId)
+                .done(function (data) {
+                    if (data.Id == 0) {
+                        user.GameId = 0;
+                        $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                        $('#userGame').html('Новое приключение');
+                    } else {
+                        $('#userGame').html(data.Scenario.Title);
+                    }
+                });
     }
     $.getJSON('../api/server')
                 .done(function (data) {
