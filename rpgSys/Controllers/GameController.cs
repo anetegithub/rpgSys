@@ -63,32 +63,50 @@ namespace rpgSys.Controllers
         public IHttpActionResult Connect(string GameId, string UserId)
         {
             bool Success = false;
-            using(var db=new Runes.UserRune())
+            using (var db = new Runes.GameRune())
             {
-                //(db.Users.QueryUniq(new RuneSpell("Id", "==", UserId)) as User).GameId = 666;
+                using (var db2 = new Runes.UserRune())
+                {
+                    try
+                    {
+                        User u = db2.Users.ReferenceUniq(new SimpleRuneSpell("Id", "==", UserId));
+                        int gameid = 0;
+                        if (!Int32.TryParse(GameId, out gameid))
+                            return Ok("false");
+                        u.GameId = gameid;
+                        db2.SaveRune();
 
-                //(from a in db.Users where a.Id == Int32.Parse(UserId) select a).ToList()[0].GameId = 666;
+                        using (var db3 = new Runes.HeroRune())
+                        {
+                            Hero h = db3.Hero.ReferenceUniq(new SimpleRuneSpell("UserId", "==", UserId));
 
-                db.Users.Reference(new SimpleRuneBook() { Spells = new List<SimpleRuneSpell>() { new SimpleRuneSpell("Id", "==", UserId), new SimpleRuneSpell("Id", "==", UserId) } })[0].GameId = 1;
+                            Game g = db.Game.ReferenceUniq(new SimpleRuneSpell("Id", "==", gameid));
+                            if (g.Heroes == null)
+                                g.Heroes = new List<Hero>();
+                            g.Heroes.Add(h);
 
+                            db.SaveRune();
+                        }
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        return Ok("false");
+                    }
+                }
+                //db.Game.ReferenceUniq(new SimpleRuneSpell("Id","==",GameId)).h
 
-                db.SaveRune();
-
+                using (var dbh = new Runes.HeroRune())
+                {
+                    foreach (Hero H in dbh.Hero)
+                        if (H.UserId == Int32.Parse(UserId))
+                            foreach (Game G in db.Game)
+                                if (G.Id == Int32.Parse(GameId))
+                                {
+                                    G.Heroes.Add(H);
+                                    Success = !Success;
+                                }
+                }
             }
-            //using (var db = new Runes.GameRune())
-            //{
-            //    using (var dbh = new Runes.HeroRune())
-            //    {
-            //        foreach (Hero H in dbh.Hero)
-            //            if (H.UserId == Int32.Parse(UserId))
-            //                foreach (Game G in db.Game)
-            //                    if (G.Id == Int32.Parse(GameId))
-            //                    {
-            //                        G.Heroes.Add(H);
-            //                        Success = !Success;
-            //                    }
-            //    }
-            //}
             if (Success)
                 return Ok("true");
             else
