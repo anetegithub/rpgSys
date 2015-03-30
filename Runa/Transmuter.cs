@@ -270,6 +270,10 @@ namespace RuneFramework
             Shaman.Delete(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell(Id, "==", (int)typeof(T).GetProperty(Id).GetValue(this.Words[Index], null)) } });
             this.Words.Remove(this.Words[Index]);
         }
+        public int IndexOf(T Item)
+        {
+            return Words.IndexOf(Item);
+        }
 
         public IEnumerator<T> GetEnumerator()
         {

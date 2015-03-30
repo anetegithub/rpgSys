@@ -72,12 +72,16 @@ function GameLobby() {
         var user = JSON.parse($.cookie("user"));
         $.getJSON('../api/game/connect?GameId=' + NewLobby.Scenario.SelectedScenario.Id + "&UserId=" + user.Id)
             .done(function (data) {
-                if (data == "true") {                    
+                if (data == "true") {
                     //WAIT UNTIL GAME STARTED
-                    NewLobby.MagicBlock.SubLabel = "Вы присоеденились к игре, ждите старта...";
-                    NewLobby.MagicBlock.SubLabelVisible(true);
-                }
-                else
+                    var user = JSON.parse($.cookie("user"));
+                    user.GameId = NewLobby.Scenario.SelectedScenario.Id;
+                    $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                    window.location.reload();
+                } else if (data == "NoHero") {
+                    alert('У вас должен быть персонаж!');
+                    window.location.replace('hero');
+                } else
                     NewLobby.MagicBlock.Break();
             });
     };
@@ -148,34 +152,59 @@ function GameLobby() {
             .done(function (data) {
                 if (data.Id != 0) {
                     if (!data.IsActive) {
-                        $('#newPt0btn0').css('cursor', 'cross');
-                        $('#newPt0btn1').css('cursor', 'cross');
-                        $('#newPt0btn0').unbind("click");
-                        $('#newPt0btn1').unbind("click");
-                        NewLobby.Scenario.ShowTemplates();
-                        NewLobby.Scenario.Visible(true);
-                        NewLobby.Scenario.OnShow = function () {
-                            NewLobby.Scenario.SelectThisItem('#' + data.Scenario.Id + 'ScListItem');
-                            NewLobby.Scenario.Ain(data.Scenario.Fable);
-                            NewLobby.Scenario.DisableList();
-                        };
-                        NewLobby.Role.Visible(true);
-                        $('#showNextBlock').unbind("click");
-                        $('#showNextBlock').css('cursor', 'cross');
+                        if (data.Master.Id == user.HeroId) {
+                            $('#newPt0btn0').css('cursor', 'cross');
+                            $('#newPt0btn1').css('cursor', 'cross');
+                            $('#newPt0btn0').unbind("click");
+                            $('#newPt0btn1').unbind("click");
+                            NewLobby.Scenario.ShowTemplates();
+                            NewLobby.Scenario.Visible(true);
+                            NewLobby.Scenario.OnShow = function () {
+                                NewLobby.Scenario.SelectThisItem('#' + data.Scenario.Id + 'ScListItem');
+                                NewLobby.Scenario.Ain(data.Scenario.Fable);
+                                NewLobby.Scenario.DisableList();
+                            };
+                            NewLobby.Role.Visible(true);
+                            $('#showNextBlock').unbind("click");
+                            $('#showNextBlock').css('cursor', 'cross');
 
-                        $('#showNextBlock').addClass('bg-color-corporative');
-                        NewLobby.MagicBlock.Visible(true);
-                        NewLobby.MagicBlock.GameId = data.Id;
-                        NewLobby.MagicBlock.Label = "Запустить игру";                        
-                        NewLobby.MagicBlock.StartBtn.Visible(true);
-                        NewLobby.MagicBlock.StartBtn.Enabled(true);
-                        NewLobby.MagicBlock.DeleteBtn.Visible(true);
-                        NewLobby.MagicBlock.DeleteBtn.Enabled(true);
-                        NewLobby.MagicBlock.ShowList();
+                            $('#showNextBlock').addClass('bg-color-corporative');
+                            NewLobby.MagicBlock.Visible(true);
+                            NewLobby.MagicBlock.GameId = data.Id;
+                            NewLobby.MagicBlock.Label = "Запустить игру";
+                            NewLobby.MagicBlock.StartBtn.Visible(true);
+                            NewLobby.MagicBlock.StartBtn.Enabled(true);
+                            NewLobby.MagicBlock.DeleteBtn.Visible(true);
+                            NewLobby.MagicBlock.DeleteBtn.Enabled(true);
+                            NewLobby.MagicBlock.ShowList();
 
-                        //WAIT UNTILL PLAYERS ADDED
+                            //WAIT UNTILL PLAYERS ADDED
 
-                        $('html, body').animate({ scrollTop: $(document).height() });
+                            $('html, body').animate({ scrollTop: $(document).height() });
+                        } else {
+                            $('#newPt0btn0').css('cursor', 'cross');
+                            $('#newPt0btn1').css('cursor', 'cross');
+                            $('#newPt0btn0').unbind("click");
+                            $('#newPt0btn1').unbind("click");
+                            NewLobby.Scenario.ShowGames();
+                            NewLobby.Scenario.Visible(true);
+                            NewLobby.Scenario.OnShow = function () {
+                                NewLobby.Scenario.SelectThisItem('#' + data.Id + 'ScListItem');
+                                NewLobby.Scenario.Ain(data.Scenario.Recomendation);
+                                NewLobby.Scenario.DisableList();
+                            };
+                            NewLobby.Role.Visible(true);
+                            $('#showNextBlock').unbind("click");
+                            $('#showNextBlock').css('cursor', 'cross');
+
+                            $('#showNextBlock').addClass('bg-color-corporative');
+                            NewLobby.MagicBlock.Visible(true);
+                            NewLobby.MagicBlock.GameId = data.Id;
+                            NewLobby.MagicBlock.Label = "Присоеденились";
+                            NewLobby.MagicBlock.SubLabel = "Вы присоеденились к игре, ждите старта...";
+                            NewLobby.MagicBlock.SubLabelVisible(true);
+                            NewLobby.MagicBlock.ShowList();
+                        }
                     } else {
                         $('#new').css('display', 'none');
                         $('#old').css('display', 'block');
@@ -229,7 +258,7 @@ function MagicBlock() {
                 .done(function (data) {
                     var html = "";
                     for (var i = 0; i < data.length; i++) {
-                        html += "<span class='list-group-item'><i class='fa fa-fw fa-" + (data[i].Id == 0 ? "" : "fe") + "male'></i>&nbsp;" + data[i].Text + "</span>";
+                        html += "<span class='list-group-item'><i class='fa fa-fw fa-" + (data[i].Id == 1 ? "" : "fe") + "male'></i>&nbsp;" + data[i].Text + "</span>";
                     }
                     $('#magicUsersList').html(html);
                     if (data.length == 0)
@@ -374,12 +403,13 @@ function ScenarioBlock() {
                 .done(function (data) {
                     var html = "";
                     for (var i = 0; i < data.length; i++) {
-                        html += "<span id='" + data[i].Id + "ScListItem' class='list-group-item' style='cursor:pointer' onclick='Lobby.Scenario.SelectedScenario=ScenarioMiniObject(" + data[i].Id + ",\"" + data[i].Text + "\"); Lobby.Scenario.SelectThisItem(\"#" + data[i].Id + "ScListItem\"); Lobby.Scenario.Ain(\"" + data[i].Param1 + "\");'>";
+                        html += "<span id='" + data[i].Id + "ScListItem' class='list-group-item' ScenarioId='" + data[i].Id + "' style='cursor:pointer' onclick='Lobby.Scenario.SelectedScenario=ScenarioMiniObject(" + data[i].Id + ",\"" + data[i].Text + "\"); Lobby.Scenario.SelectThisItem(\"#" + data[i].Id + "ScListItem\"); Lobby.Scenario.Ain(\"" + data[i].Param1 + "\");'>";
                         html += "<i class='fa fa-fw fa-comments'></i>&nbsp;";
                         html += data[i].Text + "</span>";
                     }
                     $('#scenarioList').html(html);
                     sb.Label = "Доступные игры";
+                    sb.OnShow();
                 });
     };
     sb.Label = "Unknown";

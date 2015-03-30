@@ -72,18 +72,26 @@ namespace rpgSys.Controllers
                         int gameid = 0;
                         if (!Int32.TryParse(GameId, out gameid))
                             return Ok("false");
-                        u.GameId = gameid;
-                        db2.SaveRune();
+                        u.GameId = gameid;                        
 
                         using (var db3 = new Runes.HeroRune())
                         {
-                            Hero h = db3.Hero.ReferenceUniq(new SimpleRuneSpell("UserId", "==", UserId));
+                            Hero h = null;
+                            try
+                            {
+                                h = db3.Hero.ReferenceUniq(new SimpleRuneSpell("UserId", "==", UserId));
+                            }
+                            catch (ArgumentNullException)
+                            {
+                                return Ok("NoHero");
+                            }
 
                             Game g = db.Game.ReferenceUniq(new SimpleRuneSpell("Id", "==", gameid));
                             if (g.Heroes == null)
                                 g.Heroes = new List<Hero>();
                             g.Heroes.Add(h);
 
+                            db2.SaveRune();
                             db.SaveRune();
                         }
                     }
@@ -122,6 +130,8 @@ namespace rpgSys.Controllers
             int indexOf = -1;
             using (var db = new Runes.GameRune())
             {
+                indexOf=db.Game.ToList().IndexOf
+
                 foreach (Game G in db.Game)
                     if (G.Id == Int32.Parse(GameId))
                         indexOf = db.Game.ToList().IndexOf(G);

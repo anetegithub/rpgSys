@@ -2,9 +2,9 @@
 <Games>
   <Game>
     <Id>1</Id>
-    <IsActive>false</IsActive>
+    <IsActive>False</IsActive>
     <Scenario>2</Scenario>
-    <Master>1</Master>
-    <Heroes />
+    <Master>2</Master>
+    <Heroes><Hero>1</Hero></Heroes>
   </Game>
 </Games>

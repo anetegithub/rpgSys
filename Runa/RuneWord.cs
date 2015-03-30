@@ -130,6 +130,8 @@ namespace RuneFramework
         {
             Transmuter.Remove(Index);
         }
+        public int IndexOf(T Item)
+        { return Transmuter.IndexOf(Item); }
 
         public IEnumerator<T> GetEnumerator()
         {
