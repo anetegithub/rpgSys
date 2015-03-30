@@ -92,7 +92,7 @@ namespace RuneFramework
             if (ReferenceList.Count != 0)
                 return ReferenceList[0];
             else
-                throw new ArgumentNullException();
+                throw new ArgumentException();
         }
         public T ReferenceUniq(SimpleRuneBook Book)
         {
@@ -100,7 +100,7 @@ namespace RuneFramework
             if (ReferenceList.Count != 0)
                 return ReferenceList[0];
             else
-                throw new ArgumentNullException();
+                throw new ArgumentException();
         }
 
         public T this[int i]

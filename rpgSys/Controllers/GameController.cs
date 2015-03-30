@@ -81,7 +81,7 @@ namespace rpgSys.Controllers
                             {
                                 h = db3.Hero.ReferenceUniq(new SimpleRuneSpell("UserId", "==", UserId));
                             }
-                            catch (ArgumentNullException)
+                            catch (ArgumentException)
                             {
                                 return Ok("NoHero");
                             }
@@ -95,7 +95,7 @@ namespace rpgSys.Controllers
                             db.SaveRune();
                         }
                     }
-                    catch (ArgumentNullException)
+                    catch (ArgumentException)
                     {
                         return Ok("false");
                     }
@@ -130,7 +130,11 @@ namespace rpgSys.Controllers
             int indexOf = -1;
             using (var db = new Runes.GameRune())
             {
-                indexOf=db.Game.ToList().IndexOf
+                try
+                {
+                    indexOf = db.Game.IndexOf(db.Game.ReferenceUniq(new SimpleRuneSpell("Id", "==", GameId)));
+                }
+                catch (ArgumentException) { return Ok("false"); }
 
                 foreach (Game G in db.Game)
                     if (G.Id == Int32.Parse(GameId))
