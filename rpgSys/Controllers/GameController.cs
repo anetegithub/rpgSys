@@ -72,7 +72,7 @@ namespace rpgSys.Controllers
                         int gameid = 0;
                         if (!Int32.TryParse(GameId, out gameid))
                             return Ok("false");
-                        u.GameId = gameid;                        
+                        u.GameId = gameid;
 
                         using (var db3 = new Runes.HeroRune())
                         {
@@ -127,25 +127,27 @@ namespace rpgSys.Controllers
         [HttpGet]
         public IHttpActionResult Delete(string GameId)
         {
-            int indexOf = -1;
             using (var db = new Runes.GameRune())
             {
                 try
                 {
-                    indexOf = db.Game.IndexOf(db.Game.ReferenceUniq(new SimpleRuneSpell("Id", "==", GameId)));
+                    Game g = db.Game.ReferenceUniq(new SimpleRuneSpell("Id", "==", GameId));
+
+                    using (var db2 = new Runes.UserRune())
+                    {
+                        if (g.Heroes != null)
+                            foreach (Hero h in g.Heroes)
+                                db2.Users.ReferenceUniq(new SimpleRuneSpell("Id", "==", h.UserId)).GameId = 0;
+                        db2.Users.ReferenceUniq(new SimpleRuneSpell("Id", "==", g.Master.UserId)).GameId = 0;
+
+                        db2.SaveRune();
+                    }
+
+                    db.Game.Remove(g);
+                    return Ok("true");
                 }
                 catch (ArgumentException) { return Ok("false"); }
-
-                foreach (Game G in db.Game)
-                    if (G.Id == Int32.Parse(GameId))
-                        indexOf = db.Game.ToList().IndexOf(G);
-                if (indexOf != -1)
-                    db.Game.Remove(db.Game[indexOf]);
             }
-            if (indexOf != -1)
-                return Ok("true");
-            else
-                return Ok("false");
         }
     }
 

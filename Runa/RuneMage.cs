@@ -31,22 +31,19 @@ namespace RuneFramework
 
         private ILetter<T> SpecificLetter;
 
-        private string Id
+        private string Id(Type T)
         {
-            get
+            if (T != typeof(RuneString))
             {
-                if (typeof(T) != typeof(RuneString))
-                {
-                    var Id = typeof(T).GetProperty("Id");
-                    if (Id == null)
-                        Id = typeof(T).GetProperty(typeof(T).Name + "Id");
-                    if (Id == null)
-                        throw new Exception(typeof(T).Name + " class : Id not found!");
-                    return Id.Name;
-                }
-                else
-                    return "Id";
+                var Id = T.GetProperty("Id");
+                if (Id == null)
+                    Id = T.GetProperty(typeof(T).Name + "Id");
+                if (Id == null)
+                    return "null";
+                return Id.Name;
             }
+            else
+                return "Id";
         }
 
         public void Transmute(T FromFile, T Words, RuneBook Book)
@@ -55,41 +52,29 @@ namespace RuneFramework
             {
                 foreach (var Property in Properties)
                 {
-                    if (!RuneComparer.IsEqual(FromFile, Words))
+                    Object AValue = Property.GetValue(FromFile, null);
+                    Object BValue = Property.GetValue(Words, null);
+
+                    if (!RuneComparer.IsEqual(AValue, BValue))
                     {
-                        Book.Spells.Add(
-                                new RuneSpell(Id, "==", typeof(T).GetProperty(Id).GetValue(FromFile, null))
-                            );
-                        var Value = Property.GetValue(Words, null);
+                        string PrimaryId = Id(typeof(T));
+                        Book.Spells.Add(new RuneSpell(PrimaryId, "==", typeof(T).GetProperty(PrimaryId).GetValue(FromFile, null)));
 
-                        if (Value != null)
+                        string InnerId = Id(BValue.GetType());
+
+                        if (BValue != null)
                         {
-                            var StrId = "0";
-                            var ObjId = Value.GetType().GetProperty("Id");
-                            if (ObjId == null)
-                                StrId = Value.GetType().Name + "Id";
-                            else
-                                StrId = "Id";
-
-                            if (Value.GetType().GetInterface("IList") == null)
-                                if (!Value.GetType().IsPrimitive && Value.GetType() != typeof(String))
-                                    Book.Spellage.Add(
-                                            new RuneSpellage(Property.Name, Value.GetType().GetProperty(StrId).GetValue(Value, null).ToString())
-                                        );
-                                else
-                                    Book.Spellage.Add(
-                                            new RuneSpellage(Property.Name, Value.ToString())
-                                        );
+                            if (BValue.GetType().IsPrimitive || BValue.GetType() == typeof(String))
+                                Book.Spellage.Add(new RuneSpellage(Property.Name, BValue));
+                            else if (BValue.GetType().GetInterface("IList") == null)
+                                Book.Spellage.Add(new RuneSpellage(Property.Name, BValue.GetType().GetProperty(InnerId).GetValue(BValue, null)));
                             else
                             {
-                                dynamic D = new ExpandoObject();
+                                dynamic Reference = new ExpandoObject();
                                 var TInstance = (T)Activator.CreateInstance(typeof(T));
-                                Property.SetValue(TInstance, Value);
-                                var XElementValue = ToTablet(TInstance, ref D);
-
-                                Book.Spellage.Add(
-                                    new RuneSpellage(Property.Name, XElementValue.Element(Property.Name))
-                                );
+                                Property.SetValue(TInstance, BValue);
+                                var XElementValue = ToTablet(TInstance, ref Reference);
+                                Book.Spellage.Add(new RuneSpellage(Property.Name, XElementValue.Element(Property.Name)));
                             }
                         }
                     }

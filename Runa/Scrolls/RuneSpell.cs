@@ -122,7 +122,7 @@ namespace RuneFramework
         {
             if (Value.GetType() != typeof(XElement))
                 if (Element.Element(Field) != null)
-                    Element.Element(Field).Value = (string)Value;
+                    Element.Element(Field).Value = Value.ToString();
                 else
                     Element.Add(new XElement(Field, Value));
             else

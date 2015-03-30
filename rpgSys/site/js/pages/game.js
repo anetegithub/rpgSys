@@ -2,11 +2,49 @@
     var user = JSON.parse($.cookie("user"));
     $('#userAvatar').attr('src', user.Avatar);
     $('#lastTime').html("Последняя авторизация: " + user.Stamp);
+
     Lobby = GameLobby();
+
+    //Sync
+    var synclobby = $.connection.lobby;
+
+    synclobby.client.gamedelete  = function (GameId) {
+        var user = JSON.parse($.cookie("user"));
+        if (user.GameId == GameId && GameId != 0) {
+            user.GameId = 0;
+            $.cookie('user', JSON.stringify(user), { path: '/site/' });
+            alert('Приключение отменено!');
+            window.location.replace('profile');
+        }
+    };
+    synclobby.client.gamestart = function (GameId) {
+        var user = JSON.parse($.cookie("user"));
+        if (user.GameId = GameId && GameId != 0)
+            window.location.reload();
+    };
+    synclobby.client.listupdate = function (GameId) {
+        var user = JSON.parse($.cookie("user"));
+        if (user.GameId == GameId && GameId != 0) {
+            Lobby.MagicBlock.ShowList();
+        }
+    }
+
+    $.connection.hub.start().done(function () {
+        Lobby.SyncUpdate = function (GameId) {
+            synclobby.server.listupdate(GameId);
+        };
+        Lobby.SyncStart = function (GameId) {
+            synclobby.server.gamestart(GameId);
+        };
+        Lobby.SyncDelete = function (GameId) {
+            synclobby.server.gamedelete(GameId);
+        };
+    });    
+    
     Lobby.IsState();
 });
 
-var Lobby = null;//GameLobby();
+var Lobby = null;
 
 function GameLobby() {
     var NewLobby = new Object();
@@ -67,16 +105,19 @@ function GameLobby() {
     NewLobby.Role.Init();
 
     NewLobby.MagicBlock = MagicBlock();
-    NewLobby.MagicBlock.Init();
+    NewLobby.MagicBlock.Init();    
+    NewLobby.SyncUpdate = function (GameId) { };
+    NewLobby.SyncStart = function (GameId) { };
+    NewLobby.SyncDelete = function (GameId) { };
     NewLobby.MagicBlock.ConnectBtn.OnClick = function () {
         var user = JSON.parse($.cookie("user"));
         $.getJSON('../api/game/connect?GameId=' + NewLobby.Scenario.SelectedScenario.Id + "&UserId=" + user.Id)
             .done(function (data) {
-                if (data == "true") {
-                    //WAIT UNTIL GAME STARTED
+                if (data == "true") {                    
                     var user = JSON.parse($.cookie("user"));
                     user.GameId = NewLobby.Scenario.SelectedScenario.Id;
                     $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                    NewLobby.SyncUpdate(NewLobby.Scenario.SelectedScenario.Id);
                     window.location.reload();
                 } else if (data == "NoHero") {
                     alert('У вас должен быть персонаж!');
@@ -116,11 +157,8 @@ function GameLobby() {
         var user = JSON.parse($.cookie("user"));
         $.getJSON('../api/game/start?GameId=' + user.GameId)
             .done(function (data) {
-                if (data == "true") {                    
-                    //var user = JSON.parse($.cookie("user"));
-                    //user.GameId = NewLobby.Scenario.SelectedScenario.Id;
-                    //$.cookie('user', JSON.stringify(user), { path: '/site/' });
-                    //SAY OTHERS GAME WAS STARTED
+                if (data == "true") {
+                    NewLobby.SyncStart(user.GameId);
                     window.location.reload();
                 }
                 else
@@ -132,11 +170,11 @@ function GameLobby() {
         var user = JSON.parse($.cookie("user"));
         $.getJSON('../api/game/delete?GameId=' + user.GameId)
             .done(function (data) {
-                if (data == "true") {
-                    //SAY OTHERS GAME WAS DELETED
+                if (data == "true") {                    
                     var user = JSON.parse($.cookie("user"));
+                    NewLobby.SyncDelete(user.GameId);
                     user.GameId = 0;
-                    $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                    $.cookie('user', JSON.stringify(user), { path: '/site/' });                    
                     window.location.replace('profile');
                 }
                 else
@@ -144,6 +182,7 @@ function GameLobby() {
             });
     };
     NewLobby.MagicBlock.DeleteBtn.Init();
+        
 
     NewLobby.IsState = function () {
         var user = JSON.parse($.cookie("user"));

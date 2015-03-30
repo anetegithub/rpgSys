@@ -243,6 +243,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hubs\GeneralChatHub.cs" />
+    <Compile Include="Hubs\LobbyHub.cs" />
     <Compile Include="Hubs\PlayHub.cs" />
     <Compile Include="Hubs\UserActivityHub.cs" />
     <Compile Include="Models\Game\Game.cs" />

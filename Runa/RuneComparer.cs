@@ -17,30 +17,37 @@ namespace RuneFramework
     public static class RuneComparer
     {
         public static bool IsEqual(object A, object B)
-        {
+        {            
             bool R = true;
-            if (A.GetType() != B.GetType())
-                throw new ArgumentException(A.GetType().Name + " - A type is not same as " + B.GetType().Name + " - B type");
-            else if (A.GetType().GetInterface("IList") != null)
+            if (IsNull(A, B) == -1)
             {
-                bool temp = true;
-
-                IEnumerator EnumA = (A as IList).GetEnumerator();
-                IEnumerator EnumB = (B as IList).GetEnumerator();
-
-                while ((EnumA.MoveNext()) && (EnumB.MoveNext()))
+                if (A.GetType() != B.GetType())
+                    throw new ArgumentException(A.GetType().Name + " - A type is not same as " + B.GetType().Name + " - B type");
+                else if (A.GetType().GetInterface("IList") != null)
                 {
-                    CompareTwoGenerics(A, B, ref R);
-                }
+                    bool temp = true;
 
-                return temp;
+                    IEnumerator EnumA = (A as IList).GetEnumerator();
+                    IEnumerator EnumB = (B as IList).GetEnumerator();
+
+                    while ((EnumA.MoveNext()) && (EnumB.MoveNext()))
+                    {
+                        CompareTwoGenerics(A, B, ref R);
+                    }
+
+                    return temp;
+                }
+                else
+                    if (A.GetType().IsPrimitive || A.GetType() == typeof(String) || A.GetType() == typeof(RuneString))
+                        CompareTwoPrimitives(A, B, ref R);
+                    else
+                        CompareTwoGenerics(A, B, ref R);
             }
             else
-                if (A.GetType().IsPrimitive || A.GetType() == typeof(String) || A.GetType() == typeof(RuneString))
-                    CompareTwoPrimitives(A, B, ref R);
-                else
-                    CompareTwoGenerics(A, B, ref R);
-            return R;
+                if (IsNull(A, B) == 1)
+                    R = false;
+
+            return R;            
         }
 
         private static void CompareTwoGenerics(object A, object B, ref bool R)

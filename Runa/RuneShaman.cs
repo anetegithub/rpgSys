@@ -8,6 +8,8 @@ using System.Xml.Linq;
 
 using System.Xml;
 
+using System.Collections;
+
 namespace RuneFramework
 {
     public class RuneShaman<T>
@@ -111,6 +113,36 @@ namespace RuneFramework
         }
 
         public XDocument Update(RuneBook Query)
+        {
+            return Update_New(Query);
+        }
+
+        public XDocument Update_New(RuneBook Query)
+        {
+            List<XElement> Elements = SelectStream(null).Elements().ToList()[0].Elements().ToList();
+            for (int i = 0; i < Elements.Count; i++)
+            {
+                XElement CurrentElement = Elements[i];
+
+                IEnumerator SpellEnum = Query.Spells.GetEnumerator();
+                IEnumerator SpellageEnum = Query.Spellage.GetEnumerator();
+
+                while (SpellEnum.MoveNext() && SpellageEnum.MoveNext())
+                    if ((SpellEnum.Current as RuneSpell).Spell(CurrentElement))
+                        (SpellageEnum.Current as RuneSpellage).SetValue(ref CurrentElement);
+
+                if (Elements.Count() != 0)
+                    lock (Key)
+                    {
+                        Document = new XDocument(new XElement(typeof(T).Name + 's', Elements));
+                        Document.Save(Path);
+                    }
+            }
+            return new XDocument(new XElement("Result", "True"));
+        }
+
+        [Obsolete]
+        public XDocument Update_Old(RuneBook Query)
         {
             var Doc = SelectStream(null);
             var XCollection = Doc.Elements().ToList();
