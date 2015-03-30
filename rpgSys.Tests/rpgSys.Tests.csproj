@@ -75,14 +75,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConditionsLanguage\ConditionsLanguage.csproj">
-      <Project>{71d4fc0c-b99d-49f4-850f-cb6e2d46fe63}</Project>
-      <Name>ConditionsLanguage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ormCL\ormCL.csproj">
-      <Project>{a3051d0d-ac77-456c-9b5c-0f999f60093e}</Project>
-      <Name>ormCL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\rpgSys\rpgSys.csproj">
       <Project>{F3E84DB8-AAEE-4674-90B5-E2334EF2C053}</Project>
       <Name>rpgSys</Name>

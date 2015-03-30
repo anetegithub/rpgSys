@@ -9,7 +9,7 @@ using System.Web.Script.Serialization;
 
 using System.Dynamic;
 
-using ormCL;
+
 using RuneFramework;
 
 namespace rpgSys
