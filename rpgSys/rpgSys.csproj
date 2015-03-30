@@ -326,7 +326,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Runa\Rune.csproj">
+    <ProjectReference Include="..\Rune\Rune.csproj">
       <Project>{49373242-02e9-4de2-83c3-488531672f2b}</Project>
       <Name>Rune</Name>
     </ProjectReference>
