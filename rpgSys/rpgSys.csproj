@@ -95,62 +95,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Games\Chats\1.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Data\Games\Games.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Data\Hero\Ability.xml" />
-    <Content Include="Data\Hero\AttackState.xml" />
-    <Content Include="Data\Hero\ClassSkill.xml" />
-    <Content Include="Data\Hero\CommonState.xml" />
-    <Content Include="Data\Hero\Characteristic.xml" />
-    <Content Include="Data\Hero\Common\AbilityInfo.xml" />
-    <Content Include="Data\Hero\Common\CharacteristicDIX.xml" />
-    <Content Include="Data\Hero\Common\CharacteristicName.xml" />
-    <Content Include="Data\Hero\Common\Charm.xml" />
-    <Content Include="Data\Hero\Common\Class.xml" />
-    <Content Include="Data\Hero\Common\Desease.xml" />
-    <Content Include="Data\Hero\Common\Height.xml" />
-    <Content Include="Data\Hero\Common\Intoxication.xml" />
-    <Content Include="Data\Hero\Common\Race.xml" />
-    <Content Include="Data\Hero\Common\Sex.xml" />
-    <Content Include="Data\Hero\Common\SkillList.xml" />
-    <Content Include="Data\Hero\Common\SkillName.xml" />
-    <Content Include="Data\Hero\DefenceState.xml" />
-    <Content Include="Data\Hero\HealthState.xml" />
-    <Content Include="Data\Hero\Info.xml" />
-    <Content Include="Data\Hero\MaterialSkill.xml" />
-    <Content Include="Data\Hero\MentalSkill.xml" />
-    <Content Include="Data\Reward\Reward.xml" />
-    <Content Include="Data\Reward\RewardInfo.xml" />
-    <Content Include="Data\Reward\RewardRare.xml" />
-    <Content Include="Data\Reward\RewardStats.xml" />
-    <Content Include="Data\Reward\RewardTarget.xml" />
-    <Content Include="Data\Scenario\Event.xml" />
-    <Content Include="Data\Scenario\Location.xml" />
-    <Content Include="Data\Npc\Npc.xml" />
-    <Content Include="Data\Npc\NpcStat.xml" />
-    <Content Include="Data\Scenario\Scenario.xml" />
-    <Content Include="Data\Server\Chat.xml" />
-    <Content Include="Data\Server\Tickets.xml" />
-    <Content Include="Data\Server\Modules.xml" />
-    <Content Include="Data\Server\Settings.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Data\Ability.xml" />
+    <Content Include="Data\AbilityName.xml" />
+    <Content Include="Data\AttackState.xml" />
+    <Content Include="Data\Bug.xml" />
+    <Content Include="Data\Characteristic.xml" />
+    <Content Include="Data\CharacteristicName.xml" />
+    <Content Include="Data\Charm.xml" />
+    <Content Include="Data\Class.xml" />
+    <Content Include="Data\CommonState.xml" />
+    <Content Include="Data\DefenceState.xml" />
+    <Content Include="Data\Desease.xml" />
+    <Content Include="Data\DIX.xml" />
+    <Content Include="Data\Event.xml" />
+    <Content Include="Data\Game.xml" />
+    <Content Include="Data\GeneralChatMessage.xml" />
+    <Content Include="Data\HealthState.xml" />
+    <Content Include="Data\Height.xml" />
+    <Content Include="Data\Hero.xml" />
+    <Content Include="Data\Intoxication.xml" />
+    <Content Include="Data\Location.xml" />
+    <Content Include="Data\Module.xml" />
+    <Content Include="Data\Npc.xml" />
+    <Content Include="Data\NpcStat.xml" />
+    <Content Include="Data\Race.xml" />
+    <Content Include="Data\Rare.xml" />
+    <Content Include="Data\Reward.xml" />
+    <Content Include="Data\RewardInfo.xml" />
+    <Content Include="Data\RewardStat.xml" />
+    <Content Include="Data\Scenario.xml" />
+    <Content Include="Data\Server.xml" />
+    <Content Include="Data\Sex.xml" />
+    <Content Include="Data\Skill.xml" />
+    <Content Include="Data\SkillName.xml" />
+    <Content Include="Data\SkillTemplate.xml" />
+    <Content Include="Data\Target.xml" />
     <Content Include="Data\User.xml" />
     <Content Include="Data\UserActivity.xml" />
-    <Content Include="Data\User\Activity.xml" />
-    <Content Include="Data\User\ActivityType.xml" />
-    <Content Include="Data\User\Users.xml" />
-    <Content Include="Data\Wiki\InitiativeState.xml" />
-    <Content Include="Data\Wiki\Characteristics.xml" />
-    <Content Include="Data\Wiki\AttackState.xml" />
-    <Content Include="Data\Wiki\HealthState.xml" />
-    <Content Include="Data\Wiki\DefenceState.xml" />
-    <Content Include="Data\Wiki\Info.xml" />
-    <Content Include="Data\Wiki\Proficiency.xml" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
@@ -226,7 +207,6 @@
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Data\Proxy\xmlBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
       <SubType>Code</SubType>

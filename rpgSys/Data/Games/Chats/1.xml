@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Messages>
-  <Text Id="1" HeroId="4" Master="True" System="True">111111111111Hello FCKING world!</Text>
-  <Text Id="1" HeroId="3" Master="True" System="True">Hello34543534534353 FCKING world!</Text>
-  <Text Id="3" HeroId="0" Master="True" System="True">Hello FCKING world!</Text>
-  <Text Id="4" HeroId="0" Master="True" System="True">
-  </Text>
-</Messages>

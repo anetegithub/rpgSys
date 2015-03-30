@@ -61,4 +61,45 @@
 			See RuneTests project
 		</DllInfo>
 	</Module>
+	<Module>
+		<Id>6</Id>
+		<Active>true</Active>
+		<Name>Предпросмотр изображений</Name>
+		<InnerName>imagepreview</InnerName>
+		<Info>
+			Preview custom image into img
+		</Info>
+		<Version>0.3</Version>
+		<DllInfo>
+			How to use:
+			use 'preview' img tag
+		</DllInfo>
+	</Module>
+	<Module>
+		<Id>6</Id>
+		<Active>false</Active>
+		<Name>Плитки Metro</Name>
+		<InnerName>Metro UI</InnerName>
+		<Info>
+			Metro UI div's
+		</Info>
+		<Version>0.3</Version>
+		<DllInfo>
+			How to use:
+			add .tile class
+		</DllInfo>
+	</Module>
+	<Module>
+		<Id>7</Id>
+		<Active>true</Active>
+		<Name>object-watch by Eli Grey</Name>
+		<InnerName>object-watch.js</InnerName>
+		<Info>
+			add eventlistener to field
+		</Info>
+		<Version>0.3</Version>
+		<DllInfo>
+			http://eligrey.com
+		</DllInfo>
+	</Module>
 </Modules>
