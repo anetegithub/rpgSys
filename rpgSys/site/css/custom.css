@@ -43,6 +43,9 @@ body {
 h2 {
     color: #045FB4;
 }
+.h2-corporative {
+    color: #045FB4;
+}
 h4 {
     padding-top:10px;
 }
@@ -205,7 +208,7 @@ line-height: 30px;
      /*CHAT PANEL*/
  .chat-panel .panel-body {
 height: 355px;
-overflow-y: scroll;
+overflow-y: auto;
 }
  .chat-box {
 margin: 0;

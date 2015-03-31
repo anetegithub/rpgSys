@@ -229,6 +229,9 @@ namespace rpgSys.Controllers
         {
             using (var db = new Runes.HeroRune())
             {
+                using (var db2 = new Runes.UserRune())
+                    Hero.Avatar = db2.Users.ReferenceUniq(new SimpleRuneSpell("Id", "==", userId)).Avatar;
+
                 foreach (var Item in db.Class)
                     if (Item.Value == Hero.Class.Value)
                         Hero.Class = Item;

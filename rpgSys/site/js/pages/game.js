@@ -1,5 +1,5 @@
 ﻿$(function () {
-    var user = JSON.parse($.cookie("user"));
+
     $('#userAvatar').attr('src', user.Avatar);
     $('#lastTime').html("Последняя авторизация: " + user.Stamp);
 
@@ -29,6 +29,26 @@
         }
     }
 
+
+    var gamehub = $.connection.game;
+
+    gamehub.client.addherotolist = function (Hero) {
+        Play.Players.Add(Hero);
+    };
+    gamehub.client.removefromlist = function (Hero) {
+        Play.Players.Remove(Hero);
+    };
+    gamehub.client.addgamemsg = function (Msg) {
+        var html = "<li class='left clearfix'>";
+        html += "<span class='chat-img pull-left'>";
+        html += "<img src='" + Msg.UserAvatar + "' alt='" + Msg.UserName + "' height='50px' width='50px' class='img-circle'/></span>";
+        html += "<div class='chat-body'><strong>" + Msg.UserName + "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o fa-fw'></i>" + Msg.Stamp.replace('T', ' ').replace(new RegExp('-', 'g'), '.') + "</small>";
+        html += "<p>" + Msg.Text + "</p>";
+        html += "</div></li>";
+        $('#chatBox').html($('#chatBox').html() + html);
+    }
+
+
     $.connection.hub.start().done(function () {
         Lobby.SyncUpdate = function (GameId) {
             synclobby.server.listupdate(GameId);
@@ -39,11 +59,28 @@
         Lobby.SyncDelete = function (GameId) {
             synclobby.server.gamedelete(GameId);
         };
+
+        $('#send_btn').click(function () {
+            if ($('#textFoSend').val() != '') {
+                if ($('#textFoSend').val().replace(/\s/g, '').length) {
+                    gamehub.server.sendmsg(user.GameId, user.Name, user.Avatar, "1", $('#textFoSend').val());
+                    $('#textFoSend').val('');
+                }
+            }
+        });
+        Play.Chat.SendCustom = function (userName, userAvatar, userType) {
+            if ($('#textFoSend').val() != '') {
+                if ($('#textFoSend').val().replace(/\s/g, '').length) {
+                    gamehub.server.sendmsg(user.GameId, userName, userAvatar, userType, $('#textFoSend').val());
+                    $('#textFoSend').val('');
+                }
+            }
+        };
     });    
     
     Lobby.IsState();
 });
-
+var user = JSON.parse($.cookie("user"));
 var Lobby = null;
 
 function GameLobby() {
@@ -88,6 +125,7 @@ function GameLobby() {
             NewLobby.MagicBlock.StartBtn.Visible(true);
             NewLobby.MagicBlock.DeleteBtn.Visible(true);
             NewLobby.MagicBlock.ConnectBtn.Visible(false);
+            NewLobby.MagicBlock.ExitBtn.Visible(false);
         } else {
             $('#showNextBlock').addClass('bg-color-corporative');
             NewLobby.MagicBlock.GameId = NewLobby.Scenario.SelectedScenario.Id;
@@ -99,6 +137,7 @@ function GameLobby() {
             NewLobby.MagicBlock.CreateBtn.Visible(false);
             NewLobby.MagicBlock.StartBtn.Visible(false);
             NewLobby.MagicBlock.DeleteBtn.Visible(false);
+            NewLobby.MagicBlock.ExitBtn.Visible(false);
 
         }
     };
@@ -182,6 +221,24 @@ function GameLobby() {
             });
     };
     NewLobby.MagicBlock.DeleteBtn.Init();
+    NewLobby.MagicBlock.ExitBtn.OnClick = function () {
+        var user = JSON.parse($.cookie("user"));
+        $.getJSON('../api/game/exit?GameId=' + NewLobby.Scenario.SelectedScenario.Id + "&UserId=" + user.Id)
+            .done(function (data) {
+                if (data == "true") {
+                    var user = JSON.parse($.cookie("user"));
+                    user.GameId = 0;
+                    $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                    NewLobby.SyncUpdate(NewLobby.Scenario.SelectedScenario.Id);
+                    window.location.reload();
+                } else if (data == "NoHero") {
+                    alert('У вас должен быть персонаж!');
+                    window.location.replace('hero');
+                } else
+                    NewLobby.MagicBlock.Break();
+            });
+    }
+    NewLobby.MagicBlock.ExitBtn.Init();
         
 
     NewLobby.IsState = function () {
@@ -210,7 +267,7 @@ function GameLobby() {
                             $('#showNextBlock').addClass('bg-color-corporative');
                             NewLobby.MagicBlock.Visible(true);
                             NewLobby.MagicBlock.GameId = data.Id;
-                            NewLobby.MagicBlock.Label = "Запустить игру";
+                            NewLobby.MagicBlock.Label = "Запустить игру";                            
                             NewLobby.MagicBlock.StartBtn.Visible(true);
                             NewLobby.MagicBlock.StartBtn.Enabled(true);
                             NewLobby.MagicBlock.DeleteBtn.Visible(true);
@@ -240,8 +297,7 @@ function GameLobby() {
                             NewLobby.MagicBlock.Visible(true);
                             NewLobby.MagicBlock.GameId = data.Id;
                             NewLobby.MagicBlock.Label = "Присоеденились";
-                            NewLobby.MagicBlock.SubLabel = "Вы присоеденились к игре, ждите старта...";
-                            NewLobby.MagicBlock.SubLabelVisible(true);
+                            NewLobby.MagicBlock.ExitBtn.Visible(true);
                             NewLobby.MagicBlock.ShowList();
                         }
                     } else {
@@ -315,6 +371,7 @@ function MagicBlock() {
     mb.CreateBtn = null;
     mb.StartBtn = null;
     mb.DeleteBtn = null;
+    mb.ExitBtn = null;
     mb.Break = function () {
         alert("Произошла ошибка! Отправьте баг-репорт!");
         window.location("profile");
@@ -323,7 +380,8 @@ function MagicBlock() {
         this.ConnectBtn = Button('#btnConnect');
         this.CreateBtn = Button('#btnCreate');
         this.StartBtn = Button('#btnStart');
-        this.DeleteBtn = Button('#btnDelete')
+        this.DeleteBtn = Button('#btnDelete');
+        this.ExitBtn = Button('#btnExit');
     };
 
     return mb;

@@ -109,6 +109,8 @@
     <Content Include="Data\DIX.xml" />
     <Content Include="Data\Event.xml" />
     <Content Include="Data\Game.xml" />
+    <Content Include="Data\GameChatMessage.xml" />
+    <Content Include="Data\GameMessageType.xml" />
     <Content Include="Data\GeneralChatMessage.xml" />
     <Content Include="Data\HealthState.xml" />
     <Content Include="Data\Height.xml" />
@@ -180,6 +182,7 @@
     <Content Include="site\js\modules\numberpicker.js" />
     <Content Include="site\js\modules\useractivity.js" />
     <Content Include="site\hero.html" />
+    <Content Include="site\js\pages\play.js" />
     <Content Include="site\js\pages\profile.js" />
     <Content Include="site\js\pages\registry.js" />
     <Content Include="site\js\pages\scenario.js" />
@@ -212,10 +215,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Hubs\GeneralChatHub.cs" />
+    <Compile Include="Hubs\GameHub.cs" />
     <Compile Include="Hubs\LobbyHub.cs" />
     <Compile Include="Hubs\PlayHub.cs" />
     <Compile Include="Hubs\UserActivityHub.cs" />
     <Compile Include="Models\Game\Game.cs" />
+    <Compile Include="Models\Game\GameChatMessage.cs" />
     <Compile Include="Models\Game\GameRune.cs" />
     <Compile Include="Models\Hero\Ability.cs" />
     <Compile Include="Models\Hero\AttackState.cs" />
@@ -234,7 +239,7 @@
     <Compile Include="Models\Scenario\Scenario.cs" />
     <Compile Include="Models\Scenario\ScenarioRune.cs" />
     <Compile Include="Models\Server\Bug.cs" />
-    <Compile Include="Models\Server\GeneralMessage.cs" />
+    <Compile Include="Models\Server\GeneralChatMessage.cs" />
     <Compile Include="Models\Server\Module.cs" />
     <Compile Include="Models\Server\ServerRune.cs" />
     <Compile Include="Models\Server\Server.cs" />

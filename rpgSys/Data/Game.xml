@@ -6,5 +6,8 @@
     <Scenario>2</Scenario>
     <Master>2</Master>
     <Heroes><Hero>1</Hero></Heroes>
+    <Npcs><Npc>1</Npc></Npcs>
+    <Event>1</Event>
+    <Location>1</Location>
   </Game>
 </Games>

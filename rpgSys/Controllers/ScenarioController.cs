@@ -53,6 +53,15 @@ namespace rpgSys.Controllers
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult ById(string Id)
+        {
+            using (var db = new Runes.ScenarioRune())
+            {
+                return Ok((db.Scenarios.QueryUniq(new RuneSpell("Id", "==", Id)) as Scenario) ?? new Scenario());
+            }
+        }
+
     }
 
     public static class ScenarioProcessing

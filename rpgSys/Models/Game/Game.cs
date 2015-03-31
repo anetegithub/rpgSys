@@ -16,5 +16,13 @@ namespace rpgSys
         public Hero Master { get; set; }
 
         public List<Hero> Heroes { get; set; }
+
+        public List<Npc> Npcs { get; set; }
+
+        public Event Event { get; set; }
+
+        public Location Location { get; set; }
+
+        public List<GameChatMessage> Chat { get; set; }
     }
 }

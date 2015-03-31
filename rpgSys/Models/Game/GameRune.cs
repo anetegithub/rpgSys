@@ -14,5 +14,12 @@ namespace rpgSys.Runes
         public RuneWord<Hero> Heroes { get; set; }
         public RuneWord<Hero> Master { get; set; }
         public RuneWord<RuneString> Sex { get; set; }
+
+        public RuneWord<Npc> Npcs { get; set; }
+        public RuneWord<Location> Location { get; set; }
+        public RuneWord<Event> Event { get; set; }
+
+        public RuneWord<GameChatMessage> Chat { get; set; }
+        public RuneWord<RuneString> GameMessageType { get; set; }
     }
 }

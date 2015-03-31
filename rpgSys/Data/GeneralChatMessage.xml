@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <GeneralChatMessages>
-  <GeneralMessage>
+  <GeneralChatMessage>
     <Id>1</Id>
     <UserName>Администратор</UserName>
     <UserAvatar>img/unknown.png</UserAvatar>
     <Stamp>01.01.2000 01:01:01</Stamp>
     <Text>Hello World!</Text>
-  </GeneralMessage>
+  </GeneralChatMessage>
   <GeneralChatMessage>
     <Id>2</Id>
     <UserName>Anete</UserName>

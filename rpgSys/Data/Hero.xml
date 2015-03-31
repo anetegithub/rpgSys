@@ -4,6 +4,7 @@
     <Id>1</Id>
 	<Active>true</Active>
     <UserId>1</UserId>
+    <Avatar>img/admin.png</Avatar>
     <Level>1</Level>
     <Expirience>0</Expirience>
     <Age>120</Age>
@@ -29,6 +30,7 @@
 		<Id>2</Id>
 		<Active>true</Active>
 		<UserId>2</UserId>
+    <Avatar>img/tester.png</Avatar>
 		<Level>1</Level>
 		<Expirience>0</Expirience>
 		<Age>120</Age>

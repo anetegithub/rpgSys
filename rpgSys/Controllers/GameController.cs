@@ -21,15 +21,6 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult ById(string Id)
-        {
-            using (var db = new Runes.GameRune())
-            {
-                return Ok((db.Game.QueryUniq(new RuneSpell("Id", "==", Id)) as Game) ?? new Game());
-            }
-        }
-
-        [HttpGet]
         public IHttpActionResult List()
         {
             using (var db = new Runes.GameRune())
@@ -149,6 +140,70 @@ namespace rpgSys.Controllers
                 catch (ArgumentException) { return Ok("false"); }
             }
         }
+
+        [HttpGet]
+        public IHttpActionResult Exit(string GameId, string UserId)
+        {
+            int gameid = 0;
+            if (!Int32.TryParse(GameId, out gameid))
+                return Ok("false");
+
+            using (var db = new Runes.GameRune())
+            {
+                using (var db2 = new Runes.UserRune())
+                {
+                    try
+                    {
+                        db2.Users.ReferenceUniq(new SimpleRuneSpell("Id", "==", UserId)).GameId = 0;
+
+                        using (var db3 = new Runes.HeroRune())
+                        {
+                            Hero h = null;
+                            try
+                            {
+                                h = db3.Hero.ReferenceUniq(new SimpleRuneSpell("UserId", "==", UserId));
+                            }
+                            catch (ArgumentException)
+                            {
+                                return Ok("NoHero");
+                            }
+
+                            Game g = db.Game.ReferenceUniq(new SimpleRuneSpell("Id", "==", gameid));
+                            if (g.Heroes == null)
+                                g.Heroes = new List<Hero>();
+                            g.Heroes.Remove(h);
+
+                            db2.SaveRune();
+                            db.SaveRune();
+                        }
+                    }
+                    catch (ArgumentException)
+                    {
+                        return Ok("false");
+                    }
+                }
+            }
+            return Ok("true");
+        }
+
+        [HttpGet]
+        public IHttpActionResult ById(string Id)
+        {
+            using (var db = new Runes.GameRune())
+            {
+                return Ok((db.Game.QueryUniq(new RuneSpell("Id", "==", Id)) as Game) ?? new Game());
+            }
+        }
+        
+        [HttpGet]
+        public IHttpActionResult Chat(string GameId)
+        {
+            using (var db = new Runes.GameRune())
+            {
+                try { return Ok(db.Game.ReferenceUniq(new SimpleRuneSpell("Id", "==", GameId)).Chat); }
+                catch { return Ok(new List<GameChatMessage>()); }
+            }
+        }
     }
 
     public static class GameProcessing
@@ -165,6 +220,10 @@ namespace rpgSys.Controllers
                 Scenario S = (Scenario)db.Scenario.QueryUniq(new RuneSpell("Id", "==", G.Scenario.Id));
 
                 G.Scenario = S;
+
+                G.Npcs = S.Npcs;
+                G.Event = S.Events[0];
+                G.Location = S.Locations[0];
 
                 db.Game.Add(G);
                 db.SaveRune();
