@@ -211,9 +211,9 @@ namespace rpgSys.Controllers
         }
     }
 
-    public static class GameProcessing
+    internal static class GameProcessing
     {
-        public static Game Write(Game G)
+        internal static Game Write(Game G)
         {
             using (var db = new Runes.GameRune())
             {

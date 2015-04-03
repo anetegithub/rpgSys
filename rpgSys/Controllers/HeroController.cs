@@ -66,6 +66,15 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult ByUser(string uid)
+        {
+            using (var db = new Runes.HeroInfoRune())
+            {
+                return Ok(db.Hero.QueryUniq("UserId", "==", uid));
+            }
+        }
+
+        [HttpGet]
         public IHttpActionResult InfoState()
         {
             using (var db = new Runes.HeroInfoRune())
@@ -75,11 +84,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult InfoState(string hId)
+        public IHttpActionResult InfoState(string hid)
         {
             using (var db = new Runes.HeroInfoRune())
             {
-                return Ok(db.Hero.QueryUniq("Id", "==", hId));
+                return Ok(db.Hero.QueryUniq("Id", "==", hid));
             }
         }
 
@@ -93,11 +102,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult HealthState(string hId)
+        public IHttpActionResult HealthState(string hid)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hId)).HealthState.Id));
+                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hid)).HealthState.Id));
             }
         }
 
@@ -111,11 +120,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Skills(string hId)
+        public IHttpActionResult Skills(string hid)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok(((Hero)db.Hero.QueryUniq("Id","==",hId)).Skills ?? new List<Skill>());
+                return Ok(((Hero)db.Hero.QueryUniq("Id","==",hid)).Skills ?? new List<Skill>());
             }
         }
 
@@ -129,11 +138,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult DefenceState(string hId)
+        public IHttpActionResult DefenceState(string hid)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hId)).DefenceState.Id));
+                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hid)).DefenceState.Id));
             }
         }
 
@@ -147,11 +156,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult AttackState(string hId)
+        public IHttpActionResult AttackState(string hid)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hId)).AttackState.Id));
+                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hid)).AttackState.Id));
             }
         }
 
@@ -165,11 +174,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult CommonState(string hId)
+        public IHttpActionResult CommonState(string hid)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hId)).CommonState.Id));
+                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hid)).CommonState.Id));
             }
         }
 
@@ -183,11 +192,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Characteristics(string hId)
+        public IHttpActionResult Characteristics(string hid)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok(((Hero)db.Hero.QueryUniq("Id", "==", hId)).Characteristics ?? new List<Characteristic>());
+                return Ok(((Hero)db.Hero.QueryUniq("Id", "==", hid)).Characteristics ?? new List<Characteristic>());
             }
         }
 
@@ -201,12 +210,24 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Ability(string hId)
+        public IHttpActionResult Ability(string hid)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok(((Hero)db.Hero.QueryUniq("Id", "==", hId)).Abilities ?? new List<Ability>());
+                return Ok(((Hero)db.Hero.QueryUniq("Id", "==", hid)).Abilities ?? new List<Ability>());
             }
+        }
+
+        [HttpGet]
+        public IHttpActionResult Stats(string hid)
+        {
+            Object[] StatArr = new Object[2];
+            using (var db = new Runes.HeroRune())
+            {
+                StatArr[0] = ((Hero)db.Hero.QueryUniq("Id", "==", hid)).Abilities ?? null;
+                StatArr[1] = ((Hero)db.Hero.QueryUniq("Id", "==", hid)).Characteristics ?? null;
+            }
+            return Ok(StatArr);
         }
     }
 

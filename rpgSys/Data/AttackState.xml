@@ -11,4 +11,15 @@
     <CritChance>5</CritChance>
     <CritBonus>5</CritBonus>
   </AttackState>
+  <AttackState>
+    <Id>2</Id>
+    <Attack>0</Attack>
+    <FitAttack>0</FitAttack>
+    <MinimalDamage>0</MinimalDamage>
+    <MaximalDamage>0</MaximalDamage>
+    <WeaponMinimalDamage>0</WeaponMinimalDamage>
+    <WeaponMaximalDamage>0</WeaponMaximalDamage>
+    <CritChance>0</CritChance>
+    <CritBonus>0</CritBonus>
+  </AttackState>
 </AttackStates>

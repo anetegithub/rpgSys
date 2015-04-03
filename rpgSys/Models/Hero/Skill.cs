@@ -7,19 +7,37 @@ using RuneFramework;
 
 namespace rpgSys
 {
-    public class Skill
+    public sealed class Skill
     {
-        public int Id { get; set; }
+        public Int32 Id { get; set; }
 
         public RuneString SkillName { get; set; }
         public RuneString DIX { get; set; }
 
-        public int Value { get; set; }
+        public Int32 Value { get; set; }
+
+        public static Skill operator +(Skill A, Skill B)
+        {
+            if (A.SkillName.Value == B.SkillName.Value)
+                if (A.DIX.Value == B.DIX.Value)
+                    A.Value += B.Value;
+
+            return A;
+        }
+
+        public static Skill operator -(Skill A, Skill B)
+        {
+            if (A.SkillName.Value == B.SkillName.Value)
+                if (A.DIX.Value == B.DIX.Value)
+                    A.Value -= B.Value;
+
+            return A;
+        }
     }
 
-    public class SkillTemplate
+    public sealed class SkillTemplate
     {
-        public int Id { get; set; }
+        public Int32 Id { get; set; }
 
         public RuneString SkillName { get; set; }
         public RuneString DIX { get; set; }

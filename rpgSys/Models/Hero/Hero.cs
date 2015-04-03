@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using System.Collections;
+
 using RuneFramework;
 
 namespace rpgSys
 {
-    public class Hero
+    public sealed class Hero
     {
         public int Id { get; set; }
         public int UserId { get; set; }
@@ -44,5 +46,75 @@ namespace rpgSys
         public CommonState CommonState { get; set; }
 
         public List<Skill> Skills { get; set; }
+
+        public RuneString Money { get; set; }
+        public List<Stuff> Items { get; set; }
+
+        public static Hero op_Add(Hero Hero, Stuff Item)
+        {
+            Hero.Class = Item.Class;
+            Hero.Race = Item.Race;
+            Hero.Height = Item.Height;
+            Hero.Sex = Item.Sex;
+
+
+            foreach (var Ch in Item.Characteristics)
+                foreach (var Ch2 in Hero.Characteristics)
+                    if (Ch.CharacteristicName == Ch2.CharacteristicName)
+                        Hero.Characteristics[Hero.Characteristics.IndexOf(Ch2)] += Ch;
+
+            foreach (var Ab in Item.Abilities)
+                foreach (var Ab2 in Hero.Abilities)
+                    if (Ab.AbilityName == Ab2.AbilityName)
+                        Hero.Abilities[Hero.Abilities.IndexOf(Ab2)] += Ab;
+
+            foreach (var Sk in Item.Skills)
+                foreach (var Sk2 in Hero.Skills)
+                    if (Sk.SkillName == Sk2.SkillName)
+                        Hero.Skills[Hero.Skills.IndexOf(Sk2)] += Sk;
+
+            Hero.HealthState += Item.HealthState;
+            Hero.DefenceState += Item.DefenceState;
+            Hero.AttackState += Item.AttackState;
+            Hero.CommonState += Item.CommonState;
+
+
+            return Hero;
+        }
+
+        public static Hero op_Substract(Hero Hero, Stuff Item)
+        {
+            foreach (var Ch in Item.Characteristics)
+                foreach (var Ch2 in Hero.Characteristics)
+                    if (Ch.CharacteristicName == Ch2.CharacteristicName)
+                        Hero.Characteristics[Hero.Characteristics.IndexOf(Ch2)] -= Ch;
+
+            foreach (var Ab in Item.Abilities)
+                foreach (var Ab2 in Hero.Abilities)
+                    if (Ab.AbilityName == Ab2.AbilityName)
+                        Hero.Abilities[Hero.Abilities.IndexOf(Ab2)] -= Ab;
+
+            foreach (var Sk in Item.Skills)
+                foreach (var Sk2 in Hero.Skills)
+                    if (Sk.SkillName == Sk2.SkillName)
+                        Hero.Skills[Hero.Skills.IndexOf(Sk2)] -= Sk;
+
+            Hero.HealthState -= Item.HealthState;
+            Hero.DefenceState -= Item.DefenceState;
+            Hero.AttackState -= Item.AttackState;
+            Hero.CommonState -= Item.CommonState;
+
+            return Hero;
+        }
+
+        public static Hero operator +(Hero Hero, Stuff Item)
+        {
+            return op_Add(Hero, Item);
+        }
+
+        public static Hero operator -(Hero Hero, Stuff Item)
+        {
+            return op_Substract(Hero, Item);
+        }
     }
 }

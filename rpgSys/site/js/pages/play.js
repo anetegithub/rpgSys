@@ -46,27 +46,12 @@ function PlayManager() {
     pm.Container = ContainerManager();
 
     pm.Info = Inforamtion();
+    pm.Stat = Stats();
+    pm.Skills = Skills();
 
     pm.Chat=ChatManager();
 
     pm.IsMaster=false;
-
-    pm.HeroLoaded = false;
-    pm.Hero = function (getset) {
-        if (getset = "get") {
-            if (!pm.HeroLoaded) {
-                $.getJSON('../api/hero?UserId=' + user.Id)
-                .done(function (data) {
-                    localStorage.setItem('hero', JSON.stringify(data));
-                    pm.LabelHero = "Герой: " + JSON.parse(localStorage.getItem('hero')).Name;
-                    pm.HeroLoaded = true;
-                });
-            } else
-                return JSON.parse(localStorage.getItem('hero'));
-        } else if (getset = "set") {
-
-        };
-    };
 
     pm.Label = "Unknown";
     pm.watch('Label', function (id, oldval, newval) {
@@ -83,8 +68,14 @@ function PlayManager() {
     pm.SendMessage = function (GameId, HeroId, HeroImg, HeroMsg) { };
 
     pm.Init = function () {
-        pm.Hero("get");
+        $.getJSON('../api/hero/infostate?hid=' + user.HeroId)
+               .done(function (data) {                   
+                   pm.LabelHero = "Герой: " + JSON.parse(localStorage.getItem('hero')).Name;                   
+               });
         pm.Chat.Init();
+        $('#infoBtn').click(pm.Info.Show);
+        $('#statBtn').click(pm.Stat.Show);
+        $('#skillBtn').click(pm.Skills.Show);
     }
 
     return pm;
@@ -261,12 +252,86 @@ function Inforamtion() {
     var o = new Object();
 
     o.Show = function () {
-        $.getJSON('../api/game/byid?Id=' + user.GameId).done(function (data) {
+        $.getJSON('../api/hero/infostate?hid=' + user.HeroId).done(function (data) {
             var innerhtml = "";
-
+            innerhtml+="<div class='row text-center'><div class='col-lg-6'><h2>Информация</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+            innerhtml+="<tr><td>Имя</td><td>"+data.Name+"</td></tr>";
+            innerhtml+="<tr><td>Уровень</td><td>"+data.Level+"</td></tr>";
+            innerhtml += "<tr><td>Опыт</td><td>" + data.Expirience + "</td></tr>";
+            innerhtml+="<tr><td>Класс</td><td>"+data.Class.Value+"</td></tr>";
+            innerhtml+="<tr><td>Раса</td><td>"+data.Race.Value+"</td></tr>";
+            innerhtml+="<tr><td>Божество</td><td>"+data.God+"</td></tr>";
+            innerhtml+="<tr><td>Особенности</td><td>В разработке</td></tr>";
+            innerhtml+="</tbody></table></div></div><div class='col-lg-6'><h2>Внешность</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+            innerhtml+="<tr><td>Пол</td><td>"+data.Sex.Value+"</td></tr>";
+            innerhtml+="<tr><td>Возраст</td><td>"+data.Age+"</td></tr>";
+            innerhtml+="<tr><td>Рост</td><td>"+data.Height.Value+"</td></tr>";
+            innerhtml+="<tr><td>Вес</td><td>"+data.Weight+"</td></tr>";
+            innerhtml+="<tr><td>Цвет глаз</td><td>"+data.Eyes+"</td></tr>";
+            innerhtml+="<tr><td>Цвет волос</td><td>"+data.Hair+"</td></tr>";
+            innerhtml+="<tr><td>Цвет кожи</td><td>"+data.Skin+"</td></tr>";
+            innerhtml += "</tbody></table></div></div></div>";
+            Play.Container.Show('fa-info',"Описание", 'default', innerhtml);
         });
     };
 
+    return o;
+}
+
+function Stats() {
+    var o = new Object();
+    o.Show = function () {
+        $.getJSON('../api/hero/stats?hid=' + user.HeroId).done(function (data) {
+            var innerhtml = "";
+            innerhtml += "<div class='row text-center'><div class='col-lg-6'><h2>Характеристики</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+            if (data[1] != null) {
+                for (var i = 0; i < data[1].length;i++){
+                    innerhtml += '<tr><td>' + data[1][i].CharacteristicName.Value + '</td>';
+                    innerhtml += '<td>' + data[1][i].DIX.Value + '</td>';
+                    innerhtml += '<td>' + data[1][i].Value + '</td></tr>';
+                }
+            }
+            innerhtml += "</tbody></table></div></div><div class='col-lg-6'><h2>Способности</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+            if (data[0] != null) {
+                for (var i = 0; i < data[0].length; i++) {
+                    innerhtml += '<tr><td>' + data[0][i].AbilityName.Value + '</td>';
+                    innerhtml += '<td>' + data[0][i].Value + '</td>';
+                }
+            }
+            innerhtml += "</tbody></table></div></div></div>";
+            Play.Container.Show('fa-ellipsis-v', "Показатели", 'default', innerhtml);
+        });
+    };
+    return o;
+}
+
+function Skills() {
+    var o = new Object();
+    o.Show = function () {
+        $.getJSON('../api/hero/skills?hid=' + user.HeroId).done(function (data) {
+            var innerhtml = "";
+            innerhtml += "<div class='row text-center'><div class='col-lg-4'><h2>Телесные</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+            for (var i = 0; i < 12; i++) {
+                innerhtml += '<tr><td>' + data[i].SkillName.Value + '</td>';
+                innerhtml += '<td>' + data[i].DIX.Value + '</td>';
+                innerhtml += '<td>' + data[i].Value + '</td></tr>';
+            }
+            innerhtml += "</tbody></table></div></div><div class='col-lg-4'><h2>Ментальные</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+            for (var i = 12; i < 24; i++) {
+                innerhtml += '<tr><td>' + data[i].SkillName.Value + '</td>';
+                innerhtml += '<td>' + data[i].DIX.Value + '</td>';
+                innerhtml += '<td>' + data[i].Value + '</td></tr>';
+            }
+            innerhtml += "</tbody></table></div></div><div class='col-lg-4'><h2>Классовые</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+            for (var i = 24; i < 36; i++) {
+                innerhtml += '<tr><td>' + data[i].SkillName.Value + '</td>';
+                innerhtml += '<td>' + data[i].DIX.Value + '</td>';
+                innerhtml += '<td>' + data[i].Value + '</td></tr>';
+            }            
+            innerhtml += "</tbody></table></div></div></div>";
+            Play.Container.Show('fa-magic', "Навыки", 'default', innerhtml);
+        });
+    };
     return o;
 }
 

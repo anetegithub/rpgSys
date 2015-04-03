@@ -213,6 +213,7 @@
     <Compile Include="Controllers\ScenarioController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
+    <Compile Include="Controllers\StuffController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -233,13 +234,15 @@
     <Compile Include="Models\Hero\HealthState.cs" />
     <Compile Include="Models\Hero\Hero.cs" />
     <Compile Include="Models\Hero\Characteristic.cs" />
-    <Compile Include="Models\Hero\HeroRune.cs" />
-    <Compile Include="Models\Hero\SkillRune.cs" />
+    <Compile Include="Models\Hero\Runes\HeroInfoRune.cs" />
+    <Compile Include="Models\Hero\Runes\HeroRune.cs" />
+    <Compile Include="Models\Hero\Runes\HeroStuffRune.cs" />
+    <Compile Include="Models\Hero\Runes\SkillRune.cs" />
     <Compile Include="Models\Scenario\Event.cs" />
     <Compile Include="Models\Scenario\Location.cs" />
     <Compile Include="Models\Scenario\Npc.cs" />
     <Compile Include="Models\Scenario\NpcStat.cs" />
-    <Compile Include="Models\Scenario\Reward.cs" />
+    <Compile Include="Models\Items\Reward.cs" />
     <Compile Include="Models\Scenario\Scenario.cs" />
     <Compile Include="Models\Scenario\ScenarioRune.cs" />
     <Compile Include="Models\Server\Bug.cs" />
@@ -248,6 +251,7 @@
     <Compile Include="Models\Server\ServerRune.cs" />
     <Compile Include="Models\Server\Server.cs" />
     <Compile Include="Models\Hero\Skill.cs" />
+    <Compile Include="Models\Items\Stuff.cs" />
     <Compile Include="Models\User\User.cs" />
     <Compile Include="Models\User\UserActivity.cs" />
     <Compile Include="Models\User\UserRune.cs" />

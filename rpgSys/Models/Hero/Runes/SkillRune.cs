@@ -7,7 +7,7 @@ using RuneFramework;
 
 namespace rpgSys.Runes
 {
-    public class SkillRune : Rune
+    public sealed class SkillRune : Rune
     {
         public RuneWord<Skill> Skills { get; set; }
         public RuneWord<RuneString> SkillName { get; set; }

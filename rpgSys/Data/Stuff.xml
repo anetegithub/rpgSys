@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Stuffs>
+  <Stuff>
+    <Id>1</Id>
+    <IsOnHero>false</IsOnHero>
+    <Height>2</Height>
+    <HealthState>0</HealthState>
+    <AttackState>0</AttackState>
+    <Characteristics />
+    <Abilities />
+    <Skills />
+  </Stuff>
+  <Stuff>
+    <Id>2</Id>
+    <IsOnHero>false</IsOnHero>
+    <Height>2</Height>
+    <HealthState>0</HealthState>
+    <AttackState>0</AttackState>
+    <Characteristics />
+    <Abilities />
+    <Skills />
+  </Stuff>
+  <Stuff>
+    <Id>3</Id>
+    <IsOnHero>false</IsOnHero>
+    <Height>2</Height>
+    <HealthState>0</HealthState>
+    <AttackState>0</AttackState>
+    <Characteristics />
+    <Abilities />
+    <Skills />
+  </Stuff>
+  <Stuff>
+    <Id>4</Id>
+    <IsOnHero>false</IsOnHero>
+    <Height>2</Height>
+    <HealthState>2</HealthState>
+    <AttackState>2</AttackState>
+    <Characteristics />
+    <Abilities />
+    <Skills />
+  </Stuff>
+</Stuffs>

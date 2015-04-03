@@ -5,7 +5,7 @@ using System.Web;
 
 namespace rpgSys
 {
-    public class Game
+    public sealed class Game
     {
         public int Id { get; set; }
 
@@ -15,7 +15,7 @@ namespace rpgSys
 
         public Hero Master { get; set; }
 
-        public List<Hero> Heroes { get; set; }
+        internal List<Hero> Heroes { get; set; }
 
         public List<Npc> Npcs { get; set; }
 

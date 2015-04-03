@@ -29,13 +29,4 @@ namespace rpgSys.Runes
         public RuneWord<Skill> Skills { get; set; }
         public RuneWord<RuneString> SkillName { get; set; }
     }
-
-    public class HeroInfoRune : Rune
-    {
-        public RuneWord<Hero> Hero { get; set; }
-        public RuneWord<RuneString> Class { get; set; }
-        public RuneWord<RuneString> Race { get; set; }
-        public RuneWord<RuneString> Height { get; set; }
-        public RuneWord<RuneString> Sex { get; set; }
-    }
 }

@@ -5,15 +5,39 @@ using System.Web;
 
 namespace rpgSys
 {
-    public class DefenceState
+    public sealed class DefenceState
     {
-        public int Id { get; set; }
+        public Int32 Id { get; set; }
 
-        public int Defence { get; set; }
-        public int NaturalDefence { get; set; }
-        public int ArmorDefence { get; set; }
-        public int MagicDefence { get; set; }
-        public int DefenceClass { get; set; }
-        public int DefenceBonus { get; set; }
+        public Int32 Defence { get; set; }
+        public Int32 NaturalDefence { get; set; }
+        public Int32 ArmorDefence { get; set; }
+        public Int32 MagicDefence { get; set; }
+        public Int32 DefenceClass { get; set; }
+        public Int32 DefenceBonus { get; set; }
+
+        public static DefenceState operator +(DefenceState A, DefenceState B)
+        {
+            A.Defence += B.Defence;
+            A.NaturalDefence += B.NaturalDefence;
+            A.ArmorDefence += B.ArmorDefence;
+            A.MagicDefence += B.MagicDefence;
+            A.DefenceClass += B.DefenceClass;
+            A.DefenceBonus += B.DefenceBonus;
+
+            return A;
+        }
+
+        public static DefenceState operator -(DefenceState A, DefenceState B)
+        {
+            A.Defence -= B.Defence;
+            A.NaturalDefence -= B.NaturalDefence;
+            A.ArmorDefence -= B.ArmorDefence;
+            A.MagicDefence -= B.MagicDefence;
+            A.DefenceClass -= B.DefenceClass;
+            A.DefenceBonus -= B.DefenceBonus;
+
+            return A;
+        }
     }
 }
