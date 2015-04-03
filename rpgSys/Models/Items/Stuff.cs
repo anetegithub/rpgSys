@@ -56,4 +56,12 @@ namespace rpgSys
             }
         }
     }
+
+    internal sealed class StuffInstructions
+    {
+        public Int32 UserId { get; set; }
+        public Int32 HeroId { get; set; }
+        public Int32 ItemId { get; set; }
+        public Boolean Dress { get; set; }
+    }
 }

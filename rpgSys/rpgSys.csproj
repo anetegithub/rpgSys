@@ -131,6 +131,7 @@
     <Content Include="Data\Skill.xml" />
     <Content Include="Data\SkillName.xml" />
     <Content Include="Data\SkillTemplate.xml" />
+    <Content Include="Data\Stuff.xml" />
     <Content Include="Data\Target.xml" />
     <Content Include="Data\User.xml" />
     <Content Include="Data\UserActivity.xml" />

@@ -335,6 +335,59 @@ function Skills() {
     return o;
 }
 
+function Inventory() {
+    var o = new Object();
+    o.Show = function () {
+        var innerhtml = "";
+        innerhtml += "<div class='row text-center'><div class='col-lg-4'><h2>Телесные</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+        for (var i = 0; i < 12; i++) {
+            innerhtml += '<tr><td>' + data[i].Name + '</td>';
+            innerhtml += '<td>' + data[i].IsOnHero ? 'На герое' : 'В рюкзаке' + '</td>';
+
+            if (data[i].Characteristics != null) {
+                var characteristics = "";
+                for (var i = 0; i < data[i].Characteristics.length; i++) {
+                    characteristics += data[i].Characteristics[i].CharacteristicName.Value + " " + data[i].Characteristics[i].Value + ' | ';
+                }
+                innerhtml += '<td> Характеристики:' + characteristics + '</td></tr>';
+            }
+            if (data[i].Abilities != null) {
+                var abilities = "";
+                for (var i = 0; i < data[i].Abilities.length; i++) {
+                    characteristics += data[i].Abilities[i].AbilityName.Value + " " + data[i].Abilities[i].Value + ' | ';
+                }
+                innerhtml += '<td> Способности:' + abilities + '</td></tr>';
+            }
+            if (data[i].HealthState != null) {
+                var hstate = "";
+
+                if (data[i].HealthState.MaximumHitPoints != 0)
+                    hstate += " Макс. Здоровье " + data[i].HealthState.MaximumHitPoints;
+
+                if (data[i].HealthState.AdditionalHitPoints != 0)
+                    hstate += " Доп. Здоровье " + data[i].HealthState.AdditionalHitPoints;
+
+                if (data[i].HealthState.Regeneration != 0)
+                    hstate += " Регенерация " + data[i].HealthState.Regeneration;
+
+                if (data[i].HealthState.Desease.Id != 0)
+                    hstate += data[i].HealthState.Desease.Value;
+
+                if (data[i].HealthState.Intoxication.Id != 0)
+                    hstate += data[i].HealthState.Intoxication.Value;
+
+                if (data[i].HealthState.Charm.Id != 0)
+                    hstate += data[i].HealthState.Charm.Value;
+
+                innerhtml += '<td> Показ. Здор.:' + hstate + '</td></tr>';
+            }
+        }
+        innerhtml += "</tbody></table></div></div></div>";
+        Play.Container.Show('fa-magic', "Навыки", 'default', innerhtml);
+    };
+    return o;
+}
+
 function ContainerManager() {
     var o = new Object();
 

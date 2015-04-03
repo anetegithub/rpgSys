@@ -4,8 +4,8 @@
     <Id>1</Id>
     <IsOnHero>false</IsOnHero>
     <Height>2</Height>
-    <HealthState>0</HealthState>
-    <AttackState>0</AttackState>
+    <HealthState>1</HealthState>
+    <AttackState>2</AttackState>
     <Characteristics />
     <Abilities />
     <Skills />
@@ -14,8 +14,8 @@
     <Id>2</Id>
     <IsOnHero>false</IsOnHero>
     <Height>2</Height>
-    <HealthState>0</HealthState>
-    <AttackState>0</AttackState>
+    <HealthState>1</HealthState>
+    <AttackState>1</AttackState>
     <Characteristics />
     <Abilities />
     <Skills />
@@ -24,8 +24,8 @@
     <Id>3</Id>
     <IsOnHero>false</IsOnHero>
     <Height>2</Height>
-    <HealthState>0</HealthState>
-    <AttackState>0</AttackState>
+    <HealthState>2</HealthState>
+    <AttackState>2</AttackState>
     <Characteristics />
     <Abilities />
     <Skills />
