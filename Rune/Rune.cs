@@ -22,8 +22,6 @@ namespace RuneFramework
         {
             DataDirectory();
             SayRuneWords();
- 
-            //Console.WriteLine("Init end");
         }
 
         public void SaveRune()
