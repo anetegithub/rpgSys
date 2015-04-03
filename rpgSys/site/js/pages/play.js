@@ -43,6 +43,10 @@ function PlayManager() {
     pm.Events = EventMgr();
     pm.Locations = LocationMgr();
 
+    pm.Container = ContainerManager();
+
+    pm.Info = Inforamtion();
+
     pm.Chat=ChatManager();
 
     pm.IsMaster=false;
@@ -86,12 +90,60 @@ function PlayManager() {
     return pm;
 };
 
-function ChatManager(){
+function ChatManager() {
     var cm = new Object();
     cm.Send = function () { };
     cm.SendCustom = function () { };
     cm.Init = function () {
         $('#send_btn').click(cm.Send);
+        cm.ShowLog();
+    }
+    cm.ShowLog = function () {
+        $.getJSON('../api/game/chat?GameId=' + user.GameId + "&Limit=30").done(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                cm.Add(data[i]);
+            }
+        });
+    };
+    cm.Add = function (Msg) {
+        if (Msg.GameMessageType.Id == 2) {
+            Msg.Avatar = "img/fable.png";
+            Msg.Name = "<label style='color:black'>Рассказчик</label>";
+            Msg.Text = "<label style='color:black'>" + Msg.Text + "</label>";
+            Msg.Stamp = "<label style='color:black'>" + Msg.Stamp + "</label>";
+        }
+        if (Msg.GameMessageType.Id == 3) {
+            Msg.Avatar = 'img/npc.jpg';
+            Msg.Text = "<strong>" + Msg.Text + "</strong>";
+            Msg.Stamp = "<strong>" + Msg.Stamp + "</strong>";
+        }
+        if (Msg.GameMessageType.Id == 4) {
+            Msg.Avatar = 'img/event.png';
+            Msg.Name = "<label style='color:#045FB4'>Событие: " + Msg.Name + "</label>";
+            Msg.Text = "<label style='color:#045FB4'>" + Msg.Text + "</label>";
+            Msg.Stamp = "<label style='color:#045FB4'>" + Msg.Stamp + "</label>";
+        }
+        if (Msg.GameMessageType.Id == 5) {
+            Msg.Avatar = 'img/location.png';
+            Msg.Name = "<label style='color:green'> Локация: " + Msg.Name + "</label>";
+            Msg.Text = "<label style='color:green'>" + Msg.Text + "</label>";
+            Msg.Stamp = "<label style='color:green'>" + Msg.Stamp + "</label>";
+        }
+        if (Msg.GameMessageType.Id == 6) {
+            Msg.Avatar = 'img/unknown.png';
+            Msg.Name = "<label style='color:red'>Сервер</label>";
+            Msg.Text = "<label style='color:red'>" + Msg.Text + "</label>";
+            Msg.Stamp = "<label style='color:red'>" + Msg.Stamp + "</label>";
+        }
+
+        var html = "<li class='left clearfix'>";
+        html += "<span class='chat-img pull-left'>";
+        html += "<img src='" + Msg.Avatar + "' height='50px' width='50px' class='img-circle'/></span>";
+        html += "<div class='chat-body'><strong>" + Msg.Name + "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o fa-fw'></i>" + Msg.Stamp + "</small>";
+        html += "<p>" + Msg.Text + "</p>";
+        html += "</div></li>";
+        $('#chatBox').html($('#chatBox').html() + html);
+        $("#chatWrapper").animate({ scrollTop: $('#chatWrapper')[0].scrollHeight }, 50);
     }
 
     return cm;
@@ -203,3 +255,43 @@ function Rolls() {
 
     return rlmngr;
 };
+
+//blocks
+function Inforamtion() {
+    var o = new Object();
+
+    o.Show = function () {
+        $.getJSON('../api/game/byid?Id=' + user.GameId).done(function (data) {
+            var innerhtml = "";
+
+        });
+    };
+
+    return o;
+}
+
+function ContainerManager() {
+    var o = new Object();
+
+    o.Show = function (Icon, Title, ColorBorder, Inner) {
+        var html = "";
+        html += "<div class='panel panel-back noti-box'>";
+        html += "<button type='button' class='close' style='padding-right:2%;' data-dismiss='alert' aria-hidden='true'>×</button>";
+        html += "<span class='icon-box bg-color-corporative'>";
+        html += "	<i class='fa " + Icon + "'></i>";
+        html += "</span>";
+        html += "<div class='text-box'>";
+        html += "	<p class='main-text'> " + Title + "</p>";
+        html += "	<hr>";
+        html += "	<p class='text-muted'>";
+        html += "		<div class='panel panel-" + ColorBorder + "'>";
+        html += Inner;
+        html += "		</div>";
+        html += "	</p>";
+        html += "</div>";
+        html += "</div>";
+        $('#info').html(html);
+    };
+
+    return o;
+}

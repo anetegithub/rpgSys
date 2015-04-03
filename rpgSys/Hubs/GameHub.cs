@@ -27,7 +27,7 @@ namespace rpgSys
                 gcm.Avatar = userAvatar;
                 gcm.Text = userMsg;
                 gcm.Stamp = DateTime.Now.ToString();
-                try { gcm.GameMessageType = db.GameMessageType.ReferenceUniq(new SimpleRuneSpell("Id", "==", UserType)); }
+                try { gcm.GameMessageType = db.GameMessageType.ReferenceUniq("Id", "==", UserType); }
                 catch (ArgumentException) { return; }
                 db.Chat.Add(gcm);
 

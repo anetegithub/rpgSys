@@ -1,2 +1,134 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<GameChatMessages />
+<GameChatMessages>
+  <GameChatMessage>
+    <Id>1</Id>
+    <GameId>1</GameId>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:32:46</Stamp>
+    <Text>dqa</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>2</Id>
+    <GameId>1</GameId>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:34:26</Stamp>
+    <Text>test</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>3</Id>
+    <GameId>1</GameId>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:37:23</Stamp>
+    <Text>test1</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>4</Id>
+    <GameId>1</GameId>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:38:56</Stamp>
+    <Text>q</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>5</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:40:00</Stamp>
+    <Text>e</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>6</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:41:47</Stamp>
+    <Text>q</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>7</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:43:01</Stamp>
+    <Text>q</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>8</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:43:06</Stamp>
+    <Text>r</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>9</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:43:07</Stamp>
+    <Text>e</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>10</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:43:08</Stamp>
+    <Text>What you know about testing? You know nothing!</Text>
+    <GameMessageType>6</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>11</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 9:43:09</Stamp>
+    <Text>What you know about testing? You know nothing!</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>12</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>03.04.2015 9:56:50</Stamp>
+    <Text>What you know about testing? You know nothing!</Text>
+    <GameMessageType>5</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>13</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>03.04.2015 9:57:26</Stamp>
+    <Text>What you know about testing? You know nothing!</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>14</Id>
+    <GameId>1</GameId>
+    <Name>Официантка</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>03.04.2015 9:59:20</Stamp>
+    <Text>What you know about testing? You know nothing!</Text>
+    <GameMessageType>3</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>15</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>03.04.2015 10:01:32</Stamp>
+    <Text>What you know about testing? You know nothing!</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+</GameChatMessages>

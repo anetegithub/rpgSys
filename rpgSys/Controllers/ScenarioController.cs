@@ -58,7 +58,7 @@ namespace rpgSys.Controllers
         {
             using (var db = new Runes.ScenarioRune())
             {
-                return Ok((db.Scenarios.QueryUniq(new RuneSpell("Id", "==", Id)) as Scenario) ?? new Scenario());
+                return Ok((db.Scenarios.QueryUniq("Id", "==", Id) as Scenario) ?? new Scenario());
             }
         }
 

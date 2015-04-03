@@ -42,7 +42,7 @@ namespace rpgSys.Controllers
 
             using (var db = new Runes.HeroRune())
             {
-                FindHero = (Hero)db.Hero.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("UserId", "==", UserId) } });
+                FindHero = (Hero)db.Hero.QueryUniq("UserId", "==", UserId);
             }
 
             if (FindHero != null)
@@ -66,6 +66,24 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult InfoState()
+        {
+            using (var db = new Runes.HeroInfoRune())
+            {
+                return Ok(db.Hero.ToList());
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult InfoState(string hId)
+        {
+            using (var db = new Runes.HeroInfoRune())
+            {
+                return Ok(db.Hero.QueryUniq("Id", "==", hId));
+            }
+        }
+
+        [HttpGet]
         public IHttpActionResult HealthState()
         {
             using (var db = new Runes.HeroRune())
@@ -75,11 +93,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult HealthState(string hsId)
+        public IHttpActionResult HealthState(string hId)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok((HealthState)db.HealthState.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", hsId) } }));
+                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hId)).HealthState.Id));
             }
         }
 
@@ -92,21 +110,12 @@ namespace rpgSys.Controllers
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="skId">Hero Id</param>
-        /// <returns></returns>
         [HttpGet]
-        public IHttpActionResult Skills(string skId)
+        public IHttpActionResult Skills(string hId)
         {
             using (var db = new Runes.HeroRune())
             {
-                Hero h = (Hero)db.Hero.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", skId) } });
-                if (h != null)
-                    return Ok(h.Skills ?? new List<Skill>());
-                else
-                    return NotFound();
+                return Ok(((Hero)db.Hero.QueryUniq("Id","==",hId)).Skills ?? new List<Skill>());
             }
         }
 
@@ -120,11 +129,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult DefenceState(string dfId)
+        public IHttpActionResult DefenceState(string hId)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok((DefenceState)db.DefenceState.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", dfId) } }));
+                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hId)).DefenceState.Id));
             }
         }
 
@@ -138,11 +147,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult AttackState(string atId)
+        public IHttpActionResult AttackState(string hId)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok((AttackState)db.AttackState.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", atId) } }));
+                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hId)).AttackState.Id));
             }
         }
 
@@ -156,11 +165,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult CommonState(string cmId)
+        public IHttpActionResult CommonState(string hId)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok((CommonState)db.CommonState.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", cmId) } }));
+                return Ok(db.HealthState.QueryUniq("Id", "==", ((Hero)db.Hero.QueryUniq("Id", "==", hId)).CommonState.Id));
             }
         }
 
@@ -173,21 +182,12 @@ namespace rpgSys.Controllers
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="chId">Hero Id</param>
-        /// <returns></returns>
         [HttpGet]
-        public IHttpActionResult Characteristics(string chId)
+        public IHttpActionResult Characteristics(string hId)
         {
             using (var db = new Runes.HeroRune())
             {
-                Hero h = (Hero)db.Hero.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", chId) } });
-                if (h != null)
-                    return Ok(h.Characteristics ?? new List<Characteristic>());
-                else
-                    return NotFound();
+                return Ok(((Hero)db.Hero.QueryUniq("Id", "==", hId)).Characteristics ?? new List<Characteristic>());
             }
         }
 
@@ -201,11 +201,11 @@ namespace rpgSys.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Ability(string abId)
+        public IHttpActionResult Ability(string hId)
         {
             using (var db = new Runes.HeroRune())
             {
-                return Ok((Ability)db.Abilities.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("Id", "==", abId) } }));
+                return Ok(((Hero)db.Hero.QueryUniq("Id", "==", hId)).Abilities ?? new List<Ability>());
             }
         }
     }
@@ -230,7 +230,7 @@ namespace rpgSys.Controllers
             using (var db = new Runes.HeroRune())
             {
                 using (var db2 = new Runes.UserRune())
-                    Hero.Avatar = db2.Users.ReferenceUniq(new SimpleRuneSpell("Id", "==", userId)).Avatar;
+                    Hero.Avatar = db2.Users.ReferenceUniq("Id", "==", userId).Avatar;
 
                 foreach (var Item in db.Class)
                     if (Item.Value == Hero.Class.Value)
@@ -284,7 +284,7 @@ namespace rpgSys.Controllers
                 using (var idb = new Runes.UserRune())
                 {
                     var user = (from a in idb.Users.ToList() where a.Id == userId select a).ToList()[0];
-                    user.HeroId = ((Hero)db.Hero.QueryUniq(new RuneBook() { Spells = new List<RuneSpell>() { new RuneSpell("UserId", "==", userId) } })).Id;
+                    user.HeroId = ((Hero)db.Hero.QueryUniq("UserId", "==", userId)).Id;
                     idb.SaveRune();
                 }
             }

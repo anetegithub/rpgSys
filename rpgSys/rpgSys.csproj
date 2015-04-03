@@ -159,8 +159,12 @@
     <Content Include="site\img\3.png" />
     <Content Include="site\img\4.png" />
     <Content Include="site\img\admin.png" />
+    <Content Include="site\img\event.png" />
+    <Content Include="site\img\fable.png" />
     <Content Include="site\img\favicon.ico" />
     <Content Include="site\img\find_user.png" />
+    <Content Include="site\img\location.png" />
+    <Content Include="site\img\npc.jpg" />
     <Content Include="site\img\old-find_user.png" />
     <Content Include="site\img\tester.png" />
     <Content Include="site\img\unknown.png" />

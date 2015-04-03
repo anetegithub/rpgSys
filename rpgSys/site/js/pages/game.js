@@ -39,13 +39,7 @@
         Play.Players.Remove(Hero);
     };
     gamehub.client.addgamemsg = function (Msg) {
-        var html = "<li class='left clearfix'>";
-        html += "<span class='chat-img pull-left'>";
-        html += "<img src='" + Msg.UserAvatar + "' alt='" + Msg.UserName + "' height='50px' width='50px' class='img-circle'/></span>";
-        html += "<div class='chat-body'><strong>" + Msg.UserName + "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o fa-fw'></i>" + Msg.Stamp.replace('T', ' ').replace(new RegExp('-', 'g'), '.') + "</small>";
-        html += "<p>" + Msg.Text + "</p>";
-        html += "</div></li>";
-        $('#chatBox').html($('#chatBox').html() + html);
+        Play.Chat.Add(Msg);
     }
 
 
@@ -63,7 +57,7 @@
         $('#send_btn').click(function () {
             if ($('#textFoSend').val() != '') {
                 if ($('#textFoSend').val().replace(/\s/g, '').length) {
-                    gamehub.server.sendmsg(user.GameId, user.Name, user.Avatar, "1", $('#textFoSend').val());
+                    gamehub.server.sendmsg(user.GameId, user.Login, user.Avatar, "1", $('#textFoSend').val());
                     $('#textFoSend').val('');
                 }
             }

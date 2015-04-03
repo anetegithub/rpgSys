@@ -51,8 +51,9 @@ namespace RuneFramework
             else
                 return null;
         }
-        public object QueryUniq(RuneSpell Spell)
+        public object QueryUniq(String Field, String Operator, Object Value)
         {
+            RuneSpell Spell = new RuneSpell(Field, Operator, Value);
             RuneBook Book = new RuneBook() { Spells = new List<RuneSpell>() { Spell } };
             var QueryResult = Transmuter.RealiseQuery(Book);
             if (QueryResult.Count != 0)
@@ -78,17 +79,19 @@ namespace RuneFramework
             else
                 return new List<T>();
         }
-        public List<T> Reference(SimpleRuneSpell Spell)
+        public List<T> Reference(String Field, String Operator, Object Value)
         {
+            SimpleRuneSpell Spell = new SimpleRuneSpell(Field, Operator, Value);
             var LinqQuery = (from a in Transmuter.Get where Spell.Spell(a) select a).ToList();
             if (LinqQuery.Count != 0)
                 return LinqQuery;
             else
                 return new List<T>();
         }
-        public T ReferenceUniq(SimpleRuneSpell Spell)
+
+        public T ReferenceUniq(String Field, String Operator, Object Value)
         {
-            var ReferenceList = this.Reference(Spell);
+            var ReferenceList = this.Reference(Field,Operator,Value);
             if (ReferenceList.Count != 0)
                 return ReferenceList[0];
             else

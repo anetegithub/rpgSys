@@ -22,7 +22,5 @@ namespace rpgSys
         public Event Event { get; set; }
 
         public Location Location { get; set; }
-
-        public List<GameChatMessage> Chat { get; set; }
     }
 }
