@@ -22,5 +22,15 @@ namespace rpgSys
         {
             Clients.All.listupdate(GameId);
         }
+
+        public void syncheroexit(String GameId, String HeroId)
+        {
+            Clients.All.syncheroexit(GameId, HeroId);
+        }
+
+        public void syncgamedelete(String GameId)
+        {
+            Clients.All.syncgamedelete(GameId);
+        }
     }
 }

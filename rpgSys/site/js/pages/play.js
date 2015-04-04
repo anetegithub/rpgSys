@@ -22,12 +22,18 @@ $(function () {
                     //Play.Locations.updatelocation=UPDATE OTHER CLIENTS
                     Play.Locations.location = data.Location;
 
-                   
+
+
                     if (data.Master.Id == user.HeroId) {
-                        Pla.IsMaster=true;
+                        $('#gameOffBtn').html('Закончить приключение');
+                        $('#gameOffBtn').click(Lobby.MagicBlock.ExitBtn.OnClick);
+                        $('#gameOffBtn').css('display', 'inline');
+                    } else {
+                        $('#gameOffBtn').click(Lobby.MagicBlock.ExitBtn.OnClick);
+                        $('#gameOffBtn').css('display', 'inline');
                     }
                     //$.connection.hub.start().done(function () {
-                        
+
                     //});
                 }
             }
@@ -48,6 +54,7 @@ function PlayManager() {
     pm.Info = Inforamtion();
     pm.Stat = Stats();
     pm.Skills = Skills();
+    pm.Inventory = Inventory();
 
     pm.Chat=ChatManager();
 
@@ -70,12 +77,13 @@ function PlayManager() {
     pm.Init = function () {
         $.getJSON('../api/hero/infostate?hid=' + user.HeroId)
                .done(function (data) {                   
-                   pm.LabelHero = "Герой: " + JSON.parse(localStorage.getItem('hero')).Name;                   
+                   pm.LabelHero = "Герой: " + data.Name;
                });
         pm.Chat.Init();
         $('#infoBtn').click(pm.Info.Show);
         $('#statBtn').click(pm.Stat.Show);
         $('#skillBtn').click(pm.Skills.Show);
+        $('#stuffBtn').click(pm.Inventory.Show);
     }
 
     return pm;
@@ -247,6 +255,43 @@ function Rolls() {
     return rlmngr;
 };
 
+function EndButton() {
+    var o = new Object();
+    o.Sync=function(GameId){};
+    o.Init = function (IsMaster) {
+        if (IsMaster) {            
+            $('#gameOffBtn').css('display', 'inline');
+            $.getJSON('../api/game/delete?GameId=' + user.GameId)
+           .done(function (data) {
+               if (data == "true") {
+                   var user = JSON.parse($.cookie("user"));
+                   NewLobby.SyncGameDelete(user.GameId);
+                   user.GameId = 0;
+                   $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                   window.location.replace('profile');
+               } else
+                   alert('Невозможно закончить приключение!');
+           });
+        } else {
+            $('#gameOffBtn').css('display', 'inline');
+            $('#gameOffBtn').click(function () {
+                $.getJSON('../api/game/exit?GameId=' + user.GameId + "&UserId=" + user.Id)
+                .done(function (data) {
+                    if (data == "true") {
+                        var user = JSON.parse($.cookie("user"));
+                        user.GameId = 0;
+                        $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                        Lobby.SyncHeroExit(user.GameId, user.HeroId);
+                        window.location.reload();
+                    } else
+                        alert('Невозможно покинуть партию!');
+                });
+            });
+        }
+    }
+    return o;
+}
+
 //blocks
 function Inforamtion() {
     var o = new Object();
@@ -337,53 +382,157 @@ function Skills() {
 
 function Inventory() {
     var o = new Object();
+    var f= parseInt
     o.Show = function () {
-        var innerhtml = "";
-        innerhtml += "<div class='row text-center'><div class='col-lg-4'><h2>Телесные</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
-        for (var i = 0; i < 12; i++) {
-            innerhtml += '<tr><td>' + data[i].Name + '</td>';
-            innerhtml += '<td>' + data[i].IsOnHero ? 'На герое' : 'В рюкзаке' + '</td>';
+        $.getJSON('../api/stuff/inventory?hid=' + user.HeroId).done(function (data) {
+            var innerhtml = "";
+            innerhtml += "<div class='row text-center'><div class='col-lg-12'>";
+            for (var i = 0; i < data.length; i++) {
+                innerhtml += "<div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+                innerhtml += '<tr><td><h2>' + data[i].Name + '</h2></td></tr>';                
 
-            if (data[i].Characteristics != null) {
-                var characteristics = "";
-                for (var i = 0; i < data[i].Characteristics.length; i++) {
-                    characteristics += data[i].Characteristics[i].CharacteristicName.Value + " " + data[i].Characteristics[i].Value + ' | ';
+                if (data[i].Characteristics != null) {
+                    var characteristics = "";
+                    for (var i = 0; i < data[i].Characteristics.length; i++) {
+                        characteristics += data[i].Characteristics[i].CharacteristicName.Value + " " + data[i].Characteristics[i].Value + ' | ';
+                    }
+                    innerhtml += '<tr><td> Характеристики:' + characteristics + '</td></tr>';
                 }
-                innerhtml += '<td> Характеристики:' + characteristics + '</td></tr>';
-            }
-            if (data[i].Abilities != null) {
-                var abilities = "";
-                for (var i = 0; i < data[i].Abilities.length; i++) {
-                    characteristics += data[i].Abilities[i].AbilityName.Value + " " + data[i].Abilities[i].Value + ' | ';
+                if (data[i].Abilities != null) {
+                    var abilities = "";
+                    for (var i = 0; i < data[i].Abilities.length; i++) {
+                        characteristics += data[i].Abilities[i].AbilityName.Value + " " + data[i].Abilities[i].Value + ' | ';
+                    }
+                    innerhtml += '<tr><td> Способности:' + abilities + '</td></tr>';
                 }
-                innerhtml += '<td> Способности:' + abilities + '</td></tr>';
+                if (data[i].HealthState != null) {
+                    var hstate = "";
+
+                    if (data[i].HealthState.CurrentHitPoints != 0)
+                        hstate += " Исцеление " + data[i].HealthState.CurrentHitPoints;
+
+                    if (data[i].HealthState.MaximumHitPoints != 0)
+                        hstate += " Макс. Здоровье " + data[i].HealthState.MaximumHitPoints;
+
+                    if (data[i].HealthState.AdditionalHitPoints != 0)
+                        hstate += " Доп. Здоровье " + data[i].HealthState.AdditionalHitPoints;
+
+                    if (data[i].HealthState.Regeneration != 0)
+                        hstate += " Регенерация " + data[i].HealthState.Regeneration;
+
+                    if (data[i].HealthState.Desease.Id != 1)
+                        hstate += data[i].HealthState.Desease.Value;
+
+                    if (data[i].HealthState.Intoxication.Id != 1)
+                        hstate += data[i].HealthState.Intoxication.Value;
+
+                    if (data[i].HealthState.Charm.Id != 1)
+                        hstate += data[i].HealthState.Charm.Value;
+
+                    innerhtml += '<tr><td> Показ. здор.:' + hstate + '</td></tr>';
+                }
+                if (data[i].DefenceState != null) {
+                    var hstate = "";
+
+                    if (data[i].DefenceState.Defence != 0)
+                        hstate += " Защита " + data[i].DefenceState.Defence;
+
+                    if (data[i].DefenceState.NaturalDefence != 0)
+                        hstate += " Нат. защита " + data[i].DefenceState.NaturalDefence;
+
+                    if (data[i].DefenceState.ArmorDefence != 0)
+                        hstate += " Физ. защита " + data[i].DefenceState.ArmorDefence;
+
+                    if (data[i].DefenceState.MagicDefence != 0)
+                        hstate += " Маг. защита " + data[i].DefenceState.MagicDefence;
+
+                    if (data[i].DefenceState.DefenceBonus != 0)
+                        hstate += " Бонус защиты " + data[i].DefenceState.DefenceBonus;
+
+                    if (data[i].DefenceState.DefenceClass != 0)
+                        hstate += " Класс защиты " + data[i].DefenceState.DefenceClass;
+
+                    innerhtml += '<tr><td> Показ. защиты:' + hstate + '</td></tr>';
+                }
+                if (data[i].AttackState != null) {
+                    var hstate = "";
+
+                    if (data[i].AttackState.Attack != 0)
+                        hstate += " Атака " + data[i].AttackState.Attack;
+
+                    if (data[i].AttackState.FitAttack != 0)
+                        hstate += " Доп. атака " + data[i].AttackState.FitAttack;
+
+                    if (data[i].AttackState.WeaponMinimalDamage != 0 || data[i].AttackState.WeaponMaximalDamage != 0)
+                        hstate += " Урон " + data[i].AttackState.WeaponMinimalDamage + "-" + data[i].AttackState.WeaponMaximalDamage;
+
+                    if (data[i].AttackState.CritChance != 0)
+                        hstate += " Крит. шанс " + data[i].AttackState.CritChance;
+
+                    if (data[i].AttackState.CritBonus != 0)
+                        hstate += " Крит. бонус " + data[i].AttackState.CritBonus;
+
+                    innerhtml += '<tr><td> Показ. атаки:' + hstate + '</td></tr>';
+                }
+                if (data[i].CommonState != null) {
+                    var hstate = "";
+
+                    if (data[i].CommonState.Initiative != 0)
+                        hstate += " Инициатива " + data[i].CommonState.Initiative;
+
+                    if (data[i].CommonState.InitiativeSize != 0)
+                        hstate += " Иниц. размера " + data[i].CommonState.InitiativeSize;
+
+                    if (data[i].CommonState.InitiativeWisdom != 0)
+                        hstate += " Иниц. мудрости " + data[i].CommonState.InitiativeWisdom;
+
+                    if (data[i].CommonState.InitiativeMagic != 0)
+                        hstate += " Иниц. магич. " + data[i].CommonState.InitiativeMagic;
+
+                    if (data[i].CommonState.Speed != 0)
+                        hstate += " Скорость " + data[i].CommonState.Speed;
+
+                    if (data[i].CommonState.SpeedFit != 0)
+                        hstate += " Доп. скорость " + data[i].CommonState.SpeedFit;
+
+                    innerhtml += '<tr><td> Показ. общие:' + hstate + '</td></tr>';
+                }
+                if (data[i].Skills != null) {
+                    var hstate = "";
+
+                    for (var i = 0; i < data[i].Skills.length; i++) {
+                        hstate += data[i].Skills[i].SkillName.Value + " " + data[i].Skills[i].Value + " | ";
+                    }
+
+                    innerhtml += '<tr><td> Навыки:' + hstate + '</td></tr>';
+                }
+                var addithtml = "";
+                if (data[i].Class != null) {
+                    addithtml += "Класс : " + data[i].Class.Value + " | ";
+                }
+                if (data[i].Race != null) {
+                    addithtml += "Раса : " + data[i].Race.Value + " | ";
+                }
+                if (data[i].Height != null) {
+                    addithtml += "Рост : " + data[i].Height.Value + " | ";
+                }
+                if (data[i].Sex != null) {
+                    addithtml += "Пол : " + data[i].Sex.Value + " | ";
+                }
+                if (addithtml != "")
+                    innerhtml += '<tr><td> Дополнительно:' + hstate + '</td></tr>';
+
+                if (data[i].IsOnHero)
+                    innerhtml += "<tr><td>На герое</tr></td>";
+                else
+                    innerhtml += "<tr><td>В рюкзаке</tr></td>";
+
+                innerhtml += "</tbody></table></div>";
+                innerhtml += "<br/>";
             }
-            if (data[i].HealthState != null) {
-                var hstate = "";
-
-                if (data[i].HealthState.MaximumHitPoints != 0)
-                    hstate += " Макс. Здоровье " + data[i].HealthState.MaximumHitPoints;
-
-                if (data[i].HealthState.AdditionalHitPoints != 0)
-                    hstate += " Доп. Здоровье " + data[i].HealthState.AdditionalHitPoints;
-
-                if (data[i].HealthState.Regeneration != 0)
-                    hstate += " Регенерация " + data[i].HealthState.Regeneration;
-
-                if (data[i].HealthState.Desease.Id != 0)
-                    hstate += data[i].HealthState.Desease.Value;
-
-                if (data[i].HealthState.Intoxication.Id != 0)
-                    hstate += data[i].HealthState.Intoxication.Value;
-
-                if (data[i].HealthState.Charm.Id != 0)
-                    hstate += data[i].HealthState.Charm.Value;
-
-                innerhtml += '<td> Показ. Здор.:' + hstate + '</td></tr>';
-            }
-        }
-        innerhtml += "</tbody></table></div></div></div>";
-        Play.Container.Show('fa-magic', "Навыки", 'default', innerhtml);
+            innerhtml += "</div></div>";
+            Play.Container.Show('fa-list-alt', "Инвентарь", 'default', innerhtml);
+        });
     };
     return o;
 }

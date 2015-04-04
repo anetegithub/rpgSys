@@ -53,6 +53,12 @@
         Lobby.SyncDelete = function (GameId) {
             synclobby.server.gamedelete(GameId);
         };
+        Lobby.SyncHeroExit = function (GameId, HeroId) {
+            synclobby.server.syncheroexit(GameId, HeroId);
+        };
+        Lobby.SyncGameDelete = function (GameId) {
+            synclobby.server.syncgamedelete(GameId);
+        };
 
         $('#send_btn').click(function () {
             if ($('#textFoSend').val() != '') {
@@ -62,14 +68,14 @@
                 }
             }
         });
-        Play.Chat.SendCustom = function (userName, userAvatar, userType) {
-            if ($('#textFoSend').val() != '') {
-                if ($('#textFoSend').val().replace(/\s/g, '').length) {
-                    gamehub.server.sendmsg(user.GameId, userName, userAvatar, userType, $('#textFoSend').val());
-                    $('#textFoSend').val('');
-                }
-            }
-        };
+        //Play.Chat.SendCustom = function (userName, userAvatar, userType) {
+        //    if ($('#textFoSend').val() != '') {
+        //        if ($('#textFoSend').val().replace(/\s/g, '').length) {
+        //            gamehub.server.sendmsg(user.GameId, userName, userAvatar, userType, $('#textFoSend').val());
+        //            $('#textFoSend').val('');
+        //        }
+        //    }
+        //};
     });    
     
     Lobby.IsState();
@@ -140,8 +146,10 @@ function GameLobby() {
     NewLobby.MagicBlock = MagicBlock();
     NewLobby.MagicBlock.Init();    
     NewLobby.SyncUpdate = function (GameId) { };
+    NewLobby.SyncHeroExit = function (GameId, HeroId) { };
     NewLobby.SyncStart = function (GameId) { };
     NewLobby.SyncDelete = function (GameId) { };
+    NewLobby.SyncGameDelete = function (GameId) { };
     NewLobby.MagicBlock.ConnectBtn.OnClick = function () {
         var user = JSON.parse($.cookie("user"));
         $.getJSON('../api/game/connect?GameId=' + NewLobby.Scenario.SelectedScenario.Id + "&UserId=" + user.Id)

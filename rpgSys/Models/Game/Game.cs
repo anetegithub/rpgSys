@@ -15,7 +15,7 @@ namespace rpgSys
 
         public Hero Master { get; set; }
 
-        internal List<Hero> Heroes { get; set; }
+        public List<Hero> Heroes { get; set; }
 
         public List<Npc> Npcs { get; set; }
 

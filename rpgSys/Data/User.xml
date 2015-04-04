@@ -6,7 +6,7 @@
     <Avatar>img/admin.png</Avatar>
     <Password>555033</Password>
     <Email>anete.anetes@gmail.com</Email>
-    <Stamp>03.04.2015 16:05:33</Stamp>
+    <Stamp>04.04.2015 8:27:14</Stamp>
 	<Activity><UserActivity>2</UserActivity></Activity>
 <HeroId>1</HeroId><GameId>1</GameId></User>
   <User>
@@ -15,6 +15,6 @@
     <Login>Tester</Login>
     <Password>123456</Password>
     <Email>anete.anetes@yandex.ru</Email>
-    <Stamp>03.04.2015 8:49:41</Stamp>
+    <Stamp>04.04.2015 14:28:02</Stamp>
 	<Activity><UserActivity>1</UserActivity></Activity><HeroId>2</HeroId><GameId>1</GameId></User>
 </Users>

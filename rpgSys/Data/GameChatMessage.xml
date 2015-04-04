@@ -131,4 +131,13 @@
     <Text>What you know about testing? You know nothing!</Text>
     <GameMessageType>2</GameMessageType>
   </GameChatMessage>
+  <GameChatMessage>
+    <Id>16</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>04.04.2015 14:28:47</Stamp>
+    <Text>Just da fuck up?</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
 </GameChatMessages>

@@ -34,7 +34,7 @@ namespace rpgSys.Controllers
         {
             using (var db = new Runes.HeroStuffRune())
             {
-                return Ok(((Hero)db.Hero.QueryUniq("Id", "==", hid)).Items ?? new List<Stuff>());
+                return Ok((((Hero)db.Hero.QueryUniq("Id", "==", hid)) ?? new Hero()).Items ?? new List<Stuff>());
             }
         }
 

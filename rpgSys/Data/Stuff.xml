@@ -3,12 +3,8 @@
   <Stuff>
     <Id>1</Id>
     <IsOnHero>false</IsOnHero>
-    <Height>2</Height>
+    <Name>Яблоко</Name>
     <HealthState>1</HealthState>
-    <AttackState>2</AttackState>
-    <Characteristics />
-    <Abilities />
-    <Skills />
   </Stuff>
   <Stuff>
     <Id>2</Id>
