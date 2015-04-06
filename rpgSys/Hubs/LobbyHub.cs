@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 
+using RuneFramework;
+
 using System;
 
 namespace rpgSys
@@ -25,7 +27,12 @@ namespace rpgSys
 
         public void syncheroexit(String GameId, String HeroId)
         {
-            Clients.All.syncheroexit(GameId, HeroId);
+            Hero h = new Hero();
+            using(var db =new Runes.HeroInfoRune())
+            {
+                h = (Hero)db.Hero.QueryUniq("Id", "==", HeroId);
+            }
+            Clients.All.syncheroexit(GameId, h);
         }
 
         public void syncgamedelete(String GameId)

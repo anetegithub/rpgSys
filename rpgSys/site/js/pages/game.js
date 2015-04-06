@@ -28,7 +28,18 @@
             Lobby.MagicBlock.ShowList();
         }
     }
+    synclobby.client.syncheroexit = function (GameId, Hero) {
+        var user = JSON.parse($.cookie("user"));
+        if (user.GameId == GameId && GameId != 0) {
+            Play.Players.Remove(Hero);
+        }
+    };
+    synclobby.client.syncgamedelete = function (GameId) {
+        var user = JSON.parse($.cookie("user"));
+        if (user.GameId == GameId && GameId != 0) {
 
+        }
+    };
 
     var gamehub = $.connection.game;
 
