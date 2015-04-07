@@ -131,7 +131,7 @@ namespace RuneFramework
             get
             {
                 List<T> Result = new List<T>();
-                var RunicWords = Shaman.SelectStream(null);
+                var RunicWords = Shaman.Select(null);
                 if (RunicWords.Root != null)
                 {
                     foreach (XElement RunicWord in RunicWords.Root.Elements())
@@ -151,7 +151,7 @@ namespace RuneFramework
         public List<T> RealiseQuery(RuneBook Book)
         {
             List<T> Result = new List<T>();
-            var RunicWords = Shaman.SelectStream(Book);
+            var RunicWords = Shaman.Select(Book);
             if (RunicWords.Root != null)
             {
                 foreach (XElement RunicWord in RunicWords.Root.Elements())
@@ -223,8 +223,7 @@ namespace RuneFramework
         protected RuneMage<T> Classes { get; set; }
         protected RuneMage<T> PrimitiveLists { get; set; }
         protected RuneMage<T> GenericLists { get; set; }
-
-
+        
         protected Lazy<RuneShaman<T>> Shamanism;
         private RuneShaman<T> ShadowShaman { get; set; }
         protected RuneShaman<T> Shaman
@@ -253,7 +252,7 @@ namespace RuneFramework
         }
         public void Add(T Item)
         {
-            var MaxId = Shaman.SelectMaxStream(this.Id);
+            var MaxId = Shaman.LastId(this.Id);
             Item.GetType().GetProperty(Id).SetValue(Item, Convert.ChangeType(++MaxId, Item.GetType().GetProperty(Id).PropertyType));
 
             Shaman.Insert(new RuneBook() { Elements = new List<XElement>() { TransmuteToTablet(Item) } });

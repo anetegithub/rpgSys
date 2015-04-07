@@ -11,7 +11,7 @@ namespace RuneFramework
 {
     public class RuneWord<T> : IEnumerable<T>
     {
-        public RuneWord(string TableName,Rune Rune)
+        public RuneWord(string TableName, Rune Rune)
         {
             Ids();
             if (typeof(T) != typeof(RuneString))
@@ -23,7 +23,7 @@ namespace RuneFramework
         }
         protected void Ids()
         {
-            if (typeof(T)!=typeof(RuneString))
+            if (typeof(T) != typeof(RuneString))
             {
                 var Id = typeof(T).GetProperty("Id");
                 if (Id == null)
@@ -46,7 +46,7 @@ namespace RuneFramework
         public object QueryUniq(RuneBook Book)
         {
             var QueryResult = Transmuter.RealiseQuery(Book);
-            if (QueryResult.Count!=0)
+            if (QueryResult.Count != 0)
                 return Transmuter.RealiseQuery(Book)[0];
             else
                 return null;
@@ -91,7 +91,7 @@ namespace RuneFramework
 
         public T ReferenceUniq(String Field, String Operator, Object Value)
         {
-            var ReferenceList = this.Reference(Field,Operator,Value);
+            var ReferenceList = this.Reference(Field, Operator, Value);
             if (ReferenceList.Count != 0)
                 return ReferenceList[0];
             else

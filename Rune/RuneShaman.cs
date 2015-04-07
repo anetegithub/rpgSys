@@ -8,22 +8,54 @@ using System.Xml.Linq;
 
 using System.Xml;
 
+using System.IO;
+
 using System.Collections;
 
 namespace RuneFramework
 {
-    public class RuneShaman<T>
+    public sealed class RuneShaman<T>
     {
-        public RuneShaman(string Path)
+        public RuneShaman(String Path)
         {
             this.Path = Path;
         }
+        private String Path;
 
+        public XDocument Select(RuneBook Query)
+        {
+            return RuneTotem<T>.Totem.SelectStream(Query,Path);
+        }
+
+        public XDocument Update(RuneBook Query)
+        {
+            return RuneTotem<T>.Totem.Update(Query, Path);
+        }
+
+        public XDocument Insert(RuneBook Query)
+        {
+            return RuneTotem<T>.Totem.Insert(Query, Path);
+        }
+
+        public XDocument Delete(RuneBook Query)
+        {
+            return RuneTotem<T>.Totem.Delete(Query, Path);
+        }
+
+        public Double LastId(String Field)
+        {
+            RuneTotem<T>.Totem.Path = Path;
+            return RuneTotem<T>.Totem.SelectMaxStream(Field, Path);
+        }
+    }
+
+    public class RuneSpirit<T>
+    {
         public String Path = "";
 
         protected Lazy<XDocument> LazyDocument;
         protected XDocument Document;
-        protected static object Key = new object();
+        protected object Locked = new object();
 
         protected void PrepeareSpell()
         {
@@ -38,7 +70,7 @@ namespace RuneFramework
         {
             get
             {
-                if (typeof(T)!=typeof(RuneString))
+                if (typeof(T) != typeof(RuneString))
                 {
                     var Id = typeof(T).GetProperty("Id");
                     if (Id == null)
@@ -70,10 +102,11 @@ namespace RuneFramework
             foreach (RuneSpell RuneSp in Query.Spells.Skip(1))
                 some.Where(x => RuneSp.Spell(x));
 
+
             return new XDocument(some);
         }
 
-        public XDocument SelectStream(RuneBook Query)
+        public XDocument SelectStream(RuneBook Query,String Path)
         {
             if (Query == null)
                 Query = new RuneBook();
@@ -82,7 +115,7 @@ namespace RuneFramework
 
             var some = (
                 from Item
-                in StreamRootChildDoc
+                in StreamRootChildDoc(Path)
                 where Query.Spells[0].Spell(Item)
                 select Item
                 );
@@ -90,10 +123,11 @@ namespace RuneFramework
             foreach (RuneSpell RuneSp in Query.Spells.Skip(1))
                 some.Where(x => RuneSp.Spell(x));
 
+
             return new XDocument(new XElement("Root", some));
         }
 
-        public XDocument Delete(RuneBook Query)
+        public XDocument Delete(RuneBook Query,String Path)
         {
             if (Query.Spells == null || Query.Spells.Count == 0)
                 Query.Spells = new List<RuneSpell>() { new RuneSpell(Id, "!=", 0) };
@@ -101,25 +135,25 @@ namespace RuneFramework
             PrepeareSpell();
 
             var some = Document.Root.Elements(typeof(T).Name).Where(x => Query.Spells[0].Spell(x));
-            
+
             foreach (RuneSpell RuneSp in Query.Spells.Skip(1))
                 some.Where(x => RuneSp.Spell(x));
 
             some.Remove();
 
-            lock (Key) { Document.Save(Path); }
+            lock (Locked) { Document.Save(Path); }
 
             return new XDocument();
         }
 
-        public XDocument Update(RuneBook Query)
+        public XDocument Update(RuneBook Query,String Path)
         {
-            return Update_New(Query);
+            return Update_New(Query, Path);
         }
 
-        public XDocument Update_New(RuneBook Query)
+        public XDocument Update_New(RuneBook Query, String Path)
         {
-            List<XElement> Elements = SelectStream(null).Elements().ToList()[0].Elements().ToList();
+            List<XElement> Elements = SelectStream(null,Path).Elements().ToList()[0].Elements().ToList();
             for (int i = 0; i < Elements.Count; i++)
             {
                 XElement CurrentElement = Elements[i];
@@ -130,21 +164,22 @@ namespace RuneFramework
                 while (SpellEnum.MoveNext() && SpellageEnum.MoveNext())
                     if ((SpellEnum.Current as RuneSpell).Spell(CurrentElement))
                         (SpellageEnum.Current as RuneSpellage).SetValue(ref CurrentElement);
-
+                
                 if (Elements.Count() != 0)
-                    lock (Key)
+                    lock (Locked)
                     {
                         Document = new XDocument(new XElement(typeof(T).Name + 's', Elements));
                         Document.Save(Path);
                     }
             }
+
             return new XDocument(new XElement("Result", "True"));
         }
 
         [Obsolete]
-        public XDocument Update_Old(RuneBook Query)
+        public XDocument Update_Old(RuneBook Query, String Path)
         {
-            var Doc = SelectStream(null);
+            var Doc = SelectStream(null,Path);
             var XCollection = Doc.Elements().ToList();
             var Collection = XCollection[0].Elements().ToList();
 
@@ -167,20 +202,22 @@ namespace RuneFramework
             }
             if (Collection.ToList().Count != 0)
             {
-                lock (Key) { Document = new XDocument(new XElement(typeof(T).Name + "s", Collection)); Document.Save(Path); }
+                lock (Locked) { Document = new XDocument(new XElement(typeof(T).Name + "s", Collection)); Document.Save(Path); }
             }
 
             return new XDocument(Doc.Elements());
         }
 
-        public XDocument Insert(RuneBook Query)
+        public XDocument Insert(RuneBook Query, String Path)
         {
             PrepeareSpell();
 
             foreach (XElement XEl in Query.Elements)
                 Document.Root.Add(XEl);
 
-            lock (Key) { Document.Save(Path); }
+            lock (Locked) { Document.Save(Path); }
+
+
 
             return new XDocument(Query.Elements);
         }
@@ -199,23 +236,24 @@ namespace RuneFramework
                 return 0;
         }
 
-        public double SelectMaxStream(String FieldName)
+        public double SelectMaxStream(String FieldName, String Path)
         {
             PrepeareSpell();
 
             if (Document.Root.Elements().Count() != 0)
             {
-                var some = StreamRootChildDoc.Max(c => (double)c.Element(FieldName));
+                var some = StreamRootChildDoc(Path).Max(c => (double)c.Element(FieldName));
                 return some;
             }
             else
                 return 0;
         }
-        protected IEnumerable<XElement> StreamRootChildDoc
+
+        protected IEnumerable<XElement> StreamRootChildDoc(String Path)
         {
-            get
+            lock (Locked)
             {
-                using (XmlReader reader = XmlReader.Create(Path))
+                using (XmlReader reader = XmlReader.Create(File.OpenRead(Path)))
                 {
                     reader.MoveToContent();
                     while (reader.Read())
@@ -232,29 +270,33 @@ namespace RuneFramework
                         }
                     }
                 }
+
             }
         }
     }
 
-    //public sealed class Singleton<T> where T : class, new()
-    //{
-    //    Singleton()
-    //    { }
+    public sealed class RuneTotem<T>
+    {
+        RuneTotem()
+        { }
 
-    //    public static T Instance
-    //    {
-    //        get
-    //        {
-    //            return Nested.instance;
-    //        }
-    //    }
+        public static RuneSpirit<T> Totem
+        {
+            get
+            {
+                if (typeof(T) != typeof(RuneString))
+                    return Nested.instance;
+                else
+                    return new RuneSpirit<T>();
+            }
+        }
 
-    //    class Nested
-    //    {
-    //        static Nested()
-    //        { }
+        class Nested
+        {
+            static Nested()
+            { }
 
-    //        internal static readonly T instance = new T();
-    //    }
-    //}
+            internal static readonly RuneSpirit<T> instance = new RuneSpirit<T>();
+        }
+    }
 }
