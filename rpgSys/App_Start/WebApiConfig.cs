@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
+using System.Net.Http.Headers;
+
 namespace rpgSys
 {
     public static class WebApiConfig
@@ -14,6 +16,7 @@ namespace rpgSys
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             config.Routes.MapHttpRoute("DefaultApiWithAction", "api/{controller}/{action}");
 

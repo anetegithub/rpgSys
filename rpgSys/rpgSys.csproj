@@ -227,6 +227,7 @@
     <Compile Include="Hubs\UserActivityHub.cs" />
     <Compile Include="Models\Game\Game.cs" />
     <Compile Include="Models\Game\GameChatMessage.cs" />
+    <Compile Include="Models\Game\GameCommunicationRune.cs" />
     <Compile Include="Models\Game\GameRune.cs" />
     <Compile Include="Models\Hero\Ability.cs" />
     <Compile Include="Models\Hero\AttackState.cs" />

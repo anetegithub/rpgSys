@@ -37,7 +37,10 @@
     synclobby.client.syncgamedelete = function (GameId) {
         var user = JSON.parse($.cookie("user"));
         if (user.GameId == GameId && GameId != 0) {
-
+            user.GameId = 0;
+            $.cookie('user', JSON.stringify(user), { path: '/site/' });
+            alert('Приключение закончено!');
+            window.location.replace('profile');
         }
     };
 
@@ -79,14 +82,6 @@
                 }
             }
         });
-        //Play.Chat.SendCustom = function (userName, userAvatar, userType) {
-        //    if ($('#textFoSend').val() != '') {
-        //        if ($('#textFoSend').val().replace(/\s/g, '').length) {
-        //            gamehub.server.sendmsg(user.GameId, userName, userAvatar, userType, $('#textFoSend').val());
-        //            $('#textFoSend').val('');
-        //        }
-        //    }
-        //};
     });    
     
     Lobby.IsState();
@@ -236,13 +231,14 @@ function GameLobby() {
     NewLobby.MagicBlock.DeleteBtn.Init();
     NewLobby.MagicBlock.ExitBtn.OnClick = function () {
         var user = JSON.parse($.cookie("user"));
-        $.getJSON('../api/game/exit?GameId=' + NewLobby.Scenario.SelectedScenario.Id + "&UserId=" + user.Id)
+        $.getJSON('../api/game/exit?GameId=' + user.GameId + "&UserId=" + user.Id)
             .done(function (data) {
                 if (data == "true") {
                     var user = JSON.parse($.cookie("user"));
+                    var gameid = user.GameId;
                     user.GameId = 0;
                     $.cookie('user', JSON.stringify(user), { path: '/site/' });
-                    NewLobby.SyncUpdate(NewLobby.Scenario.SelectedScenario.Id);
+                    NewLobby.SyncUpdate(gameid);
                     window.location.reload();
                 } else if (data == "NoHero") {
                     alert('У вас должен быть персонаж!');
@@ -311,6 +307,7 @@ function GameLobby() {
                             NewLobby.MagicBlock.GameId = data.Id;
                             NewLobby.MagicBlock.Label = "Присоеденились";
                             NewLobby.MagicBlock.ExitBtn.Visible(true);
+                            NewLobby.MagicBlock.ExitBtn.Enabled(true);
                             NewLobby.MagicBlock.ShowList();
                         }
                     } else {

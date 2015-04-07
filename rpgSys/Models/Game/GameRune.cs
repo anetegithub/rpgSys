@@ -16,6 +16,8 @@ namespace rpgSys.Runes
         public RuneWord<RuneString> Sex { get; set; }
 
         public RuneWord<Npc> Npcs { get; set; }
+        public RuneWord<Location> Locations { get; set; }
+        public RuneWord<Event> Events { get; set; }
         public RuneWord<Location> Location { get; set; }
         public RuneWord<Event> Event { get; set; }
 

@@ -36,18 +36,23 @@ namespace rpgSys.Controllers
         [HttpGet]
         public IHttpActionResult Heroes(string GameId)
         {
+            Int32 gameId = 0;
+            List<BadgeItem> L = new List<BadgeItem>();
+            if (!Int32.TryParse(GameId, out gameId))
+                return Ok("false");
+            if (gameId == 0)
+                return Ok(L);
+
             using (var db = new Runes.GameRune())
             {
-                var Game = (Game)db.Game.QueryUniq("Id", "==", GameId);
-                List<BadgeItem> L = new List<BadgeItem>();
-                if (Game.Heroes != null && Game.Heroes.Count > 0)
-                    foreach (var Item in Game.Heroes)
-                        L.Add(new BadgeItem() { Text = Item.Name, Id = (int)Item.Sex });
-
-                if (Game.Master != null)
-                    L.Add(new BadgeItem() { Text = Game.Master.Name, Id = (int)Game.Master.Sex });
-                return Ok(L);
+                Game Game = db.Game.Find(x => x.Id == gameId);
+                if (Game.Heroes != null)
+                    foreach (var Hero in Game.Heroes)
+                        L.Add(new BadgeItem() { Text = Hero.Name, Id = (Int32)Hero.Sex });
+                L.Add(new BadgeItem() { Text = Game.Master.Name, Id = (Int32)Game.Master.Sex });
             }
+
+            return Ok(L);
         }
 
         [HttpGet]
@@ -118,27 +123,27 @@ namespace rpgSys.Controllers
         [HttpGet]
         public IHttpActionResult Delete(string GameId)
         {
-            using (var db = new Runes.GameRune())
+            Int32 gameId = 0;
+            if (!(Int32.TryParse(GameId, out gameId)))
+                return Ok("false");
+
+            using (var db = new Runes.GameCommunicationRune())
             {
-                try
-                {
-                    Game g = db.Game.ReferenceUniq("Id", "==", GameId);
+                Game g = db.Game.Find(x => x.Id == gameId);
+                if (g == null)
+                    return Ok("false");
 
-                    using (var db2 = new Runes.UserRune())
-                    {
-                        if (g.Heroes != null)
-                            foreach (Hero h in g.Heroes)
-                                db2.Users.ReferenceUniq("Id", "==", h.UserId).GameId = 0;
-                        db2.Users.ReferenceUniq("Id", "==", g.Master.UserId).GameId = 0;
+                if (g.Heroes != null)
+                    foreach (var h in g.Heroes)
+                        db.User.Find(u => u.Id == h.UserId).GameId = 0;
+                db.User.Find(u => u.Id == g.Master.UserId).GameId = 0;
 
-                        db2.SaveRune();
-                    }
+                db.SaveRune();
 
-                    db.Game.Remove(g);
-                    return Ok("true");
-                }
-                catch (ArgumentException) { return Ok("false"); }
+                db.Game.Remove(g);
             }
+
+            return Ok("true");
         }
 
         [HttpGet]
@@ -156,26 +161,24 @@ namespace rpgSys.Controllers
                     {
                         db2.Users.ReferenceUniq("Id", "==", UserId).GameId = 0;
 
-                        using (var db3 = new Runes.HeroRune())
+                        Hero h = null;
+                        try
                         {
-                            Hero h = null;
-                            try
-                            {
-                                h = db3.Hero.ReferenceUniq("UserId", "==", UserId);
-                            }
-                            catch (ArgumentException)
-                            {
-                                return Ok("NoHero");
-                            }
-
-                            Game g = db.Game.ReferenceUniq("Id", "==", gameid);
-                            if (g.Heroes == null)
-                                g.Heroes = new List<Hero>();
-                            g.Heroes.Remove(h);
-
-                            db2.SaveRune();
-                            db.SaveRune();
+                            h = db.Heroes.ReferenceUniq("UserId", "==", UserId);
                         }
+                        catch (ArgumentException)
+                        {
+                            return Ok("NoHero");
+                        }
+
+                        Game g = db.Game.Find(x => x.Id == gameid);
+                        if (g.Heroes == null)
+                            g.Heroes = new List<Hero>();
+
+                        g.Heroes.Remove(g.Heroes.Find(x => x.Id == h.Id));
+
+                        db2.SaveRune();
+                        db.SaveRune();
                     }
                     catch (ArgumentException)
                     {

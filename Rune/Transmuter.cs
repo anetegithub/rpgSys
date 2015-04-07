@@ -274,6 +274,11 @@ namespace RuneFramework
         {
             return Words.IndexOf(Item);
         }
+        public T Find(Predicate<T> match)
+        {
+            RunicWordsLoaded();
+            return Words.Find(match);
+        }
 
         public IEnumerator<T> GetEnumerator()
         {

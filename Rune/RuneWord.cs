@@ -133,6 +133,10 @@ namespace RuneFramework
         {
             Transmuter.Remove(Index);
         }
+        public T Find(Predicate<T> match)
+        {
+            return Transmuter.Find(match);
+        }
         public int IndexOf(T Item)
         { return Transmuter.IndexOf(Item); }
 

@@ -30,6 +30,9 @@ namespace RuneFramework
                     IEnumerator EnumA = (A as IList).GetEnumerator();
                     IEnumerator EnumB = (B as IList).GetEnumerator();
 
+                    if ((A as IList).Count != (B as IList).Count)
+                        temp = false;
+
                     while ((EnumA.MoveNext()) && (EnumB.MoveNext()))
                     {
                         CompareTwoGenerics(A, B, ref R);
@@ -58,6 +61,9 @@ namespace RuneFramework
                 {
                     IEnumerator EnumA = (A as IList).GetEnumerator();
                     IEnumerator EnumB = (B as IList).GetEnumerator();
+
+                    if ((A as IList).Count != (B as IList).Count)
+                        R = false;
 
                     while ((EnumA.MoveNext()) && (EnumB.MoveNext()))
                     {

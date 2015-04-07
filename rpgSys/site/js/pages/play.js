@@ -21,20 +21,18 @@ $(function () {
                     Play.Locations.gameid = data.Id;
                     //Play.Locations.updatelocation=UPDATE OTHER CLIENTS
                     Play.Locations.location = data.Location;
-
-
+                    
 
                     if (data.Master.Id == user.HeroId) {
                         $('#gameOffBtn').html('Закончить приключение');
                         $('#gameOffBtn').click(Lobby.MagicBlock.ExitBtn.OnClick);
                         $('#gameOffBtn').css('display', 'inline');
+                        Play.End.Init(true);
                     } else {
                         $('#gameOffBtn').click(Lobby.MagicBlock.ExitBtn.OnClick);
                         $('#gameOffBtn').css('display', 'inline');
+                        Play.End.Init(false);
                     }
-                    //$.connection.hub.start().done(function () {
-
-                    //});
                 }
             }
         });
@@ -56,7 +54,8 @@ function PlayManager() {
     pm.Skills = Skills();
     pm.Inventory = Inventory();
 
-    pm.Chat=ChatManager();
+    pm.Chat = ChatManager();
+    pm.End = EndButton();
 
     pm.IsMaster=false;
 
@@ -79,7 +78,7 @@ function PlayManager() {
                .done(function (data) {                   
                    pm.LabelHero = "Герой: " + data.Name;
                });
-        pm.Chat.Init();
+        pm.Chat.Init();        
         $('#infoBtn').click(pm.Info.Show);
         $('#statBtn').click(pm.Stat.Show);
         $('#skillBtn').click(pm.Skills.Show);
@@ -261,17 +260,20 @@ function EndButton() {
     o.Init = function (IsMaster) {
         if (IsMaster) {            
             $('#gameOffBtn').css('display', 'inline');
-            $.getJSON('../api/game/delete?GameId=' + user.GameId)
-           .done(function (data) {
-               if (data == "true") {
-                   var user = JSON.parse($.cookie("user"));
-                   NewLobby.SyncGameDelete(user.GameId);
-                   user.GameId = 0;
-                   $.cookie('user', JSON.stringify(user), { path: '/site/' });
-                   window.location.replace('profile');
-               } else
-                   alert('Невозможно закончить приключение!');
-           });
+            $('#gameOffBtn').click(function () {
+                $.getJSON('../api/game/delete?GameId=' + user.GameId)
+               .done(function (data) {
+                   if (data == "true") {
+                       var user = JSON.parse($.cookie("user"));
+                       var gameid = user.GameId;
+                       user.GameId = 0;
+                       $.cookie('user', JSON.stringify(user), { path: '/site/' });
+                       NewLobby.SyncGameDelete(gameid);
+                       window.location.replace('profile');
+                   } else
+                       alert('Невозможно закончить приключение!');
+               });
+            });
         } else {
             $('#gameOffBtn').css('display', 'inline');
             $('#gameOffBtn').click(function () {
@@ -279,9 +281,10 @@ function EndButton() {
                 .done(function (data) {
                     if (data == "true") {
                         var user = JSON.parse($.cookie("user"));
+                        var gameid = user.GameId;
                         user.GameId = 0;
                         $.cookie('user', JSON.stringify(user), { path: '/site/' });
-                        Lobby.SyncHeroExit(user.GameId, user.HeroId);
+                        Lobby.SyncHeroExit(gameid, user.HeroId);
                         window.location.reload();
                     } else
                         alert('Невозможно покинуть партию!');
@@ -292,7 +295,6 @@ function EndButton() {
     return o;
 }
 
-//blocks
 function Inforamtion() {
     var o = new Object();
 

@@ -140,4 +140,22 @@
     <Text>Just da fuck up?</Text>
     <GameMessageType>1</GameMessageType>
   </GameChatMessage>
+  <GameChatMessage>
+    <Id>17</Id>
+    <GameId>2</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>07.04.2015 15:20:38</Stamp>
+    <Text>где чат</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>18</Id>
+    <GameId>2</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>07.04.2015 15:20:51</Stamp>
+    <Text>втф</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
 </GameChatMessages>
