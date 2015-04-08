@@ -2,7 +2,7 @@
 <Heros>
   <Hero>
     <Id>1</Id>
-	<Active>true</Active>
+    <Active>true</Active>
     <UserId>1</UserId>
     <Avatar>img/admin.png</Avatar>
     <Level>1</Level>
@@ -22,9 +22,57 @@
     <DefenceState>1</DefenceState>
     <AttackState>1</AttackState>
     <CommonState>1</CommonState>
-    <Characteristics><Characteristic>1</Characteristic><Characteristic>2</Characteristic><Characteristic>3</Characteristic><Characteristic>4</Characteristic><Characteristic>5</Characteristic><Characteristic>6</Characteristic></Characteristics>
-    <Abilities><Ability>1</Ability><Ability>2</Ability><Ability>3</Ability></Abilities>
-    <Skills><Skill>1</Skill><Skill>2</Skill><Skill>3</Skill><Skill>4</Skill><Skill>5</Skill><Skill>6</Skill><Skill>7</Skill><Skill>8</Skill><Skill>9</Skill><Skill>10</Skill><Skill>11</Skill><Skill>12</Skill><Skill>13</Skill><Skill>14</Skill><Skill>15</Skill><Skill>16</Skill><Skill>17</Skill><Skill>18</Skill><Skill>19</Skill><Skill>20</Skill><Skill>21</Skill><Skill>22</Skill><Skill>23</Skill><Skill>24</Skill><Skill>25</Skill><Skill>26</Skill><Skill>27</Skill><Skill>28</Skill><Skill>29</Skill><Skill>30</Skill><Skill>31</Skill><Skill>32</Skill><Skill>33</Skill><Skill>34</Skill><Skill>35</Skill><Skill>36</Skill></Skills>
+    <Characteristics>
+      <Characteristic>1</Characteristic>
+      <Characteristic>2</Characteristic>
+      <Characteristic>3</Characteristic>
+      <Characteristic>4</Characteristic>
+      <Characteristic>5</Characteristic>
+      <Characteristic>6</Characteristic>
+    </Characteristics>
+    <Abilities>
+      <Ability>1</Ability>
+      <Ability>2</Ability>
+      <Ability>3</Ability>
+    </Abilities>
+    <Skills>
+      <Skill>1</Skill>
+      <Skill>2</Skill>
+      <Skill>3</Skill>
+      <Skill>4</Skill>
+      <Skill>5</Skill>
+      <Skill>6</Skill>
+      <Skill>7</Skill>
+      <Skill>8</Skill>
+      <Skill>9</Skill>
+      <Skill>10</Skill>
+      <Skill>11</Skill>
+      <Skill>12</Skill>
+      <Skill>13</Skill>
+      <Skill>14</Skill>
+      <Skill>15</Skill>
+      <Skill>16</Skill>
+      <Skill>17</Skill>
+      <Skill>18</Skill>
+      <Skill>19</Skill>
+      <Skill>20</Skill>
+      <Skill>21</Skill>
+      <Skill>22</Skill>
+      <Skill>23</Skill>
+      <Skill>24</Skill>
+      <Skill>25</Skill>
+      <Skill>26</Skill>
+      <Skill>27</Skill>
+      <Skill>28</Skill>
+      <Skill>29</Skill>
+      <Skill>30</Skill>
+      <Skill>31</Skill>
+      <Skill>32</Skill>
+      <Skill>33</Skill>
+      <Skill>34</Skill>
+      <Skill>35</Skill>
+      <Skill>36</Skill>
+    </Skills>
     <Items>
       <Stuff>1</Stuff>
       <Stuff>1</Stuff>
@@ -32,29 +80,77 @@
     </Items>
   </Hero>
   <Hero>
-		<Id>2</Id>
-		<Active>true</Active>
-		<UserId>2</UserId>
+    <Id>2</Id>
+    <Active>true</Active>
+    <UserId>2</UserId>
     <Avatar>img/tester.png</Avatar>
-		<Level>1</Level>
-		<Expirience>0</Expirience>
-		<Age>120</Age>
-		<Weight>45</Weight>
-		<Name>Иерихон</Name>
-		<God>Фрея</God>
-		<Eyes>Белый</Eyes>
-		<Hair>Светлый</Hair>
-		<Skin>Светлый</Skin>
-		<Class>2</Class>
-		<Race>8</Race>
-		<Height>2</Height>
-		<Sex>1</Sex>
-		<HealthState>1</HealthState>
-		<DefenceState>1</DefenceState>
-		<AttackState>1</AttackState>
-		<CommonState>1</CommonState>
-		<Characteristics><Characteristic>1</Characteristic><Characteristic>2</Characteristic><Characteristic>3</Characteristic><Characteristic>4</Characteristic><Characteristic>5</Characteristic><Characteristic>6</Characteristic></Characteristics>
-		<Abilities><Ability>1</Ability><Ability>2</Ability><Ability>3</Ability></Abilities>
-		<Skills><Skill>1</Skill><Skill>2</Skill><Skill>3</Skill><Skill>4</Skill><Skill>5</Skill><Skill>6</Skill><Skill>7</Skill><Skill>8</Skill><Skill>9</Skill><Skill>10</Skill><Skill>11</Skill><Skill>12</Skill><Skill>13</Skill><Skill>14</Skill><Skill>15</Skill><Skill>16</Skill><Skill>17</Skill><Skill>18</Skill><Skill>19</Skill><Skill>20</Skill><Skill>21</Skill><Skill>22</Skill><Skill>23</Skill><Skill>24</Skill><Skill>25</Skill><Skill>26</Skill><Skill>27</Skill><Skill>28</Skill><Skill>29</Skill><Skill>30</Skill><Skill>31</Skill><Skill>32</Skill><Skill>33</Skill><Skill>34</Skill><Skill>35</Skill><Skill>36</Skill></Skills>
-	</Hero>
+    <Level>1</Level>
+    <Expirience>0</Expirience>
+    <Age>120</Age>
+    <Weight>45</Weight>
+    <Name>Иерихон</Name>
+    <God>Фрея</God>
+    <Eyes>Белый</Eyes>
+    <Hair>Светлый</Hair>
+    <Skin>Светлый</Skin>
+    <Class>2</Class>
+    <Race>8</Race>
+    <Height>2</Height>
+    <Sex>1</Sex>
+    <HealthState>1</HealthState>
+    <DefenceState>1</DefenceState>
+    <AttackState>1</AttackState>
+    <CommonState>1</CommonState>
+    <Characteristics>
+      <Characteristic>1</Characteristic>
+      <Characteristic>2</Characteristic>
+      <Characteristic>3</Characteristic>
+      <Characteristic>4</Characteristic>
+      <Characteristic>5</Characteristic>
+      <Characteristic>6</Characteristic>
+    </Characteristics>
+    <Abilities>
+      <Ability>1</Ability>
+      <Ability>2</Ability>
+      <Ability>3</Ability>
+    </Abilities>
+    <Skills>
+      <Skill>1</Skill>
+      <Skill>2</Skill>
+      <Skill>3</Skill>
+      <Skill>4</Skill>
+      <Skill>5</Skill>
+      <Skill>6</Skill>
+      <Skill>7</Skill>
+      <Skill>8</Skill>
+      <Skill>9</Skill>
+      <Skill>10</Skill>
+      <Skill>11</Skill>
+      <Skill>12</Skill>
+      <Skill>13</Skill>
+      <Skill>14</Skill>
+      <Skill>15</Skill>
+      <Skill>16</Skill>
+      <Skill>17</Skill>
+      <Skill>18</Skill>
+      <Skill>19</Skill>
+      <Skill>20</Skill>
+      <Skill>21</Skill>
+      <Skill>22</Skill>
+      <Skill>23</Skill>
+      <Skill>24</Skill>
+      <Skill>25</Skill>
+      <Skill>26</Skill>
+      <Skill>27</Skill>
+      <Skill>28</Skill>
+      <Skill>29</Skill>
+      <Skill>30</Skill>
+      <Skill>31</Skill>
+      <Skill>32</Skill>
+      <Skill>33</Skill>
+      <Skill>34</Skill>
+      <Skill>35</Skill>
+      <Skill>36</Skill>
+    </Skills>
+  </Hero>
 </Heros>

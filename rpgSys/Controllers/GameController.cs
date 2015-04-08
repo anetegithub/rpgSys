@@ -129,17 +129,6 @@ namespace rpgSys.Controllers
 
             using (var db = new Runes.GameCommunicationRune())
             {
-                //Game g = db.Game.Find(x => x.Id == gameId);
-                //if (g == null)
-                //    return Ok("false");
-
-                //if (g.Heroes != null)
-                //    foreach (var h in g.Heroes)
-                //        db.User.Find(u => u.Id == h.UserId).GameId = 0;
-                //db.User.Find(u => u.Id == g.Master.UserId).GameId = 0;
-
-                //db.SaveRune();
-
                 Game g = db.Game.ReferenceUniq("Id", "==", gameId);
                 if (g == null)
                     return Ok("false");
@@ -150,11 +139,7 @@ namespace rpgSys.Controllers
                 db.User.ReferenceUniq("Id", "==", g.Master.UserId).GameId = 0;
 
                 db.SaveRune();
-
-                //db.Game.Free = () =>
-                //    {
-                //        db.Game.Remove(g);
-                //    };
+                db.Game.Remove(g);
             }
 
             return Ok("true");

@@ -2,10 +2,10 @@
 <RuneStrings>
   <RuneString>
     <Id>1</Id>
-	<Value>Мужской</Value>
+    <Value>Мужской</Value>
   </RuneString>
   <RuneString>
-		<Id>2</Id>
-		<Value>Женский</Value>
-	</RuneString>
+    <Id>2</Id>
+    <Value>Женский</Value>
+  </RuneString>
 </RuneStrings>

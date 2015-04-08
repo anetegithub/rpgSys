@@ -32,7 +32,7 @@ $(function () {
                                         var gameid = user.GameId;
                                         user.GameId = 0;
                                         $.cookie('user', JSON.stringify(user), { path: '/site/' });
-                                        NewLobby.SyncGameDelete(gameid);
+                                        Lobby.SyncGameDelete(gameid);
                                         window.location.replace('profile');
                                     } else
                                         alert('Невозможно закончить приключение!');

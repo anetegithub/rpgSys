@@ -20,22 +20,22 @@
     </Rewards>
   </Scenario>
   <Scenario>
-		<Id>2</Id>
-		<Active>true</Active>
-		<Title>Таверна 2</Title>
-		<Recomendation>Приватная чат комната.</Recomendation>
-		<Fable>Чат комната</Fable>
-		<Locations>
-			<Location>1</Location>
-		</Locations>
-		<Events>
-			<Event>1</Event>
-		</Events>
-		<Npcs>
-			<Npc>1</Npc>
-		</Npcs>
-		<Rewards>
-			<Reward>1</Reward>
-		</Rewards>
-	</Scenario>
+    <Id>2</Id>
+    <Active>true</Active>
+    <Title>Таверна 2</Title>
+    <Recomendation>Приватная чат комната.</Recomendation>
+    <Fable>Чат комната</Fable>
+    <Locations>
+      <Location>1</Location>
+    </Locations>
+    <Events>
+      <Event>1</Event>
+    </Events>
+    <Npcs>
+      <Npc>1</Npc>
+    </Npcs>
+    <Rewards>
+      <Reward>1</Reward>
+    </Rewards>
+  </Scenario>
 </Scenarios>

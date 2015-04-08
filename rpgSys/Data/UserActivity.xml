@@ -7,9 +7,9 @@
     <Stamp>24.03.2015 8:43:26</Stamp>
   </UserActivity>
   <UserActivity>
-		<Id>2</Id>
-		<Action>1</Action>
-		<Text>Вы успешно зарегистрировались!</Text>
-		<Stamp>24.03.2015 8:43:26</Stamp>
-	</UserActivity>
+    <Id>2</Id>
+    <Action>1</Action>
+    <Text>Вы успешно зарегистрировались!</Text>
+    <Stamp>24.03.2015 8:43:26</Stamp>
+  </UserActivity>
 </UserActivitys>
