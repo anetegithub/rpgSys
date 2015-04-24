@@ -5,6 +5,12 @@
     <Name>Таверна</Name>
     <Description>Обычная таверна</Description>
     <Specification>Нет</Specification>
+  </Location>
+  <Location>
+    <Id>2</Id>
+    <Name>Маверна</Name>
+    <Description>Обычная маверна</Description>
+    <Specification>Нет</Specification>
     <Map>C:\Users\Anete\Source\Repo\rpgSys\rpgSys\site\img\Taverna.png</Map>
   </Location>
 </Locations>

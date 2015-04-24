@@ -158,4 +158,557 @@
     <Text>втф</Text>
     <GameMessageType>1</GameMessageType>
   </GameChatMessage>
+  <GameChatMessage>
+    <Id>19</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>24.04.2015 9:59:28</Stamp>
+    <Text>1</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>20</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>24.04.2015 10:06:24</Stamp>
+    <Text>test on enter type
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>21</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>24.04.2015 10:15:24</Stamp>
+    <Text>lol
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>22</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>24.04.2015 10:15:35</Stamp>
+    <Text>lololo
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>23</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>24.04.2015 10:16:15</Stamp>
+    <Text>fdsfs</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>24</Id>
+    <GameId>1</GameId>
+    <Name>Anete</Name>
+    <Avatar>img/admin.png</Avatar>
+    <Stamp>24.04.2015 10:16:16</Stamp>
+    <Text>dfsw
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>25</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:16:26</Stamp>
+    <Text>hvatit spamit
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>26</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:28:27</Stamp>
+    <Text>dfs
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>27</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:44:58</Stamp>
+    <Text>оло</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>28</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:45:02</Stamp>
+    <Text>оло</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>29</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:46:19</Stamp>
+    <Text>очень удобно</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>30</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:46:23</Stamp>
+    <Text>аж афигеть
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>31</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:47:19</Stamp>
+    <Text>идиотизм
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>32</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:47:25</Stamp>
+    <Text>кудп
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>33</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:47:38</Stamp>
+    <Text>пааввап</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>34</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:47:39</Stamp>
+    <Text>е</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>35</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:47:41</Stamp>
+    <Text>неог</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>36</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:47:42</Stamp>
+    <Text>опро</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>37</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:47:44</Stamp>
+    <Text>длж</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>38</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:47:47</Stamp>
+    <Text>да сука та
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>39</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:57:24</Stamp>
+    <Text>Прокся ваша
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>40</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:57:27</Stamp>
+    <Text>не пашет</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>41</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:57:33</Stamp>
+    <Text>Видителли ли
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>42</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:57:37</Stamp>
+    <Text>уже пашет</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>43</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:24</Stamp>
+    <Text>нах</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>44</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:30</Stamp>
+    <Text>чо бля</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>45</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:32</Stamp>
+    <Text>паав бля
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>46</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:35</Stamp>
+    <Text>вва
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>47</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:38</Stamp>
+    <Text>парар</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>48</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:41</Stamp>
+    <Text>ну д
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>49</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:45</Stamp>
+    <Text>ну блы чо такое то
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>50</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:51</Stamp>
+    <Text>гд долбанный экспешн</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>51</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 10:59:55</Stamp>
+    <Text>а фиг его знает
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>52</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:04</Stamp>
+    <Text>ДА ТЫ ЧООООО
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>53</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:06</Stamp>
+    <Text></Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>54</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:07</Stamp>
+    <Text>щг</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>55</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:16</Stamp>
+    <Text>опапап</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>56</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:18</Stamp>
+    <Text>апвы
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>57</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:25</Stamp>
+    <Text>отъебалов</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>58</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:29</Stamp>
+    <Text>во
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>59</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:33</Stamp>
+    <Text>нету больше
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>60</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:36</Stamp>
+    <Text>ваших IO</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>61</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:39</Stamp>
+    <Text>ошбок</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>62</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 11:00:41</Stamp>
+    <Text>да
+</Text>
+    <GameMessageType>1</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>63</Id>
+    <GameId>1</GameId>
+    <Name>Открытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:46:14</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>64</Id>
+    <GameId>1</GameId>
+    <Name>Закрытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:46:25</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>65</Id>
+    <GameId>1</GameId>
+    <Name>Таверна</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:46:38</Stamp>
+    <Text>Обычная таверна</Text>
+    <GameMessageType>5</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>66</Id>
+    <GameId>1</GameId>
+    <Name>Открытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:48:16</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>67</Id>
+    <GameId>1</GameId>
+    <Name>Открытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:48:24</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>68</Id>
+    <GameId>1</GameId>
+    <Name>Закрытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:48:28</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>69</Id>
+    <GameId>1</GameId>
+    <Name>Маверна</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:48:30</Stamp>
+    <Text>Обычная маверна</Text>
+    <GameMessageType>5</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>70</Id>
+    <GameId>1</GameId>
+    <Name>Открытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:48:54</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>71</Id>
+    <GameId>1</GameId>
+    <Name>Открытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:49:18</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>72</Id>
+    <GameId>1</GameId>
+    <Name>Закрытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:49:21</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>73</Id>
+    <GameId>1</GameId>
+    <Name>Открытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:54:55</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>74</Id>
+    <GameId>1</GameId>
+    <Name>Закрытие таверны</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:54:59</Stamp>
+    <Text>Без дополнений</Text>
+    <GameMessageType>4</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>75</Id>
+    <GameId>1</GameId>
+    <Name>Маверна</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:55:02</Stamp>
+    <Text>Обычная маверна</Text>
+    <GameMessageType>5</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>76</Id>
+    <GameId>1</GameId>
+    <Name>Таверна</Name>
+    <Avatar></Avatar>
+    <Stamp>24.04.2015 15:55:04</Stamp>
+    <Text>Обычная таверна</Text>
+    <GameMessageType>5</GameMessageType>
+  </GameChatMessage>
+  <GameChatMessage>
+    <Id>77</Id>
+    <GameId>1</GameId>
+    <Name>Tester</Name>
+    <Avatar>img/tester.png</Avatar>
+    <Stamp>24.04.2015 15:56:20</Stamp>
+    <Text>take (5) [1] from Иерихон</Text>
+    <GameMessageType>2</GameMessageType>
+  </GameChatMessage>
 </GameChatMessages>

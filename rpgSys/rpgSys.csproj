@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ApiControllerWithHub.cs" />
     <Compile Include="Controllers\BugController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\DiceController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\PlayController.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Hubs\LobbyHub.cs" />
     <Compile Include="Hubs\PlayHub.cs" />
     <Compile Include="Hubs\UserActivityHub.cs" />
+    <Compile Include="Log\Logger.cs" />
     <Compile Include="Models\Game\Game.cs" />
     <Compile Include="Models\Game\GameChatMessage.cs" />
     <Compile Include="Models\Game\GameCommunicationRune.cs" />

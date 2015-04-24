@@ -7,7 +7,11 @@ using System.Web.Http;
 
 using System.Web.Script.Serialization;
 
+using System.Diagnostics;
+using System.Web;
+
 using RuneFramework;
+using rpgSys.Log;
 
 namespace rpgSys.Controllers
 {
@@ -18,6 +22,83 @@ namespace rpgSys.Controllers
         {
             Game Game = new JavaScriptSerializer().Deserialize<Game>(value);
             return Ok(GameProcessing.Write(Game));
+        }
+
+        [ActionName("chgnpc")]
+        public IHttpActionResult Npc([FromBody]String value)
+        {
+            Answer Request = new Answer();
+
+            Logger.LookAfter(() =>
+                {
+                    Request = new JavaScriptSerializer().Deserialize<Answer>(value);
+                });
+
+            if (Request.Id != 0 && Request.GameId != 0)
+                using (var db = new Runes.GameRune())
+                {
+                    if (db.Game.ReferenceUniq("Id", "==", Request.GameId).Npcs == null)
+                        db.Game.ReferenceUniq("Id", "==", Request.GameId).Npcs = new List<Npc>();
+
+                    if (Request.Set)
+                        db.Game.ReferenceUniq("Id", "==", Request.GameId).Npcs.Add(db.Npcs.QueryUniqSafe("Id", "==", Request.Id));
+                    else
+                    {
+                        Game RuneBug = (Game)db.Game.ReferenceUniq("Id", "==", Request.GameId);
+                        if (RuneBug.Npcs == null)
+                            RuneBug.Npcs = new List<Npc>();
+                        RuneBug.Npcs.Remove(RuneBug.Npcs.Where(x => x.Id == Request.Id).ToList()[0]);
+                        
+                    }
+
+                    db.SaveRune();
+
+                    return Ok("true");
+                }
+            else
+                return Ok("false");
+        }
+
+        [ActionName("chgevent")]
+        public IHttpActionResult Event([FromBody]String value)
+        {
+            Answer Request = new Answer();
+
+            Logger.LookAfter(() =>
+            {
+                Request = new JavaScriptSerializer().Deserialize<Answer>(value);
+            });
+
+            if (Request.Id != 0 && Request.GameId != 0)
+                using (var db = new Runes.GameRune())
+                {
+                    db.Game.ReferenceUniq("Id", "==", Request.GameId).Event = db.Events.ReferenceUniq("Id", "==", Request.Id);
+                    db.SaveRune();
+                    return Ok("true");
+                }
+            else
+                return Ok("false");
+        }
+
+        [ActionName("chglocation")]
+        public IHttpActionResult Location([FromBody]String value)
+        {
+            Answer Request = new Answer();
+
+            Logger.LookAfter(() =>
+            {
+                Request = new JavaScriptSerializer().Deserialize<Answer>(value);
+            });
+
+            if (Request.Id != 0 && Request.GameId != 0)
+                using (var db = new Runes.GameRune())
+                {
+                    db.Game.ReferenceUniq("Id", "==", Request.GameId).Location = db.Locations.ReferenceUniq("Id", "==", Request.Id);
+                    db.SaveRune();
+                    return Ok("true");
+                }
+            else
+                return Ok("false");
         }
 
         [HttpGet]
@@ -191,10 +272,15 @@ namespace rpgSys.Controllers
         [HttpGet]
         public IHttpActionResult ById(string Id)
         {
-            using (var db = new Runes.GameRune())
-            {
-                return Ok((db.Game.QueryUniq("Id", "==", Id) as Game) ?? new Game());
-            }
+            Game game = new Game();
+            Logger.LookAfter(() =>
+                {
+                    using (var db = new Runes.GameRune())
+                    {
+                        game = (Game)db.Game.QueryUniq("Id", "==", Id);
+                    }
+                });
+            return Ok(game);
         }
         
         [HttpGet]
@@ -213,6 +299,12 @@ namespace rpgSys.Controllers
         }
     }
 
+    public sealed class Answer
+    {
+        public Int32 Id = 0, GameId = 0;
+        public Boolean Set = true;
+    }
+
     internal static class GameProcessing
     {
         internal static Game Write(Game G)
@@ -228,7 +320,7 @@ namespace rpgSys.Controllers
 
                 G.Scenario = S;
 
-                G.Npcs = S.Npcs;
+                //G.Npcs = S.Npcs;
                 G.Event = S.Events[0];
                 G.Location = S.Locations[0];
 

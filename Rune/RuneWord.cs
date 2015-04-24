@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace RuneFramework
 {
-    public class RuneWord<T> : IEnumerable<T>
+    public class RuneWord<T> : IEnumerable<T> where T : class
     {
         public RuneWord(string TableName, Rune Rune)
         {
@@ -60,6 +60,16 @@ namespace RuneFramework
                 return Transmuter.RealiseQuery(Book)[0];
             else
                 return null;
+        }
+        public T QueryUniqSafe(String Field,String Operator,Object Value)
+        {
+            RuneSpell Spell = new RuneSpell(Field, Operator, Value);
+            RuneBook Book = new RuneBook() { Spells = new List<RuneSpell>() { Spell } };
+            var QueryResult = Transmuter.RealiseQuery(Book);
+            if (QueryResult.Count != 0)
+                return Transmuter.RealiseQuery(Book)[0];
+            else
+                return (new Object() as T);
         }
 
         public List<T> Reference(SimpleRuneBook Book)

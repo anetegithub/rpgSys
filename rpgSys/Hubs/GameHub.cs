@@ -36,5 +36,24 @@ namespace rpgSys
                 Clients.All.addgamemsg(gcm);
             }
         }
+
+        public void updatenpc(string GameId)
+        {
+            Clients.All.updatenpc(GameId);
+        }
+        public void updatevnt(string GameId, String EventId, String TypeId)
+        {
+            var db = new Runes.GameRune();
+            var msg = db.Events.QueryUniqSafe("Id", "==", EventId);
+            sendmsg(GameId, msg.Title, "", TypeId, msg.Description);
+            Clients.All.updatevnt(GameId);
+        }
+        public void updateloc(string GameId, String LocId, String TypeId)
+        {
+            var db = new Runes.GameRune();
+            var msg = db.Locations.QueryUniqSafe("Id", "==", LocId);
+            sendmsg(GameId, msg.Name, "", TypeId, msg.Description);
+            Clients.All.updateloc(GameId);
+        }
     }
 }

@@ -8,7 +8,7 @@
     //Sync
     var synclobby = $.connection.lobby;
 
-    synclobby.client.gamedelete  = function (GameId) {
+    synclobby.client.gamedelete = function (GameId) {
         var user = JSON.parse($.cookie("user"));
         if (user.GameId == GameId && GameId != 0) {
             user.GameId = 0;
@@ -44,7 +44,7 @@
         }
     };
 
-    var gamehub = $.connection.game;
+    
 
     gamehub.client.addherotolist = function (Hero) {
         Play.Players.Add(Hero);
@@ -55,6 +55,22 @@
     gamehub.client.addgamemsg = function (Msg) {
         Play.Chat.Add(Msg);
     }
+    gamehub.client.updatenpc = function (GameId) {
+        if (user.GameId == GameId && GameId != 0) {
+            Play.Npcs.Update();
+        }
+    }
+    gamehub.client.updatevnt = function (GameId) {
+        if (user.GameId == GameId && GameId != 0) {
+            Play.Events.Update();
+        }
+    }
+    gamehub.client.updateloc = function (GameId) {
+        if (user.GameId == GameId && GameId != 0) {
+            Play.Locations.Update();
+        }
+    }
+
 
 
     $.connection.hub.start().done(function () {
@@ -74,6 +90,15 @@
             synclobby.server.syncgamedelete(GameId);
         };
 
+        $('#textFoSend').bind("enterKey", function (e) {
+            $('#send_btn').click();
+        });
+        $('#textFoSend').keyup(function (e) {
+            if (e.keyCode == 13) {
+                $(this).trigger("enterKey");
+            }
+        });
+
         $('#send_btn').click(function () {
             if ($('#textFoSend').val() != '') {
                 if ($('#textFoSend').val().replace(/\s/g, '').length) {
@@ -82,12 +107,13 @@
                 }
             }
         });
-    });    
-    
+    });
+
     Lobby.IsState();
 });
 var user = JSON.parse($.cookie("user"));
 var Lobby = null;
+var gamehub = $.connection.game;
 
 function GameLobby() {
     var NewLobby = new Object();

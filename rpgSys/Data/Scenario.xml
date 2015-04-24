@@ -8,6 +8,7 @@
     <Fable>Чат комната</Fable>
     <Locations>
       <Location>1</Location>
+      <Location>2</Location>
     </Locations>
     <Events>
       <Event>1</Event>
@@ -27,9 +28,11 @@
     <Fable>Чат комната</Fable>
     <Locations>
       <Location>1</Location>
+      <Location>2</Location>
     </Locations>
     <Events>
       <Event>1</Event>
+      <Event>2</Event>
     </Events>
     <Npcs>
       <Npc>1</Npc>

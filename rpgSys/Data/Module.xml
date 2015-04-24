@@ -3,103 +3,103 @@
   <Module>
     <Id>1</Id>
     <Active>true</Active>
-	  <Name>Активность пользователя</Name>
-	  <InnerName>User_Activity</InnerName>
-	  <Info>Показывает активность пользователя за последнее время, учитывается активность персонажа и пользователя.</Info>
-	  <Version>0.1</Version>
-	  <Dllinfo>UserActivityModule_Core: HOWTOUSE// put (span id=uaContainer /span) and add useractivity.js</Dllinfo>
-  </Module>  
-	<Module>
-		<Id>2</Id>
-		<Active>false</Active>
-		<Name>Быстрое инфо</Name>
-		<InnerName>Fast_Info</InnerName>
-		<Info>Добавляет всплывающее меню и окно информации для быстрого просмотра вместо того что бы искать в правилах.</Info>
-		<Version>1,0</Version>
-		<Dllinfo>FastInfoModule_Core : HOWTOUSE// add fastinfo.js, add fastinfo.css, set info window container (span id=fiContainer /span) any place, then add to every item oncontext function ShowInfo('ID_THIS_ITEM','ID_CONTAINER'), and AT LAST: put (span id=Container /span) some place for show message in this container. Server side working automatic with non-custom items which need info.</Dllinfo>		
-	</Module>	
-	<Module>
-		<Id>3</Id>
-		<Active>false</Active>
-		<Name>Язык условий</Name>
-		<InnerName>CL</InnerName>
-		<Info>
+    <Name>Активность пользователя</Name>
+    <InnerName>User_Activity</InnerName>
+    <Info>Показывает активность пользователя за последнее время, учитывается активность персонажа и пользователя.</Info>
+    <Version>0.1</Version>
+    <Dllinfo>UserActivityModule_Core: HOWTOUSE// put (span id=uaContainer /span) and add useractivity.js</Dllinfo>
+  </Module>
+  <Module>
+    <Id>2</Id>
+    <Active>false</Active>
+    <Name>Быстрое инфо</Name>
+    <InnerName>Fast_Info</InnerName>
+    <Info>Добавляет всплывающее меню и окно информации для быстрого просмотра вместо того что бы искать в правилах.</Info>
+    <Version>1,0</Version>
+    <Dllinfo>FastInfoModule_Core : HOWTOUSE// add fastinfo.js, add fastinfo.css, set info window container (span id=fiContainer /span) any place, then add to every item oncontext function ShowInfo('ID_THIS_ITEM','ID_CONTAINER'), and AT LAST: put (span id=Container /span) some place for show message in this container. Server side working automatic with non-custom items which need info.</Dllinfo>
+  </Module>
+  <Module>
+    <Id>3</Id>
+    <Active>false</Active>
+    <Name>Язык условий</Name>
+    <InnerName>CL</InnerName>
+    <Info>
 			Возможность использовать конструкции в запросах что бы делать выборки с большим количеством условий
 		</Info>
-		<Version>0.5</Version>
-		<DllInfo>
+    <Version>0.5</Version>
+    <DllInfo>
 			How to use:
 			Field Operation Value
 			Id == 1      
 		</DllInfo>
-	</Module>	
-	<Module>
-		<Id>4</Id>
-		<Active>false</Active>
-		<Name>ORM baseCL</Name>
-		<InnerName>baseCL</InnerName>
-		<Info>
+  </Module>
+  <Module>
+    <Id>4</Id>
+    <Active>false</Active>
+    <Name>ORM baseCL</Name>
+    <InnerName>baseCL</InnerName>
+    <Info>
 			ORM позволяющая получать данные из XML файла с помощью языка условий (CL)
 		</Info>
-		<Version>0.7</Version>
-		<DllInfo>
+    <Version>0.7</Version>
+    <DllInfo>
 			How to use:
 			See baseCL.exampleCL class
 		</DllInfo>
-	</Module>
-	<Module>
-		<Id>5</Id>
-		<Active>true</Active>
-		<Name>RuneFramework</Name>
-		<InnerName>RuneFramework</InnerName>
-		<Info>
+  </Module>
+  <Module>
+    <Id>5</Id>
+    <Active>true</Active>
+    <Name>RuneFramework</Name>
+    <InnerName>RuneFramework</InnerName>
+    <Info>
 			EntityFramework for XML
 		</Info>
-		<Version>0.7</Version>
-		<DllInfo>
+    <Version>0.7</Version>
+    <DllInfo>
 			How to use:
 			See RuneTests project
 		</DllInfo>
-	</Module>
-	<Module>
-		<Id>6</Id>
-		<Active>true</Active>
-		<Name>Предпросмотр изображений</Name>
-		<InnerName>imagepreview</InnerName>
-		<Info>
+  </Module>
+  <Module>
+    <Id>6</Id>
+    <Active>true</Active>
+    <Name>Предпросмотр изображений</Name>
+    <InnerName>imagepreview</InnerName>
+    <Info>
 			Preview custom image into img
 		</Info>
-		<Version>0.3</Version>
-		<DllInfo>
+    <Version>0.3</Version>
+    <DllInfo>
 			How to use:
 			use 'preview' img tag
 		</DllInfo>
-	</Module>
-	<Module>
-		<Id>6</Id>
-		<Active>false</Active>
-		<Name>Плитки Metro</Name>
-		<InnerName>Metro UI</InnerName>
-		<Info>
+  </Module>
+  <Module>
+    <Id>6</Id>
+    <Active>false</Active>
+    <Name>Плитки Metro</Name>
+    <InnerName>Metro UI</InnerName>
+    <Info>
 			Metro UI div's
 		</Info>
-		<Version>0.3</Version>
-		<DllInfo>
+    <Version>0.3</Version>
+    <DllInfo>
 			How to use:
 			add .tile class
 		</DllInfo>
-	</Module>
-	<Module>
-		<Id>7</Id>
-		<Active>true</Active>
-		<Name>object-watch by Eli Grey</Name>
-		<InnerName>object-watch.js</InnerName>
-		<Info>
+  </Module>
+  <Module>
+    <Id>7</Id>
+    <Active>true</Active>
+    <Name>object-watch by Eli Grey</Name>
+    <InnerName>object-watch.js</InnerName>
+    <Info>
 			add eventlistener to field
 		</Info>
-		<Version>0.3</Version>
-		<DllInfo>
+    <Version>0.3</Version>
+    <DllInfo>
 			http://eligrey.com
 		</DllInfo>
-	</Module>
+  </Module>
 </Modules>

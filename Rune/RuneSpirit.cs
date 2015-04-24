@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Collections;
+
 using System.Xml.Linq;
 
 namespace RuneFramework
@@ -130,12 +132,11 @@ namespace RuneFramework
             if (RuneMaster.Document.Root.Elements().Count() != 0)
             {
                 var some = RuneMaster.Elements.Max(c => (double)c.Element(FieldName));
+                RuneMaster.Close();
                 return some;
             }
             else
                 return 0;
-
-            RuneMaster.Close();
         }
 
         private Lazy<RuneMaster> Master = new Lazy<RuneMaster>();

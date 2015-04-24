@@ -35,4 +35,11 @@
     <Stamp>24.03.2015 10:19:28</Stamp>
     <Text>yeah...</Text>
   </GeneralChatMessage>
+  <GeneralChatMessage>
+    <Id>6</Id>
+    <UserName>Anete</UserName>
+    <UserAvatar>img/admin.png</UserAvatar>
+    <Stamp>24.04.2015 9:59:37</Stamp>
+    <Text>dhdf</Text>
+  </GeneralChatMessage>
 </GeneralChatMessages>

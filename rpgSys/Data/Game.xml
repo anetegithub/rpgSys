@@ -1,2 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Games />
+<Games>
+  <Game>
+    <Id>1</Id>
+    <IsActive>True</IsActive>
+    <Scenario>2</Scenario>
+    <Master>2</Master>
+    <Event>2</Event>
+    <Location>1</Location>
+    <Heroes>
+      <Hero>1</Hero>
+    </Heroes>
+    <Npcs>
+      <Npc>1</Npc>
+      <Npc>1</Npc>
+      <Npc>1</Npc>
+    </Npcs>
+  </Game>
+</Games>

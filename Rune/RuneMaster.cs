@@ -24,10 +24,13 @@ namespace RuneFramework
         }
         public void ReWrite(XElement InnerElements)
         {
-            _Document = new XDocument(InnerElements);
             AddToLine(() =>
             {
-                Document.Save(Path);
+                Logger.LookAfter(() =>
+                {
+                    _Document = new XDocument(InnerElements);
+                    Document.Save(Path);
+                });
             });
         }
 

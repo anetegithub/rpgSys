@@ -5,4 +5,9 @@
     <Title>Открытие таверны</Title>
     <Description>Без дополнений</Description>
   </Event>
+  <Event>
+    <Id>2</Id>
+    <Title>Закрытие таверны</Title>
+    <Description>Без дополнений</Description>
+  </Event>
 </Events>

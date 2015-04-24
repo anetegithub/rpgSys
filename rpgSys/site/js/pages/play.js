@@ -21,6 +21,8 @@ $(function () {
                     Play.Locations.gameid = data.Id;
                     //Play.Locations.updatelocation=UPDATE OTHER CLIENTS
                     Play.Locations.location = data.Location;
+
+                    Play.Npcs.Update();
                     
                     $('#gameOffBtn').css('display', 'inline');
                     $('#gameOffBtn').click(function () {
@@ -73,6 +75,8 @@ function PlayManager() {
     pm.Stat = Stats();
     pm.Skills = Skills();
     pm.Inventory = Inventory();
+    pm.Master = Master();
+    pm.Displays = Displays();
 
     pm.Chat = ChatManager();
 
@@ -102,6 +106,8 @@ function PlayManager() {
         $('#statBtn').click(pm.Stat.Show);
         $('#skillBtn').click(pm.Skills.Show);
         $('#stuffBtn').click(pm.Inventory.Show);
+        $('#masterMain').click(pm.Master.Show);
+        $('#masterDisplay').click(pm.Displays.Show);
     }
 
     return pm;
@@ -204,9 +210,10 @@ function NpcList() {
     };
 
     pl.Show = function (Npcs) {
-        for (var i = 0; i < Npcs.length; i++) {
-            pl.Add(Npcs[i]);
-        };
+        pl.Container.html('');
+        if (Npcs != null)
+            for (var i = 0; i < Npcs.length; i++)
+                pl.Add(Npcs[i]);            
     };
     pl.Add = function (Npc) {
         pl.Container.html(pl.Html() + "<span npcid='" + Npc.Id +
@@ -219,6 +226,12 @@ function NpcList() {
                 $(pl.Container[0].children[i]).attr('npcid').remove();
             }
         };
+    };
+
+    pl.Update = function () {
+        $.getJSON('../api/game/byid?Id=' + user.GameId).done(function (data) {
+            pl.Show(data.Npcs);
+        });
     };
 
     return pl;
@@ -234,6 +247,11 @@ function EventMgr() {
         evmngr.updateevent(evmngr.gameid);
         return newval;
     })
+    evmngr.Update = function () {
+        $.getJSON('../api/game/byid?Id=' + user.GameId).done(function (data) {
+            evmngr.event = data.Event;
+        })
+    };
     return evmngr;
 }
 
@@ -255,6 +273,11 @@ function LocationMgr() {
         evmngr.updatelocation(evmngr.gameid);
         return newval;
     })
+    evmngr.Update = function () {
+        $.getJSON('../api/game/byid?Id=' + user.GameId).done(function (data) {
+            evmngr.location = data.Location;
+        })
+    };
     return evmngr;
 }
 
@@ -517,6 +540,65 @@ function Inventory() {
     return o;
 }
 
+function Master() {
+    var o = new Object();
+    o.Show = function () {
+        $.getJSON('../api/game/byid?id=' + user.GameId).done(function (data) {
+            var innerhtml = "";
+            if (data.Master.Id == user.HeroId) {
+                innerhtml += "<div class='row text-center'><div class='col-lg-12'><h2>Действия</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+                innerhtml += "<tr><td>Сообщение:</td><td><input id='masterMsgText' placeholder='Нажмите Enter для отправки' class='form-control' type='text'/></td></tr>";
+                innerhtml += "<tr><td>Действие (MPL):</td><td><input id='masterMsgText' placeholder='Введите макрос' class='form-control' type='text'/></td></tr>";
+                innerhtml += "<tr><td>Запрос (TL):</td><td><input id='masterMsgText' placeholder='Введите текст запроса' class='form-control' type='text'/></td></tr>";
+                innerhtml += "</tbody></table></div></div></div>";
+            }
+            Play.Container.Show('fa fa-male', "Мастер " + (data.Master.Id != user.HeroId ? "(не вы)" : ""), 'default', innerhtml);
+        });
+    };
+    return o;
+}
+
+function Displays() {
+    var o = new Object();
+    o.Show = function () {
+        $.getJSON('../api/game/byid?id=' + user.GameId).done(function (data) {
+            var innerhtml = "";
+            if (data.Master.Id == user.HeroId) {
+                innerhtml += "<div class='row text-center'><div class='col-lg-4'><h2>Персонажи</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+                innerhtml += "<tr><td> <select class='form-control' id='chgNpcS'>";
+                for (var i = 0; i < data.Scenario.Npcs.length; i++) {
+                    innerhtml += "<option npcid='" + data.Scenario.Npcs[i].Id + "' class='form-control'>" + data.Scenario.Npcs[0].Name + "</option>";
+                }
+                innerhtml += "</select> </td></tr>";
+                innerhtml += "<tr><td><button id='addNpcadditionalbutton' class='btn btn-primary btn-sm' id='btn-chat'>Добавить</button>&nbsp;<button id='removeNpcadditionalbutton' class='btn btn-primary btn-sm' id='btn-chat'>Удалить</button></td></tr>";
+
+
+                innerhtml += "</tbody></table></div></div><div class='col-lg-4'><h2>События</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+                innerhtml += "<tr><td> <select class='form-control' id='chgEventS'>";
+                for (var i = 0; i < data.Scenario.Events.length; i++) {
+                    innerhtml += "<option eventid='"+data.Scenario.Events[i].Id+"' class='form-control'>" + data.Scenario.Events[i].Title + "</option>";
+                }
+                innerhtml += "</select> </td></tr>";
+                innerhtml += "<tr><td><button id='changeeventtempbtn' class='btn btn-primary btn-sm' id='btn-chat'>Проиграть новое событие</button>";
+
+
+                innerhtml += "</tbody></table></div></div><div class='col-lg-4'><h2>Локации</h2><div class='table-responsive'><table class='table table-bordered table-hover'><tbody>";
+                innerhtml += "<tr><td> <select class='form-control' id='chgLocationS'>";
+                for (var i = 0; i < data.Scenario.Locations.length; i++) {
+                    innerhtml += "<option locid='" + data.Scenario.Locations[i].Id + "' class='form-control'>" + data.Scenario.Locations[i].Name + "</option>";
+                }
+                innerhtml += "</select> </td></tr>";
+                innerhtml += "<tr><td><button id='changelocationtempbtn' class='btn btn-primary btn-sm' id='btn-chat'>Сменить текущую локацию на выбранную</button>";
+
+
+                innerhtml += "</tbody></table></div></div></div>";
+            }
+            Play.Container.Show('fa fa-share-square-o', "Экраны " + (data.Master.Id != user.HeroId ? "(недоступно)" : ""), 'default', innerhtml);
+        });
+    };
+    return o;
+}
+
 function ContainerManager() {
     var o = new Object();
 
@@ -538,6 +620,41 @@ function ContainerManager() {
         html += "</div>";
         html += "</div>";
         $('#info').html(html);
+        $('#masterMsgText').bind("enterKey", function (e) {
+            gamehub.server.sendmsg(user.GameId, user.Login, user.Avatar, "2", $('#masterMsgText').val());
+            $('#masterMsgText').val("");
+        });
+        $('#masterMsgText').keyup(function (e) {
+            if (e.keyCode == 13) {
+                $(this).trigger("enterKey");
+            }
+        });
+        $('#addNpcadditionalbutton').click(function () {
+            var data = { Id: $('#chgNpcS option:selected').attr('npcid'), GameId: user.GameId, Set: true };
+            var jqxhr = $.post('../api/game/chgnpc', { '': JSON.stringify(data) }).done(function (data) {
+                gamehub.server.updatenpc(user.GameId);
+            });
+        });
+        $('#removeNpcadditionalbutton').click(function () {
+            var data = { id: $('#chgNpcS option:selected').attr('npcid'), GameId: user.GameId, Set: false };
+            var jqxhr = $.post('../api/game/chgnpc', { '': JSON.stringify(data) }).done(function (data) {
+                gamehub.server.updatenpc(user.GameId);
+            });
+        });
+        $('#changeeventtempbtn').click(function () {
+            var eventid = $('#chgEventS option:selected').attr('eventid');
+            var data = { id: eventid, GameId: user.GameId, Set: true };
+            var jqxhr = $.post('../api/game/chgevent', { '': JSON.stringify(data) }).done(function (data) {
+                gamehub.server.updatevnt(user.GameId, eventid, "4");
+            });
+        });
+        $('#changelocationtempbtn').click(function () {
+            var locid = $('#chgLocationS option:selected').attr('locid');
+            var data = { id: locid, GameId: user.GameId, Set: true };
+            var jqxhr = $.post('../api/game/chglocation', { '': JSON.stringify(data) }).done(function (data) {
+                gamehub.server.updateloc(user.GameId, locid, "5");
+            });
+        });
     };
 
     return o;
